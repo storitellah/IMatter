@@ -1,0 +1,35 @@
+{
+  "name": "I Matter",
+  "short_name": "I Matter",
+  "description": "A safe space to learn, grow, and become more confident. I Matter is a program by Imagine Tomorrow Foundation.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#2fa7b5",
+  "background_color": "#fdf8f1",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "kids", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

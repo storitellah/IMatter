@@ -1,0 +1,20 @@
+LICENSE PLACEHOLDER
+===================
+
+Copyright (c) 2026 Imagine Tomorrow Foundation
+
+This is a placeholder license file.
+
+Before public release, Imagine Tomorrow Foundation should choose and insert
+its preferred license here. Common options:
+
+- MIT License            (permissive, simple)     https://choosealicense.com/licenses/mit/
+- Apache License 2.0     (permissive + patents)   https://choosealicense.com/licenses/apache-2.0/
+- CC BY-NC-SA 4.0        (for the learning content, non-commercial)
+                                                  https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+A common approach for a project like this:
+- Code (HTML/CSS/JS): MIT or Apache 2.0
+- Learning content (lessons, stories, activities): Creative Commons
+
+All rights reserved until a license is chosen.

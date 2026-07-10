@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>I Matter — A safe space to learn, grow, and become more confident</title>
+  <meta name="description" content="I Matter is an offline-first life skills learning app for adolescents and young people. A program by Imagine Tomorrow Foundation.">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2fa7b5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="I Matter">
+
+  <!-- Icons (replace files in /icons and root to rebrand) -->
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Editable content and configuration (see docs/CONTENT-EDITING.md) -->
+  <script src="data/config.js"></script>
+  <script src="data/strings.js"></script>
+  <script src="data/content.js"></script>
+  <script src="data/games-data.js"></script>
+  <script src="data/stories.js"></script>
+  <script src="data/activities.js"></script>
+  <script src="data/sessions.js"></script>
+  <script src="data/extras.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- App header -->
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <a href="#/home" class="brand" id="brand-home" aria-label="I Matter home">
+        <img src="assets/logos/i-matter-logo.svg" alt="" class="brand-logo" width="40" height="40">
+        <span class="brand-name" data-str="appName">I Matter</span>
+      </a>
+      <div class="header-actions">
+        <span class="offline-pill" id="offline-pill" role="status" hidden>
+          <span class="offline-dot" aria-hidden="true"></span><span id="offline-pill-text">Offline</span>
+        </span>
+        <button class="icon-btn" id="lang-btn" type="button" aria-label="Change language">
+          <span aria-hidden="true" id="lang-btn-label">SW</span>
+        </button>
+        <button class="icon-btn" id="settings-btn" type="button" aria-label="Settings and accessibility" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.08a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main view container: script.js renders each section here -->
+  <main id="main" class="app-main" role="main" tabindex="-1"></main>
+
+  <!-- App footer -->
+  <footer class="app-footer" role="contentinfo">
+    <p id="footer-text">I Matter is a program by Imagine Tomorrow Foundation.</p>
+  </footer>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation" id="bottom-nav"></nav>
+
+  <!-- Toast area for announcements (offline, updates, badges) -->
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+  <!-- Modal root -->
+  <div id="modal-root"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
