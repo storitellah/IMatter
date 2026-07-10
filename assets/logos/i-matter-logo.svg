@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="I Matter logo">
+  <!-- PLACEHOLDER LOGO: replace this file with the official I Matter logo.
+       Keep the same file name so no code changes are needed. -->
+  <rect width="512" height="512" rx="112" fill="#fdf8f1"/>
+  <g fill="#5fc0cb">
+    <rect x="112" y="156" width="54" height="204" rx="10"/>
+    <path d="M182 138 l34 -6 -12 52 -30 6 z"/>
+    <path d="M238 360 V156 h52 l40 108 40 -108 h52 v204 h-46 V240 l-32 84 h-28 l-32 -84 v120 z"/>
+  </g>
+</svg>
