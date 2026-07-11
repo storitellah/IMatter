@@ -310,18 +310,6 @@
       "<div><p class=\"card-sub\" style=\"margin:0\">" + esc(t("home.todayEncouragement")) + "</p>" +
       "<p>" + esc(encMsg) + "</p></div></div>";
 
-    /* Mood check-in */
-    html += '<section class="card" aria-labelledby="mood-h">' +
-      '<h2 id="mood-h">' + esc(t("home.moodTitle")) + "</h2>" +
-      '<p class="card-sub">' + esc(t("home.moodHint")) + "</p>" +
-      '<div class="mood-grid" id="mood-grid" role="group" aria-label="' + esc(t("home.moodTitle")) + '">' +
-      EXTRAS.moods.map(function (m) {
-        return '<button class="mood-btn" data-mood="' + m.id + '">' +
-          '<span class="mood-emoji" aria-hidden="true">' + m.emoji + "</span>" +
-          "<span>" + esc(t("mood." + m.labelKey)) + "</span></button>";
-      }).join("") +
-      '</div><div id="mood-response-slot"></div></section>';
-
     /* Quick topics */
     html += '<div class="section-heading"><h2>' + esc(t("home.quickTopics")) + "</h2>" +
       '<a class="link" href="#/learn">' + esc(t("actions.seeAll")) + "</a></div>" +
@@ -365,15 +353,6 @@
       (online ? "🟢 " + esc(t("home.online")) + " · " + esc(t("home.offlineReady")) : "🟡 " + esc(t("home.offline"))) + "</p>";
 
     view.innerHTML = html;
-
-    /* Mood interactions */
-    $$(".mood-btn", view).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        $$(".mood-btn", view).forEach(function (b) { b.classList.remove("selected"); });
-        btn.classList.add("selected");
-        showMoodResponse(btn.getAttribute("data-mood"), $("#mood-response-slot", view));
-      });
-    });
 
     var installBtn = $("#install-btn", view);
     if (installBtn) installBtn.addEventListener("click", triggerInstall);

@@ -47,7 +47,6 @@ function check(name, cond, extra) {
   check("hero welcome", await page.$eval(".hero h1", el => el.textContent.includes("You matter")));
   check("footer text", await page.$eval("#footer-text", el => el.textContent.includes("Imagine Tomorrow Foundation")));
   check("bottom nav items", (await page.$$(".nav-item")).length === 5);
-  check("mood buttons", (await page.$$(".mood-btn")).length === 8);
 
   console.log("== Service worker ==");
   await sleep(1500);
@@ -65,7 +64,10 @@ function check(name, cond, extra) {
   });
   check("precache populated (>= 20 files)", cacheCount >= 20, "cached: " + cacheCount);
 
-  console.log("== Mood check-in ==");
+  console.log("== Mood check-in (My Space) ==");
+  await page.goto(BASE + "#/myspace/mood", { waitUntil: "domcontentloaded" });
+  await sleep(300);
+  check("mood buttons", (await page.$$(".mood-btn")).length === 8);
   await page.click('.mood-btn[data-mood="worried"]');
   await sleep(300);
   check("mood response shows", !!(await page.$(".mood-response")));
