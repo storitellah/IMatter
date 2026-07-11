@@ -46,6 +46,7 @@
   var STORIES = window.IM_STORIES || [];
   var ACTIVITIES = window.IM_ACTIVITIES || [];
   var SESSIONS = window.IM_SESSIONS || [];
+  var SESSION_PLANS = window.IM_SESSION_PLANS || [];
   var EXTRAS = window.IM_EXTRAS || { moods: [], encouragements: [], journalPrompts: [], badges: [] };
 
   /* ======================================================================
@@ -206,6 +207,7 @@
     { id: "more", emoji: "➕" }
   ];
   var MORE_ITEMS = [
+    { id: "session-plans", emoji: "📋" },
     { id: "stories", emoji: "📖" },
     { id: "activities", emoji: "✂️" },
     { id: "help", emoji: "🆘" },
@@ -240,7 +242,7 @@
 
   var MORE_IDS = MORE_ITEMS.map(function (i) { return i.id; });
   function updateNav(section) {
-    var map = { lesson: "learn", game: "games", story: "stories", activity: "activities" };
+    var map = { lesson: "learn", game: "games", story: "stories", activity: "activities", "session-plan": "session-plans" };
     var active = map[section] || section;
     $$(".nav-item[data-nav]").forEach(function (el) {
       if (el.getAttribute("data-nav") === active) el.setAttribute("aria-current", "page");
@@ -1299,6 +1301,17 @@
     var prog = CONFIG.program || {};
     var skills = ["Self-awareness", "Communication", "Problem-solving", "Decision-making", "Confidence",
       "Emotional well-being", "Resilience", "Healthy relationships", "Personal responsibility", "Future planning"];
+
+    var orgLogo = '<img src="' + esc((CONFIG.logos || {}).organization || "") + '" alt="' + esc(org.name || "") + ' logo" width="180" height="60">';
+    var orgLogoLinked = org.website
+      ? '<a href="' + esc(org.website) + '" target="_blank" rel="noopener" aria-label="' + esc(org.name || "") + ' website (opens in a new tab)">' + orgLogo + "</a>"
+      : orgLogo;
+
+    var contactLines = [];
+    if (org.website) contactLines.push('🌐 <a href="' + esc(org.website) + '" target="_blank" rel="noopener">' + esc(org.website) + "</a>");
+    if (org.email) contactLines.push('✉️ <a href="mailto:' + esc(org.email) + '">' + esc(org.email) + "</a>");
+    if (org.phone) contactLines.push("📞 " + esc(org.phone));
+
     view.innerHTML =
       "<h1>ℹ️ " + esc(t("about.title")) + "</h1>" +
       '<div class="card" style="text-align:center">' +
@@ -1311,15 +1324,129 @@
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
       skills.map(function (s) { return '<span class="chip">' + esc(s) + "</span>"; }).join("") + "</div></div>" +
       '<div class="card"><div style="text-align:center;margin-bottom:10px">' +
-      '<img src="' + esc((CONFIG.logos || {}).organization || "") + '" alt="' + esc(org.name || "") + ' logo" width="180" height="60"></div>' +
+      orgLogoLinked + "</div>" +
       "<h2>" + esc(t("about.orgHeading")) + "</h2>" +
       "<p>" + esc(org.about || "") + "</p><p>" + esc(org.history || "") + "</p>" +
-      "<p>🌐 <a href=\"" + esc(org.website || "#") + "\" rel=\"noopener\">" + esc(org.website || "") + "</a><br>" +
-      "✉️ " + esc(org.email || "") + "<br>📞 " + esc(org.phone || "") + "</p></div>" +
+      (contactLines.length ? "<p>" + contactLines.join("<br>") + "</p>" : "") + "</div>" +
       '<div class="card"><h2>🔒 ' + esc(t("about.privacyHeading")) + "</h2>" +
       "<p>" + esc(t("about.privacyBody")) + "</p></div>" +
       '<p class="card-sub" style="text-align:center">' + esc(t("about.versionLabel")) + ": " + esc(CONFIG.version || "") + "</p>";
   });
+
+  /* ====================================================================
+     11b. SESSION PLANS (public, teen-friendly life-skills sessions)
+     ==================================================================== */
+  route("session-plans", function (view) {
+    view.innerHTML =
+      "<h1>📋 " + esc(t("sessionPlans.title")) + "</h1>" +
+      '<p class="page-intro">' + esc(t("sessionPlans.intro")) + "</p>" +
+      SESSION_PLANS.map(function (sp) {
+        return '<a class="card clickable sp-card c-' + esc(sp.color || "teal") + '" href="#/session-plan/' + esc(sp.id) + '">' +
+          '<div class="card-row"><div class="card-emoji">' + sp.emoji + "</div><div>" +
+          '<p class="card-title">' + esc(sp.title) + "</p>" +
+          '<p class="card-sub">' + esc(sp.tagline) + "</p>" +
+          '<p class="sp-meta">⏱️ ' + esc(sp.duration) + " · " + sp.sections.length + " " + esc(t("sessionPlans.parts")) + "</p>" +
+          "</div></div></a>";
+      }).join("");
+  });
+
+  route("session-plan", function (view, params) {
+    var sp = findById(SESSION_PLANS, params[0]);
+    if (!sp) return navigate("#/session-plans");
+    renderSessionPlan(view, sp);
+  });
+
+  /* Render one list item (supports bold label, plain text, and nested list) */
+  function spItem(it) {
+    if (typeof it === "string") return "<li>" + esc(it) + "</li>";
+    var s = "<li>";
+    if (it.b) s += "<strong>" + esc(it.b) + "</strong>" + (it.t ? " " + esc(it.t) : "");
+    else if (it.t) s += esc(it.t);
+    if (it.sub && it.sub.length) s += '<ul class="sp-sublist">' + it.sub.map(spItem).join("") + "</ul>";
+    return s + "</li>";
+  }
+
+  /* Render one content block (recursive for activity bodies) */
+  function renderSPBlock(b) {
+    if (b.p) return '<p class="sp-p">' + esc(b.p) + "</p>";
+    if (b.h) return '<h3 class="sp-h">' + esc(b.h) + "</h3>";
+    if (b.ul) return '<ul class="sp-list">' + b.ul.map(spItem).join("") + "</ul>";
+    if (b.ol) return '<ol class="sp-list sp-ol">' + b.ol.map(spItem).join("") + "</ol>";
+    if (b.note) return '<div class="sp-note"><span class="sp-note-emoji" aria-hidden="true">' + (b.emoji || "💡") + '</span><p>' + esc(b.note) + "</p></div>";
+    if (b.pledge) return '<div class="sp-pledge"><span aria-hidden="true">✊</span><p>' + esc(b.pledge) + "</p></div>";
+    if (b.scenario) {
+      var paras = Array.isArray(b.scenario) ? b.scenario : [b.scenario];
+      return '<figure class="sp-scenario">' +
+        (b.title ? '<figcaption class="sp-scenario-title">📖 ' + esc(b.title) + "</figcaption>" : "") +
+        paras.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</figure>";
+    }
+    if (b.dialogue) {
+      return '<div class="sp-dialogue">' +
+        (b.title ? '<p class="sp-scenario-title">💬 ' + esc(b.title) + "</p>" : "") +
+        b.dialogue.map(function (d) {
+          return '<p class="sp-line"><span class="sp-who">' + esc(d.who) + ":</span> " + esc(d.line) + "</p>";
+        }).join("") + "</div>";
+    }
+    if (b.table) {
+      var tb = b.table;
+      return '<div class="sp-table-wrap"><table class="sp-table"><thead><tr>' +
+        tb.headers.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") +
+        "</tr></thead><tbody>" +
+        tb.rows.map(function (r) {
+          return "<tr>" + r.map(function (c, ci) {
+            return '<td data-label="' + esc(tb.headers[ci] || "") + '">' + esc(c) + "</td>";
+          }).join("") + "</tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    if (b.activity) {
+      return '<div class="sp-activity">' +
+        '<p class="sp-activity-head"><span class="sp-activity-badge">🎲 ' + esc(t("sessionPlans.activity")) + "</span> " +
+        '<span class="sp-activity-title">' + esc(b.activity) + "</span>" +
+        (b.time ? ' <span class="sp-time">⏱️ ' + esc(b.time) + "</span>" : "") + "</p>" +
+        '<div class="sp-activity-body">' + (b.body || []).map(renderSPBlock).join("") + "</div></div>";
+    }
+    return "";
+  }
+
+  function renderSessionPlan(view, sp) {
+    var color = "c-" + (sp.color || "teal");
+
+    var toc = sp.sections.map(function (sec, i) {
+      return '<button class="chip sp-jump" type="button" data-target="sp-sec-' + i + '">' +
+        (i + 1) + ". " + esc(sec.title) + "</button>";
+    }).join("");
+
+    var body = sp.sections.map(function (sec, i) {
+      return '<section class="sp-section" id="sp-sec-' + i + '">' +
+        '<div class="sp-sec-head">' +
+        '<span class="sp-sec-num" aria-hidden="true">' + (i + 1) + "</span>" +
+        "<h2>" + esc(sec.title) + "</h2>" +
+        (sec.time ? '<span class="sp-time">⏱️ ' + esc(sec.time) + "</span>" : "") +
+        "</div>" +
+        sec.blocks.map(renderSPBlock).join("") + "</section>";
+    }).join("");
+
+    view.innerHTML =
+      backBtn("session-plans", t("sessionPlans.title")) +
+      '<header class="sp-hero ' + color + '">' +
+      '<span class="sp-hero-emoji" aria-hidden="true">' + sp.emoji + "</span>" +
+      "<h1>" + esc(sp.title) + "</h1>" +
+      '<p class="sp-hero-tagline">' + esc(sp.tagline) + "</p>" +
+      '<p class="sp-hero-meta"><span class="chip">⏱️ ' + esc(t("sessionPlans.duration")) + ": " + esc(sp.duration) + "</span></p>" +
+      "</header>" +
+      '<div class="sp-toc no-print"><p class="lesson-label">🧭 ' + esc(t("sessionPlans.contents")) + "</p>" +
+      '<div class="sp-toc-chips">' + toc + "</div></div>" +
+      body +
+      '<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
+      '<button class="btn secondary" onclick="window.print()">🖨️ ' + esc(t("actions.print")) + "</button></div>";
+
+    $$(".sp-jump", view).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = $("#" + btn.getAttribute("data-target"), view);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
 
   /* ====================================================================
      12. FACILITATOR MODE (local PIN, device-only, anonymous totals)

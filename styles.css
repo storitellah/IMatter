@@ -901,6 +901,114 @@ html[data-projector="on"] .app-footer { display: none; }
   margin-bottom: 16px;
 }
 
+/* ---------- Session Plans ---------- */
+.sp-meta { margin: 6px 0 0; font-size: .8rem; font-weight: 700; color: var(--ink-soft); }
+
+.sp-hero {
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.sp-hero-emoji { font-size: 2.6rem; line-height: 1; display: block; }
+.sp-hero h1 { margin: 8px 0 4px; font-size: 1.6rem; }
+.sp-hero-tagline { margin: 0; color: var(--ink); font-weight: 600; }
+.sp-hero-meta { margin: 12px 0 0; }
+
+.sp-toc { margin-bottom: 16px; }
+.sp-toc-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.sp-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin-bottom: 16px;
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+.sp-sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.sp-sec-num {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-sec-head h2 { margin: 0; font-size: 1.2rem; flex: 1 1 120px; }
+
+.sp-time {
+  font-size: .78rem; font-weight: 700; color: var(--teal-dark);
+  background: var(--teal-light); border-radius: 999px; padding: 4px 10px; white-space: nowrap;
+}
+.sp-h { font-family: var(--font-display); font-size: 1.02rem; margin: 16px 0 6px; color: var(--teal-dark); }
+.sp-p { margin: 0 0 10px; }
+.sp-list { margin: 0 0 12px; padding-left: 22px; }
+.sp-list li { margin-bottom: 6px; }
+.sp-sublist { margin: 6px 0; padding-left: 20px; }
+.sp-ol { list-style: decimal; }
+
+.sp-activity {
+  background: var(--yellow-light);
+  border: 2px dashed var(--yellow);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 12px 0;
+}
+.sp-activity-head { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sp-activity-badge {
+  font-family: var(--font-display); font-weight: 700; font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .04em;
+  background: var(--yellow); color: #4a3500; border-radius: 999px; padding: 4px 10px;
+}
+.sp-activity-title { font-family: var(--font-display); font-weight: 700; }
+.sp-activity-body > *:last-child { margin-bottom: 0; }
+
+.sp-scenario {
+  margin: 12px 0; padding: 14px 16px;
+  background: var(--surface-2);
+  border-left: 5px solid var(--purple);
+  border-radius: var(--radius-sm);
+  font-style: italic;
+}
+.sp-scenario p { margin: 0 0 8px; }
+.sp-scenario p:last-child { margin-bottom: 0; }
+.sp-scenario-title {
+  font-style: normal; font-family: var(--font-display); font-weight: 700;
+  font-size: .82rem; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--ink-soft); margin: 0 0 8px;
+}
+
+.sp-dialogue {
+  margin: 12px 0; padding: 14px 16px;
+  background: var(--blue-light); border-radius: var(--radius-sm);
+}
+.sp-line { margin: 0 0 6px; }
+.sp-line:last-child { margin-bottom: 0; }
+.sp-who { font-weight: 800; color: var(--teal-dark); }
+
+.sp-note {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--green-light); border-radius: var(--radius-sm);
+  padding: 12px 14px; margin: 12px 0;
+}
+.sp-note p { margin: 0; font-weight: 600; }
+.sp-note-emoji { font-size: 1.3rem; line-height: 1.2; }
+
+.sp-pledge {
+  text-align: center; background: var(--teal); color: #fff;
+  border-radius: var(--radius); padding: 18px 16px; margin: 14px 0;
+}
+.sp-pledge span { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+.sp-pledge p { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+
+.sp-table-wrap { overflow-x: auto; margin: 12px 0; }
+.sp-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.sp-table th, .sp-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.sp-table th { background: var(--teal-light); font-family: var(--font-display); }
+
 /* ---------- Print styles (worksheets / PDF export) ---------- */
 @media print {
   .app-header, .bottom-nav, .toast-region, .app-footer,
@@ -908,6 +1016,7 @@ html[data-projector="on"] .app-footer { display: none; }
   body { background: #fff; }
   .app-main { padding: 0; max-width: 100%; }
   .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  .sp-section, .sp-hero { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
   .print-header { display: block !important; text-align: center; margin-bottom: 16px; }
   .field input, .field textarea { border: 1px solid #999; min-height: 60px; }
   .print-lines { display: block !important; }

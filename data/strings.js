@@ -15,7 +15,7 @@ window.IM_STRINGS = {
     nav: {
       home: "Home", learn: "Learn", games: "Games", myspace: "My Space",
       stories: "Stories", activities: "Activities", help: "Help", about: "About",
-      more: "More", facilitator: "Facilitator"
+      more: "More", facilitator: "Facilitator", "session-plans": "Session Plans"
     },
 
     /* Common actions */
@@ -189,6 +189,16 @@ window.IM_STRINGS = {
       challenge: "Take-home challenge"
     },
 
+    /* Session Plans (public tab) */
+    sessionPlans: {
+      title: "Session Plans",
+      intro: "Full life-skills sessions you can read on your own, follow along with, or run in a group.",
+      duration: "Duration",
+      contents: "In this session",
+      activity: "Activity",
+      parts: "parts"
+    },
+
     /* Settings */
     settings: {
       title: "Settings & Accessibility",
@@ -224,7 +234,7 @@ window.IM_STRINGS = {
     nav: {
       home: "Nyumbani", learn: "Jifunze", games: "Michezo", myspace: "Nafasi Yangu",
       stories: "Hadithi", activities: "Shughuli", help: "Msaada", about: "Kuhusu",
-      more: "Zaidi", facilitator: "Mwezeshaji"
+      more: "Zaidi", facilitator: "Mwezeshaji", "session-plans": "Mipango ya Vikao"
     },
 
     actions: {
@@ -385,6 +395,15 @@ window.IM_STRINGS = {
       game: "Mchezo",
       reflection: "Tafakari",
       challenge: "Changamoto ya nyumbani"
+    },
+
+    sessionPlans: {
+      title: "Mipango ya Vikao",
+      intro: "Vikao kamili vya stadi za maisha unavyoweza kusoma peke yako, kufuatilia, au kuendesha katika kikundi.",
+      duration: "Muda",
+      contents: "Katika kikao hiki",
+      activity: "Shughuli",
+      parts: "sehemu"
     },
 
     settings: {

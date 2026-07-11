@@ -32,10 +32,10 @@ window.IM_CONFIG = {
       "people can access quality education, express themselves creatively, " +
       "build confidence, strengthen resilience, and develop pathways into " +
       "education and work.",
-    /* Placeholders — replace with real details before launch */
-    website: "https://example.org",
-    email: "info@example.org",
-    phone: "+254 700 000 000"
+    website: "https://www.imagine-tomorrow.org/",
+    email: "hello@imagine-tomorrow.org",
+    /* Leave "phone" empty ("") to hide it from the About page. */
+    phone: ""
   },
 
   /* ---- Program ---- */

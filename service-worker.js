@@ -6,7 +6,7 @@
    devices download the new files. Users will see an update notification.
    ========================================================================== */
 
-var CACHE_VERSION = "i-matter-v1";
+var CACHE_VERSION = "i-matter-v2";
 
 var PRECACHE_URLS = [
   "./",
@@ -21,6 +21,7 @@ var PRECACHE_URLS = [
   "./data/stories.js",
   "./data/activities.js",
   "./data/sessions.js",
+  "./data/session-plans.js",
   "./data/extras.js",
   "./assets/logos/i-matter-logo.svg",
   "./assets/logos/imagine-tomorrow-logo.svg",
