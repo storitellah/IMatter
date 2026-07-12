@@ -27,9 +27,9 @@ window.IM_EXTRAS = {
     {
       id: "excited", emoji: "🤩", labelKey: "excited",
       message: "Excitement is energy! Something good is happening or coming.",
-      suggestion: "Channel that energy — maybe into the Goal Builder game or planning your next step.",
+      suggestion: "Channel that energy — set a goal or plan your next step.",
       affirmation: "My energy and enthusiasm are gifts.",
-      link: { type: "game", id: "goal-builder", label: "Goal Builder game" }
+      link: { type: "lesson", id: "goals-lesson", label: "Setting goals" }
     },
     {
       id: "worried", emoji: "😟", labelKey: "worried",
@@ -111,8 +111,6 @@ window.IM_EXTRAS = {
     { id: "explorer", emoji: "🔭", title: "Explorer", desc: "Explored 5 lessons" },
     { id: "scholar", emoji: "🎓", title: "Scholar", desc: "Explored 15 lessons" },
     { id: "quiz-whiz", emoji: "🧠", title: "Quiz Whiz", desc: "Answered 10 quiz questions correctly" },
-    { id: "game-on", emoji: "🎮", title: "Game On", desc: "Played your first game" },
-    { id: "champion", emoji: "🏆", title: "Champion", desc: "Played all 10 games" },
     { id: "storyteller", emoji: "📖", title: "Story Lover", desc: "Read 3 stories" },
     { id: "reflector", emoji: "🪞", title: "Reflector", desc: "Wrote your first journal entry" },
     { id: "mood-aware", emoji: "🌈", title: "Feelings Friend", desc: "Checked in your mood 5 times" },

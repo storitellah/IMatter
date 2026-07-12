@@ -2,10 +2,11 @@
 
 *A program by Imagine Tomorrow Foundation.*
 
-**I Matter** is a lightweight, **offline-first Progressive Web App (PWA)** that teaches life
-skills to adolescents and young people through lessons, games, stories, activities, session
-plans, and private reflection tools. It has **no login, no accounts, no tracking, and no
-backend** — everything runs in the browser and all personal data stays on the device.
+**I Matter** is a lightweight, **offline-first Progressive Web App (PWA)** — a **toolkit for
+teachers and facilitators** to lead adolescents and young people through life skills. It
+provides lessons, stories, activities, and ready-to-run session plans to use with students. It
+has **no login, no accounts, no tracking, and no backend** — everything runs in the browser
+and all data stays on the device.
 
 This document is a quick project brief. For the full feature tour see [`README.md`](README.md),
 and for detailed guides see the [`docs/`](docs/) folder.
@@ -16,15 +17,16 @@ and for detailed guides see the [`docs/`](docs/) folder.
 
 | Area | Description |
 | --- | --- |
-| **Learn** | 10 categories and 70+ short lessons, each with intro, key lesson, real-life example, tap-to-reveal reflection, small activity, quick quiz, and takeaway. |
-| **Games** | 10 educational games (match, path, memory, sort, order, select) with local scores and badges. |
-| **My Space** | Private, device-only tools: mood check-in, journal, strengths, goals, gratitude, calm-down plan, badges, optional PIN, and delete-all-data. |
-| **Stories** | 10 short stories with discussion prompts and "What would you do?". |
-| **Activities** | 12 printable/in-app worksheets that save locally. |
-| **Session Plans** | 5 full life-skills session plans, formatted to be easy for teenagers to read and follow (see below). |
+| **Learn** | 10 teaching topics with 70+ short lessons, each with intro, key lesson, real-life example, tap-to-reveal reflection, small activity, quick quiz, and takeaway — to lead with students. |
+| **Session Plans** | 5 full, ready-to-run life-skills sessions, formatted to be easy to read and lead (see below). |
+| **Stories** | 10 short stories with discussion prompts and "What would you do?" to read and discuss with students. |
+| **Activities** | 12 printable/in-app worksheets to complete with students or print for sessions. |
+| **My Space** | A private, device-only space for the facilitator's own notes, planning, and reflection (journal, strengths, goals, gratitude, mood check-in, optional PIN, delete-all-data). |
 | **Facilitator Mode** | PIN-protected monthly session plans, projector mode, local totals, and notes. |
-| **Help & About** | Support contacts, safety guidance, org info, and privacy notice. |
+| **Help & About** | Support contacts and safety guidance to share with students, org info, and privacy notice. |
 | **Accessibility & languages** | Text size, high contrast, reduced motion, simple language, and full English/Kiswahili translation. |
+
+> **Note:** This is a facilitator tool — there is no Games section (removed in v2.0.0).
 
 ### Session Plans (public tab)
 
@@ -68,7 +70,6 @@ data/                 ALL editable content (plain JS files)
   config.js           Branding, org details, contacts, facilitator PIN
   strings.js          UI text (English + Kiswahili)
   content.js          Learning categories and lessons
-  games-data.js       Game questions and scenarios
   stories.js          Stories
   activities.js       Worksheets
   sessions.js         Facilitator Mode monthly sessions

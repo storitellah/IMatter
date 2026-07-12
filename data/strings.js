@@ -9,7 +9,7 @@
 window.IM_STRINGS = {
   en: {
     appName: "I Matter",
-    tagline: "A safe space to learn, grow, and become more confident.",
+    tagline: "A facilitator's toolkit for guiding young people through life skills.",
 
     /* Navigation */
     nav: {
@@ -30,16 +30,16 @@ window.IM_STRINGS = {
 
     /* Home */
     home: {
-      welcomeTitle: "You matter.",
-      welcomeBody: "Your ideas, feelings, choices, and dreams are important.",
+      welcomeTitle: "Guide. Support. Empower.",
+      welcomeBody: "Everything you need to lead young people through life skills — lessons, stories, activities, and ready-to-run session plans.",
       todayEncouragement: "Today's encouragement",
-      quickTopics: "Learning topics",
+      quickTopics: "Teaching topics",
       featuredActivity: "Featured activity",
       featuredGame: "Featured game",
       moodTitle: "How are you feeling today?",
-      moodHint: "Tap the feeling that fits you best. This stays on your device.",
-      progressTitle: "My progress",
-      lessonsDone: "lessons explored",
+      moodHint: "Tap the feeling that fits best. This stays on your device.",
+      progressTitle: "Your progress",
+      lessonsDone: "lessons reviewed",
       gamesPlayed: "games played",
       badgesEarned: "badges earned",
       installTitle: "Add I Matter to your home screen",
@@ -52,7 +52,7 @@ window.IM_STRINGS = {
     /* Learn */
     learn: {
       title: "Learn",
-      intro: "Pick a topic to explore. Short lessons, real examples, and quick quizzes.",
+      intro: "Teaching topics to lead with your students — short lessons, real-life examples, and quick quizzes to discuss together.",
       lessons: "lessons",
       introHeading: "Introduction",
       keyLesson: "Key lesson",
@@ -62,8 +62,8 @@ window.IM_STRINGS = {
       quiz: "Quick quiz",
       takeaway: "Takeaway",
       related: "Related topics",
-      markDone: "Mark as explored",
-      done: "Explored!",
+      markDone: "Mark as reviewed",
+      done: "Reviewed!",
       correct: "That's right! Well done.",
       incorrect: "Not quite — that's okay! Learning means trying.",
       tryAgain: "Try again"
@@ -84,7 +84,7 @@ window.IM_STRINGS = {
     /* My Space */
     myspace: {
       title: "My Space",
-      intro: "A private place just for you. Everything here stays on this device only.",
+      intro: "A private space for your own notes, planning, and reflection. Everything here stays on this device only.",
       privacyNote: "Private: saved only on this device. Nothing is uploaded or shared.",
       mood: "Mood check-in",
       strengths: "My strengths",
@@ -120,7 +120,7 @@ window.IM_STRINGS = {
     /* Stories */
     stories: {
       title: "Stories",
-      intro: "Short stories about young people like you. What would you do?",
+      intro: "Short stories to read and discuss with your students. Ask the group: what would you do?",
       discussion: "Talk about it",
       whatWouldYouDo: "What would you do?",
       keyLesson: "Key lesson",
@@ -130,7 +130,7 @@ window.IM_STRINGS = {
     /* Activities */
     activities: {
       title: "Activities",
-      intro: "Fun worksheets and tools. Complete them here, or print them for your notebook.",
+      intro: "Worksheets and tools to complete with your students or print for your sessions.",
       inApp: "Do it in the app",
       printable: "Printable",
       saved: "Saved on this device",
@@ -140,8 +140,8 @@ window.IM_STRINGS = {
     /* Help */
     help: {
       title: "Help & Support",
-      intro: "Everyone needs help sometimes. Asking for help is a sign of strength, not weakness.",
-      talkTo: "People you can talk to",
+      intro: "Guidance to share with your students. Everyone needs help sometimes, and asking for help is a sign of strength, not weakness.",
+      talkTo: "People students can talk to",
       trustedAdult: "A trusted adult — someone who listens and keeps you safe",
       teacher: "A teacher you trust at school",
       facilitator: "Your I Matter facilitator",
@@ -192,7 +192,7 @@ window.IM_STRINGS = {
     /* Session Plans (public tab) */
     sessionPlans: {
       title: "Session Plans",
-      intro: "Full life-skills sessions you can read on your own, follow along with, or run in a group.",
+      intro: "Ready-to-run life-skills sessions to lead with your students — read them, prepare, and run them with your group.",
       duration: "Duration",
       contents: "In this session",
       activity: "Activity",
@@ -229,7 +229,7 @@ window.IM_STRINGS = {
   /* ------------------------------------------------------------------ */
   sw: {
     appName: "I Matter",
-    tagline: "Mahali salama pa kujifunza, kukua, na kujiamini zaidi.",
+    tagline: "Zana ya mwezeshaji ya kuwaongoza vijana katika stadi za maisha.",
 
     nav: {
       home: "Nyumbani", learn: "Jifunze", games: "Michezo", myspace: "Nafasi Yangu",
@@ -247,16 +247,16 @@ window.IM_STRINGS = {
     },
 
     home: {
-      welcomeTitle: "Wewe ni wa muhimu.",
-      welcomeBody: "Mawazo yako, hisia zako, chaguzi zako, na ndoto zako ni muhimu.",
+      welcomeTitle: "Ongoza. Saidia. Wezesha.",
+      welcomeBody: "Kila unachohitaji kuwaongoza vijana katika stadi za maisha — masomo, hadithi, shughuli, na mipango ya vikao iliyo tayari kutumika.",
       todayEncouragement: "Moyo wa leo",
-      quickTopics: "Mada za kujifunza",
+      quickTopics: "Mada za kufundisha",
       featuredActivity: "Shughuli maalum",
       featuredGame: "Mchezo maalum",
       moodTitle: "Unajisikiaje leo?",
       moodHint: "Gusa hisia inayokufaa. Hii inabaki kwenye kifaa chako.",
-      progressTitle: "Maendeleo yangu",
-      lessonsDone: "masomo yaliyochunguzwa",
+      progressTitle: "Maendeleo yako",
+      lessonsDone: "masomo yaliyopitiwa",
       gamesPlayed: "michezo iliyochezwa",
       badgesEarned: "beji zilizopatikana",
       installTitle: "Weka I Matter kwenye skrini yako",
@@ -268,7 +268,7 @@ window.IM_STRINGS = {
 
     learn: {
       title: "Jifunze",
-      intro: "Chagua mada. Masomo mafupi, mifano halisi, na maswali mafupi.",
+      intro: "Mada za kufundisha na wanafunzi wako — masomo mafupi, mifano halisi, na maswali mafupi ya kujadili pamoja.",
       lessons: "masomo",
       introHeading: "Utangulizi",
       keyLesson: "Somo kuu",
@@ -278,8 +278,8 @@ window.IM_STRINGS = {
       quiz: "Swali fupi",
       takeaway: "Ujumbe wa kuchukua",
       related: "Mada zinazohusiana",
-      markDone: "Weka alama: nimesoma",
-      done: "Umesoma!",
+      markDone: "Weka alama: nimepitia",
+      done: "Umepitia!",
       correct: "Sahihi! Hongera.",
       incorrect: "Sio sahihi — ni sawa! Kujifunza ni kujaribu.",
       tryAgain: "Jaribu tena"
@@ -298,7 +298,7 @@ window.IM_STRINGS = {
 
     myspace: {
       title: "Nafasi Yangu",
-      intro: "Mahali pa faragha kwa ajili yako tu. Kila kitu hubaki kwenye kifaa hiki.",
+      intro: "Nafasi ya faragha kwa maelezo yako, mipango, na tafakari. Kila kitu hubaki kwenye kifaa hiki tu.",
       privacyNote: "Faragha: huhifadhiwa kwenye kifaa hiki tu. Hakuna kinachotumwa nje.",
       mood: "Hisia zangu",
       strengths: "Uwezo wangu",
@@ -332,7 +332,7 @@ window.IM_STRINGS = {
 
     stories: {
       title: "Hadithi",
-      intro: "Hadithi fupi kuhusu vijana kama wewe. Wewe ungefanya nini?",
+      intro: "Hadithi fupi za kusoma na kujadili na wanafunzi wako. Waulize kikundi: ungefanya nini?",
       discussion: "Zungumza kuhusu hili",
       whatWouldYouDo: "Wewe ungefanya nini?",
       keyLesson: "Somo kuu",
@@ -341,7 +341,7 @@ window.IM_STRINGS = {
 
     activities: {
       title: "Shughuli",
-      intro: "Kazi za kufurahisha. Zikamilishe hapa, au zichapishe kwa daftari lako.",
+      intro: "Kazi na zana za kukamilisha na wanafunzi wako au kuchapisha kwa vikao vyako.",
       inApp: "Fanya ndani ya programu",
       printable: "Inachapishika",
       saved: "Imehifadhiwa kwenye kifaa hiki",
@@ -350,8 +350,8 @@ window.IM_STRINGS = {
 
     help: {
       title: "Msaada",
-      intro: "Kila mtu huhitaji msaada wakati mwingine. Kuomba msaada ni ishara ya nguvu.",
-      talkTo: "Watu unaoweza kuzungumza nao",
+      intro: "Mwongozo wa kushiriki na wanafunzi wako. Kila mtu huhitaji msaada wakati mwingine, na kuomba msaada ni ishara ya nguvu.",
+      talkTo: "Watu ambao wanafunzi wanaweza kuzungumza nao",
       trustedAdult: "Mtu mzima unayemwamini — anayesikiliza na kukulinda",
       teacher: "Mwalimu unayemwamini shuleni",
       facilitator: "Mwezeshaji wako wa I Matter",
@@ -399,7 +399,7 @@ window.IM_STRINGS = {
 
     sessionPlans: {
       title: "Mipango ya Vikao",
-      intro: "Vikao kamili vya stadi za maisha unavyoweza kusoma peke yako, kufuatilia, au kuendesha katika kikundi.",
+      intro: "Vikao vya stadi za maisha vilivyo tayari kuendeshwa na wanafunzi wako — visome, jiandae, na uviendeshe na kikundi chako.",
       duration: "Muda",
       contents: "Katika kikao hiki",
       activity: "Shughuli",
