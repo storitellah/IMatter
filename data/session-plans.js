@@ -387,7 +387,7 @@ window.IM_SESSION_PLANS = [
             "D) Talk to one friend in the group and share my concerns.",
             "E) Walk away and find other friends with values similar to mine."
           ] },
-          { h: "3. Positive & negative consequences" },
+          { h: "3. Weigh up each option" },
           { table: {
             headers: ["Option", "Positive", "Negative"],
             rows: [
