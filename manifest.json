@@ -1,7 +1,7 @@
 {
   "name": "I Matter",
   "short_name": "I Matter",
-  "description": "A safe space to learn, grow, and become more confident. I Matter is a program by Imagine Tomorrow Foundation.",
+  "description": "A facilitator's toolkit for teachers and youth mentors to lead young people through life skills. I Matter is a program by Imagine Tomorrow Foundation.",
   "id": "./",
   "start_url": "./index.html",
   "scope": "./",

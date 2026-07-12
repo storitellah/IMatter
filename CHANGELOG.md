@@ -3,6 +3,30 @@
 All notable changes to the I Matter app are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.0.0] — 2026-07-12
+
+Repositioned I Matter as a **facilitator toolkit** — for teachers and youth
+mentors to lead students through life skills, rather than a student self-use app.
+
+### Added
+- New **Session Plans** tab with five full, teen-friendly life-skills sessions
+  (Self-Awareness & Confidence, Communication & Relationships, Decision-Making &
+  Problem-Solving, Conflict Resolution & Negotiation, Substance Abuse & Peer
+  Pressure). Promoted to the bottom navigation.
+
+### Changed
+- Reframed the app's language throughout (English + Kiswahili) to address
+  facilitators leading students (hero, section intros, labels).
+- Updated Imagine Tomorrow Foundation contacts: website and email set, phone
+  removed; the organization logo now links to the website. New logo artwork.
+- Bumped service worker cache to `i-matter-v3`; verified full offline precache.
+
+### Removed
+- **Games** feature removed entirely (all 10 games, engines, data, nav entry,
+  home feature, facilitator session links, and related badges).
+- The Home page "How are you feeling today?" section (mood check-in remains in
+  My Space).
+
 ## [1.0.0] — 2026-07-10
 
 ### Added

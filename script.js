@@ -42,10 +42,10 @@
 
   var CONFIG = window.IM_CONFIG || {};
   var CONTENT = window.IM_CONTENT || { categories: [] };
-  var GAMES = window.IM_GAMES || [];
   var STORIES = window.IM_STORIES || [];
   var ACTIVITIES = window.IM_ACTIVITIES || [];
   var SESSIONS = window.IM_SESSIONS || [];
+  var SESSION_PLANS = window.IM_SESSION_PLANS || [];
   var EXTRAS = window.IM_EXTRAS || { moods: [], encouragements: [], journalPrompts: [], badges: [] };
 
   /* ======================================================================
@@ -87,7 +87,7 @@
      ====================================================================== */
   function progress() {
     return store.get("progress", {
-      lessonsDone: [], gamesPlayed: [], quizCorrect: 0,
+      lessonsDone: [], quizCorrect: 0,
       storiesRead: [], moodCount: 0, journalCount: 0,
       gratitudeCount: 0, activitiesDone: []
     });
@@ -103,8 +103,6 @@
       "explorer": p.lessonsDone.length >= 5,
       "scholar": p.lessonsDone.length >= 15,
       "quiz-whiz": p.quizCorrect >= 10,
-      "game-on": p.gamesPlayed.length >= 1,
-      "champion": p.gamesPlayed.length >= GAMES.length && GAMES.length > 0,
       "storyteller": p.storiesRead.length >= 3,
       "reflector": p.journalCount >= 1,
       "mood-aware": p.moodCount >= 5,
@@ -201,7 +199,7 @@
   var NAV_ITEMS = [
     { id: "home", emoji: "🏠" },
     { id: "learn", emoji: "📚" },
-    { id: "games", emoji: "🎮" },
+    { id: "session-plans", emoji: "📋" },
     { id: "myspace", emoji: "💜" },
     { id: "more", emoji: "➕" }
   ];
@@ -240,7 +238,7 @@
 
   var MORE_IDS = MORE_ITEMS.map(function (i) { return i.id; });
   function updateNav(section) {
-    var map = { lesson: "learn", game: "games", story: "stories", activity: "activities" };
+    var map = { lesson: "learn", story: "stories", activity: "activities", "session-plan": "session-plans" };
     var active = map[section] || section;
     $$(".nav-item[data-nav]").forEach(function (el) {
       if (el.getAttribute("data-nav") === active) el.setAttribute("aria-current", "page");
@@ -281,7 +279,6 @@
     var enc = EXTRAS.encouragements;
     var dayIndex = Math.floor(Date.now() / 86400000);
     var encMsg = enc.length ? enc[dayIndex % enc.length] : "";
-    var featuredGame = GAMES.length ? GAMES[dayIndex % GAMES.length] : null;
     var featuredActivity = ACTIVITIES.length ? ACTIVITIES[dayIndex % ACTIVITIES.length] : null;
     var badges = earnedBadges();
     var online = navigator.onLine;
@@ -308,18 +305,6 @@
       "<div><p class=\"card-sub\" style=\"margin:0\">" + esc(t("home.todayEncouragement")) + "</p>" +
       "<p>" + esc(encMsg) + "</p></div></div>";
 
-    /* Mood check-in */
-    html += '<section class="card" aria-labelledby="mood-h">' +
-      '<h2 id="mood-h">' + esc(t("home.moodTitle")) + "</h2>" +
-      '<p class="card-sub">' + esc(t("home.moodHint")) + "</p>" +
-      '<div class="mood-grid" id="mood-grid" role="group" aria-label="' + esc(t("home.moodTitle")) + '">' +
-      EXTRAS.moods.map(function (m) {
-        return '<button class="mood-btn" data-mood="' + m.id + '">' +
-          '<span class="mood-emoji" aria-hidden="true">' + m.emoji + "</span>" +
-          "<span>" + esc(t("mood." + m.labelKey)) + "</span></button>";
-      }).join("") +
-      '</div><div id="mood-response-slot"></div></section>';
-
     /* Quick topics */
     html += '<div class="section-heading"><h2>' + esc(t("home.quickTopics")) + "</h2>" +
       '<a class="link" href="#/learn">' + esc(t("actions.seeAll")) + "</a></div>" +
@@ -338,14 +323,6 @@
         '<p class="card-title">' + esc(featuredActivity.title) + "</p>" +
         '<p class="card-sub">' + esc(featuredActivity.blurb) + "</p></div></div></a>";
     }
-    if (featuredGame) {
-      html += '<div class="section-heading"><h2>' + esc(t("home.featuredGame")) + "</h2></div>" +
-        '<a class="card clickable" href="#/game/' + featuredGame.id + '"><div class="card-row">' +
-        '<div class="card-emoji">' + featuredGame.emoji + "</div><div>" +
-        '<p class="card-title">' + esc(featuredGame.title) + "</p>" +
-        '<p class="card-sub">' + esc(featuredGame.blurb) + "</p></div></div></a>";
-    }
-
     /* Progress summary */
     var pct = totalLessons ? Math.round(p.lessonsDone.length / totalLessons * 100) : 0;
     html += '<section class="card" aria-labelledby="prog-h">' +
@@ -354,7 +331,6 @@
       '<div class="progress-fill" style="width:' + pct + '%"></div></div>' +
       '<div class="stat-row">' +
       '<div class="stat"><b>' + p.lessonsDone.length + "/" + totalLessons + "</b><span>" + esc(t("home.lessonsDone")) + "</span></div>" +
-      '<div class="stat"><b>' + p.gamesPlayed.length + "/" + GAMES.length + "</b><span>" + esc(t("home.gamesPlayed")) + "</span></div>" +
       '<div class="stat"><b>' + badges.length + "/" + EXTRAS.badges.length + "</b><span>" + esc(t("home.badgesEarned")) + "</span></div>" +
       "</div></section>";
 
@@ -363,15 +339,6 @@
       (online ? "🟢 " + esc(t("home.online")) + " · " + esc(t("home.offlineReady")) : "🟡 " + esc(t("home.offline"))) + "</p>";
 
     view.innerHTML = html;
-
-    /* Mood interactions */
-    $$(".mood-btn", view).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        $$(".mood-btn", view).forEach(function (b) { b.classList.remove("selected"); });
-        btn.classList.add("selected");
-        showMoodResponse(btn.getAttribute("data-mood"), $("#mood-response-slot", view));
-      });
-    });
 
     var installBtn = $("#install-btn", view);
     if (installBtn) installBtn.addEventListener("click", triggerInstall);
@@ -393,9 +360,8 @@
     var p = progress(); p.moodCount++; saveProgress(p);
 
     var linkHtml = "";
-    if (mood.link) {
-      var href = mood.link.type === "game" ? "#/game/" + mood.link.id : "#/lesson/" + mood.link.id;
-      linkHtml = '<a class="chip" href="' + href + '">📖 ' + esc(mood.link.label) + "</a>";
+    if (mood.link && mood.link.id) {
+      linkHtml = '<a class="chip" href="#/lesson/' + mood.link.id + '">📖 ' + esc(mood.link.label) + "</a>";
     }
     slot.innerHTML =
       '<div class="mood-response" role="status">' +
@@ -577,319 +543,6 @@
         }
       });
     });
-  }
-
-  /* ====================================================================
-     7. GAMES
-     ==================================================================== */
-  route("games", function (view) {
-    var scores = store.get("scores", {});
-    view.innerHTML =
-      "<h1>" + esc(t("games.title")) + "</h1>" +
-      '<p class="page-intro">' + esc(t("games.intro")) + "</p>" +
-      GAMES.map(function (g) {
-        var s = scores[g.id];
-        var scoreLine = s ? '<p class="card-sub">⭐ ' + esc(t("games.bestScore")) + ": " + esc(String(s.best)) + "</p>" : "";
-        return '<a class="card clickable" href="#/game/' + g.id + '"><div class="card-row">' +
-          '<div class="card-emoji">' + g.emoji + "</div><div>" +
-          '<p class="card-title">' + esc(g.title) + "</p>" +
-          '<p class="card-sub">' + esc(g.blurb) + "</p>" + scoreLine +
-          "</div></div></a>";
-      }).join("");
-  });
-
-  route("game", function (view, params) {
-    var game = findById(GAMES, params[0]);
-    if (!game) return navigate("#/games");
-    view.innerHTML =
-      backBtn("games", t("games.title")) +
-      '<div class="game-header"><span class="game-emoji" aria-hidden="true">' + game.emoji + "</span>" +
-      "<div><h1 style=\"margin:0\">" + esc(game.title) + "</h1>" +
-      '<p class="card-sub" style="margin:0">' + esc(game.blurb) + "</p></div></div>" +
-      '<div class="card"><span class="lesson-label">🎲 ' + esc(t("games.instructions")) + "</span>" +
-      '<p style="margin:0">' + esc(game.instructions) + "</p></div>" +
-      '<div id="game-stage"></div>';
-    var stage = $("#game-stage", view);
-    var engines = { choice: runChoiceGame, memory: runMemoryGame, order: runOrderGame, select: runSelectGame, sort: runSortGame, path: runPathGame };
-    (engines[game.type] || runChoiceGame)(stage, game);
-  });
-
-  function recordGame(game, score, max) {
-    var p = progress();
-    if (p.gamesPlayed.indexOf(game.id) === -1) p.gamesPlayed.push(game.id);
-    saveProgress(p);
-    var scores = store.get("scores", {});
-    var prev = scores[game.id] || { best: 0, plays: 0 };
-    prev.plays++;
-    prev.last = score + (max != null ? "/" + max : "");
-    var numeric = max ? Math.round(score / max * 100) : score;
-    if (numeric > (prev.bestNum || 0)) { prev.bestNum = numeric; prev.best = prev.last; }
-    scores[game.id] = prev;
-    store.set("scores", scores);
-  }
-
-  function starsFor(score, max) {
-    var r = max ? score / max : 0;
-    var n = r >= 0.9 ? 3 : r >= 0.6 ? 2 : 1;
-    return "⭐".repeat(n) + "☆".repeat(3 - n);
-  }
-
-  function gameEndScreen(stage, game, score, max, extraHtml) {
-    recordGame(game, score, max);
-    var praise = max && score / max >= 0.6 ? t("games.wellDone") : t("games.goodTry");
-    stage.innerHTML =
-      '<div class="card" style="text-align:center">' +
-      '<div class="stars" aria-hidden="true">' + starsFor(score, max) + "</div>" +
-      "<h2>" + esc(praise) + "</h2>" +
-      (max != null ? "<p><b>" + esc(t("games.score")) + ": " + score + "/" + max + "</b></p>" : "") +
-      (extraHtml || "") +
-      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px">' +
-      '<button class="btn" id="again">' + esc(t("actions.playAgain")) + "</button>" +
-      '<a class="btn secondary" href="#/games">' + esc(t("games.title")) + "</a></div></div>";
-    $("#again", stage).addEventListener("click", function () {
-      var engines = { choice: runChoiceGame, memory: runMemoryGame, order: runOrderGame, select: runSelectGame, sort: runSortGame, path: runPathGame };
-      (engines[game.type] || runChoiceGame)(stage, game);
-    });
-  }
-
-  /* --- choice game: pick the best answer each round --- */
-  function runChoiceGame(stage, game) {
-    var i = 0, score = 0;
-    var rounds = game.rounds.slice();
-    function renderRound() {
-      if (i >= rounds.length) return gameEndScreen(stage, game, score, rounds.length);
-      var r = rounds[i];
-      stage.innerHTML =
-        '<p class="game-progress">' + (i + 1) + " / " + rounds.length +
-        ' · <span class="score-pill">' + esc(t("games.score")) + ": " + score + "</span></p>" +
-        '<div class="card"><p><b>' + esc(r.prompt) + "</b></p>" +
-        r.options.map(function (opt, idx) {
-          return '<button class="quiz-option" data-i="' + idx + '">' + esc(opt) + "</button>";
-        }).join("") +
-        '<div id="round-feedback"></div></div>';
-      $$(".quiz-option", stage).forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var idx = parseInt(btn.getAttribute("data-i"), 10);
-          var correct = idx === r.answer;
-          if (correct) score++;
-          $$(".quiz-option", stage).forEach(function (b) { b.disabled = true; });
-          btn.classList.add(correct ? "correct" : "incorrect");
-          $$(".quiz-option", stage)[r.answer].classList.add("correct");
-          $("#round-feedback", stage).innerHTML =
-            '<div class="quiz-feedback ' + (correct ? "good" : "oops") + '">' +
-            (correct ? "🎉 " : "💛 ") + esc(r.why) +
-            '</div><button class="btn block" style="margin-top:10px" id="next-round">' + esc(t("actions.next")) + "</button>";
-          $("#next-round", stage).addEventListener("click", function () { i++; renderRound(); });
-          $("#next-round", stage).focus();
-        });
-      });
-    }
-    renderRound();
-  }
-
-  /* --- memory game: flip pairs --- */
-  function runMemoryGame(stage, game) {
-    var cards = [];
-    game.pairs.forEach(function (p, idx) {
-      cards.push({ pair: idx, text: p.a });
-      cards.push({ pair: idx, text: p.b });
-    });
-    /* shuffle */
-    for (var i = cards.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
-    }
-    var flips = 0, matched = 0, open = [];
-    stage.innerHTML =
-      '<p class="game-progress" id="mem-status">' + esc(t("games.score")) + ": 0</p>" +
-      '<div class="memory-grid" id="mem-grid">' +
-      cards.map(function (c, idx) {
-        return '<button class="memory-card" data-idx="' + idx + '" aria-label="Card ' + (idx + 1) + '"><span>' + esc(c.text) + "</span></button>";
-      }).join("") + "</div>";
-    var lock = false;
-    $$(".memory-card", stage).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (lock || btn.classList.contains("flipped") || btn.classList.contains("matched")) return;
-        btn.classList.add("flipped");
-        open.push(btn);
-        if (open.length === 2) {
-          flips++;
-          $("#mem-status", stage).textContent = t("games.score") + ": " + flips;
-          var a = cards[parseInt(open[0].getAttribute("data-idx"), 10)];
-          var b = cards[parseInt(open[1].getAttribute("data-idx"), 10)];
-          if (a.pair === b.pair) {
-            open.forEach(function (el) { el.classList.remove("flipped"); el.classList.add("matched"); });
-            open = [];
-            matched++;
-            if (matched === game.pairs.length) {
-              var maxFlips = game.pairs.length * 3;
-              var score = Math.max(1, maxFlips - flips);
-              setTimeout(function () {
-                gameEndScreen(stage, game, score, maxFlips - game.pairs.length,
-                  "<p>" + game.pairs.length + " pairs in " + flips + " flips</p>");
-              }, 600);
-            }
-          } else {
-            lock = true;
-            setTimeout(function () {
-              open.forEach(function (el) { el.classList.remove("flipped"); });
-              open = []; lock = false;
-            }, 900);
-          }
-        }
-      });
-    });
-  }
-
-  /* --- order game: tap steps in the correct sequence --- */
-  function runOrderGame(stage, game) {
-    var pi = 0, totalScore = 0, totalMax = 0;
-    function renderPuzzle() {
-      if (pi >= game.puzzles.length) return gameEndScreen(stage, game, totalScore, totalMax);
-      var puzzle = game.puzzles[pi];
-      var correct = puzzle.steps.slice();
-      totalMax += correct.length;
-      var shuffled = correct.slice();
-      do {
-        for (var i = shuffled.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
-        }
-      } while (shuffled.length > 2 && shuffled.join() === correct.join());
-      var chosen = [];
-      function draw() {
-        stage.innerHTML =
-          '<p class="game-progress">' + (pi + 1) + " / " + game.puzzles.length + "</p>" +
-          '<div class="card"><h2>' + esc(puzzle.title) + "</h2>" +
-          '<p class="card-sub">1️⃣ → ' + correct.length + "️⃣</p>" +
-          '<div class="order-chosen">' +
-          chosen.map(function (s, idx) {
-            return '<button class="order-step chosen" data-chosen="' + idx + '"><span class="order-num">' + (idx + 1) + "</span>" + esc(s) + "</button>";
-          }).join("") + "</div>" +
-          '<div class="order-pool">' +
-          shuffled.filter(function (s) { return chosen.indexOf(s) === -1; }).map(function (s) {
-            return '<button class="order-step" data-step="' + esc(s) + '">' + esc(s) + "</button>";
-          }).join("") + "</div>" +
-          (chosen.length === correct.length ? '<button class="btn block" id="check-order">' + esc(t("actions.check")) + "</button>" : "") +
-          "</div>";
-        $$("[data-step]", stage).forEach(function (btn) {
-          btn.addEventListener("click", function () { chosen.push(btn.getAttribute("data-step")); draw(); });
-        });
-        $$("[data-chosen]", stage).forEach(function (btn) {
-          btn.addEventListener("click", function () { chosen.splice(parseInt(btn.getAttribute("data-chosen"), 10), 1); draw(); });
-        });
-        var check = $("#check-order", stage);
-        if (check) check.addEventListener("click", function () {
-          var right = 0;
-          chosen.forEach(function (s, idx) { if (s === correct[idx]) right++; });
-          totalScore += right;
-          var all = right === correct.length;
-          stage.querySelector(".card").insertAdjacentHTML("beforeend",
-            '<div class="quiz-feedback ' + (all ? "good" : "oops") + '" style="margin-top:10px">' +
-            (all ? "🎉 " + esc(t("games.wellDone")) : "💛 " + right + "/" + correct.length + " — " + esc(t("games.goodTry"))) +
-            '</div><button class="btn block" style="margin-top:10px" id="next-puzzle">' + esc(t("actions.next")) + "</button>");
-          if (!all) {
-            /* show the correct order as learning feedback */
-            stage.querySelector(".card").insertAdjacentHTML("beforeend",
-              '<div class="reveal-content" style="margin-top:10px"><ol style="margin:0;padding-left:20px">' +
-              correct.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol></div>");
-          }
-          $("#check-order", stage).remove();
-          $("#next-puzzle", stage).addEventListener("click", function () { pi++; renderPuzzle(); });
-        });
-      }
-      draw();
-    }
-    renderPuzzle();
-  }
-
-  /* --- select game: strength finder --- */
-  function runSelectGame(stage, game) {
-    var selected = [];
-    stage.innerHTML =
-      '<div class="card">' +
-      game.items.map(function (item, idx) {
-        return '<button class="select-item" data-i="' + idx + '" aria-pressed="false">' + esc(item.text) + "</button>";
-      }).join("") +
-      '<button class="btn block" id="see-strengths">' + esc(t("actions.done")) + "</button></div>";
-    $$(".select-item", stage).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var i = parseInt(btn.getAttribute("data-i"), 10);
-        var at = selected.indexOf(i);
-        if (at === -1) { selected.push(i); btn.classList.add("selected"); btn.setAttribute("aria-pressed", "true"); }
-        else { selected.splice(at, 1); btn.classList.remove("selected"); btn.setAttribute("aria-pressed", "false"); }
-      });
-    });
-    $("#see-strengths", stage).addEventListener("click", function () {
-      var strengths = selected.map(function (i) { return game.items[i].strength; });
-      var unique = strengths.filter(function (s, i) { return strengths.indexOf(s) === i; });
-      var listHtml = unique.length
-        ? "<p>" + esc(game.resultIntro) + '</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">' +
-          unique.map(function (s) { return '<span class="chip active">🌟 ' + esc(s) + "</span>"; }).join("") + "</div>"
-        : "<p>" + esc(t("games.goodTry")) + "</p>";
-      gameEndScreen(stage, game, unique.length, null, listHtml);
-    });
-  }
-
-  /* --- sort game: safe / unsafe / not sure --- */
-  function runSortGame(stage, game) {
-    var i = 0, score = 0;
-    function renderItem() {
-      if (i >= game.items.length) return gameEndScreen(stage, game, score, game.items.length);
-      var item = game.items[i];
-      stage.innerHTML =
-        '<p class="game-progress">' + (i + 1) + " / " + game.items.length +
-        ' · <span class="score-pill">' + esc(t("games.score")) + ": " + score + "</span></p>" +
-        '<div class="card"><p style="font-size:1.05rem"><b>' + esc(item.text) + "</b></p>" +
-        '<div class="sort-buttons">' +
-        game.groups.map(function (g, gi) {
-          return '<button class="btn secondary" data-g="' + gi + '">' + esc(g) + "</button>";
-        }).join("") + '</div><div id="sort-feedback"></div></div>';
-      $$("[data-g]", stage).forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var gi = parseInt(btn.getAttribute("data-g"), 10);
-          var correct = gi === item.answer;
-          if (correct) score++;
-          $$("[data-g]", stage).forEach(function (b) { b.disabled = true; });
-          $("#sort-feedback", stage).innerHTML =
-            '<div class="quiz-feedback ' + (correct ? "good" : "oops") + '" style="margin-top:12px">' +
-            (correct ? "🎉 " : "💛 " + esc(game.groups[item.answer]) + " — ") + esc(item.why) +
-            '</div><button class="btn block" style="margin-top:10px" id="next-sort">' + esc(t("actions.next")) + "</button>";
-          $("#next-sort", stage).addEventListener("click", function () { i++; renderItem(); });
-          $("#next-sort", stage).focus();
-        });
-      });
-    }
-    renderItem();
-  }
-
-  /* --- path game: branching story --- */
-  function runPathGame(stage, game) {
-    function renderScene(id) {
-      var scene = game.scenes[id];
-      if (!scene) return;
-      if (scene.ending) {
-        var tone = scene.tone === "good" ? "good" : "oops";
-        recordGame(game, scene.tone === "good" ? 1 : 0, 1);
-        stage.innerHTML =
-          '<div class="card"><p>' + esc(scene.text) + "</p>" +
-          '<div class="quiz-feedback ' + tone + '">' + (scene.tone === "good" ? "🌟 " : "💛 ") + esc(scene.lesson) + "</div>" +
-          '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">' +
-          '<button class="btn" id="path-again">' + esc(t("actions.playAgain")) + "</button>" +
-          '<a class="btn secondary" href="#/games">' + esc(t("games.title")) + "</a></div></div>";
-        $("#path-again", stage).addEventListener("click", function () { renderScene(game.start); });
-        return;
-      }
-      stage.innerHTML =
-        '<div class="card"><p>' + esc(scene.text) + "</p>" +
-        scene.choices.map(function (c, i) {
-          return '<button class="quiz-option" data-to="' + esc(c.to) + '">' + esc(c.label) + "</button>";
-        }).join("") + "</div>";
-      $$("[data-to]", stage).forEach(function (btn) {
-        btn.addEventListener("click", function () { renderScene(btn.getAttribute("data-to")); });
-      });
-    }
-    renderScene(game.start);
   }
 
   /* ====================================================================
@@ -1299,6 +952,17 @@
     var prog = CONFIG.program || {};
     var skills = ["Self-awareness", "Communication", "Problem-solving", "Decision-making", "Confidence",
       "Emotional well-being", "Resilience", "Healthy relationships", "Personal responsibility", "Future planning"];
+
+    var orgLogo = '<img src="' + esc((CONFIG.logos || {}).organization || "") + '" alt="' + esc(org.name || "") + ' logo" width="180" height="60">';
+    var orgLogoLinked = org.website
+      ? '<a href="' + esc(org.website) + '" target="_blank" rel="noopener" aria-label="' + esc(org.name || "") + ' website (opens in a new tab)">' + orgLogo + "</a>"
+      : orgLogo;
+
+    var contactLines = [];
+    if (org.website) contactLines.push('🌐 <a href="' + esc(org.website) + '" target="_blank" rel="noopener">' + esc(org.website) + "</a>");
+    if (org.email) contactLines.push('✉️ <a href="mailto:' + esc(org.email) + '">' + esc(org.email) + "</a>");
+    if (org.phone) contactLines.push("📞 " + esc(org.phone));
+
     view.innerHTML =
       "<h1>ℹ️ " + esc(t("about.title")) + "</h1>" +
       '<div class="card" style="text-align:center">' +
@@ -1311,15 +975,129 @@
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
       skills.map(function (s) { return '<span class="chip">' + esc(s) + "</span>"; }).join("") + "</div></div>" +
       '<div class="card"><div style="text-align:center;margin-bottom:10px">' +
-      '<img src="' + esc((CONFIG.logos || {}).organization || "") + '" alt="' + esc(org.name || "") + ' logo" width="180" height="60"></div>' +
+      orgLogoLinked + "</div>" +
       "<h2>" + esc(t("about.orgHeading")) + "</h2>" +
       "<p>" + esc(org.about || "") + "</p><p>" + esc(org.history || "") + "</p>" +
-      "<p>🌐 <a href=\"" + esc(org.website || "#") + "\" rel=\"noopener\">" + esc(org.website || "") + "</a><br>" +
-      "✉️ " + esc(org.email || "") + "<br>📞 " + esc(org.phone || "") + "</p></div>" +
+      (contactLines.length ? "<p>" + contactLines.join("<br>") + "</p>" : "") + "</div>" +
       '<div class="card"><h2>🔒 ' + esc(t("about.privacyHeading")) + "</h2>" +
       "<p>" + esc(t("about.privacyBody")) + "</p></div>" +
       '<p class="card-sub" style="text-align:center">' + esc(t("about.versionLabel")) + ": " + esc(CONFIG.version || "") + "</p>";
   });
+
+  /* ====================================================================
+     11b. SESSION PLANS (public, teen-friendly life-skills sessions)
+     ==================================================================== */
+  route("session-plans", function (view) {
+    view.innerHTML =
+      "<h1>📋 " + esc(t("sessionPlans.title")) + "</h1>" +
+      '<p class="page-intro">' + esc(t("sessionPlans.intro")) + "</p>" +
+      SESSION_PLANS.map(function (sp) {
+        return '<a class="card clickable sp-card c-' + esc(sp.color || "teal") + '" href="#/session-plan/' + esc(sp.id) + '">' +
+          '<div class="card-row"><div class="card-emoji">' + sp.emoji + "</div><div>" +
+          '<p class="card-title">' + esc(sp.title) + "</p>" +
+          '<p class="card-sub">' + esc(sp.tagline) + "</p>" +
+          '<p class="sp-meta">⏱️ ' + esc(sp.duration) + " · " + sp.sections.length + " " + esc(t("sessionPlans.parts")) + "</p>" +
+          "</div></div></a>";
+      }).join("");
+  });
+
+  route("session-plan", function (view, params) {
+    var sp = findById(SESSION_PLANS, params[0]);
+    if (!sp) return navigate("#/session-plans");
+    renderSessionPlan(view, sp);
+  });
+
+  /* Render one list item (supports bold label, plain text, and nested list) */
+  function spItem(it) {
+    if (typeof it === "string") return "<li>" + esc(it) + "</li>";
+    var s = "<li>";
+    if (it.b) s += "<strong>" + esc(it.b) + "</strong>" + (it.t ? " " + esc(it.t) : "");
+    else if (it.t) s += esc(it.t);
+    if (it.sub && it.sub.length) s += '<ul class="sp-sublist">' + it.sub.map(spItem).join("") + "</ul>";
+    return s + "</li>";
+  }
+
+  /* Render one content block (recursive for activity bodies) */
+  function renderSPBlock(b) {
+    if (b.p) return '<p class="sp-p">' + esc(b.p) + "</p>";
+    if (b.h) return '<h3 class="sp-h">' + esc(b.h) + "</h3>";
+    if (b.ul) return '<ul class="sp-list">' + b.ul.map(spItem).join("") + "</ul>";
+    if (b.ol) return '<ol class="sp-list sp-ol">' + b.ol.map(spItem).join("") + "</ol>";
+    if (b.note) return '<div class="sp-note"><span class="sp-note-emoji" aria-hidden="true">' + (b.emoji || "💡") + '</span><p>' + esc(b.note) + "</p></div>";
+    if (b.pledge) return '<div class="sp-pledge"><span aria-hidden="true">✊</span><p>' + esc(b.pledge) + "</p></div>";
+    if (b.scenario) {
+      var paras = Array.isArray(b.scenario) ? b.scenario : [b.scenario];
+      return '<figure class="sp-scenario">' +
+        (b.title ? '<figcaption class="sp-scenario-title">📖 ' + esc(b.title) + "</figcaption>" : "") +
+        paras.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</figure>";
+    }
+    if (b.dialogue) {
+      return '<div class="sp-dialogue">' +
+        (b.title ? '<p class="sp-scenario-title">💬 ' + esc(b.title) + "</p>" : "") +
+        b.dialogue.map(function (d) {
+          return '<p class="sp-line"><span class="sp-who">' + esc(d.who) + ":</span> " + esc(d.line) + "</p>";
+        }).join("") + "</div>";
+    }
+    if (b.table) {
+      var tb = b.table;
+      return '<div class="sp-table-wrap"><table class="sp-table"><thead><tr>' +
+        tb.headers.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") +
+        "</tr></thead><tbody>" +
+        tb.rows.map(function (r) {
+          return "<tr>" + r.map(function (c, ci) {
+            return '<td data-label="' + esc(tb.headers[ci] || "") + '">' + esc(c) + "</td>";
+          }).join("") + "</tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    if (b.activity) {
+      return '<div class="sp-activity">' +
+        '<p class="sp-activity-head"><span class="sp-activity-badge">🎲 ' + esc(t("sessionPlans.activity")) + "</span> " +
+        '<span class="sp-activity-title">' + esc(b.activity) + "</span>" +
+        (b.time ? ' <span class="sp-time">⏱️ ' + esc(b.time) + "</span>" : "") + "</p>" +
+        '<div class="sp-activity-body">' + (b.body || []).map(renderSPBlock).join("") + "</div></div>";
+    }
+    return "";
+  }
+
+  function renderSessionPlan(view, sp) {
+    var color = "c-" + (sp.color || "teal");
+
+    var toc = sp.sections.map(function (sec, i) {
+      return '<button class="chip sp-jump" type="button" data-target="sp-sec-' + i + '">' +
+        (i + 1) + ". " + esc(sec.title) + "</button>";
+    }).join("");
+
+    var body = sp.sections.map(function (sec, i) {
+      return '<section class="sp-section" id="sp-sec-' + i + '">' +
+        '<div class="sp-sec-head">' +
+        '<span class="sp-sec-num" aria-hidden="true">' + (i + 1) + "</span>" +
+        "<h2>" + esc(sec.title) + "</h2>" +
+        (sec.time ? '<span class="sp-time">⏱️ ' + esc(sec.time) + "</span>" : "") +
+        "</div>" +
+        sec.blocks.map(renderSPBlock).join("") + "</section>";
+    }).join("");
+
+    view.innerHTML =
+      backBtn("session-plans", t("sessionPlans.title")) +
+      '<header class="sp-hero ' + color + '">' +
+      '<span class="sp-hero-emoji" aria-hidden="true">' + sp.emoji + "</span>" +
+      "<h1>" + esc(sp.title) + "</h1>" +
+      '<p class="sp-hero-tagline">' + esc(sp.tagline) + "</p>" +
+      '<p class="sp-hero-meta"><span class="chip">⏱️ ' + esc(t("sessionPlans.duration")) + ": " + esc(sp.duration) + "</span></p>" +
+      "</header>" +
+      '<div class="sp-toc no-print"><p class="lesson-label">🧭 ' + esc(t("sessionPlans.contents")) + "</p>" +
+      '<div class="sp-toc-chips">' + toc + "</div></div>" +
+      body +
+      '<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
+      '<button class="btn secondary" onclick="window.print()">🖨️ ' + esc(t("actions.print")) + "</button></div>";
+
+    $$(".sp-jump", view).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = $("#" + btn.getAttribute("data-target"), view);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
 
   /* ====================================================================
      12. FACILITATOR MODE (local PIN, device-only, anonymous totals)
@@ -1357,8 +1135,6 @@
 
   function renderFacHome(view) {
     var p = progress();
-    var scores = store.get("scores", {});
-    var gamesPlays = Object.keys(scores).reduce(function (n, k) { return n + (scores[k].plays || 0); }, 0);
     var groupName = store.get("facGroupName", "");
     var notes = store.get("facNotes", "");
     var projector = document.documentElement.getAttribute("data-projector") === "on";
@@ -1379,7 +1155,6 @@
       '<p class="card-sub">' + esc(t("facilitator.totalsNote")) + "</p>" +
       '<div class="stat-row">' +
       '<div class="stat"><b>' + p.lessonsDone.length + "</b><span>" + esc(t("home.lessonsDone")) + "</span></div>" +
-      '<div class="stat"><b>' + gamesPlays + "</b><span>" + esc(t("home.gamesPlayed")) + "</span></div>" +
       '<div class="stat"><b>' + p.quizCorrect + "</b><span>quiz ✓</span></div>" +
       '<div class="stat"><b>' + p.activitiesDone.length + "</b><span>" + esc(t("nav.activities").toLowerCase()) + "</span></div>" +
       "</div>" +
@@ -1432,7 +1207,6 @@
     var s = null;
     for (var i = 0; i < SESSIONS.length; i++) if (SESSIONS[i].number === num) s = SESSIONS[i];
     if (!s) return navigate("#/facilitator");
-    var game = findById(GAMES, s.game);
     var cat = findById(CONTENT.categories, s.relatedCategory);
     var activity = findById(ACTIVITIES, s.relatedActivity);
 
@@ -1450,11 +1224,6 @@
         (cat ? '<p style="margin:10px 0 0"><a class="chip" href="#/learn/' + cat.id + '">' + cat.emoji + " " + esc(cat.title) + "</a></p>" : "")) +
       block("💬", t("facilitator.groupDiscussion"),
         '<ol style="margin:0;padding-left:20px">' + s.discussion.map(function (q) { return "<li>" + esc(q) + "</li>"; }).join("") + "</ol>") +
-      block("🎮", t("facilitator.game"),
-        game ? '<a class="card clickable" href="#/game/' + game.id + '" style="margin:0"><div class="card-row">' +
-          '<div class="card-emoji">' + game.emoji + "</div><div>" +
-          '<p class="card-title">' + esc(game.title) + "</p>" +
-          '<p class="card-sub">' + esc(game.blurb) + "</p></div></div></a>" : "") +
       block("🪞", t("facilitator.reflection"), "<p style=\"margin:0\">" + esc(s.reflection) + "</p>") +
       block("🏠", t("facilitator.challenge"), "<p style=\"margin:0\">" + esc(s.challenge) + "</p>") +
       (activity
