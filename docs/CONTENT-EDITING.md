@@ -2,8 +2,8 @@
 
 All content in I Matter lives in plain, commented JavaScript files inside
 the `data/` folder. Authorized project staff can edit everything — lessons,
-games, stories, activities, support contacts, logos, colours, footer text,
-and organization details — with a text editor. No CMS, no build step, no
+stories, session plans, support contacts, logos, colours, footer
+text, and organization details — with a text editor. No CMS, no build step, no
 code knowledge beyond careful copy-paste.
 
 ## The golden rules
@@ -22,11 +22,10 @@ code knowledge beyond careful copy-paste.
 | `data/config.js` | App name, tagline, organization details, website/email/phone, footer text, **support contacts**, facilitator default PIN, logo paths, theme colours |
 | `data/strings.js` | Every interface label, in English and Kiswahili |
 | `data/content.js` | The 10 learning categories and all lessons |
-| `data/games-data.js` | Questions, scenarios, and pairs for all 10 games |
 | `data/stories.js` | The stories |
-| `data/activities.js` | The worksheets and their fields |
-| `data/sessions.js` | The 8 monthly session plans |
-| `data/extras.js` | Mood check-in responses, daily encouragements, journal prompts, badges |
+| `data/session-plans.js` | The public Session Plans tab content |
+| `data/sessions.js` | The 8 monthly session plans (Facilitator Mode) |
+| `data/extras.js` | Daily encouragements, journal prompts, badges |
 
 ## Common tasks
 
@@ -42,14 +41,15 @@ category's `lessons: [...]`, paste it below, and change:
 - `quiz.answer` — the position of the correct option, counting from 0
 - `related` — ids of related lessons (optional)
 
-### Add a quiz question to a game
-In `data/games-data.js`, find the game and copy one entry in its `rounds`
-(or `items` / `pairs` / `puzzles`) list.
+### Add or edit a session plan
+In `data/session-plans.js`, copy an existing plan block or a `section` inside
+one. Each section has a `title`, optional `time`, and a `blocks` list. The
+file header documents every block type (`p`, `h`, `ul`, `ol`, `activity`,
+`scenario`, `dialogue`, `table`, `note`, `pledge`).
 
 ### Add a story
-Copy a story block in `data/stories.js`. `relatedActivity` must be an id
-from `data/activities.js`. Never use real participant names or personal
-stories without written consent.
+Copy a story block in `data/stories.js`. Never use real participant names
+or personal stories without written consent.
 
 ### Change the footer or organization details
 `data/config.js` → `footerText`, `organization`.

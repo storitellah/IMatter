@@ -5,7 +5,7 @@
    names or personal stories without written consent.
    Each story: id, title, emoji, theme, text (paragraphs array), discussion,
    whatWouldYouDo (options are all reasonable — they spark conversation),
-   lesson, relatedActivity (id from data/activities.js).
+   and lesson.
    ========================================================================== */
 
 window.IM_STORIES = [
@@ -27,8 +27,7 @@ window.IM_STORIES = [
       q: "If you heard a rumour that your friend said something bad about you, what would you do first?",
       options: ["Stop talking to them immediately", "Ask them directly about it, calmly", "Spread a rumour back", "Ask others to take your side"]
     },
-    lesson: "Check the facts with the person directly before believing a rumour. A five-minute honest conversation can save a friendship.",
-    relatedActivity: "communication-practice"
+    lesson: "Check the facts with the person directly before believing a rumour. A five-minute honest conversation can save a friendship."
   },
   {
     id: "the-heavy-bag",
@@ -48,8 +47,7 @@ window.IM_STORIES = [
       q: "If school pressure was affecting your sleep and health, what would you do?",
       options: ["Push harder and ignore the signs", "Talk to a trusted adult about how you feel", "Give up on school", "Make a balanced plan with study and rest"]
     },
-    lesson: "Working hard matters, but your health matters more. Speaking honestly about pressure is not weakness — it is wisdom.",
-    relatedActivity: "study-timetable"
+    lesson: "Working hard matters, but your health matters more. Speaking honestly about pressure is not weakness — it is wisdom."
   },
   {
     id: "the-initiation",
@@ -69,8 +67,7 @@ window.IM_STORIES = [
       q: "A group you really want to join asks you to do something wrong first. What do you do?",
       options: ["Do it once — just to get in", "Refuse and look for real friends", "Report it if it could harm someone", "Pretend to do it and lie"]
     },
-    lesson: "A friendship that must be bought with wrongdoing is not friendship. Real belonging never costs your values.",
-    relatedActivity: "values-cards"
+    lesson: "A friendship that must be bought with wrongdoing is not friendship. Real belonging never costs your values."
   },
   {
     id: "amara-speaks",
@@ -90,8 +87,7 @@ window.IM_STORIES = [
       q: "You notice a danger at school that nobody is reporting. What do you do?",
       options: ["Wait — surely someone else will do it", "Report it to a teacher or leader", "Tell friends but no adults", "Fix it yourself even if it's risky"]
     },
-    lesson: "Your voice can protect people. Speaking up doesn't require a loud voice — just a clear message and a little courage.",
-    relatedActivity: "confidence-journal"
+    lesson: "Your voice can protect people. Speaking up doesn't require a loud voice — just a clear message and a little courage."
   },
   {
     id: "the-tryout",
@@ -111,8 +107,7 @@ window.IM_STORIES = [
       q: "There is something you're secretly good at, but performing scares you. What do you do?",
       options: ["Keep it secret forever", "Build a ladder of small brave steps", "Wait until the fear disappears completely", "Force yourself into the biggest stage immediately"]
     },
-    lesson: "Courage is not the absence of fear — it is singing anyway. Small brave steps build unshakeable confidence.",
-    relatedActivity: "confidence-journal"
+    lesson: "Courage is not the absence of fear — it is singing anyway. Small brave steps build unshakeable confidence."
   },
   {
     id: "baraka-two-jobs",
@@ -132,8 +127,7 @@ window.IM_STORIES = [
       q: "If home responsibilities were affecting your schoolwork, what would you do?",
       options: ["Say nothing and struggle alone", "Explain the situation to a trusted teacher", "Drop out to focus on home", "Make a plan that balances both, with help"]
     },
-    lesson: "Helping your family is something to be proud of. But you deserve support too — speaking up lets people help you carry the load.",
-    relatedActivity: "weekly-planner"
+    lesson: "Helping your family is something to be proud of. But you deserve support too — speaking up lets people help you carry the load."
   },
   {
     id: "chesangs-choice",
@@ -153,8 +147,7 @@ window.IM_STORIES = [
       q: "You find money that nobody saw you pick up. What do you do?",
       options: ["Keep it — finders keepers", "Hand it to a trusted authority", "Keep half, hand in half", "Ask friends what to do first"]
     },
-    lesson: "Difficult choices reveal — and build — who you are. Integrity means doing right even when nobody is watching.",
-    relatedActivity: "decision-tree"
+    lesson: "Difficult choices reveal — and build — who you are. Integrity means doing right even when nobody is watching."
   },
   {
     id: "the-note",
@@ -174,8 +167,7 @@ window.IM_STORIES = [
       q: "If something felt very wrong but speaking about it felt impossible, what could you do?",
       options: ["Keep the secret to protect everyone", "Write a note to a trusted adult", "Tell a trusted adult directly", "Keep telling adults until someone acts"]
     },
-    lesson: "Unsafe secrets must always be told — and there is more than one way to tell. A note, a message, a drawing: what matters is reaching a trusted adult. It is never your fault.",
-    relatedActivity: "trusted-adults-map"
+    lesson: "Unsafe secrets must always be told — and there is more than one way to tell. A note, a message, a drawing: what matters is reaching a trusted adult. It is never your fault."
   },
   {
     id: "second-race",
@@ -195,8 +187,7 @@ window.IM_STORIES = [
       q: "After failing publicly at something you trained hard for, what would you do?",
       options: ["Quit — it clearly isn't for you", "Take time to feel the disappointment, then return", "Blame the judges or bad luck", "Learn what went wrong and adjust your training"]
     },
-    lesson: "Failure is an event, not an identity. The comeback is always a bigger story than the fall.",
-    relatedActivity: "confidence-journal"
+    lesson: "Failure is an event, not an identity. The comeback is always a bigger story than the fall."
   },
   {
     id: "engineer-of-soko",
@@ -216,7 +207,6 @@ window.IM_STORIES = [
       q: "People laugh at your dream because of where you come from. What do you do?",
       options: ["Choose a 'more realistic' dream to avoid mockery", "Keep the dream and build it step by step", "Find people who believe in you and learn from them", "Prove them wrong with quiet, steady work"]
     },
-    lesson: "Where you start does not decide where you finish. A dream plus daily steps plus stubbornness is stronger than other people's doubts.",
-    relatedActivity: "vision-board"
+    lesson: "Where you start does not decide where you finish. A dream plus daily steps plus stubbornness is stronger than other people's doubts."
   }
 ];

@@ -6,10 +6,11 @@
  *   3. Point CHROME_PATH at a local Chrome/Chromium binary if needed.
  *   4. Run:                  node tools/smoke-test.js
  *
- * Covers: rendering of every section, all 76 lessons, all game engines,
- * quizzes, local saving, badges, My Space, Facilitator Mode, accessibility
- * settings, language switch, delete-all-data, offline mode, and console
- * errors. See docs/TESTING.md for the full manual checklist.
+ * Covers: rendering of every section, all 76 lessons, session plans,
+ * the Resources hub, quizzes, local saving, badges, My Space, Facilitator
+ * Mode, accessibility settings, language switch, delete-all-data, offline
+ * mode, and console errors. See docs/TESTING.md for the full manual
+ * checklist.
  */
 const puppeteer = require("puppeteer-core");
 const CHROME_PATH = process.env.CHROME_PATH || "/usr/local/bin/google-chrome";
@@ -44,10 +45,12 @@ function check(name, cond, extra) {
   console.log("== Load home ==");
   await page.goto(BASE, { waitUntil: "networkidle0" });
   check("title", (await page.title()).includes("I Matter"));
-  check("hero welcome", await page.$eval(".hero h1", el => el.textContent.includes("You matter")));
+  check("hero welcome", await page.$eval(".hero h1", el => el.textContent.includes("Guide")));
   check("footer text", await page.$eval("#footer-text", el => el.textContent.includes("Imagine Tomorrow Foundation")));
-  check("bottom nav items", (await page.$$(".nav-item")).length === 5);
-  check("mood buttons", (await page.$$(".mood-btn")).length === 8);
+  check("bottom nav items (Home, Session Plans, Resources)", (await page.$$(".nav-item")).length === 3);
+  check("home links to both main sections", await page.evaluate(() =>
+    !!document.querySelector('.app-main a[href="#/session-plans"]') && !!document.querySelector('.app-main a[href="#/resources"]')));
+  check("today's encouragement shows", await page.$eval(".encourage-card", el => el.textContent.length > 20));
 
   console.log("== Service worker ==");
   await sleep(1500);
@@ -65,13 +68,18 @@ function check(name, cond, extra) {
   });
   check("precache populated (>= 20 files)", cacheCount >= 20, "cached: " + cacheCount);
 
-  console.log("== Mood check-in ==");
-  await page.click('.mood-btn[data-mood="worried"]');
+  console.log("== Resources hub ==");
+  await page.goto(BASE + "#/resources", { waitUntil: "domcontentloaded" });
   await sleep(300);
-  check("mood response shows", !!(await page.$(".mood-response")));
-  check("breathing button for worried", !!(await page.$("[data-breathe]")));
-  const moodSaved = await page.evaluate(() => JSON.parse(localStorage.getItem("im.moodHistory") || "[]").length);
-  check("mood saved locally", moodSaved === 1);
+  check("resources hub lists 6 items", (await page.$$(".app-main .card.clickable")).length === 6);
+  check("resources in bottom nav", await page.evaluate(() => [...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").includes("Resources"))));
+
+  console.log("== Mood check-in removed ==");
+  check("no mood data present", await page.evaluate(() => window.IM_EXTRAS.moods === undefined));
+  await page.goto(BASE + "#/myspace/mood", { waitUntil: "domcontentloaded" });
+  await sleep(400);
+  check("mood route falls back to My Space", !!(await page.$("#pin-toggle")));
+  check("no mood buttons", (await page.$$(".mood-btn")).length === 0);
 
   console.log("== Learn ==");
   await page.goto(BASE + "#/learn", { waitUntil: "domcontentloaded" });
@@ -130,84 +138,22 @@ function check(name, cond, extra) {
   }
   check("all 76 lesson pages render", lessonRenderFails === 0);
 
-  console.log("== Games ==");
+  console.log("== Games removed ==");
+  check("no IM_GAMES data present", await page.evaluate(() => typeof window.IM_GAMES === "undefined"));
+  check("Games nav item removed", await page.evaluate(() => ![...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").toLowerCase().includes("game"))));
   await page.goto(BASE + "#/games"); await sleep(300);
-  check("10 games listed", (await page.$$(".app-main .card.clickable")).length === 10);
+  check("games route falls back (home shown)", !!(await page.$(".hero")));
 
-  // choice game: feelings match — play all rounds
-  await page.goto(BASE + "#/game/feelings-match"); await sleep(400);
-  for (let i = 0; i < 8; i++) {
-    await page.waitForSelector(".quiz-option", { timeout: 5000 });
-    await page.evaluate(() => document.querySelector(".quiz-option").click());
-    await page.waitForSelector("#next-round", { timeout: 5000 });
-    await page.evaluate(() => document.querySelector("#next-round").click());
-    await sleep(100);
-  }
-  check("feelings match completes", !!(await page.$(".stars")));
-
-  // memory game: play by cheating (read pairs)
-  await page.goto(BASE + "#/game/memory-match"); await sleep(300);
-  const memDone = await page.evaluate(async () => {
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    const cards = [...document.querySelectorAll(".memory-card")];
-    const texts = cards.map(c => c.querySelector("span").textContent);
-    const pairs = window.IM_GAMES.find(g => g.id === "memory-match").pairs;
-    for (const p of pairs) {
-      const i = texts.indexOf(p.a), j = texts.indexOf(p.b);
-      cards[i].click(); await sleep(50); cards[j].click(); await sleep(1100);
-    }
-    await sleep(900);
-    return !!document.querySelector(".stars");
-  });
-  check("memory match completes", memDone);
-
-  // order game
-  await page.goto(BASE + "#/game/problem-puzzle"); await sleep(300);
-  const orderDone = await page.evaluate(async () => {
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    for (let p = 0; p < 3; p++) {
-      const puzzle = window.IM_GAMES.find(g => g.id === "problem-puzzle").puzzles[p];
-      for (const step of puzzle.steps) {
-        const btn = [...document.querySelectorAll("[data-step]")].find(b => b.getAttribute("data-step") === step);
-        btn.click(); await sleep(40);
-      }
-      document.querySelector("#check-order").click(); await sleep(150);
-      const good = !!document.querySelector(".quiz-feedback.good");
-      if (!good) return "wrong order accepted as wrong on puzzle " + p;
-      document.querySelector("#next-puzzle").click(); await sleep(150);
-    }
-    return !!document.querySelector(".stars");
-  });
-  check("order game completes with perfect score", orderDone === true, String(orderDone));
-
-  // select game
-  await page.goto(BASE + "#/game/strength-finder"); await sleep(300);
-  await page.click(".select-item"); await page.click("#see-strengths"); await sleep(200);
-  check("strength finder shows result", !!(await page.$(".stars")));
-
-  // sort game
-  await page.goto(BASE + "#/game/safe-or-unsafe"); await sleep(300);
-  const sortDone = await page.evaluate(async () => {
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    const items = window.IM_GAMES.find(g => g.id === "safe-or-unsafe").items;
-    for (const item of items) {
-      document.querySelector('[data-g="' + item.answer + '"]').click(); await sleep(80);
-      document.querySelector("#next-sort").click(); await sleep(80);
-    }
-    return !!document.querySelector(".stars") && document.body.textContent.includes("10/10");
-  });
-  check("sort game completes 10/10", sortDone);
-
-  // path game
-  await page.goto(BASE + "#/game/decision-path"); await sleep(300);
-  for (let i = 0; i < 5 && !(await page.$("#path-again")); i++) {
-    await page.evaluate(() => { const b = [...document.querySelectorAll("[data-to]")][1] || document.querySelector("[data-to]"); if (b) b.click(); });
-    await sleep(150);
-  }
-  check("path game reaches ending with lesson", !!(await page.$("#path-again")) && !!(await page.$(".quiz-feedback")));
-
-  const scores = await page.evaluate(() => JSON.parse(localStorage.getItem("im.scores") || "{}"));
-  check("scores saved locally", Object.keys(scores).length >= 5, Object.keys(scores).join(","));
+  console.log("== Session Plans ==");
+  await page.goto(BASE + "#/session-plans"); await sleep(300);
+  check("6 session plans listed", (await page.$$(".app-main .card.clickable")).length === 6);
+  check("session plans in bottom nav", await page.evaluate(() => [...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").includes("Session Plans"))));
+  await page.goto(BASE + "#/session-plan/decision-making-problem-solving"); await sleep(300);
+  check("session plan renders sections", (await page.$$(".sp-section")).length > 0);
+  check("session plan has consequences table", (await page.$$(".sp-table")).length === 1);
+  await page.goto(BASE + "#/session-plan/goals-time-procrastination"); await sleep(300);
+  check("goals/time plan renders 8 sections", (await page.$$(".sp-section")).length === 8);
+  check("goals/time plan has activities", (await page.$$(".sp-activity")).length >= 4);
 
   console.log("== Stories ==");
   await page.goto(BASE + "#/stories"); await sleep(300);
@@ -216,31 +162,16 @@ function check(name, cond, extra) {
   check("story renders", (await page.$eval("h1", el => el.textContent)).includes("The Note"));
   await page.click("[data-wwyd]"); await sleep(200);
   check("what-would-you-do responds", !!(await page.$("#wwyd-feedback .quiz-feedback")));
-  const storyAudit = await page.evaluate(() => {
-    return window.IM_STORIES.filter(s => !window.IM_ACTIVITIES.find(a => a.id === s.relatedActivity)).map(s => s.id);
-  });
-  check("all story->activity links valid", storyAudit.length === 0, JSON.stringify(storyAudit));
 
-  console.log("== Activities ==");
+  console.log("== Activities removed ==");
+  check("no IM_ACTIVITIES data present", await page.evaluate(() => typeof window.IM_ACTIVITIES === "undefined"));
+  check("Activities nav item removed", await page.evaluate(() => ![...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").toLowerCase().includes("activities"))));
   await page.goto(BASE + "#/activities"); await sleep(300);
-  check("12 activities listed", (await page.$$(".app-main .card.clickable")).length === 12);
-  await page.goto(BASE + "#/activity/goal-ladder"); await sleep(300);
-  await page.type('[data-field="goal"]', "Become a nurse");
-  await page.click("#act-save"); await sleep(300);
-  const actSaved = await page.evaluate(() => JSON.parse(localStorage.getItem("im.activity.goal-ladder") || "{}").goal);
-  check("activity saves locally", actSaved === "Become a nurse", actSaved);
-  const badgesNow = await page.evaluate(() => JSON.parse(localStorage.getItem("im.badges") || "[]"));
-  check("goal-setter badge earned", badgesNow.includes("goal-setter"));
-  // list field
-  await page.goto(BASE + "#/activity/weekly-planner"); await sleep(300);
-  await page.type('[data-listin="must"]', "Revise maths");
-  await page.click('[data-listadd="must"]'); await sleep(300);
-  const listSaved = await page.evaluate(() => (JSON.parse(localStorage.getItem("im.activity.weekly-planner") || "{}").must || []).length);
-  check("list field saves", listSaved === 1);
+  check("activities route falls back (home shown)", !!(await page.$(".hero")));
 
   console.log("== My Space ==");
   await page.goto(BASE + "#/myspace"); await sleep(300);
-  check("myspace tiles", (await page.$$(".tile")).length === 11);
+  check("myspace tiles", (await page.$$(".tile")).length === 10);
   await page.goto(BASE + "#/myspace/journal"); await sleep(300);
   await page.type("#journal-in", "Today I learned that naming feelings helps.");
   await page.click("#journal-save"); await sleep(300);
@@ -256,7 +187,7 @@ function check(name, cond, extra) {
   await page.click("#text-save"); await sleep(200);
   check("calm plan saved", (await page.evaluate(() => JSON.parse(localStorage.getItem("im.myCalmPlan") || '""'))).includes("Breathe"));
   await page.goto(BASE + "#/myspace/badges"); await sleep(300);
-  check("badges grid renders", (await page.$$(".badge")).length === 12);
+  check("badges grid renders", (await page.$$(".badge")).length === 7);
 
   console.log("== Help & About ==");
   await page.goto(BASE + "#/help"); await sleep(300);
@@ -299,9 +230,9 @@ function check(name, cond, extra) {
   await page.click("[data-close]"); await sleep(200);
   // language switch
   await page.click("#lang-btn"); await sleep(400);
-  check("kiswahili applied", (await page.$eval(".hero h1", el => el.textContent)).includes("muhimu"));
+  check("kiswahili applied", (await page.$eval(".hero h1", el => el.textContent)).includes("Ongoza"));
   await page.click("#lang-btn"); await sleep(400);
-  check("english restored", (await page.$eval(".hero h1", el => el.textContent)).includes("You matter"));
+  check("english restored", (await page.$eval(".hero h1", el => el.textContent)).includes("Guide"));
 
   console.log("== Accessibility basics ==");
   const a11y = await page.evaluate(() => {
@@ -343,8 +274,8 @@ function check(name, cond, extra) {
   await page.evaluate(() => { window.dispatchEvent(new Event("online")); });
   await page.goto(BASE + "#/lesson/managing-anger"); await sleep(300);
   check("lesson loads offline", (await page.$eval("h1", el => el.textContent)).includes("Managing anger"));
-  await page.goto(BASE + "#/game/memory-match"); await sleep(300);
-  check("game loads offline", (await page.$$(".memory-card")).length === 12);
+  await page.goto(BASE + "#/session-plan/self-awareness-confidence"); await sleep(300);
+  check("session plan loads offline", (await page.$$(".sp-section")).length > 0);
   await page.setOfflineMode(false);
 
   console.log("\n== Console errors ==");

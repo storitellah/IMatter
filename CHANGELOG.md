@@ -3,6 +3,58 @@
 All notable changes to the I Matter app are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [3.0.0] — 2026-07-14
+
+Restructured the app around **two main sections**: **Session Plans** and
+**Resources**.
+
+### Added
+- New session plan: **Goal Setting, Time Management & Overcoming
+  Procrastination** (90 min) — goals and how to set them, time robbers and
+  time-management strategies, procrastination causes and fixes, plus three
+  group activities. Session Plans now total six.
+- New **Resources** hub gathering Learn, Stories, My Space, Facilitator Mode,
+  Help & Support, and About in one place.
+
+### Changed
+- Bottom navigation simplified to **Home · Session Plans · Resources** (the
+  "More" sheet is gone).
+- Home page now shows Today's encouragement, links to the two main sections,
+  and the progress summary.
+- Bumped service worker cache to `i-matter-v4`.
+
+### Removed
+- **Activities** section removed entirely (all 12 worksheets, data file, nav
+  entry, home feature, story/session "related activity" links, and related
+  badges).
+- **Mood check-in** ("How are you feeling today?") removed from My Space,
+  together with the guided breathing exercise, mood data, and mood badge.
+- Remaining leftovers of the Games feature (unused strings and data fields).
+
+## [2.0.0] — 2026-07-12
+
+Repositioned I Matter as a **facilitator toolkit** — for teachers and youth
+mentors to lead students through life skills, rather than a student self-use app.
+
+### Added
+- New **Session Plans** tab with five full, teen-friendly life-skills sessions
+  (Self-Awareness & Confidence, Communication & Relationships, Decision-Making &
+  Problem-Solving, Conflict Resolution & Negotiation, Substance Abuse & Peer
+  Pressure). Promoted to the bottom navigation.
+
+### Changed
+- Reframed the app's language throughout (English + Kiswahili) to address
+  facilitators leading students (hero, section intros, labels).
+- Updated Imagine Tomorrow Foundation contacts: website and email set, phone
+  removed; the organization logo now links to the website. New logo artwork.
+- Bumped service worker cache to `i-matter-v3`; verified full offline precache.
+
+### Removed
+- **Games** feature removed entirely (all 10 games, engines, data, nav entry,
+  home feature, facilitator session links, and related badges).
+- The Home page "How are you feeling today?" section (mood check-in remains in
+  My Space).
+
 ## [1.0.0] — 2026-07-10
 
 ### Added
