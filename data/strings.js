@@ -13,40 +13,46 @@ window.IM_STRINGS = {
 
     /* Navigation */
     nav: {
-      home: "Home", learn: "Learn", games: "Games", myspace: "My Space",
-      stories: "Stories", activities: "Activities", help: "Help", about: "About",
-      more: "More", facilitator: "Facilitator", "session-plans": "Session Plans"
+      home: "Home", resources: "Resources", "session-plans": "Session Plans"
     },
 
     /* Common actions */
     actions: {
-      back: "Back", next: "Next", start: "Start", done: "Done", close: "Close",
-      save: "Save", cancel: "Cancel", delete: "Delete", print: "Print",
-      exportPdf: "Save as PDF", reset: "Reset", playAgain: "Play again",
-      check: "Check", reveal: "Tap to reveal", continue: "Continue",
-      seeAll: "See all", tryIt: "Try it", open: "Open", install: "Install app",
-      addNote: "Add", edit: "Edit", checkUpdates: "Check for updates"
+      back: "Back", close: "Close",
+      save: "Save", saved: "Saved on this device", delete: "Delete",
+      print: "Print", reveal: "Tap to reveal",
+      open: "Open", install: "Install app",
+      addNote: "Add", checkUpdates: "Check for updates"
     },
 
     /* Home */
     home: {
       welcomeTitle: "Guide. Support. Empower.",
-      welcomeBody: "Everything you need to lead young people through life skills — lessons, stories, activities, and ready-to-run session plans.",
+      welcomeBody: "Everything you need to lead young people through life skills — ready-to-run session plans plus a toolkit of lessons, stories, and support resources.",
       todayEncouragement: "Today's encouragement",
-      quickTopics: "Teaching topics",
-      featuredActivity: "Featured activity",
-      featuredGame: "Featured game",
-      moodTitle: "How are you feeling today?",
-      moodHint: "Tap the feeling that fits best. This stays on your device.",
+      sectionsTitle: "Start here",
+      sessionPlansSub: "Full, ready-to-run life-skills sessions to lead with your group.",
+      resourcesSub: "Lessons, stories, your private space, facilitator tools, and support.",
       progressTitle: "Your progress",
       lessonsDone: "lessons reviewed",
-      gamesPlayed: "games played",
       badgesEarned: "badges earned",
       installTitle: "Add I Matter to your home screen",
       installBody: "Install the app so it works anytime, even without internet.",
       offlineReady: "Ready to use offline",
       online: "Online",
       offline: "Offline — everything still works!"
+    },
+
+    /* Resources hub */
+    resources: {
+      title: "Resources",
+      intro: "Your toolkit for sessions and beyond — teaching topics, stories, your own space, facilitator tools, and support information.",
+      learnSub: "10 teaching topics with short lessons, examples, and quick quizzes.",
+      storiesSub: "Short stories to read and discuss with your students.",
+      myspaceSub: "Your private notes, plans, journal, and badges — on this device only.",
+      facilitatorSub: "PIN-protected monthly session plans, projector mode, and notes.",
+      helpSub: "Support contacts and safety guidance to share with students.",
+      aboutSub: "About the program, the organization, and your privacy."
     },
 
     /* Learn */
@@ -69,24 +75,11 @@ window.IM_STRINGS = {
       tryAgain: "Try again"
     },
 
-    /* Games */
-    games: {
-      title: "Games",
-      intro: "Play, learn, and grow. Every game works offline and no one sees your score but you.",
-      bestScore: "Best",
-      lastScore: "Last",
-      score: "Score",
-      wellDone: "Well done!",
-      goodTry: "Good try! Every attempt helps you learn.",
-      instructions: "How to play"
-    },
-
     /* My Space */
     myspace: {
       title: "My Space",
       intro: "A private space for your own notes, planning, and reflection. Everything here stays on this device only.",
       privacyNote: "Private: saved only on this device. Nothing is uploaded or shared.",
-      mood: "Mood check-in",
       strengths: "My strengths",
       goals: "My goals",
       gratitude: "Gratitude notes",
@@ -99,22 +92,10 @@ window.IM_STRINGS = {
       badges: "My badges",
       pinProtect: "Protect My Space with a PIN",
       deleteAll: "Delete all my data",
-      deleteConfirm: "This will delete everything saved in this app on this device: journal, goals, moods, scores, and badges. This cannot be undone. Delete everything?",
+      deleteConfirm: "This will delete everything saved in this app on this device: journal, goals, notes, and badges. This cannot be undone. Delete everything?",
       deleted: "All your data has been deleted.",
       emptyList: "Nothing here yet. Add your first one!",
       journalPromptLabel: "Need an idea? Try this prompt:"
-    },
-
-    /* Mood */
-    mood: {
-      happy: "Happy", calm: "Calm", excited: "Excited", worried: "Worried",
-      sad: "Sad", angry: "Angry", tired: "Tired", confused: "Confused",
-      thanks: "Thank you for sharing how you feel.",
-      breathe: "Try a breathing exercise",
-      breatheIn: "Breathe in...",
-      breatheHold: "Hold...",
-      breatheOut: "Breathe out...",
-      breatheDone: "Well done. You can repeat this any time you need it."
     },
 
     /* Stories */
@@ -123,18 +104,7 @@ window.IM_STRINGS = {
       intro: "Short stories to read and discuss with your students. Ask the group: what would you do?",
       discussion: "Talk about it",
       whatWouldYouDo: "What would you do?",
-      keyLesson: "Key lesson",
-      relatedActivity: "Related activity"
-    },
-
-    /* Activities */
-    activities: {
-      title: "Activities",
-      intro: "Worksheets and tools to complete with your students or print for your sessions.",
-      inApp: "Do it in the app",
-      printable: "Printable",
-      saved: "Saved on this device",
-      resetOne: "Reset this activity"
+      keyLesson: "Key lesson"
     },
 
     /* Help */
@@ -179,12 +149,11 @@ window.IM_STRINGS = {
       groupName: "School / group name",
       changePin: "Change facilitator PIN",
       resetResults: "Reset local activity results",
-      resetResultsConfirm: "Reset lesson, game, and quiz completion counters on this device? Personal My Space entries are not touched.",
+      resetResultsConfirm: "Reset lesson and quiz completion counters on this device? Personal My Space entries are not touched.",
       objective: "Learning objective",
       opening: "Opening activity",
       mainLesson: "Main lesson",
       groupDiscussion: "Group discussion",
-      game: "Game",
       reflection: "Reflection",
       challenge: "Take-home challenge"
     },
@@ -232,38 +201,43 @@ window.IM_STRINGS = {
     tagline: "Zana ya mwezeshaji ya kuwaongoza vijana katika stadi za maisha.",
 
     nav: {
-      home: "Nyumbani", learn: "Jifunze", games: "Michezo", myspace: "Nafasi Yangu",
-      stories: "Hadithi", activities: "Shughuli", help: "Msaada", about: "Kuhusu",
-      more: "Zaidi", facilitator: "Mwezeshaji", "session-plans": "Mipango ya Vikao"
+      home: "Nyumbani", resources: "Rasilimali", "session-plans": "Mipango ya Vikao"
     },
 
     actions: {
-      back: "Rudi", next: "Endelea", start: "Anza", done: "Imekamilika", close: "Funga",
-      save: "Hifadhi", cancel: "Ghairi", delete: "Futa", print: "Chapisha",
-      exportPdf: "Hifadhi kama PDF", reset: "Anza upya", playAgain: "Cheza tena",
-      check: "Angalia", reveal: "Gusa kuona jibu", continue: "Endelea",
-      seeAll: "Ona zote", tryIt: "Jaribu", open: "Fungua", install: "Sakinisha programu",
-      addNote: "Ongeza", edit: "Hariri", checkUpdates: "Angalia masasisho"
+      back: "Rudi", close: "Funga",
+      save: "Hifadhi", saved: "Imehifadhiwa kwenye kifaa hiki", delete: "Futa",
+      print: "Chapisha", reveal: "Gusa kuona jibu",
+      open: "Fungua", install: "Sakinisha programu",
+      addNote: "Ongeza", checkUpdates: "Angalia masasisho"
     },
 
     home: {
       welcomeTitle: "Ongoza. Saidia. Wezesha.",
-      welcomeBody: "Kila unachohitaji kuwaongoza vijana katika stadi za maisha — masomo, hadithi, shughuli, na mipango ya vikao iliyo tayari kutumika.",
+      welcomeBody: "Kila unachohitaji kuwaongoza vijana katika stadi za maisha — mipango ya vikao iliyo tayari kutumika pamoja na zana ya masomo, hadithi, na rasilimali za msaada.",
       todayEncouragement: "Moyo wa leo",
-      quickTopics: "Mada za kufundisha",
-      featuredActivity: "Shughuli maalum",
-      featuredGame: "Mchezo maalum",
-      moodTitle: "Unajisikiaje leo?",
-      moodHint: "Gusa hisia inayokufaa. Hii inabaki kwenye kifaa chako.",
+      sectionsTitle: "Anzia hapa",
+      sessionPlansSub: "Vikao kamili vya stadi za maisha vilivyo tayari kuendeshwa na kikundi chako.",
+      resourcesSub: "Masomo, hadithi, nafasi yako ya faragha, zana za mwezeshaji, na msaada.",
       progressTitle: "Maendeleo yako",
       lessonsDone: "masomo yaliyopitiwa",
-      gamesPlayed: "michezo iliyochezwa",
       badgesEarned: "beji zilizopatikana",
       installTitle: "Weka I Matter kwenye skrini yako",
       installBody: "Sakinisha programu ili itumike wakati wowote, hata bila intaneti.",
       offlineReady: "Tayari kutumika bila intaneti",
       online: "Mtandaoni",
       offline: "Nje ya mtandao — kila kitu bado kinafanya kazi!"
+    },
+
+    resources: {
+      title: "Rasilimali",
+      intro: "Zana yako kwa vikao na zaidi — mada za kufundisha, hadithi, nafasi yako mwenyewe, zana za mwezeshaji, na taarifa za msaada.",
+      learnSub: "Mada 10 za kufundisha zenye masomo mafupi, mifano, na maswali mafupi.",
+      storiesSub: "Hadithi fupi za kusoma na kujadili na wanafunzi wako.",
+      myspaceSub: "Maelezo yako ya faragha, mipango, shajara, na beji — kwenye kifaa hiki tu.",
+      facilitatorSub: "Mipango ya vikao vya kila mwezi iliyolindwa kwa PIN, hali ya projekta, na maelezo.",
+      helpSub: "Mawasiliano ya msaada na mwongozo wa usalama wa kushiriki na wanafunzi.",
+      aboutSub: "Kuhusu programu, shirika, na faragha yako."
     },
 
     learn: {
@@ -285,22 +259,10 @@ window.IM_STRINGS = {
       tryAgain: "Jaribu tena"
     },
 
-    games: {
-      title: "Michezo",
-      intro: "Cheza, jifunze, na ukue. Kila mchezo hufanya kazi bila intaneti.",
-      bestScore: "Bora",
-      lastScore: "Mwisho",
-      score: "Alama",
-      wellDone: "Hongera!",
-      goodTry: "Jaribio zuri! Kila jaribio linakusaidia kujifunza.",
-      instructions: "Jinsi ya kucheza"
-    },
-
     myspace: {
       title: "Nafasi Yangu",
       intro: "Nafasi ya faragha kwa maelezo yako, mipango, na tafakari. Kila kitu hubaki kwenye kifaa hiki tu.",
       privacyNote: "Faragha: huhifadhiwa kwenye kifaa hiki tu. Hakuna kinachotumwa nje.",
-      mood: "Hisia zangu",
       strengths: "Uwezo wangu",
       goals: "Malengo yangu",
       gratitude: "Shukrani zangu",
@@ -313,21 +275,10 @@ window.IM_STRINGS = {
       badges: "Beji zangu",
       pinProtect: "Linda Nafasi Yangu kwa PIN",
       deleteAll: "Futa data yangu yote",
-      deleteConfirm: "Hii itafuta kila kitu kilichohifadhiwa kwenye kifaa hiki: shajara, malengo, hisia, alama, na beji. Haiwezi kurudishwa. Futa kila kitu?",
+      deleteConfirm: "Hii itafuta kila kitu kilichohifadhiwa kwenye kifaa hiki: shajara, malengo, maelezo, na beji. Haiwezi kurudishwa. Futa kila kitu?",
       deleted: "Data yako yote imefutwa.",
       emptyList: "Hakuna kitu bado. Ongeza cha kwanza!",
       journalPromptLabel: "Unahitaji wazo? Jaribu hili:"
-    },
-
-    mood: {
-      happy: "Furaha", calm: "Utulivu", excited: "Msisimko", worried: "Wasiwasi",
-      sad: "Huzuni", angry: "Hasira", tired: "Uchovu", confused: "Kuchanganyikiwa",
-      thanks: "Asante kwa kushiriki hisia zako.",
-      breathe: "Jaribu zoezi la kupumua",
-      breatheIn: "Vuta pumzi...",
-      breatheHold: "Shikilia...",
-      breatheOut: "Toa pumzi...",
-      breatheDone: "Hongera. Unaweza kurudia wakati wowote."
     },
 
     stories: {
@@ -335,17 +286,7 @@ window.IM_STRINGS = {
       intro: "Hadithi fupi za kusoma na kujadili na wanafunzi wako. Waulize kikundi: ungefanya nini?",
       discussion: "Zungumza kuhusu hili",
       whatWouldYouDo: "Wewe ungefanya nini?",
-      keyLesson: "Somo kuu",
-      relatedActivity: "Shughuli inayohusiana"
-    },
-
-    activities: {
-      title: "Shughuli",
-      intro: "Kazi na zana za kukamilisha na wanafunzi wako au kuchapisha kwa vikao vyako.",
-      inApp: "Fanya ndani ya programu",
-      printable: "Inachapishika",
-      saved: "Imehifadhiwa kwenye kifaa hiki",
-      resetOne: "Anza upya shughuli hii"
+      keyLesson: "Somo kuu"
     },
 
     help: {
@@ -387,12 +328,11 @@ window.IM_STRINGS = {
       groupName: "Jina la shule / kikundi",
       changePin: "Badilisha PIN ya mwezeshaji",
       resetResults: "Futa matokeo ya shughuli za kifaa hiki",
-      resetResultsConfirm: "Futa hesabu za masomo, michezo, na maswali kwenye kifaa hiki? Maandishi ya Nafasi Yangu hayataguswa.",
+      resetResultsConfirm: "Futa hesabu za masomo na maswali kwenye kifaa hiki? Maandishi ya Nafasi Yangu hayataguswa.",
       objective: "Lengo la kujifunza",
       opening: "Shughuli ya kufungua",
       mainLesson: "Somo kuu",
       groupDiscussion: "Majadiliano ya kikundi",
-      game: "Mchezo",
       reflection: "Tafakari",
       challenge: "Changamoto ya nyumbani"
     },

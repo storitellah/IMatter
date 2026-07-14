@@ -16,7 +16,7 @@ window.IM_CONFIG = {
   /* ---- App identity ---- */
   appName: "I Matter",
   tagline: "A facilitator's toolkit for guiding young people through life skills.",
-  version: "2.0.0",
+  version: "3.0.0",
 
   /* ---- Organization ---- */
   organization: {

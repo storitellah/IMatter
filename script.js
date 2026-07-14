@@ -43,10 +43,9 @@
   var CONFIG = window.IM_CONFIG || {};
   var CONTENT = window.IM_CONTENT || { categories: [] };
   var STORIES = window.IM_STORIES || [];
-  var ACTIVITIES = window.IM_ACTIVITIES || [];
   var SESSIONS = window.IM_SESSIONS || [];
   var SESSION_PLANS = window.IM_SESSION_PLANS || [];
-  var EXTRAS = window.IM_EXTRAS || { moods: [], encouragements: [], journalPrompts: [], badges: [] };
+  var EXTRAS = window.IM_EXTRAS || { encouragements: [], journalPrompts: [], badges: [] };
 
   /* ======================================================================
      1. Settings & i18n
@@ -88,8 +87,8 @@
   function progress() {
     return store.get("progress", {
       lessonsDone: [], quizCorrect: 0,
-      storiesRead: [], moodCount: 0, journalCount: 0,
-      gratitudeCount: 0, activitiesDone: []
+      storiesRead: [], journalCount: 0,
+      gratitudeCount: 0
     });
   }
   function saveProgress(p) { store.set("progress", p); checkBadges(p); }
@@ -105,10 +104,7 @@
       "quiz-whiz": p.quizCorrect >= 10,
       "storyteller": p.storiesRead.length >= 3,
       "reflector": p.journalCount >= 1,
-      "mood-aware": p.moodCount >= 5,
-      "goal-setter": p.activitiesDone.indexOf("goal-ladder") !== -1,
-      "grateful-heart": p.gratitudeCount >= 3,
-      "brave-one": p.activitiesDone.indexOf("confidence-journal") !== -1
+      "grateful-heart": p.gratitudeCount >= 3
     };
     EXTRAS.badges.forEach(function (b) {
       if (checks[b.id] && earned.indexOf(b.id) === -1) {
@@ -195,60 +191,41 @@
     main.focus({ preventScroll: true });
   }
 
-  /* Bottom navigation */
+  /* Bottom navigation: Home + the two main sections */
   var NAV_ITEMS = [
     { id: "home", emoji: "🏠" },
-    { id: "learn", emoji: "📚" },
     { id: "session-plans", emoji: "📋" },
-    { id: "myspace", emoji: "💜" },
-    { id: "more", emoji: "➕" }
+    { id: "resources", emoji: "🧰" }
   ];
-  var MORE_ITEMS = [
-    { id: "stories", emoji: "📖" },
-    { id: "activities", emoji: "✂️" },
-    { id: "help", emoji: "🆘" },
-    { id: "about", emoji: "ℹ️" },
-    { id: "facilitator", emoji: "🧑‍🏫" }
+
+  /* Everything that lives inside the Resources section */
+  var RESOURCE_ITEMS = [
+    { id: "learn", emoji: "📚", titleKey: "learn.title", subKey: "resources.learnSub" },
+    { id: "stories", emoji: "📖", titleKey: "stories.title", subKey: "resources.storiesSub" },
+    { id: "myspace", emoji: "💜", titleKey: "myspace.title", subKey: "resources.myspaceSub" },
+    { id: "facilitator", emoji: "🧑‍🏫", titleKey: "facilitator.title", subKey: "resources.facilitatorSub" },
+    { id: "help", emoji: "🆘", titleKey: "help.title", subKey: "resources.helpSub" },
+    { id: "about", emoji: "ℹ️", titleKey: "about.title", subKey: "resources.aboutSub" }
   ];
 
   function buildNav() {
     var nav = $("#bottom-nav");
     nav.innerHTML = NAV_ITEMS.map(function (item) {
-      if (item.id === "more") {
-        return '<button class="nav-item" data-more aria-haspopup="dialog">' +
-          '<span class="nav-emoji" aria-hidden="true">' + item.emoji + "</span>" +
-          "<span>" + esc(t("nav.more")) + "</span></button>";
-      }
       return '<a class="nav-item" href="#/' + item.id + '" data-nav="' + item.id + '">' +
         '<span class="nav-emoji" aria-hidden="true">' + item.emoji + "</span>" +
         "<span>" + esc(t("nav." + item.id)) + "</span></a>";
     }).join("");
-    var moreBtn = nav.querySelector("[data-more]");
-    if (moreBtn) moreBtn.addEventListener("click", openMoreSheet);
   }
 
-  function openMoreSheet() {
-    var body = MORE_ITEMS.map(function (item) {
-      return '<a class="card clickable" href="#/' + item.id + '" data-close>' +
-        '<div class="card-row"><div class="card-emoji">' + item.emoji + "</div>" +
-        '<div><p class="card-title">' + esc(t("nav." + item.id)) + "</p></div></div></a>";
-    }).join("");
-    openModal(esc(t("nav.more")), body);
-  }
-
-  var MORE_IDS = MORE_ITEMS.map(function (i) { return i.id; });
+  var RESOURCE_IDS = RESOURCE_ITEMS.map(function (i) { return i.id; });
   function updateNav(section) {
-    var map = { lesson: "learn", story: "stories", activity: "activities", "session-plan": "session-plans" };
+    var map = { lesson: "resources", story: "resources", "session-plan": "session-plans" };
     var active = map[section] || section;
+    if (RESOURCE_IDS.indexOf(active) !== -1) active = "resources";
     $$(".nav-item[data-nav]").forEach(function (el) {
       if (el.getAttribute("data-nav") === active) el.setAttribute("aria-current", "page");
       else el.removeAttribute("aria-current");
     });
-    var moreBtn = $("[data-more]");
-    if (moreBtn) {
-      if (MORE_IDS.indexOf(active) !== -1) moreBtn.setAttribute("aria-current", "page");
-      else moreBtn.removeAttribute("aria-current");
-    }
   }
 
   /* Shared view helpers */
@@ -279,7 +256,6 @@
     var enc = EXTRAS.encouragements;
     var dayIndex = Math.floor(Date.now() / 86400000);
     var encMsg = enc.length ? enc[dayIndex % enc.length] : "";
-    var featuredActivity = ACTIVITIES.length ? ACTIVITIES[dayIndex % ACTIVITIES.length] : null;
     var badges = earnedBadges();
     var online = navigator.onLine;
 
@@ -305,24 +281,17 @@
       "<div><p class=\"card-sub\" style=\"margin:0\">" + esc(t("home.todayEncouragement")) + "</p>" +
       "<p>" + esc(encMsg) + "</p></div></div>";
 
-    /* Quick topics */
-    html += '<div class="section-heading"><h2>' + esc(t("home.quickTopics")) + "</h2>" +
-      '<a class="link" href="#/learn">' + esc(t("actions.seeAll")) + "</a></div>" +
-      '<div class="grid-2">' +
-      CONTENT.categories.slice(0, 4).map(function (c) {
-        return '<a class="tile c-' + c.color + '" href="#/learn/' + c.id + '">' +
-          '<span class="tile-emoji" aria-hidden="true">' + c.emoji + "</span>" +
-          '<span class="tile-label">' + esc(c.title) + "</span></a>";
-      }).join("") + "</div>";
+    /* The two main sections */
+    html += '<div class="section-heading"><h2>' + esc(t("home.sectionsTitle")) + "</h2></div>" +
+      '<a class="card clickable" href="#/session-plans"><div class="card-row">' +
+      '<div class="card-emoji">📋</div><div>' +
+      '<p class="card-title">' + esc(t("nav.session-plans")) + "</p>" +
+      '<p class="card-sub">' + esc(t("home.sessionPlansSub")) + "</p></div></div></a>" +
+      '<a class="card clickable" href="#/resources"><div class="card-row">' +
+      '<div class="card-emoji">🧰</div><div>' +
+      '<p class="card-title">' + esc(t("nav.resources")) + "</p>" +
+      '<p class="card-sub">' + esc(t("home.resourcesSub")) + "</p></div></div></a>";
 
-    /* Featured */
-    if (featuredActivity) {
-      html += '<div class="section-heading"><h2>' + esc(t("home.featuredActivity")) + "</h2></div>" +
-        '<a class="card clickable" href="#/activity/' + featuredActivity.id + '"><div class="card-row">' +
-        '<div class="card-emoji">' + featuredActivity.emoji + "</div><div>" +
-        '<p class="card-title">' + esc(featuredActivity.title) + "</p>" +
-        '<p class="card-sub">' + esc(featuredActivity.blurb) + "</p></div></div></a>";
-    }
     /* Progress summary */
     var pct = totalLessons ? Math.round(p.lessonsDone.length / totalLessons * 100) : 0;
     html += '<section class="card" aria-labelledby="prog-h">' +
@@ -349,68 +318,20 @@
     });
   });
 
-  function showMoodResponse(moodId, slot) {
-    var mood = findById(EXTRAS.moods, moodId);
-    if (!mood || !slot) return;
-    /* Save check-in (device only) */
-    var history = store.get("moodHistory", []);
-    history.push({ mood: moodId, at: new Date().toISOString() });
-    if (history.length > 200) history = history.slice(-200);
-    store.set("moodHistory", history);
-    var p = progress(); p.moodCount++; saveProgress(p);
-
-    var linkHtml = "";
-    if (mood.link && mood.link.id) {
-      linkHtml = '<a class="chip" href="#/lesson/' + mood.link.id + '">📖 ' + esc(mood.link.label) + "</a>";
-    }
-    slot.innerHTML =
-      '<div class="mood-response" role="status">' +
-      "<p><b>" + esc(t("mood.thanks")) + "</b> " + esc(mood.message) + "</p>" +
-      "<p>" + esc(mood.suggestion) + "</p>" +
-      '<p class="affirmation">💬 ' + esc(mood.affirmation) + "</p>" +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-      (mood.breathe ? '<button class="chip" data-breathe>🫁 ' + esc(t("mood.breathe")) + "</button>" : "") +
-      linkHtml + "</div></div>";
-    var bb = slot.querySelector("[data-breathe]");
-    if (bb) bb.addEventListener("click", openBreathing);
-  }
-
-  function openBreathing() {
-    openModal(esc(t("mood.breathe")),
-      '<div class="breathe-wrap">' +
-      '<div class="breathe-circle" id="breathe-circle"><span id="breathe-text">' + esc(t("actions.start")) + "</span></div>" +
-      '<button class="btn" id="breathe-start">' + esc(t("actions.start")) + "</button>" +
-      '<p class="card-sub" id="breathe-status" role="status" style="margin-top:12px"></p></div>',
-      function (modal) {
-        var timer = [];
-        $("#breathe-start", modal).addEventListener("click", function () {
-          timer.forEach(clearTimeout); timer = [];
-          var circle = $("#breathe-circle", modal);
-          var text = $("#breathe-text", modal);
-          var status = $("#breathe-status", modal);
-          var cycle = 0;
-          function step() {
-            if (cycle >= 3) {
-              text.textContent = "😊";
-              status.textContent = t("mood.breatheDone");
-              circle.classList.remove("grow");
-              return;
-            }
-            text.textContent = t("mood.breatheIn"); status.textContent = t("mood.breatheIn");
-            circle.classList.add("grow"); circle.classList.remove("shrink");
-            timer.push(setTimeout(function () {
-              text.textContent = t("mood.breatheHold"); status.textContent = t("mood.breatheHold");
-              timer.push(setTimeout(function () {
-                text.textContent = t("mood.breatheOut"); status.textContent = t("mood.breatheOut");
-                circle.classList.remove("grow"); circle.classList.add("shrink");
-                timer.push(setTimeout(function () { cycle++; step(); }, 4000));
-              }, 4000));
-            }, 4000));
-          }
-          step();
-        });
-      });
-  }
+  /* ====================================================================
+     5b. RESOURCES (hub for everything that is not a session plan)
+     ==================================================================== */
+  route("resources", function (view) {
+    view.innerHTML =
+      "<h1>🧰 " + esc(t("resources.title")) + "</h1>" +
+      '<p class="page-intro">' + esc(t("resources.intro")) + "</p>" +
+      RESOURCE_ITEMS.map(function (item) {
+        return '<a class="card clickable" href="#/' + item.id + '"><div class="card-row">' +
+          '<div class="card-emoji">' + item.emoji + "</div><div>" +
+          '<p class="card-title">' + esc(t(item.titleKey)) + "</p>" +
+          '<p class="card-sub">' + esc(t(item.subKey)) + "</p></div></div></a>";
+      }).join("");
+  });
 
   /* ====================================================================
      6. LEARN VIEWS
@@ -419,6 +340,7 @@
     if (params[0]) return renderCategory(view, params[0]);
     var p = progress();
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>" + esc(t("learn.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("learn.intro")) + "</p>" +
       CONTENT.categories.map(function (c) {
@@ -574,7 +496,6 @@
   }
 
   var MYSPACE_TOOLS = [
-    { id: "mood", emoji: "🌈", key: "mood" },
     { id: "strengths", emoji: "🌟", key: "strengths", list: "myStrengths", placeholder: "e.g. I am a good listener" },
     { id: "goals", emoji: "🎯", key: "goals", list: "myGoals", placeholder: "e.g. Improve my maths grade this term" },
     { id: "gratitude", emoji: "💚", key: "gratitude", list: "myGratitude", placeholder: "e.g. My friend helped me today" },
@@ -589,6 +510,7 @@
 
   function renderMySpaceHome(view) {
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>" + esc(t("myspace.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("myspace.intro")) + "</p>" +
       '<div class="privacy-banner"><span aria-hidden="true">🔒</span><span>' + esc(t("myspace.privacyNote")) + "</span></div>" +
@@ -633,33 +555,6 @@
     var title = t("myspace." + tool.key);
     var html = backBtn("myspace", t("myspace.title")) + "<h1>" + tool.emoji + " " + esc(title) + "</h1>" +
       '<div class="privacy-banner"><span aria-hidden="true">🔒</span><span>' + esc(t("myspace.privacyNote")) + "</span></div>";
-
-    if (tool.id === "mood") {
-      var history = store.get("moodHistory", []).slice(-14).reverse();
-      html += '<div class="card"><h2>' + esc(t("home.moodTitle")) + "</h2>" +
-        '<div class="mood-grid" id="mood-grid">' +
-        EXTRAS.moods.map(function (m) {
-          return '<button class="mood-btn" data-mood="' + m.id + '">' +
-            '<span class="mood-emoji" aria-hidden="true">' + m.emoji + "</span>" +
-            "<span>" + esc(t("mood." + m.labelKey)) + "</span></button>";
-        }).join("") + '</div><div id="mood-response-slot"></div></div>';
-      if (history.length) {
-        html += '<div class="card"><h2>🗓️</h2><div style="display:flex;gap:6px;flex-wrap:wrap">' +
-          history.map(function (h) {
-            var m = findById(EXTRAS.moods, h.mood);
-            return '<span class="chip" title="' + esc(h.at.slice(0, 10)) + '">' + (m ? m.emoji : "❔") + " " + esc(h.at.slice(5, 10)) + "</span>";
-          }).join("") + "</div></div>";
-      }
-      view.innerHTML = html;
-      $$(".mood-btn", view).forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          $$(".mood-btn", view).forEach(function (b) { b.classList.remove("selected"); });
-          btn.classList.add("selected");
-          showMoodResponse(btn.getAttribute("data-mood"), $("#mood-response-slot", view));
-        });
-      });
-      return;
-    }
 
     if (tool.id === "badges") {
       var earned = earnedBadges();
@@ -753,7 +648,7 @@
       view.innerHTML = html;
       $("#text-save", view).addEventListener("click", function () {
         store.set(tool.text, $("#text-in", view).value);
-        $("#save-msg", view).textContent = "✓ " + t("activities.saved");
+        $("#save-msg", view).textContent = "✓ " + t("actions.saved");
       });
       return;
     }
@@ -765,6 +660,7 @@
   route("stories", function (view) {
     var p = progress();
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>" + esc(t("stories.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("stories.intro")) + "</p>" +
       STORIES.map(function (s) {
@@ -782,7 +678,6 @@
     var p = progress();
     if (p.storiesRead.indexOf(s.id) === -1) { p.storiesRead.push(s.id); saveProgress(p); }
 
-    var activity = findById(ACTIVITIES, s.relatedActivity);
     view.innerHTML =
       backBtn("stories", t("stories.title")) +
       "<h1>" + esc(s.title) + "</h1>" +
@@ -799,14 +694,7 @@
         return '<button class="quiz-option" data-wwyd>' + esc(o) + "</button>";
       }).join("") +
       '<div id="wwyd-feedback"></div></div>' +
-      '<div class="takeaway-card">🌟 ' + esc(t("stories.keyLesson")) + ": " + esc(s.lesson) + "</div>" +
-      (activity
-        ? '<div class="section-heading"><h2>' + esc(t("stories.relatedActivity")) + "</h2></div>" +
-          '<a class="card clickable" href="#/activity/' + activity.id + '"><div class="card-row">' +
-          '<div class="card-emoji">' + activity.emoji + "</div><div>" +
-          '<p class="card-title">' + esc(activity.title) + "</p>" +
-          '<p class="card-sub">' + esc(activity.blurb) + "</p></div></div></a>"
-        : "");
+      '<div class="takeaway-card">🌟 ' + esc(t("stories.keyLesson")) + ": " + esc(s.lesson) + "</div>";
     /* "What would you do" has no wrong answers — it opens conversation */
     $$("[data-wwyd]", view).forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -819,116 +707,12 @@
   });
 
   /* ====================================================================
-     10. ACTIVITIES
-     ==================================================================== */
-  route("activities", function (view) {
-    var p = progress();
-    view.innerHTML =
-      "<h1>" + esc(t("activities.title")) + "</h1>" +
-      '<p class="page-intro">' + esc(t("activities.intro")) + "</p>" +
-      ACTIVITIES.map(function (a) {
-        var done = p.activitiesDone.indexOf(a.id) !== -1;
-        return '<a class="card clickable" href="#/activity/' + a.id + '"><div class="card-row">' +
-          '<div class="card-emoji">' + (done ? "✅" : a.emoji) + "</div><div>" +
-          '<p class="card-title">' + esc(a.title) + "</p>" +
-          '<p class="card-sub">' + esc(a.blurb) + " · 🖨️ " + esc(t("activities.printable")) + "</p></div></div></a>";
-      }).join("");
-  });
-
-  route("activity", function (view, params) {
-    var a = findById(ACTIVITIES, params[0]);
-    if (!a) return navigate("#/activities");
-    var saved = store.get("activity." + a.id, {});
-
-    view.innerHTML =
-      backBtn("activities", t("activities.title")) +
-      '<div class="print-header"><h1>' + a.emoji + " " + esc(a.title) + "</h1>" +
-      "<p>" + esc(CONFIG.appName || "I Matter") + " — " + esc(CONFIG.footerText || "") + "</p></div>" +
-      "<h1>" + a.emoji + " " + esc(a.title) + "</h1>" +
-      '<div class="card"><p>' + esc(a.intro) + "</p>" +
-      a.fields.map(function (f) {
-        if (f.type === "list") {
-          var items = saved[f.id] || [];
-          return '<div class="field" data-listfield="' + f.id + '"><label>' + esc(f.label) + "</label>" +
-            '<div class="list-items">' +
-            items.map(function (it, idx) {
-              return '<div class="list-entry"><span>' + esc(it) + '</span>' +
-                '<button class="del no-print" data-list="' + f.id + '" data-del="' + idx + '" aria-label="' + esc(t("actions.delete")) + '">🗑️</button></div>';
-            }).join("") + "</div>" +
-            '<div class="add-row no-print"><input type="text" data-listin="' + f.id + '" aria-label="' + esc(f.label) + '">' +
-            '<button class="btn small" data-listadd="' + f.id + '">' + esc(t("actions.addNote")) + "</button></div>" +
-            '<div class="print-lines"><div class="pline"></div><div class="pline"></div><div class="pline"></div></div></div>';
-        }
-        var val = saved[f.id] || "";
-        if (f.type === "textarea") {
-          return '<div class="field"><label for="af-' + f.id + '">' + esc(f.label) + "</label>" +
-            '<textarea id="af-' + f.id + '" data-field="' + f.id + '">' + esc(val) + "</textarea></div>";
-        }
-        return '<div class="field"><label for="af-' + f.id + '">' + esc(f.label) + "</label>" +
-          '<input type="text" id="af-' + f.id + '" data-field="' + f.id + '" value="' + esc(val) + '"></div>';
-      }).join("") +
-      "</div>" +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap" class="no-print">' +
-      '<button class="btn" id="act-save">💾 ' + esc(t("actions.save")) + "</button>" +
-      '<button class="btn secondary" id="act-print">🖨️ ' + esc(t("actions.print")) + " / " + esc(t("actions.exportPdf")) + "</button>" +
-      '<button class="btn secondary" id="act-reset">↺ ' + esc(t("activities.resetOne")) + "</button></div>" +
-      '<p class="card-sub no-print" id="act-msg" role="status" style="margin-top:10px"></p>';
-
-    function collectAndSave(markDone) {
-      $$("[data-field]", view).forEach(function (el) { saved[el.getAttribute("data-field")] = el.value; });
-      store.set("activity." + a.id, saved);
-      if (markDone) {
-        var filled = a.fields.some(function (f) {
-          var v = saved[f.id];
-          return Array.isArray(v) ? v.length > 0 : (v && String(v).trim());
-        });
-        if (filled) {
-          var p = progress();
-          if (p.activitiesDone.indexOf(a.id) === -1) { p.activitiesDone.push(a.id); saveProgress(p); }
-        }
-      }
-    }
-
-    $("#act-save", view).addEventListener("click", function () {
-      collectAndSave(true);
-      $("#act-msg", view).textContent = "✓ " + t("activities.saved");
-    });
-    $("#act-print", view).addEventListener("click", function () {
-      collectAndSave(false);
-      window.print();
-    });
-    $("#act-reset", view).addEventListener("click", function () {
-      store.remove("activity." + a.id);
-      render();
-    });
-    $$("[data-listadd]", view).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var fid = btn.getAttribute("data-listadd");
-        var input = view.querySelector('[data-listin="' + fid + '"]');
-        var v = input.value.trim();
-        if (!v) return;
-        saved[fid] = saved[fid] || [];
-        saved[fid].push(v);
-        store.set("activity." + a.id, saved);
-        render();
-      });
-    });
-    $$("[data-list][data-del]", view).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var fid = btn.getAttribute("data-list");
-        saved[fid].splice(parseInt(btn.getAttribute("data-del"), 10), 1);
-        store.set("activity." + a.id, saved);
-        render();
-      });
-    });
-  });
-
-  /* ====================================================================
      11. HELP & ABOUT
      ==================================================================== */
   route("help", function (view) {
     var contacts = CONFIG.supportContacts || [];
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>🆘 " + esc(t("help.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("help.intro")) + "</p>" +
       '<div class="card"><h2>' + esc(t("help.talkTo")) + "</h2>" +
@@ -964,6 +748,7 @@
     if (org.phone) contactLines.push("📞 " + esc(org.phone));
 
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>ℹ️ " + esc(t("about.title")) + "</h1>" +
       '<div class="card" style="text-align:center">' +
       '<img src="' + esc((CONFIG.logos || {}).app || "") + '" alt="I Matter logo" width="96" height="96" style="border-radius:22px">' +
@@ -1116,6 +901,7 @@
 
   function renderFacGate(view) {
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>🧑‍🏫 " + esc(t("facilitator.title")) + "</h1>" +
       '<div class="card"><p>' + esc(t("facilitator.enterPin")) + "</p>" +
       '<div class="field"><label for="fac-pin" class="visually-hidden">PIN</label>' +
@@ -1140,6 +926,7 @@
     var projector = document.documentElement.getAttribute("data-projector") === "on";
 
     view.innerHTML =
+      backBtn("resources", t("resources.title")) +
       "<h1>🧑‍🏫 " + esc(t("facilitator.title")) + "</h1>" +
       (groupName ? '<p class="page-intro">🏫 ' + esc(groupName) + "</p>" : "") +
 
@@ -1156,7 +943,6 @@
       '<div class="stat-row">' +
       '<div class="stat"><b>' + p.lessonsDone.length + "</b><span>" + esc(t("home.lessonsDone")) + "</span></div>" +
       '<div class="stat"><b>' + p.quizCorrect + "</b><span>quiz ✓</span></div>" +
-      '<div class="stat"><b>' + p.activitiesDone.length + "</b><span>" + esc(t("nav.activities").toLowerCase()) + "</span></div>" +
       "</div>" +
       '<button class="btn warn small" id="fac-reset" style="margin-top:12px">↺ ' + esc(t("facilitator.resetResults")) + "</button></div>" +
 
@@ -1177,7 +963,7 @@
     $("#fac-save", view).addEventListener("click", function () {
       store.set("facGroupName", $("#fac-group", view).value.trim());
       store.set("facNotes", $("#fac-notes", view).value);
-      toast("✓ " + t("activities.saved"));
+      toast("✓ " + t("actions.saved"));
     });
     $("#fac-reset", view).addEventListener("click", function () {
       if (confirm(t("facilitator.resetResultsConfirm"))) {
@@ -1208,7 +994,6 @@
     for (var i = 0; i < SESSIONS.length; i++) if (SESSIONS[i].number === num) s = SESSIONS[i];
     if (!s) return navigate("#/facilitator");
     var cat = findById(CONTENT.categories, s.relatedCategory);
-    var activity = findById(ACTIVITIES, s.relatedActivity);
 
     function block(emoji, label, body) {
       return '<div class="card"><span class="lesson-label">' + emoji + " " + esc(label) + "</span>" + body + "</div>";
@@ -1226,13 +1011,6 @@
         '<ol style="margin:0;padding-left:20px">' + s.discussion.map(function (q) { return "<li>" + esc(q) + "</li>"; }).join("") + "</ol>") +
       block("🪞", t("facilitator.reflection"), "<p style=\"margin:0\">" + esc(s.reflection) + "</p>") +
       block("🏠", t("facilitator.challenge"), "<p style=\"margin:0\">" + esc(s.challenge) + "</p>") +
-      (activity
-        ? '<div class="section-heading"><h2>✂️ ' + esc(t("stories.relatedActivity")) + "</h2></div>" +
-          '<a class="card clickable" href="#/activity/' + activity.id + '"><div class="card-row">' +
-          '<div class="card-emoji">' + activity.emoji + "</div><div>" +
-          '<p class="card-title">' + esc(activity.title) + "</p>" +
-          '<p class="card-sub">🖨️ ' + esc(t("activities.printable")) + "</p></div></div></a>"
-        : "") +
       '<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
       '<button class="btn secondary" onclick="window.print()">🖨️ ' + esc(t("actions.print")) + "</button></div>";
   }

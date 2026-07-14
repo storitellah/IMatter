@@ -11,11 +11,11 @@ the adults who deploy it.
 - **No data collection.** Nothing a child writes leaves the device. There
   are no accounts, uploads, or analytics, which removes the most common
   digital risks (profiling, grooming vectors, data breaches).
-- **Age-appropriate content.** All lessons, stories, and games use calm,
+- **Age-appropriate content.** All lessons, stories, and session plans use calm,
   positive, non-frightening language. Sensitive topics (bullying, unsafe
   secrets, reporting harm) are handled with clear "tell a trusted adult"
   guidance and never place blame on the child.
-- **Help-seeking is normalized.** Every relevant lesson, story, and mood
+- **Help-seeking is normalized.** Every relevant lesson and story
   response points to trusted adults and the Help section.
 - **Fictional stories only.** All names and stories are fictional or
   composite. Real participant names or personal stories must never be
@@ -33,7 +33,7 @@ the adults who deploy it.
    school's and organization's child protection reporting procedure before
    running sessions.
 3. **Respect digital privacy.** Adults must never require a child to show
-   their My Space, journal, or mood history. Facilitator totals are
+   their My Space or journal. Facilitator totals are
    anonymous by design — keep it that way.
 4. **Shared devices.** Teach students to use *Delete all my data* after
    using borrowed devices.
@@ -50,7 +50,7 @@ the adults who deploy it.
 
 ## Content governance
 
-- Changes to lessons, stories, or games should be reviewed by the program
+- Changes to lessons, stories, or session plans should be reviewed by the program
   team against these principles: child-friendly, positive, non-shaming,
   non-frightening, help-seeking oriented.
 - Keep the "safe/unsafe secrets", "reporting harm", and "child protection

@@ -3,7 +3,7 @@
    --------------------------------------------------------------------------
    Safe to edit. Eight monthly sessions for the I Matter program.
    Each session: title, objective, opening, mainLesson (points array),
-   discussion (questions array), game (id from data/games-data.js),
+   discussion (questions array),
    reflection, challenge, relatedCategory (id from data/content.js).
    ========================================================================== */
 
@@ -25,11 +25,9 @@ window.IM_SESSIONS = [
       "Why is it sometimes hard to see our own strengths?",
       "How can we help each other notice strengths?"
     ],
-    game: "strength-finder",
     reflection: "Each student silently completes: 'One strength I am taking home today is…' Volunteers may share.",
     challenge: "This month, use one of your strengths to help someone — and notice one strength in a classmate and tell them.",
-    relatedCategory: "knowing-myself",
-    relatedActivity: "strengths-shield"
+    relatedCategory: "knowing-myself"
   },
   {
     number: 2,
@@ -48,11 +46,9 @@ window.IM_SESSIONS = [
       "What do people around here usually do when they are angry? What works and what causes harm?",
       "Why do some people believe boys should not cry? What do you think?"
     ],
-    game: "feelings-match",
     reflection: "Practice belly breathing together as a group: in for 4, hold 4, out for 4, three rounds.",
     challenge: "Once a day this month, pause and silently name what you are feeling. Try one calming exercise when a big feeling comes.",
-    relatedCategory: "emotions",
-    relatedActivity: "feelings-wheel"
+    relatedCategory: "emotions"
   },
   {
     number: 3,
@@ -71,11 +67,9 @@ window.IM_SESSIONS = [
       "Why do messages get twisted as they pass between people?",
       "When is it hardest to say no? What makes it easier?"
     ],
-    game: "communication-challenge",
     reflection: "In pairs: one speaks for one minute about their week, the other only listens, then repeats back what they heard. Swap.",
     challenge: "This month, have one conversation where you listen without interrupting once, and use one 'I' statement to express a need.",
-    relatedCategory: "communication",
-    relatedActivity: "communication-practice"
+    relatedCategory: "communication"
   },
   {
     number: 4,
@@ -94,11 +88,9 @@ window.IM_SESSIONS = [
       "Why is 'everyone is doing it' such a powerful phrase — and why is it usually false?",
       "Who helps you make big decisions?"
     ],
-    game: "decision-path",
     reflection: "Each student writes one decision they face soon and applies the Safe–Fair–Approved test to it privately.",
     challenge: "Before one big choice this month, stop and run the 3-question test. Notice what changes.",
-    relatedCategory: "decisions",
-    relatedActivity: "decision-tree"
+    relatedCategory: "decisions"
   },
   {
     number: 5,
@@ -117,11 +109,9 @@ window.IM_SESSIONS = [
       "When should a problem be taken to an adult immediately?",
       "Why do teams often solve problems better than individuals?"
     ],
-    game: "problem-puzzle",
     reflection: "Each student writes one current problem as a single clear sentence: 'The problem is ___ because ___.'",
     challenge: "Pick one small problem this month and walk it through all the steps — including the review at the end.",
-    relatedCategory: "problem-solving",
-    relatedActivity: "problem-worksheet"
+    relatedCategory: "problem-solving"
   },
   {
     number: 6,
@@ -140,11 +130,9 @@ window.IM_SESSIONS = [
       "What should you do if a friendship starts to feel bad?",
       "How can bystanders change a bullying situation?"
     ],
-    game: "peer-pressure-escape",
     reflection: "Silently rate: 'Am I the kind of friend I would want to have?' Pick one way to be a better friend.",
     challenge: "Do one unexpected kind thing for a friend this month, and reach out to someone who seems left out.",
-    relatedCategory: "relationships",
-    relatedActivity: "values-cards"
+    relatedCategory: "relationships"
   },
   {
     number: 7,
@@ -163,11 +151,9 @@ window.IM_SESSIONS = [
       "What does your inner voice say when things go wrong? Where did that voice learn to speak that way?",
       "Why do we celebrate only big wins? What small wins deserve celebrating?"
     ],
-    game: "confidence-builder",
     reflection: "Each student writes one kind-but-true sentence about themselves and keeps it somewhere they will see it.",
     challenge: "Do one thing this month that is 'one size braver' than usual. Record it in your Confidence Journal.",
-    relatedCategory: "resilience",
-    relatedActivity: "confidence-journal"
+    relatedCategory: "resilience"
   },
   {
     number: 8,
@@ -186,10 +172,8 @@ window.IM_SESSIONS = [
       "What pathways have people in our community taken to good careers?",
       "What obstacles do young people here face, and how can they be overcome?"
     ],
-    game: "goal-builder",
     reflection: "Each student completes a Goal Ladder: big goal at the top, first step at the bottom — a step they can take THIS WEEK.",
     challenge: "Take the first step on your goal ladder this month, and tell one person about your goal so they can encourage you.",
-    relatedCategory: "future",
-    relatedActivity: "goal-ladder"
+    relatedCategory: "future"
   }
 ];

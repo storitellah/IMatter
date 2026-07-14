@@ -10,7 +10,7 @@ privacy, and My Space).*
   the app and use it.
 - **We do not ask for your name.** The app never needs your full legal
   name, phone number, or address.
-- **Nothing you write leaves your device.** Your journal, moods, goals,
+- **Nothing you write leaves your device.** Your journal, goals,
   strengths, and everything in My Space is saved only on the phone,
   tablet, or computer you are using. It is not uploaded, shared, or sent
   anywhere — the app doesn't even need the internet.
@@ -22,9 +22,8 @@ privacy, and My Space).*
 
 ## What the app stores (on your device only)
 
-- Which lessons you explored, games you played, and badges you earned
-- Your mood check-ins
-- Anything you write in My Space and in activities
+- Which lessons you explored and badges you earned
+- Anything you write in My Space
 - Your settings (language, text size, contrast)
 
 ## Things to know
@@ -34,7 +33,7 @@ privacy, and My Space).*
   avoid writing private things on shared devices.
 - **Facilitator Mode** shows only anonymous totals (for example, "12
   lessons explored on this device"). It never shows anyone's journal,
-  moods, or personal entries.
+  or personal entries.
 - The app works completely offline. When you are online, it only uses the
   internet to check for app updates from the website it was installed from.
 

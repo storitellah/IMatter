@@ -7,9 +7,10 @@
  *   4. Run:                  node tools/smoke-test.js
  *
  * Covers: rendering of every section, all 76 lessons, session plans,
- * quizzes, local saving, badges, My Space, Facilitator Mode, accessibility
- * settings, language switch, delete-all-data, offline mode, and console
- * errors. See docs/TESTING.md for the full manual checklist.
+ * the Resources hub, quizzes, local saving, badges, My Space, Facilitator
+ * Mode, accessibility settings, language switch, delete-all-data, offline
+ * mode, and console errors. See docs/TESTING.md for the full manual
+ * checklist.
  */
 const puppeteer = require("puppeteer-core");
 const CHROME_PATH = process.env.CHROME_PATH || "/usr/local/bin/google-chrome";
@@ -46,7 +47,10 @@ function check(name, cond, extra) {
   check("title", (await page.title()).includes("I Matter"));
   check("hero welcome", await page.$eval(".hero h1", el => el.textContent.includes("Guide")));
   check("footer text", await page.$eval("#footer-text", el => el.textContent.includes("Imagine Tomorrow Foundation")));
-  check("bottom nav items", (await page.$$(".nav-item")).length === 5);
+  check("bottom nav items (Home, Session Plans, Resources)", (await page.$$(".nav-item")).length === 3);
+  check("home links to both main sections", await page.evaluate(() =>
+    !!document.querySelector('.app-main a[href="#/session-plans"]') && !!document.querySelector('.app-main a[href="#/resources"]')));
+  check("today's encouragement shows", await page.$eval(".encourage-card", el => el.textContent.length > 20));
 
   console.log("== Service worker ==");
   await sleep(1500);
@@ -64,16 +68,18 @@ function check(name, cond, extra) {
   });
   check("precache populated (>= 20 files)", cacheCount >= 20, "cached: " + cacheCount);
 
-  console.log("== Mood check-in (My Space) ==");
+  console.log("== Resources hub ==");
+  await page.goto(BASE + "#/resources", { waitUntil: "domcontentloaded" });
+  await sleep(300);
+  check("resources hub lists 6 items", (await page.$$(".app-main .card.clickable")).length === 6);
+  check("resources in bottom nav", await page.evaluate(() => [...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").includes("Resources"))));
+
+  console.log("== Mood check-in removed ==");
+  check("no mood data present", await page.evaluate(() => window.IM_EXTRAS.moods === undefined));
   await page.goto(BASE + "#/myspace/mood", { waitUntil: "domcontentloaded" });
-  await sleep(300);
-  check("mood buttons", (await page.$$(".mood-btn")).length === 8);
-  await page.click('.mood-btn[data-mood="worried"]');
-  await sleep(300);
-  check("mood response shows", !!(await page.$(".mood-response")));
-  check("breathing button for worried", !!(await page.$("[data-breathe]")));
-  const moodSaved = await page.evaluate(() => JSON.parse(localStorage.getItem("im.moodHistory") || "[]").length);
-  check("mood saved locally", moodSaved === 1);
+  await sleep(400);
+  check("mood route falls back to My Space", !!(await page.$("#pin-toggle")));
+  check("no mood buttons", (await page.$$(".mood-btn")).length === 0);
 
   console.log("== Learn ==");
   await page.goto(BASE + "#/learn", { waitUntil: "domcontentloaded" });
@@ -140,11 +146,14 @@ function check(name, cond, extra) {
 
   console.log("== Session Plans ==");
   await page.goto(BASE + "#/session-plans"); await sleep(300);
-  check("5 session plans listed", (await page.$$(".app-main .card.clickable")).length === 5);
+  check("6 session plans listed", (await page.$$(".app-main .card.clickable")).length === 6);
   check("session plans in bottom nav", await page.evaluate(() => [...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").includes("Session Plans"))));
   await page.goto(BASE + "#/session-plan/decision-making-problem-solving"); await sleep(300);
   check("session plan renders sections", (await page.$$(".sp-section")).length > 0);
   check("session plan has consequences table", (await page.$$(".sp-table")).length === 1);
+  await page.goto(BASE + "#/session-plan/goals-time-procrastination"); await sleep(300);
+  check("goals/time plan renders 8 sections", (await page.$$(".sp-section")).length === 8);
+  check("goals/time plan has activities", (await page.$$(".sp-activity")).length >= 4);
 
   console.log("== Stories ==");
   await page.goto(BASE + "#/stories"); await sleep(300);
@@ -153,31 +162,16 @@ function check(name, cond, extra) {
   check("story renders", (await page.$eval("h1", el => el.textContent)).includes("The Note"));
   await page.click("[data-wwyd]"); await sleep(200);
   check("what-would-you-do responds", !!(await page.$("#wwyd-feedback .quiz-feedback")));
-  const storyAudit = await page.evaluate(() => {
-    return window.IM_STORIES.filter(s => !window.IM_ACTIVITIES.find(a => a.id === s.relatedActivity)).map(s => s.id);
-  });
-  check("all story->activity links valid", storyAudit.length === 0, JSON.stringify(storyAudit));
 
-  console.log("== Activities ==");
+  console.log("== Activities removed ==");
+  check("no IM_ACTIVITIES data present", await page.evaluate(() => typeof window.IM_ACTIVITIES === "undefined"));
+  check("Activities nav item removed", await page.evaluate(() => ![...document.querySelectorAll(".nav-item")].some(n => (n.textContent || "").toLowerCase().includes("activities"))));
   await page.goto(BASE + "#/activities"); await sleep(300);
-  check("12 activities listed", (await page.$$(".app-main .card.clickable")).length === 12);
-  await page.goto(BASE + "#/activity/goal-ladder"); await sleep(300);
-  await page.type('[data-field="goal"]', "Become a nurse");
-  await page.click("#act-save"); await sleep(300);
-  const actSaved = await page.evaluate(() => JSON.parse(localStorage.getItem("im.activity.goal-ladder") || "{}").goal);
-  check("activity saves locally", actSaved === "Become a nurse", actSaved);
-  const badgesNow = await page.evaluate(() => JSON.parse(localStorage.getItem("im.badges") || "[]"));
-  check("goal-setter badge earned", badgesNow.includes("goal-setter"));
-  // list field
-  await page.goto(BASE + "#/activity/weekly-planner"); await sleep(300);
-  await page.type('[data-listin="must"]', "Revise maths");
-  await page.click('[data-listadd="must"]'); await sleep(300);
-  const listSaved = await page.evaluate(() => (JSON.parse(localStorage.getItem("im.activity.weekly-planner") || "{}").must || []).length);
-  check("list field saves", listSaved === 1);
+  check("activities route falls back (home shown)", !!(await page.$(".hero")));
 
   console.log("== My Space ==");
   await page.goto(BASE + "#/myspace"); await sleep(300);
-  check("myspace tiles", (await page.$$(".tile")).length === 11);
+  check("myspace tiles", (await page.$$(".tile")).length === 10);
   await page.goto(BASE + "#/myspace/journal"); await sleep(300);
   await page.type("#journal-in", "Today I learned that naming feelings helps.");
   await page.click("#journal-save"); await sleep(300);
@@ -193,7 +187,7 @@ function check(name, cond, extra) {
   await page.click("#text-save"); await sleep(200);
   check("calm plan saved", (await page.evaluate(() => JSON.parse(localStorage.getItem("im.myCalmPlan") || '""'))).includes("Breathe"));
   await page.goto(BASE + "#/myspace/badges"); await sleep(300);
-  check("badges grid renders", (await page.$$(".badge")).length === 10);
+  check("badges grid renders", (await page.$$(".badge")).length === 7);
 
   console.log("== Help & About ==");
   await page.goto(BASE + "#/help"); await sleep(300);

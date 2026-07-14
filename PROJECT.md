@@ -4,9 +4,9 @@
 
 **I Matter** is a lightweight, **offline-first Progressive Web App (PWA)** — a **toolkit for
 teachers and facilitators** to lead adolescents and young people through life skills. It
-provides lessons, stories, activities, and ready-to-run session plans to use with students. It
-has **no login, no accounts, no tracking, and no backend** — everything runs in the browser
-and all data stays on the device.
+provides ready-to-run session plans plus a resources hub of lessons, stories, and support
+tools to use with students. It has **no login, no accounts, no tracking, and no backend** —
+everything runs in the browser and all data stays on the device.
 
 This document is a quick project brief. For the full feature tour see [`README.md`](README.md),
 and for detailed guides see the [`docs/`](docs/) folder.
@@ -15,29 +15,33 @@ and for detailed guides see the [`docs/`](docs/) folder.
 
 ## What it does
 
+The app has **two main sections** — **Session Plans** and **Resources** — plus a Home page
+with the day's encouragement and quick links to both.
+
 | Area | Description |
 | --- | --- |
-| **Learn** | 10 teaching topics with 70+ short lessons, each with intro, key lesson, real-life example, tap-to-reveal reflection, small activity, quick quiz, and takeaway — to lead with students. |
-| **Session Plans** | 5 full, ready-to-run life-skills sessions, formatted to be easy to read and lead (see below). |
-| **Stories** | 10 short stories with discussion prompts and "What would you do?" to read and discuss with students. |
-| **Activities** | 12 printable/in-app worksheets to complete with students or print for sessions. |
-| **My Space** | A private, device-only space for the facilitator's own notes, planning, and reflection (journal, strengths, goals, gratitude, mood check-in, optional PIN, delete-all-data). |
-| **Facilitator Mode** | PIN-protected monthly session plans, projector mode, local totals, and notes. |
-| **Help & About** | Support contacts and safety guidance to share with students, org info, and privacy notice. |
+| **Session Plans** | 6 full, ready-to-run life-skills sessions, formatted to be easy to read and lead (see below). |
+| **Resources → Learn** | 10 teaching topics with 70+ short lessons, each with intro, key lesson, real-life example, tap-to-reveal reflection, small activity, quick quiz, and takeaway — to lead with students. |
+| **Resources → Stories** | 10 short stories with discussion prompts and "What would you do?" to read and discuss with students. |
+| **Resources → My Space** | A private, device-only space for the facilitator's own notes, planning, and reflection (journal, strengths, goals, gratitude, optional PIN, delete-all-data). |
+| **Resources → Facilitator Mode** | PIN-protected monthly session plans, projector mode, local totals, and notes. |
+| **Resources → Help & About** | Support contacts and safety guidance to share with students, org info, and privacy notice. |
 | **Accessibility & languages** | Text size, high contrast, reduced motion, simple language, and full English/Kiswahili translation. |
 
-> **Note:** This is a facilitator tool — there is no Games section (removed in v2.0.0).
+> **Note:** This is a facilitator tool — there is no Games section (removed in v2.0.0), no
+> Activities section, and no mood check-in (both removed in v3.0.0).
 
-### Session Plans (public tab)
+### Session Plans (main tab)
 
-Five sessions live in [`data/session-plans.js`](data/session-plans.js) and are shown under
-**More → Session Plans**:
+Six sessions live in [`data/session-plans.js`](data/session-plans.js) and are shown under
+**Session Plans** in the bottom navigation:
 
 1. 🌟 Self-Awareness & Building Confidence (90 min)
 2. 💬 Effective Communication & Healthy Relationships (70 min)
 3. 🧭 Decision-Making & Problem-Solving (75 min)
 4. 🤝 Conflict Resolution & Negotiation Skills (70 min)
 5. 🛡️ Substance Abuse & Peer Pressure (70 min)
+6. 🎯 Goal Setting, Time Management & Overcoming Procrastination (90 min)
 
 Each plan renders a colourful header, "In this session" jump chips, numbered section cards
 with time badges, highlighted activity boxes, scenario/dialogue callouts, tables, key-point
@@ -60,7 +64,7 @@ fully offline.
 ```
 index.html            App shell and script/style includes
 styles.css            Design system (themable via :root variables)
-script.js             All app logic (router, views, games, PWA)
+script.js             All app logic (router, views, PWA)
 manifest.json         PWA manifest
 service-worker.js     Offline cache (bump CACHE_VERSION on updates)
 favicon.ico           Favicon (placeholder)
@@ -71,10 +75,9 @@ data/                 ALL editable content (plain JS files)
   strings.js          UI text (English + Kiswahili)
   content.js          Learning categories and lessons
   stories.js          Stories
-  activities.js       Worksheets
   sessions.js         Facilitator Mode monthly sessions
   session-plans.js    Public "Session Plans" tab content
-  extras.js           Mood responses, encouragements, prompts, badges
+  extras.js           Encouragements, journal prompts, badges
 docs/                 Deployment, testing, content-editing, privacy, safeguarding guides
 tools/                generate-icons.py, smoke-test.js
 ```

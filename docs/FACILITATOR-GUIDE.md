@@ -6,7 +6,7 @@ mentors using the app in monthly sessions at partner schools.
 ## What the app is (and is not)
 
 - It is an **offline resource centre** for the young people in your program:
-  lessons, games, stories, activities, and private reflection tools.
+  session plans, lessons, stories, and private reflection tools.
 - It is **not** a data collection tool. It stores nothing about individual
   students, requires no accounts, and uploads nothing. Anything a student
   writes stays on the device they used and can be deleted by them at any
@@ -30,7 +30,7 @@ mentors using the app in monthly sessions at partner schools.
 | Discussion questions | Shown inside each session plan — tap to display |
 | Projector mode | Enlarges all text and hides navigation for group display |
 | Print | Print any session plan or worksheet (or save as PDF) |
-| Local completion totals | Anonymous counts of lessons/games/quizzes done **on that device** |
+| Local completion totals | Anonymous counts of lessons/quizzes done **on that device** |
 | Session notes | Your private notes, stored on the device |
 | Reset local activity results | Clears counters (does NOT touch students' My Space) |
 
@@ -64,8 +64,8 @@ a take-home challenge, plus a linked printable activity.
 - **Safe space first.** No mocking, no forced sharing. Students may always
   pass.
 - **Never shame wrong answers** — the app doesn't, and neither should we.
-- **Privacy is real.** Never ask students to show their My Space, journal,
-  or mood history. If a device is shared, show students how to delete their
+- **Privacy is real.** Never ask students to show their My Space or journal
+  entries. If a device is shared, show students how to delete their
   data afterwards (My Space → Delete all my data).
 - **Be alert.** Sessions on feelings, safety, and secrets can surface
   disclosures. Know your school's child protection procedure and the

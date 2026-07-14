@@ -2,7 +2,7 @@
 
 All content in I Matter lives in plain, commented JavaScript files inside
 the `data/` folder. Authorized project staff can edit everything — lessons,
-stories, activities, session plans, support contacts, logos, colours, footer
+stories, session plans, support contacts, logos, colours, footer
 text, and organization details — with a text editor. No CMS, no build step, no
 code knowledge beyond careful copy-paste.
 
@@ -23,10 +23,9 @@ code knowledge beyond careful copy-paste.
 | `data/strings.js` | Every interface label, in English and Kiswahili |
 | `data/content.js` | The 10 learning categories and all lessons |
 | `data/stories.js` | The stories |
-| `data/activities.js` | The worksheets and their fields |
 | `data/session-plans.js` | The public Session Plans tab content |
 | `data/sessions.js` | The 8 monthly session plans (Facilitator Mode) |
-| `data/extras.js` | Mood check-in responses, daily encouragements, journal prompts, badges |
+| `data/extras.js` | Daily encouragements, journal prompts, badges |
 
 ## Common tasks
 
@@ -49,9 +48,8 @@ file header documents every block type (`p`, `h`, `ul`, `ol`, `activity`,
 `scenario`, `dialogue`, `table`, `note`, `pledge`).
 
 ### Add a story
-Copy a story block in `data/stories.js`. `relatedActivity` must be an id
-from `data/activities.js`. Never use real participant names or personal
-stories without written consent.
+Copy a story block in `data/stories.js`. Never use real participant names
+or personal stories without written consent.
 
 ### Change the footer or organization details
 `data/config.js` → `footerText`, `organization`.

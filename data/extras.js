@@ -1,75 +1,10 @@
 /* ==========================================================================
-   I MATTER — EXTRAS: mood responses, affirmations, badges, journal prompts
+   I MATTER — EXTRAS: encouragements, badges, journal prompts
    --------------------------------------------------------------------------
    Safe to edit.
    ========================================================================== */
 
 window.IM_EXTRAS = {
-
-  /* ---- Mood check-in responses ----
-     Each mood offers: a message, a suggestion, and helpful links.
-     "breathe: true" adds a guided breathing exercise button. */
-  moods: [
-    {
-      id: "happy", emoji: "😄", labelKey: "happy",
-      message: "That's wonderful! Happiness is worth noticing and remembering.",
-      suggestion: "Spread it around — a kind word from a happy heart can brighten someone else's day.",
-      affirmation: "I notice and enjoy the good moments in my life.",
-      link: { type: "lesson", id: "emotional-wellbeing", label: "Emotional well-being" }
-    },
-    {
-      id: "calm", emoji: "😌", labelKey: "calm",
-      message: "Calm is a lovely place to be. Well done for checking in.",
-      suggestion: "This is a great moment to plan something, learn something, or help someone.",
-      affirmation: "I carry my calm with me wherever I go.",
-      link: { type: "lesson", id: "my-feelings", label: "My feelings" }
-    },
-    {
-      id: "excited", emoji: "🤩", labelKey: "excited",
-      message: "Excitement is energy! Something good is happening or coming.",
-      suggestion: "Channel that energy — set a goal or plan your next step.",
-      affirmation: "My energy and enthusiasm are gifts.",
-      link: { type: "lesson", id: "goals-lesson", label: "Setting goals" }
-    },
-    {
-      id: "worried", emoji: "😟", labelKey: "worried",
-      message: "Worry visits everyone. Thank you for being honest about it.",
-      suggestion: "Try the breathing exercise below. If the worry is big or won't leave, share it with a trusted adult — worries shrink when spoken.",
-      affirmation: "I can handle this one step at a time.",
-      breathe: true,
-      link: { type: "lesson", id: "coping-stress", label: "Coping with stress" }
-    },
-    {
-      id: "sad", emoji: "😢", labelKey: "sad",
-      message: "It's okay to feel sad. Sadness is a natural feeling, and it passes.",
-      suggestion: "Be gentle with yourself today. Talking to someone you trust can make sadness lighter — you don't have to carry it alone.",
-      affirmation: "My feelings matter, and it is okay to ask for comfort.",
-      breathe: true,
-      link: { type: "lesson", id: "handling-sadness", label: "Handling sadness" }
-    },
-    {
-      id: "angry", emoji: "😠", labelKey: "angry",
-      message: "Anger is a normal feeling — it tells you something feels unfair or wrong.",
-      suggestion: "Before acting, try the breathing exercise below. When you're calmer, think about what the anger is trying to tell you.",
-      affirmation: "I can feel angry and still choose my actions wisely.",
-      breathe: true,
-      link: { type: "lesson", id: "managing-anger", label: "Managing anger" }
-    },
-    {
-      id: "tired", emoji: "😴", labelKey: "tired",
-      message: "Your body is asking for rest — and rest is not laziness.",
-      suggestion: "If you can, rest, drink water, and sleep early tonight. If you're tired every day, tell a trusted adult.",
-      affirmation: "Taking care of my body helps me grow strong.",
-      link: { type: "lesson", id: "emotional-wellbeing", label: "Emotional well-being" }
-    },
-    {
-      id: "confused", emoji: "😕", labelKey: "confused",
-      message: "Confusion means your brain is working on something new. That's okay.",
-      suggestion: "Try writing down what confuses you in one sentence — then ask someone about it. Questions turn confusion into understanding.",
-      affirmation: "It is okay not to know — asking is how I learn.",
-      link: { type: "lesson", id: "asking-questions-comm", label: "Asking questions" }
-    }
-  ],
 
   /* ---- Daily encouragements (rotate by day) ---- */
   encouragements: [
@@ -113,9 +48,6 @@ window.IM_EXTRAS = {
     { id: "quiz-whiz", emoji: "🧠", title: "Quiz Whiz", desc: "Answered 10 quiz questions correctly" },
     { id: "storyteller", emoji: "📖", title: "Story Lover", desc: "Read 3 stories" },
     { id: "reflector", emoji: "🪞", title: "Reflector", desc: "Wrote your first journal entry" },
-    { id: "mood-aware", emoji: "🌈", title: "Feelings Friend", desc: "Checked in your mood 5 times" },
-    { id: "goal-setter", emoji: "🎯", title: "Goal Setter", desc: "Completed the Goal Ladder activity" },
-    { id: "grateful-heart", emoji: "💚", title: "Grateful Heart", desc: "Wrote 3 gratitude notes" },
-    { id: "brave-one", emoji: "🦁", title: "Brave One", desc: "Completed the Confidence Journal" }
+    { id: "grateful-heart", emoji: "💚", title: "Grateful Heart", desc: "Wrote 3 gratitude notes" }
   ]
 };

@@ -768,6 +768,217 @@ window.IM_SESSION_PLANS = [
         ]
       }
     ]
+  },
+
+  /* ====================================================================
+     6. GOAL SETTING, TIME MANAGEMENT, AND OVERCOMING PROCRASTINATION
+     ==================================================================== */
+  {
+    id: "goals-time-procrastination",
+    emoji: "🎯",
+    color: "green",
+    title: "Goal Setting, Time Management & Overcoming Procrastination",
+    duration: "90 min",
+    tagline: "Set clear goals, own your time, and stop putting things off.",
+    sections: [
+      {
+        title: "Introduction",
+        time: "5 min",
+        blocks: [
+          { h: "Welcome & icebreaker" },
+          { activity: "My Future Self", body: [
+            { ul: [
+              "Ask participants to imagine themselves ten years from now: Where are you living? What are you studying or doing for work? What are you most proud of?",
+              "Invite 2 or 3 volunteers to share."
+            ] }
+          ] },
+          { note: "Purpose: this encourages participants to think about their future and introduces the importance of setting goals.", emoji: "🎯" },
+          { p: "Explain that achieving goals rarely happens by chance. It requires planning, managing your time, and taking consistent action." }
+        ]
+      },
+      {
+        title: "Goal setting",
+        time: "15 min",
+        blocks: [
+          { h: "What are goals and why are they important?" },
+          { ul: [
+            "Goals are things we want to achieve.",
+            "They give us direction, help us stay focused, and motivate us to keep working even when we encounter challenges."
+          ] },
+          { note: "What happens when you don't have goals: lack of direction, loss of purpose, failure, stress.", emoji: "⚠️" },
+          { h: "Different types of goals" },
+          { ul: [
+            { b: "Short-term:", t: "can be completed within a brief period of time (days, weeks, months).", sub: [
+              "Ex: reading a chapter, attending all the classes this semester."
+            ] },
+            { b: "Long-term:", t: "need extended periods to be completed (years or decades).", sub: [
+              "Ex: studying abroad, getting a degree, buying a house."
+            ] },
+            "Goals can be about education, family, health, career, money, art, and more."
+          ] },
+          { h: "Setting goals: step by step" },
+          { ol: [
+            { b: "Identify your goal.", t: "What do you want to achieve?" },
+            { b: "Make a plan to reach your goal.", t: "Decide what steps you need to follow and what actions you need to take to get where you want to be." },
+            { b: "Take action", t: "and follow your plan." },
+            { b: "Keep track of your progress.", t: "Is your plan working or do you need to change something? Be flexible — sometimes the path to your goal may be a little bumpy, and you may need to find another route." },
+            { b: "Seek help or guidance", t: "if what you are doing is not working." },
+            { b: "Stay positive.", t: "Don't give up if it takes longer to achieve." }
+          ] },
+          { h: "Tips" },
+          { ul: [
+            { b: "Be clear about your goal.", sub: [
+              "❌ \"I want to perform better in school.\"",
+              "✅ \"I want to improve my mathematics grade from a C to a B.\""
+            ] },
+            { b: "Think about why you want to achieve your goal.", sub: [
+              "\"I want to improve my grades so I can join a course I like after high school.\""
+            ] },
+            { b: "Think about the obstacles you might face and how you will deal with them.", sub: [
+              "\"I can improve my grades if I go to the library and study every afternoon.\""
+            ] },
+            { b: "Set a deadline.", t: "It helps you stay focused and avoid procrastination.", sub: [
+              "\"I want to improve my mathematics grade by the end of this term.\""
+            ] }
+          ] }
+        ]
+      },
+      {
+        title: "Activity: My goals",
+        time: "10 min",
+        blocks: [
+          { activity: "My goals", time: "10 min", body: [
+            { ul: [
+              "Divide the group into 3 or 4 teams.",
+              { b: "Ask participants to think about:", sub: [
+                "One short-term goal (next 6 months).",
+                "One long-term goal (next 5 years)."
+              ] },
+              { b: "For each goal, answer the following:", sub: [
+                "Why is this goal important to you?",
+                "What resources or support will you need to achieve it?",
+                "What steps do you need to take to achieve this?",
+                "What are the potential obstacles you will find, and how will you overcome them?"
+              ] },
+              "Ask one representative from each group to present one goal discussed and the key insights from the conversation."
+            ] }
+          ] }
+        ]
+      },
+      {
+        title: "Time management",
+        time: "15 min",
+        blocks: [
+          { note: "Time management means planning how you use your time so you can get important things done and achieve your goals.", emoji: "⏰" },
+          { p: "Time is a limited resource: we need to own it and control it!" },
+          { h: "Time robbers" },
+          { p: "Activities that make us waste our time:" },
+          { ul: [
+            "Texting — people spend 2–4 hours per day on their phone.",
+            "Endless chatting with friends and neighbours.",
+            "Surfing the internet without a goal.",
+            "Social media (Facebook, Instagram, TikTok).",
+            "Watching TV.",
+            "Procrastination.",
+            "Not being able to say No."
+          ] },
+          { h: "Strategies to manage your time effectively" },
+          { ul: [
+            { b: "Plan your day.", t: "At the beginning of the day, think about what you need to do. You can also make a to-do list the night before." },
+            { b: "Do the most important tasks first.", t: "Finish first the tasks that are urgent or have the nearest deadline." },
+            { b: "Set aside time for each task.", t: "Decide when you will do something and stick to your plan. (Ex: from 6 pm to 7 pm I will complete my Kiswahili homework.)" },
+            { b: "Break big tasks into smaller steps.", t: "Large tasks can feel overwhelming. Completing one small step at a time makes them easier. (Ex: today I will write the introduction of my essay. Tomorrow I will write the next section.)" },
+            { b: "Focus on one task at a time.", t: "It is easier to do your best work when you focus on one activity instead of trying to do several things at once." },
+            { b: "Avoid distractions.", t: "Put the phone away and find a quiet place to study." },
+            { b: "Use reminders.", t: "A calendar, notebook, or phone reminder can help you remember important tasks and deadlines." },
+            { b: "Take short breaks.", t: "If you have been studying for a long time, take a 10-minute break. Stretch, go for a short walk, or drink some water before getting back to work." },
+            { b: "Get enough sleep.", t: "Sleeping well helps you manage your time better." }
+          ] }
+        ]
+      },
+      {
+        title: "Activity: Time-robber scenarios",
+        time: "10 min",
+        blocks: [
+          { activity: "What could this student do differently?", time: "10 min", body: [
+            { ul: [
+              "Divide the group into 4 teams. Each team receives a card with a scenario on it:",
+              { b: "Team 1:", t: "\"John is watching TV when he should be doing his homework.\"" },
+              { b: "Team 2:", t: "\"Mary spends 10 minutes searching for a pencil, then another 10 minutes finding her notebook, wasting time that she could have used to study.\"" },
+              { b: "Team 3:", t: "\"Peter has homework for tomorrow, but he keeps watching videos and memes on the phone.\"" },
+              { b: "Team 4:", t: "\"Irene starts her homework late because she spent too much time talking with her friends.\"" },
+              "Ask the groups to discuss: What could this student do differently?",
+              "One representative from each team shares their insights."
+            ] }
+          ] }
+        ]
+      },
+      {
+        title: "Procrastination & how to overcome it",
+        time: "10 min",
+        blocks: [
+          { h: "What is procrastination?" },
+          { ul: [
+            "Postponing tasks, decisions, or activities.",
+            "It is a learned habit: the more you do it, the worse it becomes."
+          ] },
+          { h: "How to identify procrastination" },
+          { ul: [
+            "\"I will do this tomorrow.\"",
+            "\"Someone else can do it.\"",
+            "\"I am too tired now.\"",
+            "\"This is not the right time to do it.\"",
+            "\"I can't do it right, so why start it anyway.\""
+          ] },
+          { h: "Why do people procrastinate?" },
+          { note: "Before introducing the reasons, ask participants why they think people procrastinate. Write the responses on the board, then introduce the reasons that were not mentioned.", emoji: "💡" },
+          { ul: [
+            { b: "Fear of failure:", t: "you avoid starting a task because you are afraid you won't do it well." },
+            { b: "Wanting everything to be perfect:", t: "you don't start because you feel your work has to be perfect and you are not ready." },
+            { b: "The task feels too difficult:", t: "you don't know where to begin, so you keep postponing." },
+            { b: "Distractions:", t: "other things keep taking your attention away from what you should be doing." },
+            { b: "Trying to do many things at the same time." },
+            { b: "Poor time management:", t: "you leave important tasks until the last minute, then feel overwhelmed." },
+            { b: "Dependency:", t: "you think you can't do it alone." },
+            { b: "Pleasure-seeking:", t: "\"life is too short to do boring things.\"" }
+          ] },
+          { note: "Consequences of procrastination: poor academic performance, low productivity, low self-esteem, failure to achieve goals.", emoji: "⚠️" },
+          { h: "Strategies to overcome procrastination" },
+          { ul: [
+            "Set goals every day.",
+            "Break tasks into small steps.",
+            "Start with the most urgent task.",
+            "Remove distractions."
+          ] }
+        ]
+      },
+      {
+        title: "Activity: Beat procrastination",
+        time: "10 min",
+        blocks: [
+          { activity: "One task I keep postponing", time: "10 min", body: [
+            { ul: [
+              "Divide the group into 3 or 4 teams.",
+              { b: "Ask the students to think about a task they've been procrastinating on, and about:", sub: [
+                "The benefits of completing the task.",
+                "3 steps they need to take to complete the task."
+              ] },
+              "Invite one representative per group to share their examples."
+            ] }
+          ] }
+        ]
+      },
+      {
+        title: "Questions & closing the session",
+        time: "5 min",
+        blocks: [
+          { ul: [
+            "Give the students the opportunity to ask questions.",
+            "Ask them to write down (individually) one goal they want to focus on during the next week, and one strategy they will use to manage their time better."
+          ] }
+        ]
+      }
+    ]
   }
 
 ];

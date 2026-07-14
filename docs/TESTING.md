@@ -2,27 +2,27 @@
 
 ## Latest test report
 
-**Version tested:** 1.0.0 · **Date:** 2026-07-10 ·
-**Method:** automated headless-Chrome suite (`tools/smoke-test.js`, 63
+**Version tested:** 3.0.0 · **Date:** 2026-07-14 ·
+**Method:** automated headless-Chrome suite (`tools/smoke-test.js`, 67
 checks) at a 390×844 mobile viewport, plus manual review of screenshots.
 
-**Result: 63 / 63 checks passed.** Highlights:
+**Result: 67 / 67 checks passed.** Highlights:
 
 | Area | Result |
 | --- | --- |
-| App shell, hero, footer, bottom nav render | ✅ |
-| Service worker registers; 23 files precached | ✅ |
-| Mood check-in: response, breathing option, local save | ✅ |
+| App shell, hero, footer, 3-item bottom nav (Home · Session Plans · Resources), Today's encouragement | ✅ |
+| Service worker registers; 21+ files precached | ✅ |
+| Resources hub lists Learn, Stories, My Space, Facilitator Mode, Help, About | ✅ |
 | Learn: 10 categories, all 76 lessons render, no duplicate ids, no broken related links, all quizzes valid | ✅ |
 | Quiz answering, tap-to-reveal, mark-as-explored, badge earning | ✅ |
-| All 6 game engines complete end-to-end (choice, memory, order, select, sort, path); scores saved locally | ✅ |
-| Stories: all 10 render; "What would you do?" responds; activity links valid | ✅ |
-| Activities: text + list fields save locally; reset works; goal-setter badge | ✅ |
+| Session Plans: all 6 listed; sections, tables, and activity boxes render (incl. new Goal Setting, Time Management & Overcoming Procrastination plan) | ✅ |
+| Stories: all 10 render; "What would you do?" responds | ✅ |
+| Games, Activities, and mood check-in fully removed; old routes fall back safely | ✅ |
 | My Space: journal, lists, text plans save; badges grid; delete-all clears every `im.*` key | ✅ |
 | Facilitator Mode: wrong PIN rejected, correct PIN unlocks, session plans render, projector mode toggles | ✅ |
 | Settings: text size, high contrast, reduced motion apply to `<html>`; EN↔SW language switch | ✅ |
 | Accessibility: all images have alt text, all buttons labelled, skip link first and focusable | ✅ |
-| **Offline:** after one visit, home, lessons, and games all load with the network disabled; offline pill appears | ✅ |
+| **Offline:** after one visit, home, lessons, and session plans all load with the network disabled; offline pill appears | ✅ |
 | No console errors; no requests to any external domain | ✅ |
 
 Not verifiable in this environment (requires physical devices / live hosting —
@@ -53,14 +53,13 @@ CHROME_PATH=/path/to/chrome node tools/smoke-test.js
 ### Offline
 - [ ] Load the app once online, enable airplane mode, close and reopen: everything works
 - [ ] Offline pill appears in the header when offline
-- [ ] Lessons, games, stories, activities, My Space all usable offline
+- [ ] Lessons, stories, session plans, My Space all usable offline
 - [ ] "Check for updates" (Settings) finds new versions when online
 
 ### Content & navigation
-- [ ] All 8 bottom-nav / More destinations open
-- [ ] Lessons open correctly from Learn, Home, mood responses, and related links
+- [ ] All 3 bottom-nav destinations open, and all 6 Resources entries open
+- [ ] Lessons open correctly from Learn and related-topic links
 - [ ] Quizzes give encouraging feedback for right and wrong answers
-- [ ] All 10 games are playable and replayable; scores persist after closing the app
 - [ ] Stories display with discussion prompts
 - [ ] No broken links, no placeholder text left over (search the app for "PLACEHOLDER" after configuring contacts)
 
