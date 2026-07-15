@@ -31,11 +31,11 @@ privacy, and My Space).*
 - **Shared devices:** if you use someone else's phone, remember your
   entries stay on THAT phone. Use *Delete all my data* when you finish, or
   avoid writing private things on shared devices.
-- **Facilitator Mode** shows only anonymous totals (for example, "12
-  lessons explored on this device"). It never shows anyone's journal,
-  or personal entries.
-- The app works completely offline. When you are online, it only uses the
-  internet to check for app updates from the website it was installed from.
+- **Your progress** (lessons reviewed, badges) is counted only on your own
+  device and is never shown to anyone else or sent anywhere.
+- The app works completely offline once installed. It only needs the internet
+  the first time it is installed, and afterwards to check for app updates from
+  the website it was installed from.
 
 ## For parents, guardians, and schools
 

@@ -1,212 +1,324 @@
 /* ==========================================================================
-   I MATTER — STORIES
+   I MATTER — STORIES (English + Kiswahili)
    --------------------------------------------------------------------------
-   Safe to edit. All characters are fictional. Do not add real participant
-   names or personal stories without written consent.
-   Each story: id, title, emoji, theme, text (paragraphs array), discussion,
-   whatWouldYouDo (options are all reasonable — they spark conversation),
-   and lesson.
+   Safe to edit. Six short stories — one for each pillar of the framework.
+   All characters are fictional. Do not add real participant names or
+   personal stories without written consent.
+
+   STRUCTURE
+   window.IM_STORIES = { en: [...], sw: [...] }
+   Both language trees must keep the SAME ids, order, emoji, and pillar.
+   Each story: id, pillar (category id), title, emoji, theme,
+   text (paragraphs array), discussion, whatWouldYouDo { q, options[4] },
+   lesson.
    ========================================================================== */
 
-window.IM_STORIES = [
-  {
-    id: "two-friends-one-rumour",
-    title: "Two Friends, One Rumour",
-    emoji: "👭",
-    theme: "Friendship conflict",
-    text: [
-      "Wambui and Njoki had been best friends since Class 4. They shared lunches, secrets, and dreams of starting a bakery together one day.",
-      "Then, one Monday, everything changed. Someone told Njoki that Wambui had called her 'a show-off' behind her back. Njoki was so hurt that she stopped talking to Wambui completely.",
-      "For a whole week, they walked past each other in silence. Wambui didn't even know what she had done. Their other friends started taking sides, and the class felt divided.",
-      "Finally, Wambui wrote a note: 'I don't know what happened, but I miss my friend. Can we talk at break?' Under the mango tree, Njoki explained what she had heard. Wambui was shocked: 'I never said that. Who told you?'",
-      "They traced the rumour back and discovered it had been twisted as it passed from person to person — like a broken telephone. The original comment wasn't even about Njoki.",
-      "The two friends made a pact: 'If we ever hear something about each other, we come and ask directly — before believing it.'"
-    ],
-    discussion: "Why do rumours grow and change as they spread? What damage can they do?",
-    whatWouldYouDo: {
-      q: "If you heard a rumour that your friend said something bad about you, what would you do first?",
-      options: ["Stop talking to them immediately", "Ask them directly about it, calmly", "Spread a rumour back", "Ask others to take your side"]
+window.IM_STORIES = {
+
+  en: [
+    {
+      id: "quiet-champion",
+      pillar: "know-myself",
+      title: "The Quiet Champion",
+      emoji: "🌟",
+      theme: "Discovering hidden strengths",
+      text: [
+        "Wanja was sure she had no talent. She wasn't the fastest runner, the best singer, or the top of her class. On prize-giving day she clapped for everyone else and felt invisible.",
+        "One afternoon, her teacher asked her to help organise the class debate. Wanja made a list of speakers, calmed the nervous ones, and quietly reminded the loud ones to let others finish. The debate ran perfectly.",
+        "Afterwards, the teacher said something Wanja never forgot: \"Did you see what you just did? Half of leadership is helping others shine. That is a talent.\"",
+        "Wanja started noticing it everywhere. Friends came to her with problems because she listened without judging. Group work went better when she was in the group. She wasn't invisible — she was the glue.",
+        "At the next prize-giving day, Wanja still didn't win a trophy. But when the debate club was named the best in the county, everyone turned and clapped — for her."
+      ],
+      discussion: "Why did Wanja believe she had no talent? What finally helped her see her strengths?",
+      whatWouldYouDo: {
+        q: "If you felt you had no special talent, what would you do?",
+        options: [
+          "Decide talents are only for other people",
+          "Ask people who know me well what they see in me",
+          "Copy whatever talent is most popular",
+          "Notice what people thank me for and build on it"
+        ]
+      },
+      lesson: "Strengths can be quiet. The things people thank you for are clues to talents you may not see yourself."
     },
-    lesson: "Check the facts with the person directly before believing a rumour. A five-minute honest conversation can save a friendship."
-  },
-  {
-    id: "the-heavy-bag",
-    title: "The Heavy Bag",
-    emoji: "🎒",
-    theme: "School pressure",
-    text: [
-      "Kimani was the firstborn, and everyone said he would be the first in his family to go to university. He liked that dream — but lately it felt like a heavy bag he carried everywhere.",
-      "Mock exams were coming. His father reminded him daily. His teachers reminded him. Even the neighbour reminded him. Kimani started sleeping badly. His head ached during lessons. One day, staring at a revision book, he realized he had read the same page four times without understanding a word.",
-      "At the next I Matter session, the facilitator talked about stress: 'Stress is like carrying water. One cup is easy. But nobody can carry a full drum alone.'",
-      "After the session, Kimani stayed behind. 'I think I'm carrying a drum,' he said quietly. The facilitator listened, then helped him make a plan: a realistic revision timetable, ten minutes of football every evening, and — hardest of all — an honest talk with his father.",
-      "The talk surprised him. His father was quiet for a while, then said: 'I push you because I never got the chance. But I'd rather have a healthy son than a broken student.' They agreed on study hours AND rest hours.",
-      "The mock exams came. Kimani didn't score the highest in class — but he passed well, slept at night, and the drum finally felt like a cup again."
-    ],
-    discussion: "What are the signs that pressure is becoming too heavy for someone? Who pressures students most — and why?",
-    whatWouldYouDo: {
-      q: "If school pressure was affecting your sleep and health, what would you do?",
-      options: ["Push harder and ignore the signs", "Talk to a trusted adult about how you feel", "Give up on school", "Make a balanced plan with study and rest"]
+    {
+      id: "two-friends-one-rumour",
+      pillar: "belong",
+      title: "Two Friends, One Rumour",
+      emoji: "👭",
+      theme: "Communication and friendship",
+      text: [
+        "Wambui and Njoki had been best friends since Class 4. They shared lunches, secrets, and dreams of starting a bakery together one day.",
+        "Then, one Monday, everything changed. Someone told Njoki that Wambui had called her 'a show-off' behind her back. Njoki was so hurt that she stopped talking to Wambui completely.",
+        "For a whole week, they walked past each other in silence. Wambui didn't even know what she had done. Their other friends started taking sides, and the class felt divided.",
+        "Finally, Wambui wrote a note: 'I don't know what happened, but I miss my friend. Can we talk at break?' Under the mango tree, Njoki explained what she had heard. Wambui was shocked: 'I never said that. Who told you?'",
+        "They traced the rumour back and discovered it had been twisted as it passed from person to person — like a broken telephone. The original comment wasn't even about Njoki. The two friends made a pact: 'If we ever hear something about each other, we come and ask directly — before believing it.'"
+      ],
+      discussion: "Why do rumours grow and change as they spread? What damage can they do to relationships?",
+      whatWouldYouDo: {
+        q: "If you heard a rumour that your friend said something bad about you, what would you do first?",
+        options: [
+          "Stop talking to them immediately",
+          "Ask them directly about it, calmly",
+          "Spread a rumour back",
+          "Ask others to take your side"
+        ]
+      },
+      lesson: "Check the facts with the person directly before believing a rumour. A five-minute honest conversation can save a friendship."
     },
-    lesson: "Working hard matters, but your health matters more. Speaking honestly about pressure is not weakness — it is wisdom."
-  },
-  {
-    id: "the-initiation",
-    title: "The 'Initiation'",
-    emoji: "🚧",
-    theme: "Peer pressure",
-    text: [
-      "When Leken joined his new school, a group of popular boys took interest in him. He was good at football, and they wanted him in their circle.",
-      "'There's just one thing,' said Karanja, their leader. 'Everyone in our group does the initiation. You take something small from the school store. Just sweets or a soda. It proves you're not a coward.'",
-      "Leken's heart pounded. He wanted friends badly — being new was lonely. But stealing? He thought of his grandmother, who always said: 'Your name is worth more than gold.'",
-      "'And if I don't?' Leken asked. Karanja shrugged: 'Then you stay a nobody.'",
-      "That evening, Leken made his decision. The next day he told Karanja: 'I'm not doing it. If your friendship needs me to steal, it's too expensive for me.' Some boys laughed. Leken walked to the field and joined a pickup game with other students.",
-      "Weeks passed. Leken made friends on the field — the kind who didn't charge an entry fee. And one quiet afternoon, one of Karanja's boys sat next to him: 'You know what? I wish I'd said no too.'"
-    ],
-    discussion: "Why do some groups demand 'proof' before accepting someone? What does that tell you about the group?",
-    whatWouldYouDo: {
-      q: "A group you really want to join asks you to do something wrong first. What do you do?",
-      options: ["Do it once — just to get in", "Refuse and look for real friends", "Report it if it could harm someone", "Pretend to do it and lie"]
+    {
+      id: "tomorrow-juma",
+      pillar: "take-action",
+      title: "'Tomorrow' Juma",
+      emoji: "🎯",
+      theme: "Goals and procrastination",
+      text: [
+        "Everyone called him 'Tomorrow' Juma. Homework? Tomorrow. Revision? Tomorrow. Fixing the puncture on his bicycle? Definitely tomorrow.",
+        "Juma had a big dream — he wanted to become an engineer. But dreams, he was discovering, do not build themselves. The end-of-term exams were four weeks away, and the pile of unrevised work grew taller each day, until just looking at it made him tired.",
+        "His grandmother watched him one evening staring hopelessly at his books. \"Juma,\" she said, \"how do you eat an elephant?\" He laughed. \"One bite at a time, Bibi.\" She nodded at the books. \"So take one bite.\"",
+        "That night Juma made a plan. Not a heroic plan — a small one. One topic per evening, phone in the kitchen drawer, hardest subject first. Some evenings he only managed twenty minutes. But twenty minutes, every day, four weeks in a row, is a mountain of minutes.",
+        "When the results came, Juma hadn't just passed — he had climbed higher than ever before. Taped above his desk was a new note in his own handwriting: 'Tomorrow is where dreams go to sleep. Start today.'"
+      ],
+      discussion: "What made Juma keep postponing things? What actually changed — his dream, or his habits?",
+      whatWouldYouDo: {
+        q: "You have a huge task and four weeks. What would you do?",
+        options: [
+          "Wait until you feel motivated",
+          "Break it into small daily steps and start today",
+          "Plan to do it all in the final week",
+          "Decide the goal was too big anyway"
+        ]
+      },
+      lesson: "Big goals are reached through small, consistent steps. Starting — even small — beats waiting for the perfect moment."
     },
-    lesson: "A friendship that must be bought with wrongdoing is not friendship. Real belonging never costs your values."
-  },
-  {
-    id: "amara-speaks",
-    title: "Amara Speaks Up",
-    emoji: "🗣️",
-    theme: "Speaking up",
-    text: [
-      "Amara noticed it during lunch: the water tap near the kitchen was leaking again, making the ground slippery. Last term, a Grade 4 pupil had slipped there and broken his arm.",
-      "She told her deskmate, who shrugged: 'Someone will report it.' But days passed, and nobody did. The puddle grew bigger.",
-      "Amara was shy — the kind of student who rehearsed a sentence five times before raising her hand. Going to the head teacher's office felt like climbing a mountain. 'Who am I to report this?' she thought. 'Maybe they already know.'",
-      "Then she remembered something from an I Matter session: 'If everyone waits for someone, nobody becomes someone.'",
-      "The next morning, Amara knocked on the deputy head's door. Her voice shook a little, but her message was clear: 'The tap near the kitchen is leaking, the ground is slippery, and a pupil was hurt there before. Could it be fixed before someone else falls?'",
-      "The deputy head thanked her — and by Friday, the tap was repaired. At assembly, without naming her, he said: 'This week, one student's small report prevented a big accident. That is leadership.' Amara looked straight ahead, but inside, she was smiling."
-    ],
-    discussion: "Why is it hard to speak up, even about important things? What helps a shy person find their voice?",
-    whatWouldYouDo: {
-      q: "You notice a danger at school that nobody is reporting. What do you do?",
-      options: ["Wait — surely someone else will do it", "Report it to a teacher or leader", "Tell friends but no adults", "Fix it yourself even if it's risky"]
+    {
+      id: "the-ride-home",
+      pillar: "choose-wisely",
+      title: "The Ride Home",
+      emoji: "🧭",
+      theme: "Decisions under pressure",
+      text: [
+        "The party was the best Sifa had been to all year — music, dancing, half her class there. She had permission to stay until nine, and her cousin Mark had promised to drive her home.",
+        "At half past eight she found Mark by the gate, laughing loudly, a bottle in his hand. It wasn't his first. \"We'll leave soon,\" he grinned, jingling the car keys. \"Relax, I drive better after a few!\"",
+        "Sifa felt the pull of the easy choice. Everyone was getting into the car. Refusing would look childish. And how else would she get home?",
+        "Then she remembered her mother's words — never, ever ride with a driver who has been drinking — and did the maths in her head: a few minutes of embarrassment, against everything she could lose. She stepped back. \"I'll find another way.\"",
+        "She called her neighbour, Mama Achieng, who was picking up her own daughter. In the car, nobody laughed at her. The next morning she learned Mark had scraped a matatu at the junction. Everyone was fine — but nobody was calling her choice childish anymore."
+      ],
+      discussion: "What made this decision hard for Sifa? What helped her choose well under pressure?",
+      whatWouldYouDo: {
+        q: "Your ride home has been drinking. What would you do?",
+        options: [
+          "Get in — it's probably fine",
+          "Find another safe way home, even if it's awkward",
+          "Ask the driver to drive slowly",
+          "Wait and hope someone else decides for you"
+        ]
+      },
+      lesson: "Good decisions weigh consequences, not just comfort. A moment of awkwardness is a small price for your safety."
     },
-    lesson: "Your voice can protect people. Speaking up doesn't require a loud voice — just a clear message and a little courage."
-  },
-  {
-    id: "the-tryout",
-    title: "The Tryout",
-    emoji: "🎤",
-    theme: "Self-confidence",
-    text: [
-      "Everyone knew Zawadi could sing — everyone except Zawadi. She sang while washing dishes, while walking, while studying. But the moment anyone watched, her voice hid like a startled bird.",
-      "When the music teacher announced tryouts for the county music festival, Zawadi's friends pushed her to sign up. 'I can't sing in front of people,' she protested. 'You sing in front of us all the time!' they laughed. 'You just don't notice.'",
-      "That night, Zawadi wrote in her journal: 'What is the worst that can happen? I shake. My voice cracks. People whisper. Then... it ends, and I go home. What is the BEST that can happen?' She stared at that question for a long time.",
-      "She made a ladder: sing for her little brother — done. Sing for her two best friends — done, hands shaking. Sing one verse for her class during music lesson — done, heart pounding, but the class clapped.",
-      "On tryout day, her legs felt like water. She sang anyway. Her voice trembled on the first line... then found its wings.",
-      "She didn't get the first slot — she got the second. But walking home, Zawadi realized the real prize wasn't the slot. It was discovering that fear and doing can live in the same moment."
-    ],
-    discussion: "What is the difference between having no fear and having courage? Can confidence be built step by step?",
-    whatWouldYouDo: {
-      q: "There is something you're secretly good at, but performing scares you. What do you do?",
-      options: ["Keep it secret forever", "Build a ladder of small brave steps", "Wait until the fear disappears completely", "Force yourself into the biggest stage immediately"]
+    {
+      id: "the-desk-war",
+      pillar: "build-bridges",
+      title: "The Desk War",
+      emoji: "🤝",
+      theme: "Conflict resolution",
+      text: [
+        "It started with a line drawn in chalk down the middle of a shared desk. \"Your books keep invading my side,\" said Baraka. \"Your elbow lives on mine,\" replied Otieno. By Friday they weren't speaking — they were just shoving.",
+        "The class began picking sides. Team Baraka. Team Otieno. Old, unrelated grudges got dragged in. Nobody even remembered the desk anymore.",
+        "Their teacher didn't punish them. Instead she sat them down with one rule: each boy had to explain the problem as the OTHER one saw it, and he couldn't speak until he'd done it fairly.",
+        "Baraka went first, slowly: \"Otieno is left-handed... so he needs the left side, and my books were pushing into his writing space.\" Otieno blinked. \"And Baraka carries books for two subjects because he shares with his brother... so he needs more space, not less.\" The silence after that was different.",
+        "The solution took two minutes: swap sides so Otieno's left hand had room, and one shared shelf for the extra books. The chalk line faded within a week. The friendship — oddly — came out stronger than before the war."
+      ],
+      discussion: "What made the conflict grow? What changed when each boy had to explain the other's side?",
+      whatWouldYouDo: {
+        q: "You are stuck in a conflict where both sides feel right. What would you do?",
+        options: [
+          "Keep arguing until the other person gives up",
+          "Try to state the other person's view fairly, then look for a win-win",
+          "Get your friends to back you up",
+          "Stay silent and stay angry"
+        ]
+      },
+      lesson: "Most conflicts shrink the moment each side truly understands the other. Attack the problem, not the person."
     },
-    lesson: "Courage is not the absence of fear — it is singing anyway. Small brave steps build unshakeable confidence."
-  },
-  {
-    id: "baraka-two-jobs",
-    title: "Baraka's Two Jobs",
-    emoji: "🏠",
-    theme: "Family responsibilities",
-    text: [
-      "Since his mother started working night shifts at the hospital, Baraka, 14, had what he called 'two jobs': student by day, and the one who cooked supper and watched his two younger sisters by evening.",
-      "He never complained. But slowly, his homework started arriving late. He dozed in afternoon classes. His teacher wrote 'lazy' on his report — a word that stung, because whatever Baraka was, he was not lazy.",
-      "One day his class teacher, Mrs. Odhiambo, kept him back. 'Talk to me,' she said simply. And for the first time, Baraka explained his evenings: cooking, homework help for his sisters, waiting for his mother to return safe.",
-      "Mrs. Odhiambo listened without interrupting. Then she said: 'Thank you for telling me. Caring for family is honourable — and you shouldn't have to fail school to do it.'",
-      "Together they made a plan: Baraka would do homework during lunch break in the library. Mrs. Odhiambo spoke with his mother, and a neighbour agreed to help with the girls two evenings a week. Small changes — but they gave Baraka breathing room.",
-      "His grades climbed back slowly. And Mrs. Odhiambo quietly crossed out one word in her records and replaced it: not 'lazy' — 'responsible'."
-    ],
-    discussion: "Many students carry responsibilities at home that school never sees. How can schools, friends, and teachers support them?",
-    whatWouldYouDo: {
-      q: "If home responsibilities were affecting your schoolwork, what would you do?",
-      options: ["Say nothing and struggle alone", "Explain the situation to a trusted teacher", "Drop out to focus on home", "Make a plan that balances both, with help"]
+    {
+      id: "the-new-crew",
+      pillar: "protect-future",
+      title: "The New Crew",
+      emoji: "🛡️",
+      theme: "Peer pressure and healthy choices",
+      text: [
+        "When Dan moved to the estate, the first boys to welcome him were older, loud, and generous. They called themselves a crew. For a lonely newcomer, it felt like belonging.",
+        "The first weeks were football and jokes. Then one evening, behind the kiosk, a bottle went around. Then something to sniff. \"Family shares everything,\" said the leader, holding it out. \"Don't be a child.\"",
+        "Dan's heart pounded. He wanted these friends. But he also remembered his cousin Musa — how the same words had started Musa's story, and how that story had ended: dropped out, sick, stealing from his own mother, fighting his way back one hard day at a time.",
+        "\"No thanks,\" Dan said, standing up. \"I'm good.\" They laughed at him. Someone called him a baby. Walking home alone that night, he felt like he'd lost everything all over again.",
+        "He hadn't. The school football team needed a defender; the coach needed commitment. Within a month Dan had a new crew — one that ran drills instead of risks. Years later he would tell his little brother: \"Real friends never charge an entrance fee to your future.\""
+      ],
+      discussion: "Why was the crew's offer so hard to refuse? What protected Dan in that moment?",
+      whatWouldYouDo: {
+        q: "A group you want to join pressures you to try drugs. What would you do?",
+        options: [
+          "Try it once so they accept you",
+          "Say no firmly and find belonging somewhere healthier",
+          "Pretend to try it",
+          "Keep quiet and hope they forget about you"
+        ]
+      },
+      lesson: "Belonging that costs your health and future is too expensive. Real friends respect your NO."
+    }
+  ],
+
+  /* ==================================================================== */
+  sw: [
+    {
+      id: "quiet-champion",
+      pillar: "know-myself",
+      title: "Bingwa wa Kimya",
+      emoji: "🌟",
+      theme: "Kugundua uwezo uliojificha",
+      text: [
+        "Wanja alikuwa na uhakika hana kipaji. Hakuwa mkimbiaji mwepesi zaidi, mwimbaji bora, wala wa kwanza darasani. Siku ya tuzo aliwapigia makofi wengine wote na kujihisi haonekani.",
+        "Alasiri moja, mwalimu wake alimwomba asaidie kupanga mdahalo wa darasa. Wanja aliandika orodha ya wazungumzaji, akawatuliza wenye woga, na kwa upole akawakumbusha wenye sauti kubwa kuwaacha wengine wamalize. Mdahalo ulienda kikamilifu.",
+        "Baadaye, mwalimu alisema jambo ambalo Wanja hakulisahau kamwe: \"Umeona ulichofanya sasa hivi? Nusu ya uongozi ni kuwasaidia wengine kung'aa. Hicho ni kipaji.\"",
+        "Wanja alianza kukiona kila mahali. Marafiki walimjia na matatizo yao kwa sababu alisikiliza bila kuhukumu. Kazi za vikundi zilienda vizuri zaidi alipokuwa ndani ya kikundi. Hakuwa haonekani — alikuwa gundi inayounganisha.",
+        "Siku ya tuzo iliyofuata, Wanja bado hakushinda kombe. Lakini klabu ya midahalo ilipotangazwa kuwa bora zaidi kaunti nzima, kila mtu aligeuka na kupiga makofi — kwa ajili yake."
+      ],
+      discussion: "Kwa nini Wanja aliamini hana kipaji? Nini hatimaye kilimsaidia kuona uwezo wake?",
+      whatWouldYouDo: {
+        q: "Kama ungehisi huna kipaji maalum, ungefanya nini?",
+        options: [
+          "Kuamua vipaji ni vya watu wengine tu",
+          "Kuwauliza watu wanaonijua vizuri wanaona nini ndani yangu",
+          "Kuiga kipaji kinachopendwa zaidi",
+          "Kutambua watu hunishukuru kwa nini na kukijenga"
+        ]
+      },
+      lesson: "Uwezo unaweza kuwa wa kimya. Mambo ambayo watu hukushukuru kwayo ni dalili za vipaji ambavyo huenda huvioni mwenyewe."
     },
-    lesson: "Helping your family is something to be proud of. But you deserve support too — speaking up lets people help you carry the load."
-  },
-  {
-    id: "chesangs-choice",
-    title: "Chesang's Choice",
-    emoji: "⚖️",
-    theme: "Making a difficult choice",
-    text: [
-      "Chesang found the envelope near the school gate: thick, unmarked, and full of money — more than her mother made in a month.",
-      "Her mind raced. School fees were overdue. Her shoes had holes. Nobody had seen her pick it up. 'Finders keepers,' whispered one voice inside her. 'It could be someone's school fees. Their medicine money,' whispered another.",
-      "She stood there so long a teacher noticed her. In that moment, Chesang had to choose who she was.",
-      "'Madam,' she heard herself say, 'I found this by the gate.' The teacher's eyes widened at the amount. They took it to the office together.",
-      "The next day, the story spread: the money belonged to the school cook, who had withdrawn her daughter's college fees that morning and lost the envelope on her way in. When she came to thank Chesang, she was crying: 'You saved my daughter's future.'",
-      "Chesang walked home with holes in her shoes and something enormous in her chest. Her mother, hearing the story, held her face in both hands: 'We are poor in money,' she said, 'but look how rich you are.'"
-    ],
-    discussion: "What makes a choice 'difficult'? Is the right choice always the easy one? What would most people do — honestly?",
-    whatWouldYouDo: {
-      q: "You find money that nobody saw you pick up. What do you do?",
-      options: ["Keep it — finders keepers", "Hand it to a trusted authority", "Keep half, hand in half", "Ask friends what to do first"]
+    {
+      id: "two-friends-one-rumour",
+      pillar: "belong",
+      title: "Marafiki Wawili, Uvumi Mmoja",
+      emoji: "👭",
+      theme: "Mawasiliano na urafiki",
+      text: [
+        "Wambui na Njoki walikuwa marafiki wa karibu tangu darasa la nne. Walishirikiana chakula cha mchana, siri, na ndoto za kufungua duka la mikate pamoja siku moja.",
+        "Kisha, Jumatatu moja, kila kitu kilibadilika. Mtu alimwambia Njoki kwamba Wambui alimwita 'mwenye majivuno' mgongoni mwake. Njoki aliumia sana hata akaacha kuongea na Wambui kabisa.",
+        "Kwa wiki nzima, walipishana kwa ukimya. Wambui hakujua hata alichokifanya. Marafiki zao wengine walianza kuchagua pande, na darasa likahisi limegawanyika.",
+        "Hatimaye, Wambui aliandika barua ndogo: 'Sijui kilichotokea, lakini namkumbuka rafiki yangu. Tunaweza kuongea wakati wa mapumziko?' Chini ya mwembe, Njoki alieleza alichokisikia. Wambui alishtuka: 'Sikusema hivyo kamwe. Nani alikwambia?'",
+        "Walifuatilia uvumi na kugundua ulipotoshwa ulivyopita kutoka mtu hadi mtu — kama simu iliyoharibika. Maneno ya awali hayakuwa hata kuhusu Njoki. Marafiki hao wawili waliweka ahadi: 'Tukisikia jambo lolote kuhusu mwenzetu, tunakuja kuuliza moja kwa moja — kabla ya kuamini.'"
+      ],
+      discussion: "Kwa nini uvumi hukua na kubadilika unavyoenea? Unaweza kuleta madhara gani kwa mahusiano?",
+      whatWouldYouDo: {
+        q: "Ukisikia uvumi kwamba rafiki yako alisema jambo baya kukuhusu, ungefanya nini kwanza?",
+        options: [
+          "Kuacha kuongea naye mara moja",
+          "Kumuuliza moja kwa moja, kwa utulivu",
+          "Kueneza uvumi wa kulipiza",
+          "Kuwaomba wengine wachague upande wako"
+        ]
+      },
+      lesson: "Hakiki ukweli na mtu mwenyewe moja kwa moja kabla ya kuamini uvumi. Mazungumzo ya dakika tano ya uaminifu yanaweza kuokoa urafiki."
     },
-    lesson: "Difficult choices reveal — and build — who you are. Integrity means doing right even when nobody is watching."
-  },
-  {
-    id: "the-note",
-    title: "The Note",
-    emoji: "✉️",
-    theme: "Asking for help",
-    text: [
-      "Something was wrong at Sudi's home. He didn't have words for it — only a knot in his stomach that grew tighter every day. An older relative who visited often had started saying and doing things that made Sudi deeply uncomfortable, then warning him: 'This is our secret.'",
-      "At school, Sudi grew quiet. His friends noticed he'd stopped joking. His marks slipped. But every time he imagined telling someone, his throat closed. What if no one believed him? What if it caused trouble for the family?",
-      "During an I Matter session on safe and unsafe secrets, the facilitator said something that stuck: 'A secret that makes you feel scared or sick inside is a secret that must be told. And if speaking is too hard — write it.'",
-      "That night, Sudi tore a page from his exercise book. His hands shook, but he wrote what was happening in three sentences. The next day, he waited until the other students left, and placed the folded note on his teacher's desk.",
-      "His teacher read it, looked up, and said quietly: 'Thank you for trusting me. You did exactly the right thing. This is not your fault, and I am going to help you.' And she did — calmly, seriously, involving the right people who protect children.",
-      "Months later, Sudi told the facilitator: 'That page from my exercise book was the heaviest and lightest thing I ever carried.'"
-    ],
-    discussion: "Why do unsafe secrets stay hidden? What did the teacher do well? Who are the people in your school who protect children?",
-    whatWouldYouDo: {
-      q: "If something felt very wrong but speaking about it felt impossible, what could you do?",
-      options: ["Keep the secret to protect everyone", "Write a note to a trusted adult", "Tell a trusted adult directly", "Keep telling adults until someone acts"]
+    {
+      id: "tomorrow-juma",
+      pillar: "take-action",
+      title: "Juma wa 'Kesho'",
+      emoji: "🎯",
+      theme: "Malengo na uchelewaji",
+      text: [
+        "Kila mtu alimwita Juma wa 'Kesho'. Kazi ya nyumbani? Kesho. Marudio? Kesho. Kutengeneza pancha ya baiskeli yake? Hakika kesho.",
+        "Juma alikuwa na ndoto kubwa — alitaka kuwa mhandisi. Lakini ndoto, alikuwa anagundua, hazijijengi zenyewe. Mitihani ya mwisho wa muhula ilikuwa wiki nne mbele, na rundo la kazi ambazo hajazipitia lilikua refu kila siku, hadi kuliangalia tu kulimchosha.",
+        "Bibi yake alimtazama jioni moja akikodolea vitabu vyake bila matumaini. \"Juma,\" alisema, \"tembo huliwaje?\" Alicheka. \"Kidogo kidogo, Bibi.\" Bibi akatikisa kichwa kuelekea vitabu. \"Basi anza kidogo.\"",
+        "Usiku huo Juma alipanga mpango. Si mpango wa kishujaa — mdogo tu. Mada moja kila jioni, simu ndani ya droo jikoni, somo gumu zaidi kwanza. Jioni nyingine aliweza dakika ishirini tu. Lakini dakika ishirini, kila siku, wiki nne mfululizo, ni mlima wa dakika.",
+        "Matokeo yalipokuja, Juma hakufaulu tu — alipanda juu kuliko wakati wowote. Juu ya meza yake kulibandikwa ujumbe mpya kwa mwandiko wake mwenyewe: 'Kesho ndiko ndoto huenda kulala. Anza leo.'"
+      ],
+      discussion: "Nini kilimfanya Juma aendelee kuahirisha mambo? Nini hasa kilibadilika — ndoto yake, au mazoea yake?",
+      whatWouldYouDo: {
+        q: "Una kazi kubwa sana na wiki nne. Ungefanya nini?",
+        options: [
+          "Kusubiri hadi upate motisha",
+          "Kuigawa katika hatua ndogo za kila siku na kuanza leo",
+          "Kupanga kuifanya yote wiki ya mwisho",
+          "Kuamua lengo lilikuwa kubwa mno hata hivyo"
+        ]
+      },
+      lesson: "Malengo makubwa hufikiwa kwa hatua ndogo za kudumu. Kuanza — hata kidogo — ni bora kuliko kusubiri wakati mkamilifu."
     },
-    lesson: "Unsafe secrets must always be told — and there is more than one way to tell. A note, a message, a drawing: what matters is reaching a trusted adult. It is never your fault."
-  },
-  {
-    id: "second-race",
-    title: "The Second Race",
-    emoji: "🏃🏾‍♀️",
-    theme: "Dealing with failure",
-    text: [
-      "Naliaka trained for months for the regional 400 metres. She woke before sunrise, ran the dusty road behind her home, and dreamed of the finish line.",
-      "On race day, she false-started. Disqualified. Just like that — months of sunrise runs erased by one second of nerves. She walked off the track with her face burning, avoiding everyone's eyes.",
-      "For a week, she refused to touch her running shoes. 'I embarrassed the whole school,' she told her grandfather, who had once been a runner himself.",
-      "He nodded slowly. 'You know what the crowd forgets by next season?' he asked. 'Your false start. You know what your legs never forget? Every single morning you trained.' He paused. 'Failure is an event, Naliaka. It is not a person. You failed. You are not a failure. Those are different things.'",
-      "She turned his words over for days. Then one morning, her alarm rang before sunrise — and she got up.",
-      "The next season, Naliaka stood at the same starting line, heart hammering. She waited an extra heartbeat after the gun — then flew. Second place. But when she crossed the line, she wasn't thinking about the medal. She was thinking: 'I came back. That's the victory.'"
-    ],
-    discussion: "What is the difference between 'I failed' and 'I am a failure'? Why do some people give up after failing while others return?",
-    whatWouldYouDo: {
-      q: "After failing publicly at something you trained hard for, what would you do?",
-      options: ["Quit — it clearly isn't for you", "Take time to feel the disappointment, then return", "Blame the judges or bad luck", "Learn what went wrong and adjust your training"]
+    {
+      id: "the-ride-home",
+      pillar: "choose-wisely",
+      title: "Safari ya Kurudi Nyumbani",
+      emoji: "🧭",
+      theme: "Maamuzi chini ya shinikizo",
+      text: [
+        "Sherehe ilikuwa bora zaidi ambayo Sifa amewahi kuhudhuria mwaka huo — muziki, dansi, nusu ya darasa lake wapo. Alikuwa na ruhusa ya kukaa hadi saa tatu, na binamu yake Mark alikuwa ameahidi kumrudisha nyumbani.",
+        "Saa mbili na nusu alimkuta Mark langoni, akicheka kwa sauti, chupa mkononi. Haikuwa yake ya kwanza. \"Tutaondoka hivi karibuni,\" alitabasamu, akitikisa funguo za gari. \"Tulia, mimi huendesha vizuri zaidi baada ya chupa chache!\"",
+        "Sifa alihisi mvuto wa chaguo rahisi. Kila mtu alikuwa anaingia kwenye gari. Kukataa kungeonekana kitoto. Na angerudije nyumbani vinginevyo?",
+        "Kisha alikumbuka maneno ya mama yake — kamwe, kamwe usipande gari la dereva aliyekunywa — na akapiga hesabu kichwani: dakika chache za aibu, dhidi ya kila kitu angeweza kupoteza. Alirudi nyuma. \"Nitatafuta njia nyingine.\"",
+        "Alimpigia jirani yake, Mama Achieng, aliyekuwa anamchukua binti yake mwenyewe. Ndani ya gari, hakuna aliyemcheka. Asubuhi iliyofuata alisikia Mark aligonga matatu kwenye makutano. Wote walikuwa salama — lakini hakuna aliyekuwa akiita tena chaguo lake kitoto."
+      ],
+      discussion: "Nini kilifanya uamuzi huu kuwa mgumu kwa Sifa? Nini kilimsaidia kuchagua vizuri chini ya shinikizo?",
+      whatWouldYouDo: {
+        q: "Dereva wako wa kurudi nyumbani amekunywa pombe. Ungefanya nini?",
+        options: [
+          "Kuingia — labda ni sawa tu",
+          "Kutafuta njia nyingine salama ya kurudi, hata kama ni aibu",
+          "Kumwomba dereva aendeshe polepole",
+          "Kusubiri na kutumaini mtu mwingine ataamua kwa niaba yako"
+        ]
+      },
+      lesson: "Maamuzi mazuri hupima madhara, si starehe tu. Dakika ya aibu ni bei ndogo kwa usalama wako."
     },
-    lesson: "Failure is an event, not an identity. The comeback is always a bigger story than the fall."
-  },
-  {
-    id: "engineer-of-soko",
-    title: "The Engineer of Soko Road",
-    emoji: "💡",
-    theme: "Following a dream",
-    text: [
-      "Everyone on Soko Road knew Mueni as 'the girl who fixes things'. Broken radios, jammed padlocks, wobbly stools — she repaired them all with a screwdriver she'd traded for two mangoes.",
-      "When she told her career dream to the class — 'I want to be an electrical engineer' — a few students snickered. Girls from her area became shopkeepers or tailors, they said. Engineering was for city people with money.",
-      "Her teacher, however, didn't laugh. 'Do you know what engineers do all day, Mueni?' she asked. 'They solve problems with their hands and minds. You've been doing that since you were seven.'",
-      "The road was not straight. Maths got harder; she failed one term badly and cried behind the classroom. Her family sometimes needed her at the stall when she wanted to study. But she kept a picture in her exercise book: an electricity pylon, drawn in blue pen, with her name printed underneath like a signature on the future.",
-      "She joined the science club. She asked a technician at the electricity company so many questions during a school trip that he gave her his old textbook. She fixed neighbours' appliances for small coins and saved them in a tin marked 'FUTURE'.",
-      "Years later — after retakes, scholarships, setbacks, and sunrise study sessions — a woman in a hard hat and reflective vest walked down Soko Road, checking the new transformer installation. The children ran behind her, shouting her name. Mueni had come home — as the engineer of Soko Road."
-    ],
-    discussion: "What obstacles stood between Mueni and her dream? Which mattered more: her talent, or what she did with it?",
-    whatWouldYouDo: {
-      q: "People laugh at your dream because of where you come from. What do you do?",
-      options: ["Choose a 'more realistic' dream to avoid mockery", "Keep the dream and build it step by step", "Find people who believe in you and learn from them", "Prove them wrong with quiet, steady work"]
+    {
+      id: "the-desk-war",
+      pillar: "build-bridges",
+      title: "Vita vya Deski",
+      emoji: "🤝",
+      theme: "Utatuzi wa migogoro",
+      text: [
+        "Ilianza na mstari wa chaki uliochorwa katikati ya deski la kushirikiana. \"Vitabu vyako vinaendelea kuvamia upande wangu,\" alisema Baraka. \"Kiwiko chako kinaishi upande wangu,\" alijibu Otieno. Kufikia Ijumaa hawakuwa wanaongea — walikuwa wanasukumana tu.",
+        "Darasa lilianza kuchagua pande. Timu ya Baraka. Timu ya Otieno. Visasi vya zamani visivyohusiana vikaburutwa ndani. Hakuna aliyekumbuka hata deski tena.",
+        "Mwalimu wao hakuwaadhibu. Badala yake aliwakalisha chini na kanuni moja: kila mvulana lazima aeleze tatizo kama MWENZAKE anavyoliona, na hawezi kuongea hadi amefanya hivyo kwa haki.",
+        "Baraka alianza, polepole: \"Otieno anaandika kwa mkono wa kushoto... kwa hiyo anahitaji upande wa kushoto, na vitabu vyangu vilikuwa vinaingia kwenye nafasi yake ya kuandika.\" Otieno alipepesa macho. \"Na Baraka hubeba vitabu vya masomo mawili kwa sababu anashirikiana na kaka yake... kwa hiyo anahitaji nafasi zaidi, si pungufu.\" Ukimya uliofuata ulikuwa tofauti.",
+        "Suluhisho lilichukua dakika mbili: kubadilishana pande ili mkono wa kushoto wa Otieno upate nafasi, na rafu moja ya kushirikiana kwa vitabu vya ziada. Mstari wa chaki ulififia ndani ya wiki. Urafiki — kwa ajabu — ulitoka imara zaidi kuliko kabla ya vita."
+      ],
+      discussion: "Nini kilifanya mgogoro ukue? Nini kilibadilika kila mvulana alipolazimika kueleza upande wa mwenzake?",
+      whatWouldYouDo: {
+        q: "Umekwama kwenye mgogoro ambapo pande zote zinahisi ziko sahihi. Ungefanya nini?",
+        options: [
+          "Kuendelea kubishana hadi mwingine akate tamaa",
+          "Kujaribu kueleza mtazamo wa mwingine kwa haki, kisha kutafuta ushindi kwa wote",
+          "Kuwaita marafiki zangu waniunge mkono",
+          "Kunyamaza na kubaki na hasira"
+        ]
+      },
+      lesson: "Migogoro mingi hupungua pale kila upande unapoelewa mwingine kweli. Shambulia tatizo, si mtu."
     },
-    lesson: "Where you start does not decide where you finish. A dream plus daily steps plus stubbornness is stronger than other people's doubts."
-  }
-];
+    {
+      id: "the-new-crew",
+      pillar: "protect-future",
+      title: "Kundi Jipya",
+      emoji: "🛡️",
+      theme: "Shinikizo la marafiki na maamuzi yenye afya",
+      text: [
+        "Dan alipohamia mtaani, wavulana wa kwanza kumkaribisha walikuwa wakubwa, wenye kelele, na wakarimu. Walijiita 'crew'. Kwa mgeni mpweke, ilihisi kama kupata mahali pa kuwa.",
+        "Wiki za kwanza zilikuwa mpira na vichekesho. Kisha jioni moja, nyuma ya kiosk, chupa ilizunguka. Kisha kitu cha kunusa. \"Familia hushirikiana kila kitu,\" alisema kiongozi, akikinyoosha. \"Usiwe mtoto.\"",
+        "Moyo wa Dan ulienda mbio. Alitaka marafiki hawa. Lakini pia alimkumbuka binamu yake Musa — jinsi maneno yale yale yalivyoanza hadithi ya Musa, na jinsi hadithi hiyo ilivyoishia: kuacha shule, kuugua, kuiba kwa mama yake mwenyewe, akipigana kurudi siku ngumu moja baada ya nyingine.",
+        "\"Hapana asante,\" Dan alisema, akisimama. \"Niko sawa.\" Walimcheka. Mmoja alimwita mtoto mchanga. Akitembea nyumbani peke yake usiku ule, alihisi kama amepoteza kila kitu tena.",
+        "Hakuwa amepoteza. Timu ya mpira ya shule ilihitaji beki; kocha alihitaji kujituma. Ndani ya mwezi mmoja Dan alikuwa na kundi jipya — linalofanya mazoezi badala ya hatari. Miaka baadaye angemwambia mdogo wake: \"Marafiki wa kweli kamwe hawatozi kiingilio cha maisha yako ya baadaye.\""
+      ],
+      discussion: "Kwa nini ofa ya kundi ilikuwa ngumu kukataa? Nini kilimlinda Dan wakati ule?",
+      whatWouldYouDo: {
+        q: "Kundi unalotaka kujiunga nalo linakushinikiza kujaribu dawa za kulevya. Ungefanya nini?",
+        options: [
+          "Kujaribu mara moja ili wanikubali",
+          "Kusema hapana kwa msisitizo na kutafuta mahali pa kuwa penye afya zaidi",
+          "Kujifanya najaribu",
+          "Kunyamaza na kutumaini watanisahau"
+        ]
+      },
+      lesson: "Mahali pa kuwa panapogharimu afya yako na kesho yako ni ghali mno. Marafiki wa kweli huheshimu HAPANA yako."
+    }
+  ]
+};

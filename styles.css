@@ -196,24 +196,6 @@ button { font-family: inherit; }
 }
 .icon-btn:active { transform: scale(.94); }
 
-.offline-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--yellow-light);
-  color: #7a5b00;
-  font-size: .78rem;
-  font-weight: 700;
-  padding: 6px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-.offline-dot {
-  width: 8px; height: 8px;
-  background: var(--orange);
-  border-radius: 50%;
-}
-
 /* ---------- Main layout ---------- */
 .app-main {
   max-width: 900px;
@@ -321,6 +303,15 @@ button { font-family: inherit; }
 }
 @media (min-width: 640px) { .grid-2 { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 860px) { .grid-2 { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) { .pillar-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 860px) { .pillar-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Card lists that become two balanced columns on wide screens */
+.card-grid { display: grid; grid-template-columns: 1fr; gap: 0 16px; }
+@media (min-width: 720px) {
+  .card-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .card-grid > .card { height: calc(100% - 16px); }
+}
 
 .tile {
   border: none;
@@ -435,8 +426,58 @@ button { font-family: inherit; }
   border-radius: 50%;
 }
 .hero h1 { color: #fff; font-size: 1.8rem; margin-bottom: .3em; }
-.hero p { margin: 0; font-size: 1.05rem; opacity: .95; max-width: 40ch; }
+.hero p { margin: 0; font-size: 1.05rem; opacity: .95; max-width: 46ch; }
+.hero .hero-sub { margin-top: 10px; font-size: .88rem; opacity: .85; }
 html[data-contrast="high"] .hero { background: #00404b; }
+
+/* Motto / outcome callout */
+.motto-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--teal-light);
+  border-left: 5px solid var(--teal);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 0 0 16px;
+}
+.motto-card p { margin: 0; font-family: var(--font-display); font-weight: 700; color: var(--teal-dark); }
+.motto-card span { font-size: 1.3rem; line-height: 1.2; }
+.motto-card.small p { font-size: .95rem; }
+
+/* Pillar cards (framework page) */
+.pillar-card { border-left: 6px solid rgba(0,0,0,.08); }
+.pillar-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.pillar-head h3 { margin: 0; flex: 1 1 120px; }
+.pillar-num {
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .9rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.pillar-emoji { font-size: 1.5rem; line-height: 1; }
+.pillar-outcome { font-family: var(--font-display); font-weight: 700; color: var(--teal-dark); }
+
+/* Session plan pillar tag */
+.sp-pillar-tag {
+  margin: 0 0 2px;
+  font-size: .74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+}
+.sp-hero-outcome { margin: 10px 0 0; font-weight: 700; }
+
+/* Contact cards (Help) */
+.contact-line { margin: 0 0 4px; font-weight: 700; overflow-wrap: anywhere; }
+.contact-line a { text-decoration: none; }
+.contact-line a:hover, .contact-line a:focus { text-decoration: underline; }
 
 .encourage-card {
   background: var(--yellow-light);
@@ -451,63 +492,11 @@ html[data-contrast="high"] .hero { background: #00404b; }
 .encourage-card .enc-emoji { font-size: 1.6rem; }
 .encourage-card p { margin: 0; font-weight: 700; }
 
-/* Mood */
-.mood-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-.mood-btn {
-  border: none;
-  background: var(--surface-2);
-  border-radius: var(--radius-sm);
-  padding: 12px 4px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  min-height: 76px;
-  font-size: .75rem;
-  font-weight: 700;
-  color: var(--ink);
-  transition: transform .15s ease, background .15s ease;
-}
-.mood-btn:active { transform: scale(.92); }
-.mood-btn .mood-emoji { font-size: 1.7rem; line-height: 1; }
-.mood-btn.selected { background: var(--teal-light); outline: 3px solid var(--teal); }
-
-.mood-response {
-  margin-top: 14px;
-  background: var(--teal-light);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  animation: viewIn .3s ease both;
-}
-.mood-response p { margin: 0 0 8px; }
 .affirmation {
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--teal-dark);
 }
-
-/* Breathing exercise */
-.breathe-wrap { text-align: center; padding: 20px 0 8px; }
-.breathe-circle {
-  width: 120px; height: 120px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  background: var(--teal-light);
-  border: 4px solid var(--teal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: var(--teal-dark);
-  transition: transform 3.5s ease-in-out;
-}
-.breathe-circle.grow { transform: scale(1.45); }
-.breathe-circle.shrink { transform: scale(1); }
 
 /* Progress bar */
 .progress-track {
@@ -602,100 +591,6 @@ html[data-contrast="high"] .hero { background: #00404b; }
 }
 .quiz-feedback.good { background: var(--green-light); color: #1d5c3c; }
 .quiz-feedback.oops { background: var(--yellow-light); color: #7a5b00; }
-
-/* ---------- Games ---------- */
-.game-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-.game-header .game-emoji { font-size: 2.4rem; }
-.score-pill {
-  display: inline-block;
-  background: var(--purple-light);
-  color: var(--purple);
-  font-weight: 800;
-  border-radius: 999px;
-  padding: 4px 14px;
-  font-size: .85rem;
-}
-.game-progress { font-size: .8rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 8px; }
-
-/* Memory game */
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-@media (min-width: 560px) { .memory-grid { grid-template-columns: repeat(4, 1fr); } }
-.memory-card {
-  aspect-ratio: 3 / 3.4;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: var(--teal);
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: .78rem;
-  cursor: pointer;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: transform .25s ease, background .25s ease;
-  line-height: 1.25;
-}
-.memory-card.flipped { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
-.memory-card.matched { background: var(--green-light); color: #1d5c3c; cursor: default; }
-.memory-card:not(.flipped):not(.matched)::after { content: "❔"; font-size: 1.5rem; }
-.memory-card:not(.flipped):not(.matched) span { display: none; }
-
-/* Order game */
-.order-pool, .order-chosen { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-.order-step {
-  border: 2px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  min-height: var(--touch);
-}
-.order-step.chosen { border-color: var(--teal); background: var(--teal-light); }
-.order-step .order-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px; height: 26px;
-  background: var(--teal);
-  color: #fff;
-  border-radius: 50%;
-  font-weight: 800;
-  font-size: .8rem;
-  margin-right: 10px;
-  flex-shrink: 0;
-}
-
-/* Select game (strength finder) */
-.select-item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: 2px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  padding: 13px 16px;
-  margin-bottom: 10px;
-  font: inherit;
-  cursor: pointer;
-  min-height: var(--touch);
-}
-.select-item.selected { border-color: var(--green); background: var(--green-light); }
-
-/* Sort game */
-.sort-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.sort-buttons .btn { flex: 1; min-width: 100px; }
-
-/* Stars */
-.stars { font-size: 1.8rem; letter-spacing: 4px; }
 
 /* ---------- Badges ---------- */
 .badge-grid {
@@ -883,13 +778,6 @@ html[data-contrast="high"] .hero { background: #00404b; }
 }
 .toast .btn { min-height: 36px; padding: 4px 14px; font-size: .82rem; }
 
-/* ---------- Projector mode ---------- */
-html[data-projector="on"] .app-main { max-width: 1200px; font-size: 1.5rem; }
-html[data-projector="on"] h1 { font-size: 2.6rem; }
-html[data-projector="on"] h2 { font-size: 2rem; }
-html[data-projector="on"] .bottom-nav,
-html[data-projector="on"] .app-footer { display: none; }
-
 /* ---------- Story ---------- */
 .story-para { margin-bottom: 1em; }
 .story-illustration {
@@ -1029,3 +917,47 @@ html[data-projector="on"] .app-footer { display: none; }
 @media (min-width: 900px) {
   .bottom-nav { max-width: 720px; margin: 0 auto; border-radius: 20px 20px 0 0; left: 50%; transform: translateX(-50%); }
 }
+
+/* ---------- Responsive refinements (mobile / tablet / desktop) ---------- */
+
+/* Small phones: keep everything inside the viewport, comfortable taps */
+@media (max-width: 360px) {
+  .app-main { padding-left: 12px; padding-right: 12px; }
+  h1 { font-size: 1.45rem; }
+  .hero h1 { font-size: 1.5rem; }
+  .card-emoji { width: 48px; height: 48px; flex-basis: 48px; font-size: 1.6rem; }
+  .nav-item { font-size: .62rem; }
+  .tile { min-height: 100px; }
+}
+
+/* Tablets / iPad: two-up hero + roomier reading measure */
+@media (min-width: 640px) {
+  .hero { padding: 32px 28px; }
+  .hero h1 { font-size: 2.1rem; }
+  .sp-hero h1 { font-size: 1.85rem; }
+}
+
+/* Large tablets landscape & up: cap line length for readability */
+@media (min-width: 1024px) {
+  .app-main, .header-inner { max-width: 960px; }
+  .sp-section .sp-p,
+  .card > p,
+  .page-intro { max-width: 72ch; }
+}
+
+/* Desktop / Mac: hover affordances already gated behind (hover:hover) */
+@media (hover: hover) and (min-width: 900px) {
+  .nav-item:hover { color: var(--teal-dark); background: var(--surface-2); }
+  .chip:hover { filter: brightness(.97); }
+}
+
+/* Landscape phones: shrink the sticky chrome so content fits */
+@media (max-height: 480px) and (orientation: landscape) {
+  :root { --header-height: 52px; --nav-height: 56px; }
+  .hero { padding: 18px 20px; }
+}
+
+/* Never allow a stray element to force sideways scrolling */
+.app-main, .card, .sp-section, .hero, .modal { max-width: 100%; }
+table { max-width: 100%; }
+pre, code { overflow-x: auto; max-width: 100%; }

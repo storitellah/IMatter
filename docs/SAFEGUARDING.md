@@ -23,18 +23,18 @@ the adults who deploy it.
 
 ## Responsibilities before rollout (project staff)
 
-1. **Verify support contacts.** `data/config.js` ships with PLACEHOLDER
-   entries for the child protection helpline, emergency number, school
-   support, and program office. Replace them with verified, current
-   numbers before any child uses the app. **Do not publish unverified
+1. **Verify support contacts.** `data/config.js` ships with the National
+   Child Helpline (116), national emergency numbers (999/112/911), a school
+   support prompt, and the programme office. Confirm these are current for
+   your school and area before any child uses the app. **Do not publish unverified
    emergency numbers.**
 2. **Brief facilitators.** Sessions on feelings, secrets, and safety can
    surface disclosures of abuse or harm. Every facilitator must know the
    school's and organization's child protection reporting procedure before
    running sessions.
 3. **Respect digital privacy.** Adults must never require a child to show
-   their My Space or journal. Facilitator totals are
-   anonymous by design — keep it that way.
+   their My Space or journal. Progress counts stay on the child's own device
+   and are anonymous by design — keep it that way.
 4. **Shared devices.** Teach students to use *Delete all my data* after
    using borrowed devices.
 
