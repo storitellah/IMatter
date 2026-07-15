@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'org.imaginetomorrow.imatter'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "org.imaginetomorrow.imatter"
+        minSdk 24            // Android 7.0+ (covers ~99% of devices)
+        targetSdk 34
+        versionCode 40200    // bump on each release (e.g. 4.2.0 -> 40200)
+        versionName "4.2.0"
+    }
+
+    buildTypes {
+        // The debug build is signed with the standard Android debug key, so
+        // the resulting APK installs on any device (enable "install unknown
+        // apps") and is fine for sharing internally with teams.
+        debug {
+            applicationIdSuffix ""
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// No dependencies: the app is a single WebView that loads the bundled web
+// assets from assets/www/ — it needs no libraries and no internet.
+dependencies { }

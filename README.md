@@ -95,6 +95,10 @@ There is an **Install app** option in **Settings** (the ⚙️ button in the hea
 
 The app only needs an internet connection the first time it is installed or opened. After that, everything works fully offline.
 
+### Shareable Android app (.apk)
+
+There is also a native **Android app** you can download as a single `.apk` and share with your team — it **bundles the whole app inside it, so it needs no internet at all, ever**. GitHub Actions builds it for you (no Android Studio needed): Actions → **Build Android APK** → download the artifact, or push a `v*` tag to attach it to a GitHub Release. Full guide: [`docs/ANDROID-APK.md`](docs/ANDROID-APK.md).
+
 ## Editing content and branding
 
 All content lives in plain, commented files under `data/` — each holds an English (`en`) and Kiswahili (`sw`) tree with matching structure. No CMS and no code changes required. See [`docs/CONTENT-EDITING.md`](docs/CONTENT-EDITING.md).
