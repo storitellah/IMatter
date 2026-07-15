@@ -6,7 +6,7 @@
    devices download the new files. Users will see an update notification.
    ========================================================================== */
 
-var CACHE_VERSION = "i-matter-v5";
+var CACHE_VERSION = "i-matter-v6";
 
 var PRECACHE_URLS = [
   "./",

@@ -21,7 +21,7 @@ window.IM_CONFIG = {
     en: "A Positive Youth Development Framework — helping adolescents recognize their worth and build an inner compass to navigate life with confidence.",
     sw: "Mfumo wa Makuzi Chanya ya Vijana — unaowasaidia vijana kutambua thamani yao na kujenga dira ya ndani ya kuongoza maisha kwa kujiamini."
   },
-  version: "4.0.0",
+  version: "4.1.0",
 
   /* ---- The heart of the program ---- */
   motto: {

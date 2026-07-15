@@ -3,6 +3,19 @@
 All notable changes to the I Matter app are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [4.1.0] — 2026-07-15
+
+### Added
+- A persistent **Install app** option in Settings (⚙️), always reachable from
+  the header on every screen. Where the browser supports it (Chrome, Edge,
+  Android) it triggers the native install prompt; on iOS/iPad Safari and other
+  browsers that never fire an install prompt it shows clear "Add to Home
+  Screen" instructions instead. Fully bilingual, and it shows an "already
+  installed" note when the app is running as an installed PWA.
+
+### Changed
+- Bumped app version to 4.1.0 and service worker cache to `i-matter-v6`.
+
 ## [4.0.0] — 2026-07-15
 
 Rebuilt I Matter around the **I Matter Positive Youth Development Framework**
