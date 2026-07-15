@@ -3,7 +3,7 @@
   "short_name": "I Matter",
   "description": "A Positive Youth Development toolkit for teachers, facilitators, and youth workers to guide adolescents through life skills. I Matter is a program by Imagine Tomorrow Foundation.",
   "id": "./",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

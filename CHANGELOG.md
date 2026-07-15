@@ -3,6 +3,32 @@
 All notable changes to the I Matter app are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [4.2.0] — 2026-07-15
+
+### Fixed
+- **The installed PWA now works fully offline.** The service worker's precache
+  used the atomic `cache.addAll`, which fails entirely if a single request
+  redirects — and Cloudflare Pages redirects `/index.html` → `/`. That aborted
+  the whole precache on the live site, so an installed app had nothing cached
+  and failed in aeroplane mode (`ERR_FAILED`). The worker now caches each file
+  individually and redirect-safely, always caches the app shell, serves every
+  navigation from the cached shell, and activates immediately. Verified offline
+  even against a server that reproduces the `/index.html` redirect.
+- `manifest.json` `start_url` changed to `./` so launching the installed app
+  never hits the redirect.
+
+### Added
+- **Downloadable, installable Android `.apk`.** A native Android WebView app
+  (`android/`) that **bundles the entire web app inside the APK** and loads it
+  from `file:///android_asset/www/` — so it needs **no internet at all, ever**
+  (not even a service worker), and is a single file you can share with teams.
+  A GitHub Actions workflow (`.github/workflows/build-apk.yml`) builds the APK
+  and publishes it as a downloadable artifact, and attaches it to a GitHub
+  Release on tagged builds. See [`docs/ANDROID-APK.md`](docs/ANDROID-APK.md).
+
+### Changed
+- Bumped app version to 4.2.0 and service worker cache to `i-matter-v7`.
+
 ## [4.1.0] — 2026-07-15
 
 ### Added

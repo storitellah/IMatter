@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Full-screen container theme; teal status bar and warm app background
+         to match the web app so there is no colour "flash" at launch. -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#2fa7b5</item>
+        <item name="android:colorPrimaryDark">#1d7f8c</item>
+        <item name="android:windowBackground">#fdf8f1</item>
+    </style>
+</resources>
