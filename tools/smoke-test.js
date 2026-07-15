@@ -216,6 +216,16 @@ function check(name, cond, extra) {
   console.log("== Settings & accessibility ==");
   await page.click("#settings-btn"); await sleep(300);
   check("settings modal opens", !!(await page.$(".modal")));
+  // Install option is always present in Settings — a button where the browser
+  // supports it, otherwise Add-to-Home-Screen instructions.
+  const installField = await page.evaluate(() => {
+    const labels = [...document.querySelectorAll(".modal .field label")].map(l => l.textContent);
+    const hasHeading = labels.some(t => /install|sakinisha/i.test(t));
+    const hasControl = !!document.querySelector("#install-now") ||
+      /home screen|address bar|browser menu|skrini|kivinjari/i.test(document.querySelector(".modal").textContent);
+    return { hasHeading, hasControl };
+  });
+  check("settings has an Install app option", installField.hasHeading && installField.hasControl, JSON.stringify(installField));
   await page.click('[data-set="textsize"][data-val="large"]'); await sleep(300);
   check("text size applied", await page.evaluate(() => document.documentElement.getAttribute("data-textsize") === "large"));
   await page.click("#set-contrast"); await sleep(200);

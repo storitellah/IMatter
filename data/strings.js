@@ -184,7 +184,13 @@ window.IM_STRINGS = {
     },
 
     install: {
-      installed: "App installed! It now works anywhere, even without an internet connection."
+      installed: "App installed! It now works anywhere, even without an internet connection.",
+      heading: "Install app",
+      installedNote: "✅ I Matter is installed on this device. It works anywhere, even offline.",
+      body: "Install I Matter so it works anywhere, anytime — even with no internet connection.",
+      ios: "On iPhone or iPad: tap the Share button, then choose “Add to Home Screen”.",
+      android: "On Android: open the browser menu (⋮), then choose “Install app” or “Add to Home screen”.",
+      desktop: "On computer: click the install icon in your browser’s address bar, or use the browser menu."
     }
   },
 
@@ -353,7 +359,13 @@ window.IM_STRINGS = {
     },
 
     install: {
-      installed: "Programu imesakinishwa! Sasa inafanya kazi popote, hata bila intaneti."
+      installed: "Programu imesakinishwa! Sasa inafanya kazi popote, hata bila intaneti.",
+      heading: "Sakinisha programu",
+      installedNote: "✅ I Matter imesakinishwa kwenye kifaa hiki. Inafanya kazi popote, hata bila intaneti.",
+      body: "Sakinisha I Matter ili ifanye kazi popote, wakati wowote — hata bila intaneti.",
+      ios: "Kwenye iPhone au iPad: gusa kitufe cha Share, kisha uchague “Add to Home Screen”.",
+      android: "Kwenye Android: fungua menyu ya kivinjari (⋮), kisha uchague “Install app” au “Add to Home screen”.",
+      desktop: "Kwenye kompyuta: bofya aikoni ya kusakinisha kwenye upau wa anwani wa kivinjari, au tumia menyu ya kivinjari."
     }
   }
 };

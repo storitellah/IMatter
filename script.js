@@ -209,6 +209,7 @@
     var b = $(".modal-backdrop");
     if (b) b.remove();
     document.removeEventListener("keydown", escClose);
+    settingsOpen = false;
   }
 
   /* ======================================================================
@@ -1030,6 +1031,36 @@
   /* ====================================================================
      13. SETTINGS MODAL (accessibility controls)
      ==================================================================== */
+  /* Is the app already running as an installed PWA? */
+  function isInstalled() {
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+      window.navigator.standalone === true;
+  }
+
+  /* Best-effort platform hint for install instructions */
+  function installInstructionKey() {
+    var ua = (navigator.userAgent || "").toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua) || (/macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "install.ios";
+    if (/android/.test(ua)) return "install.android";
+    return "install.desktop";
+  }
+
+  /* The install control shown inside the Settings panel — always available:
+     a real install button where the browser supports it, otherwise clear
+     step-by-step instructions (e.g. iOS "Add to Home Screen"). */
+  function installFieldHtml() {
+    if (isInstalled()) {
+      return '<p class="card-sub" role="status">' + esc(t("install.installedNote")) + "</p>";
+    }
+    var html = '<p class="card-sub" style="margin:0 0 8px">' + esc(t("install.body")) + "</p>";
+    if (deferredInstall) {
+      html += '<button class="btn small" id="install-now">📲 ' + esc(t("actions.install")) + "</button>";
+    } else {
+      html += '<p class="card-sub" style="margin:0">📲 ' + esc(t(installInstructionKey())) + "</p>";
+    }
+    return html;
+  }
+
   function openSettings() {
     function seg(name, value, label) {
       var active = settings[name] === value;
@@ -1059,11 +1090,15 @@
       seg("lang", "en", t("settings.english")) +
       seg("lang", "sw", t("settings.kiswahili")) + "</div></div>" +
 
+      '<div class="field" style="margin-top:10px"><label>' + esc(t("install.heading")) + "</label>" +
+      installFieldHtml() + "</div>" +
+
       '<div class="field" style="margin-top:10px"><label>' + esc(t("settings.updates")) + "</label>" +
       '<button class="btn secondary small" id="check-updates">🔄 ' + esc(t("actions.checkUpdates")) + "</button>" +
       '<p class="card-sub" id="update-msg" role="status" style="margin-top:6px"></p></div>';
 
     openModal("⚙️ " + esc(t("settings.title")), body, function (modal) {
+      settingsOpen = true;
       $$("[data-set]", modal).forEach(function (btn) {
         btn.addEventListener("click", function () {
           settings[btn.getAttribute("data-set")] = btn.getAttribute("data-val");
@@ -1083,6 +1118,8 @@
       $("#set-simple", modal).addEventListener("change", function () {
         settings.simple = this.checked; saveSettings();
       });
+      var installNow = $("#install-now", modal);
+      if (installNow) installNow.addEventListener("click", triggerInstall);
       $("#check-updates", modal).addEventListener("click", function () {
         var msg = $("#update-msg", modal);
         msg.textContent = t("settings.checking");
@@ -1113,22 +1150,27 @@
      15. PWA: install prompt + service worker + update notification
      ==================================================================== */
   var deferredInstall = null;
+  var settingsOpen = false;
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     deferredInstall = e;
-    if (currentRoute() === "home") render();
+    /* Reflect availability wherever the install option is showing */
+    if (settingsOpen) openSettings();
+    else if (currentRoute() === "home") render();
   });
   function triggerInstall() {
     if (!deferredInstall) return;
     deferredInstall.prompt();
     deferredInstall.userChoice.then(function () {
       deferredInstall = null;
-      if (currentRoute() === "home") render();
+      if (settingsOpen) openSettings();
+      else if (currentRoute() === "home") render();
     });
   }
   window.addEventListener("appinstalled", function () {
     deferredInstall = null;
     toast("🎉 " + t("install.installed"));
+    if (settingsOpen) openSettings();
   });
 
   if ("serviceWorker" in navigator) {

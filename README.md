@@ -87,9 +87,11 @@ Then open `http://localhost:8080`. (Service workers require `http://localhost` o
 
 ## Install as an app
 
-- **Android (Chrome):** open the site → menu ⋮ → *Add to Home screen* / *Install app* (or tap the in-app install prompt).
-- **iOS/iPad (Safari):** open the site → Share button → *Add to Home Screen*.
-- **Desktop (Chrome/Edge/Mac):** install icon in the address bar.
+There is an **Install app** option in **Settings** (the ⚙️ button in the header) on every screen, plus an install card on the Home page. Depending on the device:
+
+- **Android (Chrome):** tap **Install app** in Settings (or the in-app prompt), or menu ⋮ → *Add to Home screen*.
+- **iOS/iPad (Safari):** Settings → Install app shows the steps — Share button → *Add to Home Screen*.
+- **Desktop (Chrome/Edge/Mac):** tap **Install app** in Settings, or use the install icon in the address bar.
 
 The app only needs an internet connection the first time it is installed or opened. After that, everything works fully offline.
 
