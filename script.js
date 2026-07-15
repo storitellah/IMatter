@@ -1,6 +1,7 @@
 /* ==========================================================================
    I MATTER — Application logic
-   Offline-first, no accounts, no tracking. All data stays on the device.
+   A Positive Youth Development toolkit. No accounts, no tracking; all data
+   stays on the device. Fully bilingual (English + Kiswahili).
    ========================================================================== */
 (function () {
   "use strict";
@@ -41,11 +42,8 @@
   };
 
   var CONFIG = window.IM_CONFIG || {};
-  var CONTENT = window.IM_CONTENT || { categories: [] };
-  var STORIES = window.IM_STORIES || [];
-  var SESSIONS = window.IM_SESSIONS || [];
-  var SESSION_PLANS = window.IM_SESSION_PLANS || [];
-  var EXTRAS = window.IM_EXTRAS || { encouragements: [], journalPrompts: [], badges: [] };
+  var EXTRAS = window.IM_EXTRAS || { encouragements: { en: [] }, journalPrompts: { en: [] }, badges: [] };
+  var FW = window.IM_FRAMEWORK || { pillars: [], en: {}, sw: {} };
 
   /* ======================================================================
      1. Settings & i18n
@@ -66,9 +64,10 @@
     html.setAttribute("lang", settings.lang);
     var langBtn = $("#lang-btn-label");
     if (langBtn) langBtn.textContent = settings.lang === "en" ? "SW" : "EN";
+    renderFooter();
   }
 
-  /* t("learn.title") -> translated string */
+  /* t("learn.title") -> translated UI string */
   function t(path) {
     var dict = (window.IM_STRINGS || {})[settings.lang] || (window.IM_STRINGS || {}).en || {};
     var enDict = (window.IM_STRINGS || {}).en || {};
@@ -79,6 +78,56 @@
       curEn = curEn && curEn[parts[i]];
     }
     return cur != null ? cur : (curEn != null ? curEn : path);
+  }
+
+  /* lx({en:"...", sw:"..."}) -> localized value from a bilingual field */
+  function lx(field) {
+    if (field == null) return "";
+    if (typeof field === "string") return field;
+    var v = field[settings.lang];
+    return v != null ? v : (field.en != null ? field.en : "");
+  }
+
+  /* Localized content trees (each data file has an en and a sw tree) */
+  function content() {
+    var c = window.IM_CONTENT || {};
+    return c[settings.lang] || c.en || { categories: [] };
+  }
+  function stories() {
+    var s = window.IM_STORIES || {};
+    return s[settings.lang] || s.en || [];
+  }
+  function sessionPlans() {
+    var sp = window.IM_SESSION_PLANS || {};
+    return sp[settings.lang] || sp.en || [];
+  }
+  function framework() {
+    return FW[settings.lang] || FW.en || {};
+  }
+  function encouragements() {
+    var e = EXTRAS.encouragements || {};
+    return e[settings.lang] || e.en || [];
+  }
+  function journalPrompts() {
+    var jp = EXTRAS.journalPrompts || {};
+    return jp[settings.lang] || jp.en || [];
+  }
+
+  /* The six pillars: shared identity merged with localized names */
+  function pillars() {
+    var loc = framework().pillars || {};
+    return (FW.pillars || []).map(function (p, i) {
+      var l = loc[p.id] || {};
+      return {
+        id: p.id, emoji: p.emoji, color: p.color, num: i + 1,
+        name: l.name || p.id, focus: l.focus || "", topics: l.topics || "", outcome: l.outcome || ""
+      };
+    });
+  }
+  function pillarById(id) {
+    var all = pillars();
+    for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];
+    return null;
   }
 
   /* ======================================================================
@@ -110,7 +159,7 @@
       if (checks[b.id] && earned.indexOf(b.id) === -1) {
         earned.push(b.id);
         store.set("badges", earned);
-        toast(b.emoji + " " + t("badges.earned") + " " + b.title);
+        toast(b.emoji + " " + t("badges.earned") + " " + lx(b.title));
       }
     });
   }
@@ -200,10 +249,10 @@
 
   /* Everything that lives inside the Resources section */
   var RESOURCE_ITEMS = [
+    { id: "framework", emoji: "🧭", titleKey: "framework.title", subKey: "resources.frameworkSub" },
     { id: "learn", emoji: "📚", titleKey: "learn.title", subKey: "resources.learnSub" },
     { id: "stories", emoji: "📖", titleKey: "stories.title", subKey: "resources.storiesSub" },
     { id: "myspace", emoji: "💜", titleKey: "myspace.title", subKey: "resources.myspaceSub" },
-    { id: "facilitator", emoji: "🧑‍🏫", titleKey: "facilitator.title", subKey: "resources.facilitatorSub" },
     { id: "help", emoji: "🆘", titleKey: "help.title", subKey: "resources.helpSub" },
     { id: "about", emoji: "ℹ️", titleKey: "about.title", subKey: "resources.aboutSub" }
   ];
@@ -233,9 +282,20 @@
     return '<div class="back-row"><a class="chip" href="#/' + hash + '">← ' + esc(label || t("actions.back")) + "</a></div>";
   }
 
+  function orgLink() {
+    var org = CONFIG.organization || {};
+    return '<a href="' + esc(org.website || "#") + '" target="_blank" rel="noopener">' + esc(org.name || "") + "</a>";
+  }
+
+  function renderFooter() {
+    var f = $("#footer-text");
+    if (f) f.innerHTML = esc(lx(CONFIG.footerText)) + " " + orgLink() + ".";
+  }
+
   function findLesson(id) {
-    for (var i = 0; i < CONTENT.categories.length; i++) {
-      var cat = CONTENT.categories[i];
+    var cats = content().categories;
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
       for (var j = 0; j < cat.lessons.length; j++) {
         if (cat.lessons[j].id === id) return { lesson: cat.lessons[j], category: cat };
       }
@@ -246,23 +306,29 @@
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
     return null;
   }
+  function planForPillar(pillarId) {
+    var plans = sessionPlans();
+    for (var i = 0; i < plans.length; i++) if (plans[i].pillar === pillarId) return plans[i];
+    return null;
+  }
 
   /* ====================================================================
      5. HOME VIEW
      ==================================================================== */
   route("home", function (view) {
     var p = progress();
-    var totalLessons = CONTENT.categories.reduce(function (n, c) { return n + c.lessons.length; }, 0);
-    var enc = EXTRAS.encouragements;
+    var cats = content().categories;
+    var totalLessons = cats.reduce(function (n, c) { return n + c.lessons.length; }, 0);
+    var enc = encouragements();
     var dayIndex = Math.floor(Date.now() / 86400000);
     var encMsg = enc.length ? enc[dayIndex % enc.length] : "";
     var badges = earnedBadges();
-    var online = navigator.onLine;
 
     var html =
       '<section class="hero">' +
       "<h1>" + esc(t("home.welcomeTitle")) + "</h1>" +
       "<p>" + esc(t("home.welcomeBody")) + "</p>" +
+      '<p class="hero-sub">' + esc(t("home.welcomeSub")) + "</p>" +
       "</section>";
 
     /* Install prompt (where supported) */
@@ -281,8 +347,21 @@
       "<div><p class=\"card-sub\" style=\"margin:0\">" + esc(t("home.todayEncouragement")) + "</p>" +
       "<p>" + esc(encMsg) + "</p></div></div>";
 
+    /* The six pillars */
+    html += '<div class="section-heading"><h2>' + esc(t("home.pillarsTitle")) + "</h2></div>" +
+      '<div class="grid-2 pillar-grid">' +
+      pillars().map(function (pl) {
+        var plan = planForPillar(pl.id);
+        var href = plan ? "#/session-plan/" + plan.id : "#/learn/" + pl.id;
+        return '<a class="tile c-' + pl.color + '" href="' + href + '">' +
+          '<span class="tile-emoji" aria-hidden="true">' + pl.emoji + "</span>" +
+          '<span class="tile-label">' + esc(pl.name) + "</span>" +
+          '<span class="tile-sub">' + esc(t("framework.pillar")) + " " + pl.num + "</span></a>";
+      }).join("") + "</div>";
+
     /* The two main sections */
     html += '<div class="section-heading"><h2>' + esc(t("home.sectionsTitle")) + "</h2></div>" +
+      '<div class="card-grid">' +
       '<a class="card clickable" href="#/session-plans"><div class="card-row">' +
       '<div class="card-emoji">📋</div><div>' +
       '<p class="card-title">' + esc(t("nav.session-plans")) + "</p>" +
@@ -290,7 +369,8 @@
       '<a class="card clickable" href="#/resources"><div class="card-row">' +
       '<div class="card-emoji">🧰</div><div>' +
       '<p class="card-title">' + esc(t("nav.resources")) + "</p>" +
-      '<p class="card-sub">' + esc(t("home.resourcesSub")) + "</p></div></div></a>";
+      '<p class="card-sub">' + esc(t("home.resourcesSub")) + "</p></div></div></a>" +
+      "</div>";
 
     /* Progress summary */
     var pct = totalLessons ? Math.round(p.lessonsDone.length / totalLessons * 100) : 0;
@@ -302,10 +382,6 @@
       '<div class="stat"><b>' + p.lessonsDone.length + "/" + totalLessons + "</b><span>" + esc(t("home.lessonsDone")) + "</span></div>" +
       '<div class="stat"><b>' + badges.length + "/" + EXTRAS.badges.length + "</b><span>" + esc(t("home.badgesEarned")) + "</span></div>" +
       "</div></section>";
-
-    /* Offline status */
-    html += '<p class="card-sub" style="text-align:center" role="status">' +
-      (online ? "🟢 " + esc(t("home.online")) + " · " + esc(t("home.offlineReady")) : "🟡 " + esc(t("home.offline"))) + "</p>";
 
     view.innerHTML = html;
 
@@ -325,43 +401,89 @@
     view.innerHTML =
       "<h1>🧰 " + esc(t("resources.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("resources.intro")) + "</p>" +
+      '<div class="card-grid">' +
       RESOURCE_ITEMS.map(function (item) {
         return '<a class="card clickable" href="#/' + item.id + '"><div class="card-row">' +
           '<div class="card-emoji">' + item.emoji + "</div><div>" +
           '<p class="card-title">' + esc(t(item.titleKey)) + "</p>" +
           '<p class="card-sub">' + esc(t(item.subKey)) + "</p></div></div></a>";
-      }).join("");
+      }).join("") + "</div>";
   });
 
   /* ====================================================================
-     6. LEARN VIEWS
+     5c. THE FRAMEWORK
+     ==================================================================== */
+  route("framework", function (view) {
+    var fw = framework();
+    var html =
+      backBtn("resources", t("resources.title")) +
+      "<h1>🧭 " + esc(t("framework.title")) + "</h1>" +
+      '<p class="page-intro">' + esc(fw.tagline || "") + "</p>" +
+      '<div class="card">' +
+      (fw.intro || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
+      "</div>" +
+      '<div class="motto-card"><span aria-hidden="true">💛</span><p>' + esc(lx(CONFIG.motto)) + "</p></div>" +
+
+      '<div class="section-heading"><h2>' + esc(fw.pillarsHeading || "") + "</h2></div>" +
+      '<p class="page-intro">' + esc(fw.pillarsIntro || "") + "</p>" +
+      pillars().map(function (pl) {
+        var plan = planForPillar(pl.id);
+        return '<div class="card pillar-card c-' + pl.color + '">' +
+          '<div class="pillar-head">' +
+          '<span class="pillar-num" aria-hidden="true">' + pl.num + "</span>" +
+          '<span class="pillar-emoji" aria-hidden="true">' + pl.emoji + "</span>" +
+          "<h3>" + esc(pl.name) + "</h3></div>" +
+          "<p>" + esc(pl.focus) + "</p>" +
+          '<p class="card-sub"><b>' + esc(t("framework.topics")) + ":</b> " + esc(pl.topics) + "</p>" +
+          '<p class="pillar-outcome">🌱 “' + esc(pl.outcome) + "”</p>" +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          (plan ? '<a class="chip" href="#/session-plan/' + esc(plan.id) + '">📋 ' + esc(t("sessionPlans.title")) + "</a>" : "") +
+          '<a class="chip" href="#/learn/' + pl.id + '">📚 ' + esc(t("learn.lessons")) + "</a>" +
+          "</div></div>";
+      }).join("") +
+
+      '<div class="card"><h2>' + esc(fw.approachHeading || "") + "</h2>" +
+      (fw.approach || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>" +
+
+      '<div class="card"><h2>' + esc(fw.changeHeading || "") + "</h2>" +
+      (fw.change || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>";
+
+    view.innerHTML = html;
+  });
+
+  /* ====================================================================
+     6. LEARN VIEWS (pillar lessons)
      ==================================================================== */
   route("learn", function (view, params) {
     if (params[0]) return renderCategory(view, params[0]);
     var p = progress();
     view.innerHTML =
       backBtn("resources", t("resources.title")) +
-      "<h1>" + esc(t("learn.title")) + "</h1>" +
+      "<h1>📚 " + esc(t("learn.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("learn.intro")) + "</p>" +
-      CONTENT.categories.map(function (c) {
+      '<div class="card-grid">' +
+      content().categories.map(function (c, i) {
         var done = c.lessons.filter(function (l) { return p.lessonsDone.indexOf(l.id) !== -1; }).length;
         return '<a class="card clickable c-' + c.color + '" href="#/learn/' + c.id + '">' +
           '<div class="card-row"><div class="card-emoji">' + c.emoji + "</div><div>" +
+          '<p class="card-sub" style="margin:0">' + esc(t("framework.pillar")) + " " + (i + 1) + "</p>" +
           '<p class="card-title">' + esc(c.title) + "</p>" +
           '<p class="card-sub">' + esc(c.blurb) + "</p>" +
           '<p class="card-sub"><b>' + done + "/" + c.lessons.length + "</b> " + esc(t("learn.lessons")) + "</p>" +
           "</div></div></a>";
-      }).join("");
+      }).join("") + "</div>";
   });
 
   function renderCategory(view, catId) {
-    var cat = findById(CONTENT.categories, catId);
+    var cat = findById(content().categories, catId);
     if (!cat) return navigate("#/learn");
+    var pl = pillarById(catId);
     var p = progress();
     view.innerHTML =
       backBtn("learn", t("learn.title")) +
       "<h1>" + cat.emoji + " " + esc(cat.title) + "</h1>" +
       '<p class="page-intro">' + esc(cat.blurb) + "</p>" +
+      (pl && pl.outcome ? '<div class="motto-card small"><span aria-hidden="true">🌱</span><p>“' + esc(pl.outcome) + "”</p></div>" : "") +
       cat.lessons.map(function (l) {
         var done = p.lessonsDone.indexOf(l.id) !== -1;
         return '<a class="card clickable" href="#/lesson/' + l.id + '"><div class="card-row">' +
@@ -428,7 +550,7 @@
       reveal.nextElementSibling.hidden = false;
     });
 
-    attachQuiz(view, l.quiz, cat, l);
+    attachQuiz(view, l.quiz);
 
     $("#mark-done", view).addEventListener("click", function () {
       var pr = progress();
@@ -441,7 +563,7 @@
     });
   });
 
-  function attachQuiz(view, quiz, cat, lesson) {
+  function attachQuiz(view, quiz) {
     if (!quiz) return;
     var buttons = $$(".quiz-option", view);
     var feedback = $("#quiz-feedback", view);
@@ -489,21 +611,21 @@
       '<p class="card-sub" id="pin-msg" role="alert" style="margin-top:8px"></p></div>';
     function tryPin() {
       if ($("#pin-in", view).value === pin) { myspaceUnlocked = true; render(); }
-      else $("#pin-msg", view).textContent = t("facilitator.wrongPin");
+      else $("#pin-msg", view).textContent = t("myspace.wrongPin");
     }
     $("#pin-go", view).addEventListener("click", tryPin);
     $("#pin-in", view).addEventListener("keydown", function (e) { if (e.key === "Enter") tryPin(); });
   }
 
   var MYSPACE_TOOLS = [
-    { id: "strengths", emoji: "🌟", key: "strengths", list: "myStrengths", placeholder: "e.g. I am a good listener" },
-    { id: "goals", emoji: "🎯", key: "goals", list: "myGoals", placeholder: "e.g. Improve my maths grade this term" },
-    { id: "gratitude", emoji: "💚", key: "gratitude", list: "myGratitude", placeholder: "e.g. My friend helped me today" },
-    { id: "learned", emoji: "💡", key: "learned", list: "myLearned", placeholder: "e.g. Naming feelings makes them easier" },
-    { id: "trusted", emoji: "🤝", key: "trusted", list: "myTrusted", placeholder: "e.g. My aunt Grace" },
-    { id: "calmplan", emoji: "🧘", key: "calmPlan", text: "myCalmPlan", prompt: "When I feel overwhelmed, I will... (e.g. breathe slowly 3 times, drink water, talk to someone I trust)" },
-    { id: "studyplan", emoji: "⏰", key: "studyPlan", text: "myStudyPlan", prompt: "My study plan: when, where, which subjects, and my break plan." },
-    { id: "challenge", emoji: "🏅", key: "weeklyChallenge", text: "myChallenge", prompt: "My challenge for this week is..." },
+    { id: "strengths", emoji: "🌟", key: "strengths", list: "myStrengths", phKey: "myspace.strengthsPh" },
+    { id: "goals", emoji: "🎯", key: "goals", list: "myGoals", phKey: "myspace.goalsPh" },
+    { id: "gratitude", emoji: "💚", key: "gratitude", list: "myGratitude", phKey: "myspace.gratitudePh" },
+    { id: "learned", emoji: "💡", key: "learned", list: "myLearned", phKey: "myspace.learnedPh" },
+    { id: "trusted", emoji: "🤝", key: "trusted", list: "myTrusted", phKey: "myspace.trustedPh" },
+    { id: "calmplan", emoji: "🧘", key: "calmPlan", text: "myCalmPlan", promptKey: "myspace.calmPlanPrompt" },
+    { id: "studyplan", emoji: "⏰", key: "studyPlan", text: "myStudyPlan", promptKey: "myspace.studyPlanPrompt" },
+    { id: "challenge", emoji: "🏅", key: "weeklyChallenge", text: "myChallenge", promptKey: "myspace.challengePrompt" },
     { id: "journal", emoji: "📔", key: "journal" },
     { id: "badges", emoji: "🏆", key: "badges" }
   ];
@@ -529,7 +651,7 @@
 
     $("#pin-toggle", view).addEventListener("change", function () {
       if (this.checked) {
-        var chosen = prompt(t("myspace.pinProtect") + " — PIN (4+ digits):");
+        var chosen = prompt(t("myspace.pinPrompt"));
         if (chosen && chosen.length >= 4) { store.set("myspacePin", chosen); myspaceUnlocked = true; toast("🔒 PIN ✓"); }
         else this.checked = false;
       } else {
@@ -563,15 +685,15 @@
           var got = earned.indexOf(b.id) !== -1;
           return '<div class="badge' + (got ? "" : " locked") + '">' +
             '<div class="badge-emoji" aria-hidden="true">' + b.emoji + "</div>" +
-            '<div class="badge-title">' + esc(b.title) + "</div>" +
-            '<div class="badge-desc">' + esc(b.desc) + "</div></div>";
+            '<div class="badge-title">' + esc(lx(b.title)) + "</div>" +
+            '<div class="badge-desc">' + esc(lx(b.desc)) + "</div></div>";
         }).join("") + "</div>";
       view.innerHTML = html;
       return;
     }
 
     if (tool.id === "journal") {
-      var prompts = EXTRAS.journalPrompts;
+      var prompts = journalPrompts();
       var pIdx = Math.floor(Math.random() * prompts.length);
       var entries = store.get("journal", []);
       html += '<div class="card">' +
@@ -609,7 +731,7 @@
       var items = store.get(tool.list, []);
       html += '<div class="card">' +
         '<div class="add-row"><label for="list-in" class="visually-hidden">' + esc(title) + "</label>" +
-        '<input type="text" id="list-in" placeholder="' + esc(tool.placeholder || "") + '">' +
+        '<input type="text" id="list-in" placeholder="' + esc(t(tool.phKey)) + '">' +
         '<button class="btn" id="list-add">' + esc(t("actions.addNote")) + "</button></div></div>" +
         (items.length === 0 ? '<p class="card-sub" style="text-align:center">' + esc(t("myspace.emptyList")) + "</p>" : "") +
         items.map(function (item, idx) {
@@ -617,14 +739,14 @@
             '<button class="del" data-del="' + idx + '" aria-label="' + esc(t("actions.delete")) + '">🗑️</button></div>';
         }).join("");
       view.innerHTML = html;
-      function addItem() {
+      var addItem = function () {
         var v = $("#list-in", view).value.trim();
         if (!v) return;
         items.push(v);
         store.set(tool.list, items);
         if (tool.id === "gratitude") { var p = progress(); p.gratitudeCount++; saveProgress(p); }
         renderMySpaceTool(view, toolId);
-      }
+      };
       $("#list-add", view).addEventListener("click", addItem);
       $("#list-in", view).addEventListener("keydown", function (e) { if (e.key === "Enter") addItem(); });
       $$("[data-del]", view).forEach(function (btn) {
@@ -640,7 +762,7 @@
     if (tool.text) {
       var saved = store.get(tool.text, "");
       html += '<div class="card">' +
-        "<p class=\"card-sub\">" + esc(tool.prompt || "") + "</p>" +
+        "<p class=\"card-sub\">" + esc(t(tool.promptKey)) + "</p>" +
         '<div class="field"><label for="text-in" class="visually-hidden">' + esc(title) + "</label>" +
         '<textarea id="text-in">' + esc(saved) + "</textarea></div>" +
         '<button class="btn block" id="text-save">' + esc(t("actions.save")) + "</button>" +
@@ -661,19 +783,20 @@
     var p = progress();
     view.innerHTML =
       backBtn("resources", t("resources.title")) +
-      "<h1>" + esc(t("stories.title")) + "</h1>" +
+      "<h1>📖 " + esc(t("stories.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("stories.intro")) + "</p>" +
-      STORIES.map(function (s) {
+      stories().map(function (s) {
         var read = p.storiesRead.indexOf(s.id) !== -1;
+        var pl = pillarById(s.pillar);
         return '<a class="card clickable" href="#/story/' + s.id + '"><div class="card-row">' +
-          '<div class="card-emoji">' + (read ? "✅" : s.emoji) + "</div><div>" +
+          '<div class="card-emoji' + (pl ? " c-" + pl.color : "") + '">' + (read ? "✅" : s.emoji) + "</div><div>" +
           '<p class="card-title">' + esc(s.title) + "</p>" +
-          '<p class="card-sub">' + esc(s.theme) + "</p></div></div></a>";
+          '<p class="card-sub">' + esc(s.theme) + (pl ? " · " + pl.emoji + " " + esc(pl.name) : "") + "</p></div></div></a>";
       }).join("");
   });
 
   route("story", function (view, params) {
-    var s = findById(STORIES, params[0]);
+    var s = findById(stories(), params[0]);
     if (!s) return navigate("#/stories");
     var p = progress();
     if (p.storiesRead.indexOf(s.id) === -1) { p.storiesRead.push(s.id); saveProgress(p); }
@@ -701,7 +824,7 @@
         $$("[data-wwyd]", view).forEach(function (b) { b.classList.remove("correct"); });
         btn.classList.add("correct");
         $("#wwyd-feedback", view).innerHTML =
-          '<div class="quiz-feedback good">💭 There is no single right answer here — what matters is thinking it through. Talk about your choice with a friend, your group, or a trusted adult.</div>';
+          '<div class="quiz-feedback good">💭 ' + esc(t("stories.wwydNote")) + "</div>";
       });
     });
   });
@@ -721,21 +844,33 @@
           return '<div class="card-row" style="margin-bottom:12px"><div class="card-emoji">' + row[0] + "</div>" +
             "<p style=\"margin:0\">" + esc(row[1]) + "</p></div>";
         }).join("") + "</div>" +
-      '<div class="card"><h2>' + esc(t("help.contacts")) + "</h2>" +
-      '<p class="card-sub">' + esc(t("help.contactsNote")) + "</p>" +
-      contacts.filter(function (c) { return c.number; }).map(function (c) {
-        return '<div style="margin-bottom:14px"><p style="margin:0"><b>' + esc(c.label) + "</b></p>" +
-          '<p class="card-sub" style="margin:0">' + esc(c.note) + "</p>" +
-          "<p style=\"margin:0\">📞 " + esc(c.number) + "</p></div>";
-      }).join("") + "</div>" +
+      '<div class="section-heading"><h2>' + esc(t("help.contacts")) + "</h2></div>" +
+      '<p class="page-intro">' + esc(lx(CONFIG.supportIntro)) + "</p>" +
+      contacts.map(function (c) {
+        var sub = "";
+        if (c.subtitle) {
+          sub = c.subtitle.orgLink
+            ? '<p class="card-sub" style="margin:0 0 6px">' + orgLink() + "</p>"
+            : '<p class="card-sub" style="margin:0 0 6px">' + esc(lx(c.subtitle)) + "</p>";
+        }
+        return '<div class="card contact-card">' +
+          '<div class="card-row" style="align-items:flex-start"><div class="card-emoji">' + c.emoji + "</div><div style=\"flex:1\">" +
+          '<p class="card-title">' + esc(lx(c.title)) + "</p>" + sub +
+          (c.rows || []).map(function (r) {
+            var label = esc(lx(r.label));
+            return r.href
+              ? '<p class="contact-line"><a href="' + esc(r.href) + '"' + (r.href.indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : "") + ">" + label + "</a></p>"
+              : '<p class="contact-line">' + label + "</p>";
+          }).join("") +
+          (c.note ? '<p class="card-sub" style="margin-top:6px">' + esc(lx(c.note)) + "</p>" : "") +
+          "</div></div></div>";
+      }).join("") +
       '<div class="takeaway-card">💛 ' + esc(t("help.safetyReminder")) + "</div>";
   });
 
   route("about", function (view) {
     var org = CONFIG.organization || {};
     var prog = CONFIG.program || {};
-    var skills = ["Self-awareness", "Communication", "Problem-solving", "Decision-making", "Confidence",
-      "Emotional well-being", "Resilience", "Healthy relationships", "Personal responsibility", "Future planning"];
 
     var orgLogo = '<img src="' + esc((CONFIG.logos || {}).organization || "") + '" alt="' + esc(org.name || "") + ' logo" width="180" height="60">';
     var orgLogoLinked = org.website
@@ -743,7 +878,7 @@
       : orgLogo;
 
     var contactLines = [];
-    if (org.website) contactLines.push('🌐 <a href="' + esc(org.website) + '" target="_blank" rel="noopener">' + esc(org.website) + "</a>");
+    if (org.website) contactLines.push('🌐 <a href="' + esc(org.website) + '" target="_blank" rel="noopener">' + esc(org.websiteLabel || org.website) + "</a>");
     if (org.email) contactLines.push('✉️ <a href="mailto:' + esc(org.email) + '">' + esc(org.email) + "</a>");
     if (org.phone) contactLines.push("📞 " + esc(org.phone));
 
@@ -753,16 +888,19 @@
       '<div class="card" style="text-align:center">' +
       '<img src="' + esc((CONFIG.logos || {}).app || "") + '" alt="I Matter logo" width="96" height="96" style="border-radius:22px">' +
       "<h2>" + esc(CONFIG.appName || "I Matter") + "</h2>" +
-      "<p>" + esc(CONFIG.tagline || "") + "</p></div>" +
+      "<p>" + esc(lx(CONFIG.tagline)) + "</p></div>" +
+      '<div class="motto-card"><span aria-hidden="true">💛</span><p>' + esc(lx(CONFIG.motto)) + "</p></div>" +
       '<div class="card"><h2>' + esc(t("about.programHeading")) + "</h2>" +
-      "<p>" + esc(prog.about || "") + "</p><p>" + esc(prog.delivery || "") + "</p>" +
-      "<h3>" + esc(t("about.skillsHeading")) + "</h3>" +
+      "<p>" + esc(lx(prog.about)) + "</p><p>" + esc(lx(prog.delivery)) + "</p>" +
+      "<h3>" + esc(t("about.pillarsHeading")) + "</h3>" +
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-      skills.map(function (s) { return '<span class="chip">' + esc(s) + "</span>"; }).join("") + "</div></div>" +
+      pillars().map(function (pl) {
+        return '<a class="chip" href="#/framework">' + pl.emoji + " " + esc(pl.name) + "</a>";
+      }).join("") + "</div></div>" +
       '<div class="card"><div style="text-align:center;margin-bottom:10px">' +
       orgLogoLinked + "</div>" +
       "<h2>" + esc(t("about.orgHeading")) + "</h2>" +
-      "<p>" + esc(org.about || "") + "</p><p>" + esc(org.history || "") + "</p>" +
+      "<p>" + esc(lx(org.about)) + "</p><p>" + esc(lx(org.history)) + "</p>" +
       (contactLines.length ? "<p>" + contactLines.join("<br>") + "</p>" : "") + "</div>" +
       '<div class="card"><h2>🔒 ' + esc(t("about.privacyHeading")) + "</h2>" +
       "<p>" + esc(t("about.privacyBody")) + "</p></div>" +
@@ -770,15 +908,17 @@
   });
 
   /* ====================================================================
-     11b. SESSION PLANS (public, teen-friendly life-skills sessions)
+     11b. SESSION PLANS (one per pillar)
      ==================================================================== */
   route("session-plans", function (view) {
     view.innerHTML =
       "<h1>📋 " + esc(t("sessionPlans.title")) + "</h1>" +
       '<p class="page-intro">' + esc(t("sessionPlans.intro")) + "</p>" +
-      SESSION_PLANS.map(function (sp) {
+      sessionPlans().map(function (sp) {
+        var pl = pillarById(sp.pillar);
         return '<a class="card clickable sp-card c-' + esc(sp.color || "teal") + '" href="#/session-plan/' + esc(sp.id) + '">' +
           '<div class="card-row"><div class="card-emoji">' + sp.emoji + "</div><div>" +
+          (pl ? '<p class="sp-pillar-tag">' + esc(t("sessionPlans.pillar")) + " " + pl.num + " · " + esc(pl.name) + "</p>" : "") +
           '<p class="card-title">' + esc(sp.title) + "</p>" +
           '<p class="card-sub">' + esc(sp.tagline) + "</p>" +
           '<p class="sp-meta">⏱️ ' + esc(sp.duration) + " · " + sp.sections.length + " " + esc(t("sessionPlans.parts")) + "</p>" +
@@ -787,7 +927,7 @@
   });
 
   route("session-plan", function (view, params) {
-    var sp = findById(SESSION_PLANS, params[0]);
+    var sp = findById(sessionPlans(), params[0]);
     if (!sp) return navigate("#/session-plans");
     renderSessionPlan(view, sp);
   });
@@ -846,6 +986,7 @@
 
   function renderSessionPlan(view, sp) {
     var color = "c-" + (sp.color || "teal");
+    var pl = pillarById(sp.pillar);
 
     var toc = sp.sections.map(function (sec, i) {
       return '<button class="chip sp-jump" type="button" data-target="sp-sec-' + i + '">' +
@@ -866,8 +1007,10 @@
       backBtn("session-plans", t("sessionPlans.title")) +
       '<header class="sp-hero ' + color + '">' +
       '<span class="sp-hero-emoji" aria-hidden="true">' + sp.emoji + "</span>" +
+      (pl ? '<p class="sp-pillar-tag">' + esc(t("sessionPlans.pillar")) + " " + pl.num + " · " + esc(pl.name) + "</p>" : "") +
       "<h1>" + esc(sp.title) + "</h1>" +
       '<p class="sp-hero-tagline">' + esc(sp.tagline) + "</p>" +
+      (pl && pl.outcome ? '<p class="sp-hero-outcome">🌱 ' + esc(t("sessionPlans.outcome")) + ": “" + esc(pl.outcome) + "”</p>" : "") +
       '<p class="sp-hero-meta"><span class="chip">⏱️ ' + esc(t("sessionPlans.duration")) + ": " + esc(sp.duration) + "</span></p>" +
       "</header>" +
       '<div class="sp-toc no-print"><p class="lesson-label">🧭 ' + esc(t("sessionPlans.contents")) + "</p>" +
@@ -882,137 +1025,6 @@
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
-  }
-
-  /* ====================================================================
-     12. FACILITATOR MODE (local PIN, device-only, anonymous totals)
-     ==================================================================== */
-  var facilitatorUnlocked = false;
-
-  function facilitatorPin() {
-    return store.get("facilitatorPin", (CONFIG.facilitator || {}).defaultPin || "0000");
-  }
-
-  route("facilitator", function (view, params) {
-    if (!facilitatorUnlocked) return renderFacGate(view);
-    if (params[0] === "session" && params[1]) return renderSession(view, parseInt(params[1], 10));
-    renderFacHome(view);
-  });
-
-  function renderFacGate(view) {
-    view.innerHTML =
-      backBtn("resources", t("resources.title")) +
-      "<h1>🧑‍🏫 " + esc(t("facilitator.title")) + "</h1>" +
-      '<div class="card"><p>' + esc(t("facilitator.enterPin")) + "</p>" +
-      '<div class="field"><label for="fac-pin" class="visually-hidden">PIN</label>' +
-      '<input type="password" id="fac-pin" inputmode="numeric" autocomplete="off" maxlength="8"></div>' +
-      '<button class="btn block" id="fac-go">' + esc(t("actions.open")) + "</button>" +
-      '<p class="card-sub" id="fac-msg" role="alert" style="margin-top:8px"></p></div>';
-    function tryPin() {
-      if ($("#fac-pin", view).value === facilitatorPin()) {
-        facilitatorUnlocked = true;
-        toast("🔓 " + t("facilitator.unlocked"));
-        render();
-      } else $("#fac-msg", view).textContent = t("facilitator.wrongPin");
-    }
-    $("#fac-go", view).addEventListener("click", tryPin);
-    $("#fac-pin", view).addEventListener("keydown", function (e) { if (e.key === "Enter") tryPin(); });
-  }
-
-  function renderFacHome(view) {
-    var p = progress();
-    var groupName = store.get("facGroupName", "");
-    var notes = store.get("facNotes", "");
-    var projector = document.documentElement.getAttribute("data-projector") === "on";
-
-    view.innerHTML =
-      backBtn("resources", t("resources.title")) +
-      "<h1>🧑‍🏫 " + esc(t("facilitator.title")) + "</h1>" +
-      (groupName ? '<p class="page-intro">🏫 ' + esc(groupName) + "</p>" : "") +
-
-      '<div class="section-heading"><h2>' + esc(t("facilitator.sessions")) + "</h2></div>" +
-      SESSIONS.map(function (s) {
-        return '<a class="card clickable" href="#/facilitator/session/' + s.number + '"><div class="card-row">' +
-          '<div class="card-emoji">' + s.emoji + "</div><div>" +
-          '<p class="card-title">Session ' + s.number + ": " + esc(s.title) + "</p>" +
-          '<p class="card-sub">' + esc(s.objective) + "</p></div></div></a>";
-      }).join("") +
-
-      '<div class="card"><h2>📊 ' + esc(t("facilitator.totals")) + "</h2>" +
-      '<p class="card-sub">' + esc(t("facilitator.totalsNote")) + "</p>" +
-      '<div class="stat-row">' +
-      '<div class="stat"><b>' + p.lessonsDone.length + "</b><span>" + esc(t("home.lessonsDone")) + "</span></div>" +
-      '<div class="stat"><b>' + p.quizCorrect + "</b><span>quiz ✓</span></div>" +
-      "</div>" +
-      '<button class="btn warn small" id="fac-reset" style="margin-top:12px">↺ ' + esc(t("facilitator.resetResults")) + "</button></div>" +
-
-      '<div class="card"><h2>📝 ' + esc(t("facilitator.notes")) + "</h2>" +
-      '<div class="field"><label for="fac-group">' + esc(t("facilitator.groupName")) + "</label>" +
-      '<input type="text" id="fac-group" value="' + esc(groupName) + '"></div>' +
-      '<div class="field"><label for="fac-notes">' + esc(t("facilitator.notes")) + "</label>" +
-      '<textarea id="fac-notes">' + esc(notes) + "</textarea></div>" +
-      '<button class="btn small" id="fac-save">' + esc(t("actions.save")) + "</button></div>" +
-
-      '<div class="card"><h2>⚙️</h2>' +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-      '<button class="btn secondary small" id="fac-projector">📽️ ' + esc(projector ? t("facilitator.projectorOff") : t("facilitator.projector")) + "</button>" +
-      '<button class="btn secondary small" id="fac-pin-change">🔑 ' + esc(t("facilitator.changePin")) + "</button>" +
-      '<button class="btn secondary small" id="fac-lock">🔒 ' + esc(t("facilitator.lock")) + "</button>" +
-      "</div></div>";
-
-    $("#fac-save", view).addEventListener("click", function () {
-      store.set("facGroupName", $("#fac-group", view).value.trim());
-      store.set("facNotes", $("#fac-notes", view).value);
-      toast("✓ " + t("actions.saved"));
-    });
-    $("#fac-reset", view).addEventListener("click", function () {
-      if (confirm(t("facilitator.resetResultsConfirm"))) {
-        store.remove("progress");
-        store.remove("scores");
-        store.remove("badges");
-        render();
-      }
-    });
-    $("#fac-projector", view).addEventListener("click", function () {
-      var html = document.documentElement;
-      html.setAttribute("data-projector", html.getAttribute("data-projector") === "on" ? "off" : "on");
-      render();
-    });
-    $("#fac-pin-change", view).addEventListener("click", function () {
-      var np = prompt(t("facilitator.changePin") + " (4+ digits):");
-      if (np && np.length >= 4) { store.set("facilitatorPin", np); toast("🔑 ✓"); }
-    });
-    $("#fac-lock", view).addEventListener("click", function () {
-      facilitatorUnlocked = false;
-      document.documentElement.setAttribute("data-projector", "off");
-      navigate("#/home");
-    });
-  }
-
-  function renderSession(view, num) {
-    var s = null;
-    for (var i = 0; i < SESSIONS.length; i++) if (SESSIONS[i].number === num) s = SESSIONS[i];
-    if (!s) return navigate("#/facilitator");
-    var cat = findById(CONTENT.categories, s.relatedCategory);
-
-    function block(emoji, label, body) {
-      return '<div class="card"><span class="lesson-label">' + emoji + " " + esc(label) + "</span>" + body + "</div>";
-    }
-
-    view.innerHTML =
-      backBtn("facilitator", t("facilitator.title")) +
-      "<h1>" + s.emoji + " Session " + s.number + ": " + esc(s.title) + "</h1>" +
-      block("🎯", t("facilitator.objective"), "<p style=\"margin:0\">" + esc(s.objective) + "</p>") +
-      block("🔥", t("facilitator.opening"), "<p style=\"margin:0\">" + esc(s.opening) + "</p>") +
-      block("📖", t("facilitator.mainLesson"),
-        '<ul style="margin:0;padding-left:20px">' + s.mainLesson.map(function (pt) { return "<li>" + esc(pt) + "</li>"; }).join("") + "</ul>" +
-        (cat ? '<p style="margin:10px 0 0"><a class="chip" href="#/learn/' + cat.id + '">' + cat.emoji + " " + esc(cat.title) + "</a></p>" : "")) +
-      block("💬", t("facilitator.groupDiscussion"),
-        '<ol style="margin:0;padding-left:20px">' + s.discussion.map(function (q) { return "<li>" + esc(q) + "</li>"; }).join("") + "</ol>") +
-      block("🪞", t("facilitator.reflection"), "<p style=\"margin:0\">" + esc(s.reflection) + "</p>") +
-      block("🏠", t("facilitator.challenge"), "<p style=\"margin:0\">" + esc(s.challenge) + "</p>") +
-      '<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
-      '<button class="btn secondary" onclick="window.print()">🖨️ ' + esc(t("actions.print")) + "</button></div>";
   }
 
   /* ====================================================================
@@ -1098,21 +1110,6 @@
   });
 
   /* ====================================================================
-     14. OFFLINE STATUS
-     ==================================================================== */
-  function updateOnlineStatus(announce) {
-    var pill = $("#offline-pill");
-    var online = navigator.onLine;
-    if (pill) {
-      pill.hidden = online;
-      $("#offline-pill-text").textContent = t("home.offline").split("—")[0].trim();
-    }
-    if (announce) toast(online ? "🟢 " + t("offline.nowOnline") : "🟡 " + t("offline.nowOffline"));
-  }
-  window.addEventListener("online", function () { updateOnlineStatus(true); if (currentRoute() === "home") render(); });
-  window.addEventListener("offline", function () { updateOnlineStatus(true); if (currentRoute() === "home") render(); });
-
-  /* ====================================================================
      15. PWA: install prompt + service worker + update notification
      ==================================================================== */
   var deferredInstall = null;
@@ -1131,7 +1128,7 @@
   }
   window.addEventListener("appinstalled", function () {
     deferredInstall = null;
-    toast("🎉 " + t("home.offlineReady"));
+    toast("🎉 " + t("install.installed"));
   });
 
   if ("serviceWorker" in navigator) {
@@ -1149,7 +1146,7 @@
             }
           });
         });
-      }).catch(function () { /* offline first load or unsupported */ });
+      }).catch(function () { /* first load without a connection, or unsupported */ });
 
       var refreshed = false;
       navigator.serviceWorker.addEventListener("controllerchange", function () {
@@ -1165,8 +1162,6 @@
      ====================================================================== */
   applySettings();
   buildNav();
-  updateOnlineStatus(false);
-  $("#footer-text").textContent = CONFIG.footerText || "";
   window.addEventListener("hashchange", render);
   render();
 })();

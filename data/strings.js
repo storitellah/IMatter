@@ -9,7 +9,6 @@
 window.IM_STRINGS = {
   en: {
     appName: "I Matter",
-    tagline: "A facilitator's toolkit for guiding young people through life skills.",
 
     /* Navigation */
     nav: {
@@ -27,38 +26,46 @@ window.IM_STRINGS = {
 
     /* Home */
     home: {
-      welcomeTitle: "Guide. Support. Empower.",
-      welcomeBody: "Everything you need to lead young people through life skills — ready-to-run session plans plus a toolkit of lessons, stories, and support resources.",
+      welcomeTitle: "You matter.",
+      welcomeBody: "Your life has value. Your choices have power. Your future is worth investing in.",
+      welcomeSub: "A Positive Youth Development toolkit for facilitators, teachers, and youth workers.",
       todayEncouragement: "Today's encouragement",
+      pillarsTitle: "The six pillars",
       sectionsTitle: "Start here",
-      sessionPlansSub: "Full, ready-to-run life-skills sessions to lead with your group.",
-      resourcesSub: "Lessons, stories, your private space, facilitator tools, and support.",
+      sessionPlansSub: "Six ready-to-run sessions — one for each pillar of the framework.",
+      resourcesSub: "The framework, pillar lessons, stories, your private space, and support.",
       progressTitle: "Your progress",
       lessonsDone: "lessons reviewed",
       badgesEarned: "badges earned",
       installTitle: "Add I Matter to your home screen",
-      installBody: "Install the app so it works anytime, even without internet.",
-      offlineReady: "Ready to use offline",
-      online: "Online",
-      offline: "Offline — everything still works!"
+      installBody: "Install the app once with an internet connection — after that it works anywhere, anytime."
     },
 
     /* Resources hub */
     resources: {
       title: "Resources",
-      intro: "Your toolkit for sessions and beyond — teaching topics, stories, your own space, facilitator tools, and support information.",
-      learnSub: "10 teaching topics with short lessons, examples, and quick quizzes.",
+      intro: "Your toolkit for sessions and beyond — the framework, pillar lessons, stories, your own space, and support information.",
+      frameworkSub: "What I Matter is, the approach behind it, and the six pillars.",
+      learnSub: "Short lessons for every pillar — key ideas, examples, and quick quizzes.",
       storiesSub: "Short stories to read and discuss with your students.",
       myspaceSub: "Your private notes, plans, journal, and badges — on this device only.",
-      facilitatorSub: "PIN-protected monthly session plans, projector mode, and notes.",
       helpSub: "Support contacts and safety guidance to share with students.",
       aboutSub: "About the program, the organization, and your privacy."
     },
 
-    /* Learn */
+    /* Framework page */
+    framework: {
+      title: "The Framework",
+      pillar: "Pillar",
+      outcome: "Outcome",
+      focus: "Focus",
+      topics: "Core topics"
+    },
+
+    /* Learn (pillar lessons) */
     learn: {
-      title: "Learn",
-      intro: "Teaching topics to lead with your students — short lessons, real-life examples, and quick quizzes to discuss together.",
+      title: "The Six Pillars",
+      intro: "Every pillar strengthens the inner compass. Lead these short lessons with your students — key ideas, real-life examples, and quick quizzes to discuss together.",
       lessons: "lessons",
       introHeading: "Introduction",
       keyLesson: "Key lesson",
@@ -91,19 +98,31 @@ window.IM_STRINGS = {
       journal: "Private journal",
       badges: "My badges",
       pinProtect: "Protect My Space with a PIN",
+      pinPrompt: "Choose a PIN (4+ digits):",
+      wrongPin: "That PIN is not correct.",
       deleteAll: "Delete all my data",
       deleteConfirm: "This will delete everything saved in this app on this device: journal, goals, notes, and badges. This cannot be undone. Delete everything?",
       deleted: "All your data has been deleted.",
       emptyList: "Nothing here yet. Add your first one!",
-      journalPromptLabel: "Need an idea? Try this prompt:"
+      journalPromptLabel: "Need an idea? Try this prompt:",
+      /* Placeholders and prompts for the tools */
+      strengthsPh: "e.g. I am a good listener",
+      goalsPh: "e.g. Improve my maths grade this term",
+      gratitudePh: "e.g. My friend helped me today",
+      learnedPh: "e.g. Naming feelings makes them easier",
+      trustedPh: "e.g. My aunt Grace",
+      calmPlanPrompt: "When I feel overwhelmed, I will... (e.g. breathe slowly 3 times, drink water, talk to someone I trust)",
+      studyPlanPrompt: "My study plan: when, where, which subjects, and my break plan.",
+      challengePrompt: "My challenge for this week is..."
     },
 
     /* Stories */
     stories: {
       title: "Stories",
-      intro: "Short stories to read and discuss with your students. Ask the group: what would you do?",
+      intro: "Short stories to read and discuss with your students — one for each pillar. Ask the group: what would you do?",
       discussion: "Talk about it",
       whatWouldYouDo: "What would you do?",
+      wwydNote: "There is no single right answer here — what matters is thinking it through. Talk about your choice with a friend, your group, or a trusted adult.",
       keyLesson: "Key lesson"
     },
 
@@ -117,7 +136,6 @@ window.IM_STRINGS = {
       facilitator: "Your I Matter facilitator",
       parent: "A parent, guardian, or family member you trust",
       contacts: "Support contacts",
-      contactsNote: "Ask your teacher or facilitator to confirm these contacts are current.",
       safetyReminder: "If you or a friend is in danger, tell a trusted adult right away. You never have to face a hard situation alone."
     },
 
@@ -128,44 +146,20 @@ window.IM_STRINGS = {
       orgHeading: "About Imagine Tomorrow Foundation",
       privacyHeading: "Your privacy",
       privacyBody: "This app does not ask for your name, does not need an account, and does not send your writing or feelings anywhere. Everything you save stays on this device. You can delete it all at any time in My Space.",
-      skillsHeading: "Skills we grow together",
+      pillarsHeading: "The six pillars",
       versionLabel: "App version"
     },
 
-    /* Sessions / facilitator */
-    facilitator: {
-      title: "Facilitator Mode",
-      enterPin: "Enter facilitator PIN",
-      wrongPin: "That PIN is not correct.",
-      unlocked: "Facilitator Mode unlocked",
-      lock: "Lock Facilitator Mode",
-      sessions: "Monthly session plans",
-      projector: "Projector mode",
-      projectorOff: "Exit projector mode",
-      discussion: "Discussion questions",
-      totals: "Local completion totals",
-      totalsNote: "These totals count activity on this device only. No individual or personal data is collected.",
-      notes: "My session notes",
-      groupName: "School / group name",
-      changePin: "Change facilitator PIN",
-      resetResults: "Reset local activity results",
-      resetResultsConfirm: "Reset lesson and quiz completion counters on this device? Personal My Space entries are not touched.",
-      objective: "Learning objective",
-      opening: "Opening activity",
-      mainLesson: "Main lesson",
-      groupDiscussion: "Group discussion",
-      reflection: "Reflection",
-      challenge: "Take-home challenge"
-    },
-
-    /* Session Plans (public tab) */
+    /* Session Plans (main tab) */
     sessionPlans: {
       title: "Session Plans",
-      intro: "Ready-to-run life-skills sessions to lead with your students — read them, prepare, and run them with your group.",
+      intro: "Six ready-to-run life-skills sessions — one for each pillar of the I Matter framework. Read them, prepare, and lead them with your group.",
       duration: "Duration",
       contents: "In this session",
       activity: "Activity",
-      parts: "parts"
+      parts: "parts",
+      pillar: "Pillar",
+      outcome: "Outcome"
     },
 
     /* Settings */
@@ -189,16 +183,14 @@ window.IM_STRINGS = {
       earned: "Badge earned!"
     },
 
-    offline: {
-      nowOffline: "You are offline. Everything in I Matter still works!",
-      nowOnline: "You are back online."
+    install: {
+      installed: "App installed! It now works anywhere, even without an internet connection."
     }
   },
 
   /* ------------------------------------------------------------------ */
   sw: {
     appName: "I Matter",
-    tagline: "Zana ya mwezeshaji ya kuwaongoza vijana katika stadi za maisha.",
 
     nav: {
       home: "Nyumbani", resources: "Rasilimali", "session-plans": "Mipango ya Vikao"
@@ -213,36 +205,43 @@ window.IM_STRINGS = {
     },
 
     home: {
-      welcomeTitle: "Ongoza. Saidia. Wezesha.",
-      welcomeBody: "Kila unachohitaji kuwaongoza vijana katika stadi za maisha — mipango ya vikao iliyo tayari kutumika pamoja na zana ya masomo, hadithi, na rasilimali za msaada.",
+      welcomeTitle: "Wewe ni wa muhimu.",
+      welcomeBody: "Maisha yako yana thamani. Maamuzi yako yana nguvu. Maisha yako ya baadaye yanastahili kuwekezwa.",
+      welcomeSub: "Zana ya Makuzi Chanya ya Vijana kwa wawezeshaji, walimu, na wafanyakazi wa vijana.",
       todayEncouragement: "Moyo wa leo",
+      pillarsTitle: "Nguzo sita",
       sectionsTitle: "Anzia hapa",
-      sessionPlansSub: "Vikao kamili vya stadi za maisha vilivyo tayari kuendeshwa na kikundi chako.",
-      resourcesSub: "Masomo, hadithi, nafasi yako ya faragha, zana za mwezeshaji, na msaada.",
+      sessionPlansSub: "Vikao sita vilivyo tayari kuendeshwa — kimoja kwa kila nguzo ya mfumo.",
+      resourcesSub: "Mfumo, masomo ya nguzo, hadithi, nafasi yako ya faragha, na msaada.",
       progressTitle: "Maendeleo yako",
       lessonsDone: "masomo yaliyopitiwa",
       badgesEarned: "beji zilizopatikana",
       installTitle: "Weka I Matter kwenye skrini yako",
-      installBody: "Sakinisha programu ili itumike wakati wowote, hata bila intaneti.",
-      offlineReady: "Tayari kutumika bila intaneti",
-      online: "Mtandaoni",
-      offline: "Nje ya mtandao — kila kitu bado kinafanya kazi!"
+      installBody: "Sakinisha programu mara moja ukiwa na intaneti — baada ya hapo inafanya kazi popote, wakati wowote."
     },
 
     resources: {
       title: "Rasilimali",
-      intro: "Zana yako kwa vikao na zaidi — mada za kufundisha, hadithi, nafasi yako mwenyewe, zana za mwezeshaji, na taarifa za msaada.",
-      learnSub: "Mada 10 za kufundisha zenye masomo mafupi, mifano, na maswali mafupi.",
+      intro: "Zana yako kwa vikao na zaidi — mfumo, masomo ya nguzo, hadithi, nafasi yako mwenyewe, na taarifa za msaada.",
+      frameworkSub: "I Matter ni nini, mbinu iliyo nyuma yake, na nguzo sita.",
+      learnSub: "Masomo mafupi kwa kila nguzo — mawazo makuu, mifano, na maswali mafupi.",
       storiesSub: "Hadithi fupi za kusoma na kujadili na wanafunzi wako.",
       myspaceSub: "Maelezo yako ya faragha, mipango, shajara, na beji — kwenye kifaa hiki tu.",
-      facilitatorSub: "Mipango ya vikao vya kila mwezi iliyolindwa kwa PIN, hali ya projekta, na maelezo.",
       helpSub: "Mawasiliano ya msaada na mwongozo wa usalama wa kushiriki na wanafunzi.",
       aboutSub: "Kuhusu programu, shirika, na faragha yako."
     },
 
+    framework: {
+      title: "Mfumo",
+      pillar: "Nguzo",
+      outcome: "Matokeo",
+      focus: "Lengo",
+      topics: "Mada kuu"
+    },
+
     learn: {
-      title: "Jifunze",
-      intro: "Mada za kufundisha na wanafunzi wako — masomo mafupi, mifano halisi, na maswali mafupi ya kujadili pamoja.",
+      title: "Nguzo Sita",
+      intro: "Kila nguzo huimarisha dira ya ndani. Ongoza masomo haya mafupi na wanafunzi wako — mawazo makuu, mifano halisi, na maswali mafupi ya kujadili pamoja.",
       lessons: "masomo",
       introHeading: "Utangulizi",
       keyLesson: "Somo kuu",
@@ -274,31 +273,41 @@ window.IM_STRINGS = {
       journal: "Shajara ya faragha",
       badges: "Beji zangu",
       pinProtect: "Linda Nafasi Yangu kwa PIN",
+      pinPrompt: "Chagua PIN (tarakimu 4 au zaidi):",
+      wrongPin: "PIN hiyo si sahihi.",
       deleteAll: "Futa data yangu yote",
       deleteConfirm: "Hii itafuta kila kitu kilichohifadhiwa kwenye kifaa hiki: shajara, malengo, maelezo, na beji. Haiwezi kurudishwa. Futa kila kitu?",
       deleted: "Data yako yote imefutwa.",
       emptyList: "Hakuna kitu bado. Ongeza cha kwanza!",
-      journalPromptLabel: "Unahitaji wazo? Jaribu hili:"
+      journalPromptLabel: "Unahitaji wazo? Jaribu hili:",
+      strengthsPh: "mfano: Mimi ni msikilizaji mzuri",
+      goalsPh: "mfano: Kuboresha alama zangu za hisabati muhula huu",
+      gratitudePh: "mfano: Rafiki yangu alinisaidia leo",
+      learnedPh: "mfano: Kutaja hisia hufanya ziwe rahisi",
+      trustedPh: "mfano: Shangazi yangu Grace",
+      calmPlanPrompt: "Ninapohisi kulemewa, nita... (mfano: kupumua polepole mara 3, kunywa maji, kuzungumza na mtu ninayemwamini)",
+      studyPlanPrompt: "Mpango wangu wa kusoma: lini, wapi, masomo yapi, na mpango wangu wa mapumziko.",
+      challengePrompt: "Changamoto yangu ya wiki hii ni..."
     },
 
     stories: {
       title: "Hadithi",
-      intro: "Hadithi fupi za kusoma na kujadili na wanafunzi wako. Waulize kikundi: ungefanya nini?",
+      intro: "Hadithi fupi za kusoma na kujadili na wanafunzi wako — moja kwa kila nguzo. Waulize kikundi: ungefanya nini?",
       discussion: "Zungumza kuhusu hili",
       whatWouldYouDo: "Wewe ungefanya nini?",
+      wwydNote: "Hakuna jibu moja sahihi hapa — muhimu ni kufikiria kwa kina. Zungumza kuhusu chaguo lako na rafiki, kikundi chako, au mtu mzima unayemwamini.",
       keyLesson: "Somo kuu"
     },
 
     help: {
       title: "Msaada",
-      intro: "Mwongozo wa kushiriki na wanafunzi wako. Kila mtu huhitaji msaada wakati mwingine, na kuomba msaada ni ishara ya nguvu.",
+      intro: "Mwongozo wa kushiriki na wanafunzi wako. Kila mtu huhitaji msaada wakati mwingine, na kuomba msaada ni ishara ya nguvu, si udhaifu.",
       talkTo: "Watu ambao wanafunzi wanaweza kuzungumza nao",
       trustedAdult: "Mtu mzima unayemwamini — anayesikiliza na kukulinda",
       teacher: "Mwalimu unayemwamini shuleni",
       facilitator: "Mwezeshaji wako wa I Matter",
       parent: "Mzazi, mlezi, au ndugu unayemwamini",
       contacts: "Mawasiliano ya msaada",
-      contactsNote: "Muulize mwalimu au mwezeshaji wako kuthibitisha mawasiliano haya.",
       safetyReminder: "Kama wewe au rafiki yako yuko hatarini, mwambie mtu mzima unayemwamini mara moja. Hupaswi kukabili hali ngumu peke yako."
     },
 
@@ -308,42 +317,19 @@ window.IM_STRINGS = {
       orgHeading: "Kuhusu Imagine Tomorrow Foundation",
       privacyHeading: "Faragha yako",
       privacyBody: "Programu hii haiombi jina lako, haihitaji akaunti, na haitumi maandishi au hisia zako popote. Kila unachohifadhi hubaki kwenye kifaa hiki. Unaweza kufuta yote wakati wowote katika Nafasi Yangu.",
-      skillsHeading: "Ujuzi tunaokuza pamoja",
+      pillarsHeading: "Nguzo sita",
       versionLabel: "Toleo la programu"
-    },
-
-    facilitator: {
-      title: "Hali ya Mwezeshaji",
-      enterPin: "Weka PIN ya mwezeshaji",
-      wrongPin: "PIN hiyo si sahihi.",
-      unlocked: "Hali ya Mwezeshaji imefunguliwa",
-      lock: "Funga Hali ya Mwezeshaji",
-      sessions: "Mipango ya vikao vya kila mwezi",
-      projector: "Hali ya projekta",
-      projectorOff: "Toka hali ya projekta",
-      discussion: "Maswali ya majadiliano",
-      totals: "Jumla za ukamilishaji (kifaa hiki)",
-      totalsNote: "Jumla hizi huhesabu matumizi kwenye kifaa hiki tu. Hakuna data ya mtu binafsi inayokusanywa.",
-      notes: "Maelezo yangu ya kikao",
-      groupName: "Jina la shule / kikundi",
-      changePin: "Badilisha PIN ya mwezeshaji",
-      resetResults: "Futa matokeo ya shughuli za kifaa hiki",
-      resetResultsConfirm: "Futa hesabu za masomo na maswali kwenye kifaa hiki? Maandishi ya Nafasi Yangu hayataguswa.",
-      objective: "Lengo la kujifunza",
-      opening: "Shughuli ya kufungua",
-      mainLesson: "Somo kuu",
-      groupDiscussion: "Majadiliano ya kikundi",
-      reflection: "Tafakari",
-      challenge: "Changamoto ya nyumbani"
     },
 
     sessionPlans: {
       title: "Mipango ya Vikao",
-      intro: "Vikao vya stadi za maisha vilivyo tayari kuendeshwa na wanafunzi wako — visome, jiandae, na uviendeshe na kikundi chako.",
+      intro: "Vikao sita vya stadi za maisha vilivyo tayari kuendeshwa — kimoja kwa kila nguzo ya mfumo wa I Matter. Visome, jiandae, na uviongoze na kikundi chako.",
       duration: "Muda",
       contents: "Katika kikao hiki",
       activity: "Shughuli",
-      parts: "sehemu"
+      parts: "sehemu",
+      pillar: "Nguzo",
+      outcome: "Matokeo"
     },
 
     settings: {
@@ -366,9 +352,8 @@ window.IM_STRINGS = {
       earned: "Umepata beji!"
     },
 
-    offline: {
-      nowOffline: "Uko nje ya mtandao. Kila kitu katika I Matter bado kinafanya kazi!",
-      nowOnline: "Umerudi mtandaoni."
+    install: {
+      installed: "Programu imesakinishwa! Sasa inafanya kazi popote, hata bila intaneti."
     }
   }
 };

@@ -3,6 +3,51 @@
 All notable changes to the I Matter app are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [4.0.0] — 2026-07-15
+
+Rebuilt I Matter around the **I Matter Positive Youth Development Framework**
+(2026) and its **six pillars**: *I Know Myself, I Belong, I Take Action, I
+Choose Wisely, I Build Bridges, I Protect My Future.*
+
+### Added
+- New **The Framework** page (Resources) explaining Positive Youth
+  Development, the approach, the theory of change, and the six pillars with
+  their focus, core topics, and outcome statements.
+- **Six-pillar structure** across the whole app: Home shows the six pillars;
+  each pillar has a Learn category (4 lessons, 24 in total), a story, and a
+  session plan, all cross-linked.
+- **Full bilingual content.** Every lesson, story, session plan, the
+  framework page, and all config text now has English **and** Kiswahili
+  versions. Switching language re-translates the entire app — content and
+  interface — with one tap.
+- New verified **support contacts**: National Child Helpline (call 116,
+  WhatsApp, email), emergency services (999/112/911), school support, and the
+  I Matter programme office — with tap-to-call and tap-to-email links.
+- New **content files** `data/framework.js` (framework + pillars) and rebuilt
+  `data/content.js`, `data/stories.js`, `data/session-plans.js` as bilingual
+  `{ en, sw }` trees.
+- Responsive refinements for small phones, iPhone/iOS, iPad (portrait and
+  landscape), PC, and Mac — no horizontal scrolling at any width, safe-area
+  aware, balanced two-column layouts on wide screens.
+
+### Changed
+- Reframed the app from a generic life-skills toolkit to the Positive Youth
+  Development Framework; new hero ("You matter."), motto, and taglines.
+- Every mention of **Imagine Tomorrow Foundation** now hyperlinks to
+  [imagine-tomorrow.org](https://www.imagine-tomorrow.org/) (footer, About,
+  Help).
+- Bumped app version to 4.0.0 and service worker cache to `i-matter-v5`.
+- Smoke test rewritten (90 checks) covering pillars, bilingual re-translation,
+  responsive widths, new contacts, and offline operation.
+
+### Removed
+- The **"Offline" indicator/pill** and all "Offline" wording from the UI. The
+  app still works 100% offline once installed; it only needs a connection on
+  the first install/visit.
+- The **PIN-protected Facilitator Mode** tab and all its code (monthly
+  sessions, projector mode, local totals, session notes), and the retired
+  `data/sessions.js`.
+
 ## [3.0.0] — 2026-07-14
 
 Restructured the app around **two main sections**: **Session Plans** and

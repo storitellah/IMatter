@@ -1,1042 +1,1154 @@
 /* ==========================================================================
-   I MATTER — LEARNING CONTENT (Knowledge Centre)
+   I MATTER — PILLAR LESSONS (English + Kiswahili)
    --------------------------------------------------------------------------
-   This file is safe to edit. Each category has lessons. Each lesson has:
-     id        - unique name (letters, numbers, dashes; do not repeat)
-     title     - lesson name
-     intro     - short introduction (1-2 sentences)
-     key       - the key lesson
-     example   - a real-life example
-     reflection- a question to think about
-     activity  - a small activity to try
-     quiz      - one quick question: { q, options[], answer (index from 0), tf (true/false mode) }
-     takeaway  - the message to remember
-     related   - ids of related lessons
-   Words in [square brackets] inside "hard" are explained in simple terms.
+   Safe to edit. Six pillars, each with four short lessons that follow the
+   I Matter Positive Youth Development Framework (2026).
+
+   STRUCTURE
+   window.IM_CONTENT = { en: { categories: [...] }, sw: { categories: [...] } }
+   Both language trees must keep the SAME ids, order, emoji, colours, and
+   quiz answer indexes — only the text changes.
+
+   Each lesson: id, title, intro, key, example, reflection, activity,
+   quiz { q, options[4], answer (0-based index) }, takeaway, related [ids].
    ========================================================================== */
 
 window.IM_CONTENT = {
-  categories: [
 
-    /* ================= 1. KNOWING MYSELF ================= */
+  en: { categories: [
+
+    /* ================= PILLAR 1 — I KNOW MYSELF ================= */
     {
-      id: "knowing-myself",
-      title: "Knowing Myself",
-      emoji: "🌟",
-      color: "teal",
-      blurb: "Discover what makes you special, strong, and unique.",
+      id: "know-myself", emoji: "🌟", color: "yellow",
+      title: "I Know Myself",
+      blurb: "Understanding who I am and recognizing my strengths, values, and potential.",
+      outcome: "I know who I am and I value myself.",
       lessons: [
         {
-          id: "unique-me",
-          title: "What makes me unique",
-          intro: "No one in the whole world is exactly like you. That is a wonderful thing.",
-          key: "Being unique means having your own mix of looks, talents, ideas, and dreams. You do not need to be like anyone else to matter.",
-          example: "Wanjiru is quiet in class but tells amazing stories. Her friend Baraka is loud and funny. Both are valuable in different ways.",
-          reflection: "What is one thing about you that makes you different from your friends?",
-          activity: "Write down three things about yourself that make you 'you'. They can be big or small.",
-          quiz: { q: "Being unique means...", options: ["Being better than others", "Having your own special mix of qualities", "Copying popular people"], answer: 1 },
-          takeaway: "You are one of a kind, and that is your strength.",
-          related: ["my-strengths", "my-identity"]
+          id: "self-awareness",
+          title: "Self-awareness",
+          intro: "Self-awareness is the ability to understand ourselves — our personality, thoughts, feelings, behaviours, strengths, and weaknesses.",
+          key: "Knowing yourself is the first step of the journey. When you understand what you feel, what you value, and what you are good at, you can make choices that truly fit you.",
+          example: "Amina notices that she works best in the morning and gets frustrated when rushed. She starts doing her hardest homework before school — and her grades improve.",
+          reflection: "What are three things you know about yourself — something you enjoy, something you are good at, and something you find hard?",
+          activity: "Draw a circle and divide it into five parts: my strengths, my weaknesses, my goals, my values, and one word that describes me. Fill it in.",
+          quiz: {
+            q: "What is self-awareness?",
+            options: [
+              "Knowing everything about other people",
+              "Understanding your own thoughts, feelings, strengths, and weaknesses",
+              "Always being happy with yourself",
+              "Never making mistakes"
+            ],
+            answer: 1
+          },
+          takeaway: "The better you know yourself, the better you can guide yourself.",
+          related: ["self-esteem", "my-strengths"]
+        },
+        {
+          id: "self-esteem",
+          title: "Self-esteem & confidence",
+          intro: "Confidence is the belief in our abilities and self-worth — believing in yourself. Self-esteem is how much you value yourself.",
+          key: "Confidence grows through practice and positive self-talk — talking to yourself with kindness, compassion, and care. You do not need to be perfect to be valuable.",
+          example: "Before a class presentation, Baraka tells himself: \"I prepared well. Even if I make a mistake, I am still learning.\" His hands still shake a little — but he speaks up, and it goes well.",
+          reflection: "What would you say to a friend who feels they are not good enough? Now — can you say the same kind words to yourself?",
+          activity: "Write three positive affirmations about yourself, such as \"I am kind\" or \"I take good care of my siblings.\" Say them out loud.",
+          quiz: {
+            q: "Which of these helps confidence grow?",
+            options: [
+              "Waiting until you feel no fear at all",
+              "Comparing yourself to others",
+              "Practice and positive self-talk",
+              "Avoiding every challenge"
+            ],
+            answer: 2
+          },
+          takeaway: "Talk to yourself like someone you love.",
+          related: ["self-awareness", "resilience"]
         },
         {
           id: "my-strengths",
           title: "My strengths",
-          intro: "A strength is something you are good at or something good inside you, like kindness or courage.",
-          key: "Everyone has strengths, even if they are hard to see at first. Knowing your strengths helps you feel confident and choose good goals.",
-          example: "Kioko thought he had no strengths. Then he noticed he always helps younger kids with homework. Patience and helping are strengths!",
-          reflection: "What do people thank you for? That is often a clue to your strengths.",
-          activity: "Ask a friend or family member: 'What is one thing I am good at?' Write down what they say.",
-          quiz: { q: "True or false: Only talents like sports or singing count as strengths.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Your strengths are already inside you. Use them every day.",
-          related: ["unique-me", "self-confidence", "positive-self-talk"]
+          intro: "Everyone has strengths — things we do well, qualities that help us and others. Some are easy to see; others are hidden.",
+          key: "Strengths can be hidden: the things people thank you for are clues. Knowing your strengths builds confidence and guides your goals.",
+          example: "Neema thought she had no talents because she wasn't the best in class. Then she noticed classmates always came to her with their problems — being a good listener is a real strength.",
+          reflection: "What has a friend, teacher, or family member thanked you for recently? What does that say about your strengths?",
+          activity: "Ask two people who know you well: \"What do you think I am good at?\" Write down what they say.",
+          quiz: {
+            q: "Which of these is a clue to a hidden strength?",
+            options: [
+              "Things people often thank you for",
+              "Only school grades",
+              "What others say you cannot do",
+              "Being the best in everything"
+            ],
+            answer: 0
+          },
+          takeaway: "You have strengths — some you haven't even discovered yet.",
+          related: ["self-awareness", "goal-setting"]
         },
         {
           id: "my-values",
           title: "My values",
-          intro: "Values are the things you believe are most important, like honesty, family, or fairness.",
-          key: "Your values are like a compass. When you know them, it is easier to make choices you can be proud of.",
-          example: "Amina values honesty. When her friend asked her to lie to a teacher, she said no, because lying goes against what she believes.",
-          reflection: "Which is more important to you: being popular or being honest? Why?",
-          activity: "From this list, pick your top three: honesty, kindness, family, learning, courage, fairness, faith, friendship.",
-          quiz: { q: "Values help you...", options: ["Make choices you can be proud of", "Win every argument", "Avoid all problems"], answer: 0 },
-          takeaway: "When your choices match your values, you feel strong inside.",
-          related: ["safe-decisions", "my-identity"]
-        },
-        {
-          id: "my-feelings",
-          title: "My feelings",
-          intro: "Feelings are signals from inside you. Happy, sad, angry, excited — they all carry a message.",
-          key: "All feelings are okay to have. What matters is what you do with them. Noticing your feelings is the first step to managing them.",
-          example: "Before a big exam, Njeri felt her heart beating fast. She noticed: 'I am nervous.' Naming the feeling helped her calm down.",
-          reflection: "What feeling have you felt the most this week?",
-          activity: "Right now, stop and ask yourself: 'What am I feeling?' Try to give it a name.",
-          quiz: { q: "True or false: Some feelings are bad and you should never have them.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Feelings are messengers, not bosses. Listen to them, then choose your action.",
-          related: ["naming-feelings", "emotional-wellbeing"]
-        },
-        {
-          id: "my-interests",
-          title: "My interests",
-          intro: "Interests are things you enjoy doing or learning about — football, drawing, animals, music, numbers.",
-          key: "Your interests give you energy and can grow into skills, hobbies, and even careers. Exploring them helps you learn who you are.",
-          example: "Sifa loved fixing radios at home. Years later, that interest helped her choose to study electrical work.",
-          reflection: "What activity makes you forget the time because you enjoy it so much?",
-          activity: "List three things you love doing. Circle one you could do more of this month.",
-          quiz: { q: "Interests are important because they...", options: ["Waste your time", "Can grow into skills and dreams", "Are only for rich people"], answer: 1 },
-          takeaway: "Follow what makes you curious — it is pointing to your future.",
-          related: ["career-explore", "my-dreams"]
-        },
-        {
-          id: "my-identity",
-          title: "My identity",
-          intro: "Your identity is your answer to the question 'Who am I?' It includes your name, family, culture, beliefs, strengths, and dreams.",
-          key: "Your identity is yours to build. Other people's opinions are not your identity. You can be proud of where you come from and still grow into something new.",
-          example: "Lekishon is Maasai, a footballer, a big brother, and a science lover. All of these are parts of his identity.",
-          reflection: "If you had to describe yourself in five words, what would they be?",
-          activity: "Draw a circle. Inside, write words that describe who you are: your roles, culture, strengths, and dreams.",
-          quiz: { q: "Who decides your identity?", options: ["Your classmates", "Social media", "You, as you grow"], answer: 2 },
-          takeaway: "You are the author of your own story.",
-          related: ["unique-me", "my-values"]
-        },
-        {
-          id: "boundaries",
-          title: "My personal boundaries",
-          intro: "A boundary is a line that protects you. It says what is okay and what is not okay for you.",
-          key: "You are allowed to say no to things that make you feel unsafe or uncomfortable. Healthy boundaries protect your body, your feelings, and your time.",
-          example: "A classmate kept taking Pendo's pen without asking. Pendo said kindly but firmly: 'Please ask me first.' That is a boundary.",
-          reflection: "Is there something you wish you could say no to?",
-          activity: "Practice saying this out loud: 'No, I am not comfortable with that.' Say it kindly and firmly.",
-          quiz: { q: "A personal boundary is...", options: ["A wall that keeps all people away", "A line that protects what is okay for you", "A rule made by your friends"], answer: 1 },
-          takeaway: "Saying no to what feels wrong is saying yes to yourself.",
-          related: ["saying-no", "rel-boundaries", "personal-safety"]
-        },
-        {
-          id: "self-confidence",
-          title: "Building self-confidence",
-          intro: "Self-confidence means believing in yourself — trusting that you can learn, try, and grow.",
-          key: "Confidence is not something you are born with. It grows every time you try something, practice, and keep going after mistakes.",
-          example: "Mumbi was afraid to answer questions in class. She started with one answer a week. Each time it got easier. Now she speaks up often.",
-          reflection: "What is one small brave thing you could try this week?",
-          activity: "Stand tall, shoulders back, and say: 'I can learn anything with practice.' Do this every morning for a week.",
-          quiz: { q: "Confidence grows when you...", options: ["Avoid anything difficult", "Try, practice, and keep going", "Wait until you feel ready"], answer: 1 },
-          takeaway: "Every small brave step makes your confidence stronger.",
-          related: ["my-strengths", "positive-self-talk", "building-courage"]
+          intro: "Values are the beliefs that matter most to us — like honesty, respect, family, faith, or fairness. They shape our decisions every day.",
+          key: "When your actions match your values, you feel at peace with yourself. When they don't, you feel uncomfortable — that feeling is a signal worth listening to.",
+          example: "Juma values honesty. When a friend asks him to lie to a teacher, he feels a knot in his stomach. He says: \"I can't do that — but I can help you explain what happened.\"",
+          reflection: "Think of a moment you felt proud of yourself. Which of your values were you living in that moment?",
+          activity: "From this list — honesty, respect, family, friendship, learning, faith, courage, kindness — choose your top three values and explain why.",
+          quiz: {
+            q: "What are values?",
+            options: [
+              "Things that cost a lot of money",
+              "The beliefs that matter most to us and guide our choices",
+              "Rules made by other people",
+              "Feelings that change every day"
+            ],
+            answer: 1
+          },
+          takeaway: "Know what you stand for — it makes hard choices easier.",
+          related: ["decision-making", "self-awareness"]
         }
       ]
     },
 
-    /* ================= 2. UNDERSTANDING EMOTIONS ================= */
+    /* ================= PILLAR 2 — I BELONG ================= */
     {
-      id: "emotions",
-      title: "Understanding Emotions",
-      emoji: "💛",
-      color: "yellow",
-      blurb: "Name your feelings and learn healthy ways to handle them.",
+      id: "belong", emoji: "💬", color: "teal",
+      title: "I Belong",
+      blurb: "Building healthy relationships through effective communication, empathy, and mutual respect.",
+      outcome: "I build positive relationships with others.",
       lessons: [
         {
-          id: "naming-feelings",
-          title: "Naming feelings",
-          intro: "When you can name a feeling, it becomes easier to handle. 'Name it to tame it.'",
-          key: "There are many feelings: happy, sad, angry, worried, excited, jealous, proud, embarrassed. The more feeling words you know, the better you understand yourself.",
-          example: "Instead of saying 'I feel bad', Otieno learned to say 'I feel disappointed because we lost the match.' Naming it helped him talk about it.",
-          reflection: "How many feeling words can you think of? Try to count five.",
-          activity: "Today, each time you notice a feeling, silently name it: 'This is worry.' 'This is joy.'",
-          quiz: { q: "Naming your feelings helps you...", options: ["Hide them better", "Understand and manage them", "Make them go away forever"], answer: 1 },
-          takeaway: "A feeling you can name is a feeling you can handle.",
-          related: ["my-feelings", "managing-anger"]
+          id: "communication-basics",
+          title: "How we communicate",
+          intro: "We communicate with words (verbal) and without words (non-verbal) — facial expressions, body language, eye contact, and tone of voice.",
+          key: "Assertive communication means expressing your thoughts, feelings, and needs clearly and confidently, while respecting others. It is different from being passive (staying silent) or aggressive (hurting others).",
+          example: "Someone keeps taking Zawadi's seat. Instead of saying nothing (passive) or shouting (aggressive), she says calmly: \"I prefer to sit here. Can you please move?\"",
+          reflection: "When something bothers you, do you usually stay quiet, get angry, or speak calmly? What would you like to change?",
+          activity: "Practise saying one assertive sentence for this situation: a friend keeps interrupting you. Start with \"I\" — for example, \"I don't like being interrupted. Please let me finish.\"",
+          quiz: {
+            q: "Which response is assertive?",
+            options: [
+              "Saying nothing and feeling upset inside",
+              "\"No thanks, I want to stay in class. We can meet after school.\"",
+              "\"Leave me alone! You are always causing problems!\"",
+              "Agreeing to everything to avoid conflict"
+            ],
+            answer: 1
+          },
+          takeaway: "Be direct but respectful — your voice deserves to be heard.",
+          related: ["active-listening", "peer-pressure"]
         },
         {
-          id: "managing-anger",
-          title: "Managing anger",
-          intro: "Anger is a normal feeling. Everyone feels it. But what we do when angry can help or hurt.",
-          key: "When anger rises, your body gives signs: hot face, fast heart, tight fists. Pause, breathe, and step away before you act. Anger is okay; hurting people is not.",
-          example: "When Juma's brother broke his toy, Juma wanted to shout. Instead, he took five deep breaths and walked outside first. Then he could talk calmly.",
-          reflection: "What happens in your body when you get angry?",
-          activity: "Practice the 'STOP' plan: Stop. Take a breath. Observe your body. Proceed calmly.",
-          quiz: { q: "When you feel very angry, the best first step is to...", options: ["Say everything you feel immediately", "Pause and take slow breaths", "Keep it secret forever"], answer: 1 },
-          takeaway: "You cannot always control anger arriving, but you can control what you do next.",
-          related: ["calming-exercises", "handling-disagreements"]
+          id: "active-listening",
+          title: "Active listening",
+          intro: "Hearing is passive — it happens automatically. Listening is active — it needs attention, concentration, and care.",
+          key: "Active listening means staying fully focused while someone talks: pay attention, make eye contact, don't interrupt, ask questions, and show empathy. People feel less angry and more valued when they feel heard.",
+          example: "Mary tells Wanjiru about a problem at home. Wanjiru puts her phone away, looks at her, and asks: \"How did that make you feel?\" Mary later says that talk helped her more than any advice.",
+          reflection: "When you talk, how do you know if someone is really listening to you? How do you feel when they are not?",
+          activity: "Today, in one conversation, practise listening without interrupting even once. Then ask one caring question.",
+          quiz: {
+            q: "Which of these is part of active listening?",
+            options: [
+              "Planning your reply while the other person talks",
+              "Checking your phone",
+              "Paying full attention and asking questions",
+              "Finishing the other person's sentences"
+            ],
+            answer: 2
+          },
+          takeaway: "Listening well is one of the kindest things you can do.",
+          related: ["communication-basics", "empathy"]
         },
         {
-          id: "handling-sadness",
-          title: "Handling sadness",
-          intro: "Sadness comes when we lose something or when things do not go our way. It is a natural feeling.",
-          key: "It is okay to cry and okay to feel sad. Sadness becomes lighter when you share it with someone you trust. It usually passes with time, rest, and care.",
-          example: "When Achieng's best friend moved away, she felt sad for weeks. Talking to her aunt and writing letters to her friend helped her heal.",
-          reflection: "Who is one person you could talk to when you feel sad?",
-          activity: "Make a 'comfort list': three things that gently lift your mood, like music, a walk, or talking to a friend.",
-          quiz: { q: "True or false: Crying means you are weak.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Sadness shared is sadness halved.",
-          related: ["asking-support", "emotional-wellbeing"]
+          id: "empathy",
+          title: "Empathy",
+          intro: "Empathy is the ability to understand and share what another person is feeling — to see the situation through their eyes.",
+          key: "Empathy does not mean agreeing with everything. It means trying to understand before judging. It builds trust and makes relationships stronger.",
+          example: "A classmate snaps at Otieno for no clear reason. Instead of snapping back, Otieno remembers the boy's mother is unwell. Later he asks quietly: \"Are you okay?\" — and the boy apologises.",
+          reflection: "Think of someone who annoyed you recently. What might have been happening in their life that you couldn't see?",
+          activity: "Watch people around you today. Try to name what they might be feeling from their face and body language — without judging.",
+          quiz: {
+            q: "What is empathy?",
+            options: [
+              "Feeling sorry for someone from far away",
+              "Trying to understand what another person feels, from their point of view",
+              "Agreeing with everything others say",
+              "Telling people what they should feel"
+            ],
+            answer: 1
+          },
+          takeaway: "Before judging, ask yourself: what might they be going through?",
+          related: ["active-listening", "perspective-taking"]
         },
         {
-          id: "managing-fear",
-          title: "Managing fear",
-          intro: "Fear tries to protect you from danger. But sometimes fear shows up even when you are safe, like before a class presentation.",
-          key: "Ask yourself: 'Is this real danger, or just discomfort?' If it is real danger, get help. If it is discomfort, breathe slowly and take one small step forward.",
-          example: "Baraka feared reading aloud. He practiced at home, then read one paragraph in class. The fear got smaller each time he tried.",
-          reflection: "What is something you fear that is actually safe to try?",
-          activity: "Write down one fear. Next to it, write one tiny step you could take toward facing it.",
-          quiz: { q: "If fear shows up but you are actually safe, you can...", options: ["Run away every time", "Breathe slowly and take one small step", "Pretend you feel nothing"], answer: 1 },
-          takeaway: "Courage is not having no fear. Courage is moving forward with fear beside you.",
-          related: ["building-courage", "calming-exercises"]
-        },
-        {
-          id: "coping-stress",
-          title: "Coping with stress",
-          intro: "Stress is the feeling of being under pressure — too much homework, family duties, or worries all at once.",
-          key: "You can lower stress by breaking big tasks into small steps, taking breaks, moving your body, sleeping enough, and talking to someone.",
-          example: "Nasieku felt stressed by exams and chores. She made a simple plan: study one subject a day, help at home in the evening, and sleep by 10. The pressure eased.",
-          reflection: "What is causing you the most pressure right now?",
-          activity: "Take a big worry and split it into three small steps. Do just the first step today.",
-          quiz: { q: "A good way to handle stress is to...", options: ["Ignore it until it disappears", "Break big tasks into small steps", "Stay up all night working"], answer: 1 },
-          takeaway: "You do not have to carry everything at once. One small step at a time.",
-          related: ["school-stress", "time-management", "calming-exercises"]
-        },
-        {
-          id: "asking-support",
-          title: "Asking for support",
-          intro: "Everyone needs help sometimes — even adults, even teachers, even heroes.",
-          key: "Asking for help is a skill and a strength. Choose a person you trust, find a calm time, and say clearly what is troubling you.",
-          example: "Kip was being troubled by older boys on the way home. He told his uncle, who helped change his route and spoke to the school. The problem stopped.",
-          reflection: "What makes it hard to ask for help? What would make it easier?",
-          activity: "Practice this sentence: 'I need to talk to you about something important. Can you help me?'",
-          quiz: { q: "Asking for help shows that you are...", options: ["Weak", "Smart and strong", "A bother to others"], answer: 1 },
-          takeaway: "Strong people ask for help. You never have to struggle alone.",
-          related: ["trusted-adults", "asking-help"]
-        },
-        {
-          id: "calming-exercises",
-          title: "Calming exercises",
-          intro: "When feelings get too big, calming exercises help your body and mind settle down.",
-          key: "Try belly breathing: breathe in slowly for 4 counts, hold for 4, breathe out for 4. Or try 5-4-3-2-1: notice 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.",
-          example: "Before her music performance, Zawadi did belly breathing backstage. Her hands stopped shaking and she performed well.",
-          reflection: "When was the last time you needed to calm down quickly?",
-          activity: "Try belly breathing right now: in for 4... hold for 4... out for 4. Repeat three times.",
-          quiz: { q: "Slow, deep breathing helps because it...", options: ["Tells your body it is safe to relax", "Makes problems disappear", "Is only for adults"], answer: 0 },
-          takeaway: "Your breath is a calm-down tool you carry everywhere.",
-          related: ["managing-anger", "managing-fear", "coping-stress"]
-        },
-        {
-          id: "emotional-wellbeing",
-          title: "Emotional well-being",
-          intro: "Emotional well-being means taking care of your feelings the same way you care for your body.",
-          key: "Feed your well-being daily: enough sleep, kind self-talk, time with good friends, movement, helping others, and talking about feelings instead of hiding them.",
-          example: "Mwikali noticed she felt happier in weeks when she slept well, played with friends, and wrote in her journal. She made those her habits.",
-          reflection: "What is one habit that makes you feel good inside?",
-          activity: "Pick one well-being habit (sleep, journaling, play, gratitude) and try it every day for one week.",
-          quiz: { q: "Emotional well-being grows from...", options: ["Ignoring feelings", "Daily healthy habits and talking about feelings", "Being happy all the time"], answer: 1 },
-          takeaway: "Caring for your feelings every day keeps your mind strong.",
-          related: ["my-feelings", "handling-sadness", "celebrating-progress"]
+          id: "teamwork",
+          title: "Healthy relationships & teamwork",
+          intro: "In healthy relationships people feel valued, respected, and supported. Healthy teams work the same way — everyone matters.",
+          key: "Healthy relationships are built on trust, mutual respect, open communication, and support. Unhealthy ones show disrespect, control, constant conflict, or fear. Boundaries — the limits we set to feel safe and respected — protect every relationship.",
+          example: "Achieng's friend reads her diary without permission. Achieng says: \"Please don't go through my things — that's my boundary.\" A real friend listens and apologises.",
+          reflection: "Think about your closest friendships. Do you feel valued, respected, and supported? Do your friends feel the same with you?",
+          activity: "Write one boundary that matters to you (for example: \"I need time to study in the evening\") and practise saying it kindly and clearly.",
+          quiz: {
+            q: "Which is a sign of a healthy relationship?",
+            options: [
+              "One person controls the other's choices",
+              "Mocking and name-calling as \"jokes\"",
+              "Trust, respect, and support in both directions",
+              "Being afraid to say no"
+            ],
+            answer: 2
+          },
+          takeaway: "You deserve relationships where you feel safe, valued, and free to be yourself.",
+          related: ["empathy", "understanding-conflict"]
         }
       ]
     },
 
-    /* ================= 3. COMMUNICATION ================= */
+    /* ================= PILLAR 3 — I TAKE ACTION ================= */
     {
-      id: "communication",
-      title: "Communication",
-      emoji: "💬",
-      color: "coral",
-      blurb: "Listen well, speak clearly, and connect with respect.",
+      id: "take-action", emoji: "🎯", color: "green",
+      title: "I Take Action",
+      blurb: "Turning aspirations into action through planning, perseverance, and personal responsibility.",
+      outcome: "I take action to achieve my goals.",
       lessons: [
         {
-          id: "listening-well",
-          title: "Listening well",
-          intro: "Listening is more than hearing. It means giving someone your full attention.",
-          key: "Good listeners face the speaker, keep eye contact, do not interrupt, and check they understood: 'So you mean...?' Listening well makes people feel respected.",
-          example: "When Halima's friend was upset, Halima put her phone away, listened, and said, 'That sounds really hard.' Her friend felt truly heard.",
-          reflection: "Do you listen to understand, or just wait for your turn to speak?",
-          activity: "Today, in one conversation, listen without interrupting even once. Notice what changes.",
-          quiz: { q: "A good listener...", options: ["Interrupts with advice quickly", "Gives full attention and checks understanding", "Looks at their phone while listening"], answer: 1 },
-          takeaway: "Listening is a gift you can give anyone.",
-          related: ["speaking-clearly", "supporting-others"]
-        },
-        {
-          id: "speaking-clearly",
-          title: "Speaking clearly",
-          intro: "Speaking clearly helps people understand your ideas, needs, and feelings.",
-          key: "Think first, then speak calmly and simply. Use 'I' statements: 'I think...', 'I feel...', 'I need...'. Speak loud enough to be heard, but not shouting.",
-          example: "Instead of mumbling, Saitoti practiced: 'I did not understand the homework. Can you explain question two?' His teacher gladly helped.",
-          reflection: "When is it hardest for you to say what you mean?",
-          activity: "Practice one clear sentence starting with 'I need...' or 'I think...' and say it to someone today.",
-          quiz: { q: "An 'I' statement sounds like...", options: ["'You always ignore me!'", "'I feel ignored when no one answers me.'", "Saying nothing at all"], answer: 1 },
-          takeaway: "Clear words open doors. Speak so others can understand you.",
-          related: ["expressing-feelings", "asking-questions-comm"]
-        },
-        {
-          id: "expressing-feelings",
-          title: "Expressing feelings",
-          intro: "Sharing your feelings in words helps others understand you and helps you feel lighter.",
-          key: "Use the pattern: 'I feel [feeling] when [situation] because [reason].' This shares your heart without blaming anyone.",
-          example: "'I feel left out when you make plans without me, because I like being included.' Rehema's friends had not realized — and they changed.",
-          reflection: "What feeling have you been keeping inside that you could share?",
-          activity: "Complete this out loud: 'I feel ____ when ____ because ____.'",
-          quiz: { q: "True or false: Keeping all feelings hidden is the healthiest choice.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Feelings spoken kindly build bridges, not walls.",
-          related: ["naming-feelings", "speaking-clearly"]
-        },
-        {
-          id: "asking-questions-comm",
-          title: "Asking questions",
-          intro: "Questions are how we learn. There is no such thing as a stupid question.",
-          key: "Good questions start with what, why, how, when, and who. Asking questions shows you are thinking, not that you are slow.",
-          example: "Chebet did not understand a maths step. She asked, 'How did you get from step two to step three?' Half the class was quietly wondering the same thing.",
-          reflection: "Has fear of looking silly ever stopped you from asking something?",
-          activity: "Ask one question in class or at home today that you would normally keep inside.",
-          quiz: { q: "Asking questions in class shows that you are...", options: ["Not clever", "Thinking and wanting to learn", "Wasting time"], answer: 1 },
-          takeaway: "The person who asks learns more than the person who stays silent.",
-          related: ["asking-questions-school", "asking-advice"]
-        },
-        {
-          id: "saying-no",
-          title: "Saying no respectfully",
-          intro: "You have the right to say no. Saying no respectfully protects you and keeps respect between people.",
-          key: "Be short, clear, and kind: 'No, thank you.' 'No, I am not comfortable with that.' You do not need to give long excuses. You can repeat your no if pushed.",
-          example: "Friends asked Tumaini to skip class. He smiled and said, 'No, I am staying. Catch you later.' He said it twice, calmly, and they left him alone.",
-          reflection: "What would help you feel braver about saying no?",
-          activity: "Practice in a mirror: 'No, thank you. I am not doing that.' Calm voice, head up.",
-          quiz: { q: "A respectful 'no' is...", options: ["Short, clear, and kind", "A long list of excuses", "Impossible with friends"], answer: 0 },
-          takeaway: "'No' is a complete sentence. Use it to protect what matters.",
-          related: ["boundaries", "resisting-pressure", "peer-pressure"]
-        },
-        {
-          id: "handling-disagreements",
-          title: "Handling disagreements",
-          intro: "People do not always agree — that is normal. Disagreements can be handled without fighting.",
-          key: "Stay calm, listen to the other side, speak your view with 'I' statements, and look for a fair solution. Attack the problem, not the person.",
-          example: "Two friends both wanted the ball at break. Instead of fighting, they agreed: ten minutes each, then a game together. Problem solved.",
-          reflection: "Think of a recent disagreement. What could have made it calmer?",
-          activity: "Next disagreement, try this: first repeat the other person's view in your own words before giving yours.",
-          quiz: { q: "In a disagreement it helps to...", options: ["Shout louder to win", "Listen first, then share your view calmly", "Never talk to the person again"], answer: 1 },
-          takeaway: "You can disagree with someone and still respect them.",
-          related: ["conflict", "listening-well"]
-        },
-        {
-          id: "nonverbal",
-          title: "Non-verbal communication",
-          intro: "We speak with more than words. Our face, hands, posture, and tone all send messages.",
-          key: "A smile, crossed arms, rolling eyes, or a warm tone can say more than words. Make sure your body says the same thing as your mouth.",
-          example: "Naliaka said 'I'm fine' but her slumped shoulders and quiet voice said something else. Her teacher gently asked again, and she opened up.",
-          reflection: "What does your body language say when you are upset?",
-          activity: "Watch a conversation (with permission!) and count how many messages are sent without words.",
-          quiz: { q: "Non-verbal communication includes...", options: ["Only spoken words", "Face, posture, gestures, and tone", "Only written notes"], answer: 1 },
-          takeaway: "Your body speaks. Help it say what you mean.",
-          related: ["listening-well", "speaking-clearly"]
-        },
-        {
-          id: "online-communication",
-          title: "Communicating online safely",
-          intro: "Messages, chats, and posts are communication too — and they can be seen by more people than you think.",
-          key: "Before sending, THINK: is it True, Helpful, Inspiring, Necessary, Kind? Never share personal details, photos, or passwords with strangers. Screens hide feelings, so be extra kind.",
-          example: "Jabali almost posted an angry comment about a classmate. He remembered posts can spread and never disappear, so he talked to the classmate in person instead.",
-          reflection: "Would you be happy if your parents or teacher read your last messages?",
-          activity: "Make your own rule: 'Before I post or send, I will always ____.'",
-          quiz: { q: "Before posting something online, it is smart to...", options: ["Post fast before you change your mind", "Think: is it true, necessary, and kind?", "Share your home address so friends find you"], answer: 1 },
-          takeaway: "Type as kindly as you would speak face to face — and keep private things private.",
-          related: ["online-safety", "saying-no"]
-        }
-      ]
-    },
-
-    /* ================= 4. DECISION-MAKING ================= */
-    {
-      id: "decisions",
-      title: "Decision-Making",
-      emoji: "🧭",
-      color: "purple",
-      blurb: "Learn to make choices that are safe, smart, and true to you.",
-      lessons: [
-        {
-          id: "understanding-choices",
-          title: "Understanding choices",
-          intro: "Every day you make choices: what to say, who to walk with, how to spend time. Choices shape your life.",
-          key: "Even small choices matter. You always have more options than you first see. Stop and ask: 'What are ALL my choices here?'",
-          example: "When friends started a risky dare game, Nyokabi realized she had choices: join, watch, walk away, or suggest a different game. She chose to suggest football.",
-          reflection: "What choice did you make today without even noticing?",
-          activity: "Pick one decision you face this week. List at least three different options.",
-          quiz: { q: "When facing a decision, you usually have...", options: ["Only one option", "More options than you first see", "No control at all"], answer: 1 },
-          takeaway: "Seeing your choices clearly is the first step to choosing well.",
-          related: ["consequences", "safe-decisions"]
-        },
-        {
-          id: "consequences",
-          title: "Thinking about consequences",
-          intro: "A consequence is what happens after a choice — good or bad, now or later.",
-          key: "Before deciding, ask: 'What could happen next? And after that? Who else is affected?' Thinking one step ahead protects you from many problems.",
-          example: "Mwangi was invited to skip school for a day in town. He thought ahead: missed lessons, worried parents, trouble at school. He chose not to go.",
-          reflection: "Think of a good choice you made. What good things followed?",
-          activity: "For your next decision, draw two arrows: 'If I do this → then...' and 'If I don't → then...'",
-          quiz: { q: "A consequence is...", options: ["Only a punishment", "What happens after a choice, good or bad", "Something only adults face"], answer: 1 },
-          takeaway: "Choose with your future self in mind.",
-          related: ["understanding-choices", "learning-mistakes-dm"]
-        },
-        {
-          id: "safe-decisions",
-          title: "Making safe decisions",
-          intro: "A safe decision protects your body, your feelings, your future, and other people.",
-          key: "Use the 3-question test: Is it safe? Is it fair? Would a trusted adult approve? If any answer is no, choose differently.",
-          example: "Older boys offered Sankale a ride on an overloaded motorbike. He used the test: not safe. He said no and walked with a friend instead.",
-          reflection: "Who is a person whose advice helps you decide safely?",
-          activity: "Memorize the test: Safe? Fair? Approved? Try it on your next decision.",
-          quiz: { q: "Which question belongs in the safe-decision test?", options: ["Will it make me look cool?", "Is it safe?", "Will everyone like me?"], answer: 1 },
-          takeaway: "When in doubt, choose the option that keeps you safe.",
-          related: ["personal-safety", "consequences", "resisting-pressure"]
-        },
-        {
-          id: "resisting-pressure",
-          title: "Resisting pressure",
-          intro: "Pressure is when someone pushes you to do something. It can come from friends, older youth, or even adults.",
-          key: "You can resist pressure by: saying no firmly, repeating your no, suggesting something else, walking away, or getting help. Real friends respect your no.",
-          example: "'Everyone is trying it,' they told Makena about sniffing glue. She said, 'Not me,' twice, then walked to where other friends were playing.",
-          reflection: "Why do you think people pressure others to join them?",
-          activity: "Practice with a friend: one pressures (kindly!), the other says no three different ways.",
-          quiz: { q: "If someone keeps pressuring you after you say no, you can...", options: ["Give in to stop the pressure", "Repeat your no and walk away", "Fight them"], answer: 1 },
-          takeaway: "Your no belongs to you. No one can take it without your permission.",
-          related: ["saying-no", "peer-pressure", "safe-decisions"]
-        },
-        {
-          id: "asking-advice",
-          title: "Asking for advice",
-          intro: "Big decisions are easier with wise input. Asking for advice is a smart move, not a weak one.",
-          key: "Choose someone with experience who cares about you. Explain the situation honestly. Listen. Then remember: advice helps you decide, but the decision is still yours.",
-          example: "Choosing subjects for next year, Wafula asked his teacher, his mother, and an older cousin. Their advice helped him pick with confidence.",
-          reflection: "Who gives you advice that has helped you before?",
-          activity: "Think of one decision you face. Write down two people you could ask about it.",
-          quiz: { q: "After getting advice, the final decision belongs to...", options: ["The adviser", "You", "Whoever is oldest"], answer: 1 },
-          takeaway: "Wise people borrow wisdom. Ask, listen, then choose.",
-          related: ["asking-support", "trusted-adults"]
-        },
-        {
-          id: "learning-mistakes-dm",
-          title: "Learning from mistakes",
-          intro: "Everyone makes wrong choices sometimes. Mistakes are painful, but they are also powerful teachers.",
-          key: "When a choice goes wrong: admit it, fix what you can, apologize if needed, and ask 'What will I do differently next time?' Then let it go.",
-          example: "Kadzo lent her textbook to someone she barely knew and never got it back. Next time, she lent books only to people who returned things before.",
-          reflection: "What has a past mistake taught you?",
-          activity: "Finish this sentence: 'A mistake I learned from was ____, and now I ____.'",
-          quiz: { q: "True or false: Making a mistake means you are a failure.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "A mistake is a lesson in work clothes.",
-          related: ["trying-again", "learning-mistakes-cr"]
-        },
-        {
-          id: "setting-priorities",
-          title: "Setting priorities",
-          intro: "A priority is what matters most right now. When everything feels important, priorities show you where to start.",
-          key: "List your tasks, then mark: Must do, Should do, Could do. Do the 'must' items first. Saying yes to everything means doing nothing well.",
-          example: "Exam week: Neema wanted to revise, attend choir, and visit friends. She chose revision first, choir second, and moved the visit to after exams.",
-          reflection: "What is your number one priority this week?",
-          activity: "Write today's tasks. Mark each one: Must / Should / Could. Start with a Must.",
-          quiz: { q: "Setting priorities means...", options: ["Doing everything at once", "Choosing what matters most first", "Ignoring school work"], answer: 1 },
-          takeaway: "When you know what matters most, deciding becomes easier.",
-          related: ["time-management", "goals-lesson"]
-        }
-      ]
-    },
-
-    /* ================= 5. PROBLEM-SOLVING ================= */
-    {
-      id: "problem-solving",
-      title: "Problem-Solving",
-      emoji: "🧩",
-      color: "green",
-      blurb: "Face challenges step by step, like a puzzle you can solve.",
-      lessons: [
-        {
-          id: "understand-problem",
-          title: "Understanding the problem",
-          intro: "You cannot solve a problem you do not understand. The first step is always to see it clearly.",
-          key: "Ask: What exactly is the problem? When does it happen? Who is involved? What do I want to be different? Write it in one clear sentence.",
-          example: "'School is terrible' became clearer when Owino wrote: 'I keep arriving late because I sleep late, and I get punished.' Now the real problem could be solved.",
-          reflection: "What is one problem in your life you have never described in a single clear sentence?",
-          activity: "Take a problem and write it in one sentence: 'The problem is ____ because ____.'",
-          quiz: { q: "The first step in solving a problem is to...", options: ["Panic", "Understand it clearly", "Blame someone"], answer: 1 },
-          takeaway: "A problem well described is a problem half solved.",
-          related: ["possible-solutions", "choose-solution"]
-        },
-        {
-          id: "possible-solutions",
-          title: "Looking at possible solutions",
-          intro: "Most problems have more than one solution. Brainstorming means listing many ideas before judging them.",
-          key: "Write every idea, even funny ones — quantity first, quality later. Then look at each: What would happen? Is it safe? Is it fair? Can I actually do it?",
-          example: "Problem: no quiet place to study at home. Ideas: study early morning, use the school library, ask neighbours, study with a friend, use headphones. Several could work!",
-          reflection: "Do you usually stop at the first idea, or look for more?",
-          activity: "Pick a small problem and list five possible solutions in two minutes. Don't judge until the list is done.",
-          quiz: { q: "When brainstorming solutions, you should first...", options: ["List many ideas without judging", "Pick the first idea", "Give up if it is hard"], answer: 0 },
-          takeaway: "More ideas mean better choices.",
-          related: ["understand-problem", "choose-solution"]
-        },
-        {
-          id: "asking-help-ps",
-          title: "Asking for help",
-          intro: "Some problems are too big to solve alone — and that is completely normal.",
-          key: "Signs you need help: the problem involves danger, it keeps repeating, it is about adults, or it makes you feel scared or hopeless. Choose a trusted person and tell them clearly.",
-          example: "Money was disappearing from the class fund and some students blamed Musa unfairly. He could not fix it alone, so he asked the class teacher to help investigate.",
-          reflection: "How do you know when a problem is too big for you alone?",
-          activity: "Write the names of three people you could go to with a big problem.",
-          quiz: { q: "You should definitely ask for help when a problem...", options: ["Is a little boring", "Involves danger or feels too big", "Can be solved in one minute"], answer: 1 },
-          takeaway: "Asking for help is part of solving, not giving up.",
-          related: ["asking-support", "trusted-adults"]
-        },
-        {
-          id: "choose-solution",
-          title: "Choosing a safe solution",
-          intro: "After listing ideas, it is time to choose. The best solution is safe, fair, and possible.",
-          key: "Test each idea: Is it safe for me and others? Is it fair? Do I have what I need to do it? What could go wrong? Choose the strongest one and make a simple plan.",
-          example: "To stop being late, Owino compared ideas: sleeping earlier was safe, free, and fully in his control. He chose it and set a bedtime.",
-          reflection: "Have you ever chosen a quick fix that caused a bigger problem later?",
-          activity: "Take your five brainstormed ideas and give each a score out of 5 for safety, fairness, and possibility.",
-          quiz: { q: "The best solution is usually the one that is...", options: ["Fastest, no matter the risk", "Safe, fair, and possible", "Most popular with friends"], answer: 1 },
-          takeaway: "Choose the solution your future self will thank you for.",
-          related: ["safe-decisions", "review-solution"]
-        },
-        {
-          id: "review-solution",
-          title: "Reviewing what happened",
-          intro: "After trying a solution, look back. Did it work? This is how problem-solvers get better every time.",
-          key: "Ask: What went well? What was hard? What would I do differently? If the problem is not solved, that is okay — pick the next idea from your list and try again.",
-          example: "Owino's earlier bedtime worked for school days but not weekends. He reviewed and added a weekend alarm. Now his plan works every day.",
-          reflection: "Think of something you tried recently. What did you learn from how it went?",
-          activity: "After your next solved (or unsolved!) problem, answer: went well / was hard / next time I will...",
-          quiz: { q: "If your first solution does not work, you should...", options: ["Give up — the problem cannot be solved", "Review, learn, and try another idea", "Pretend it worked"], answer: 1 },
-          takeaway: "Every attempt teaches you something. Review, adjust, and go again.",
-          related: ["trying-again", "learning-mistakes-dm"]
-        },
-        {
-          id: "working-with-others",
-          title: "Working with others",
-          intro: "Two heads are often better than one. Many problems are solved faster and better together.",
-          key: "Good teamwork means sharing ideas, listening to everyone, dividing tasks fairly, and encouraging each other. Different views make solutions stronger.",
-          example: "The school compound was littered. One class made teams: some collected, some made bins from boxes, some drew posters. Together they fixed what no one could alone.",
-          reflection: "What do you bring to a team — ideas, energy, organization, humour?",
-          activity: "Next group task, make sure every member speaks before any decision is made.",
-          quiz: { q: "Teams solve problems better when...", options: ["One person decides everything", "Everyone's ideas are heard", "Members compete against each other"], answer: 1 },
-          takeaway: "Together, ordinary people solve extraordinary problems.",
-          related: ["group-work", "supporting-others"]
-        }
-      ]
-    },
-    /* ================= 6. HEALTHY RELATIONSHIPS ================= */
-    {
-      id: "relationships",
-      title: "Healthy Relationships",
-      emoji: "🤝",
-      color: "pink",
-      blurb: "Build friendships based on respect, trust, and kindness.",
-      lessons: [
-        {
-          id: "friendship",
-          title: "Friendship",
-          intro: "Good friends make life brighter. Friendship is something you build, like a house, brick by brick.",
-          key: "Real friends listen, share, keep their word, celebrate your wins, and stand by you in hard times. To have a good friend, be a good friend.",
-          example: "When Zuri was sick for two weeks, her friend Nia brought her class notes every day. That is friendship in action.",
-          reflection: "What kind of friend are you? What kind of friend do you want to be?",
-          activity: "Do one small kind thing for a friend today without being asked.",
-          quiz: { q: "A real friend is someone who...", options: ["Only appears when they need something", "Listens, shares, and stands by you", "Makes fun of you in front of others"], answer: 1 },
-          takeaway: "Friendship grows where kindness is planted.",
-          related: ["respect", "trust"]
-        },
-        {
-          id: "respect",
-          title: "Respect",
-          intro: "Respect means treating people as valuable — their feelings, their things, their choices, and their differences.",
-          key: "Respect is shown in small ways: greeting people, listening, not laughing at differences, asking before borrowing, keeping promises. Respect given usually comes back.",
-          example: "A new student spoke with a different accent. Instead of laughing, Katana asked about her home town and learned three new words in her language.",
-          reflection: "How do you feel when someone respects you? When someone doesn't?",
-          activity: "Today, show respect to one person younger than you and one person older than you.",
-          quiz: { q: "Respect means...", options: ["Fearing people", "Treating people as valuable", "Only obeying the strongest"], answer: 1 },
-          takeaway: "Every person you meet deserves basic respect — including you.",
-          related: ["friendship", "rel-boundaries"]
-        },
-        {
-          id: "trust",
-          title: "Trust",
-          intro: "Trust is believing someone will do what they say and keep you safe. It is earned slowly and lost quickly.",
-          key: "Build trust by being honest, keeping promises, keeping secrets that are safe to keep, and admitting mistakes. Notice who has earned YOUR trust before sharing private things.",
-          example: "Simiyu told Barasa a private worry. Barasa never repeated it and checked on him kindly. Simiyu learned Barasa could be trusted.",
-          reflection: "Who has earned your trust? How did they earn it?",
-          activity: "Keep every promise you make this week — even tiny ones.",
-          quiz: { q: "Trust is built by...", options: ["Big promises", "Honesty and kept promises over time", "Buying gifts"], answer: 1 },
-          takeaway: "Be the person others can count on.",
-          related: ["friendship", "secrets"]
-        },
-        {
-          id: "rel-boundaries",
-          title: "Boundaries in relationships",
-          intro: "Even in close friendships, you are allowed to have limits — things that are yours alone.",
-          key: "Healthy relationships respect boundaries: your body, your time, your things, your privacy. A friend who ignores your no again and again is not treating you well.",
-          example: "Chiku's friend read her private journal without asking. Chiku said: 'I like you, but my journal is private. Please never do that again.'",
-          reflection: "What boundaries matter most to you in a friendship?",
-          activity: "Complete: 'In my friendships, it is not okay for anyone to ____.'",
-          quiz: { q: "If a friend keeps ignoring your 'no'...", options: ["That is normal friendship", "That is a warning sign to take seriously", "You must accept it to keep the friend"], answer: 1 },
-          takeaway: "Real friends respect your limits.",
-          related: ["boundaries", "unhealthy-behaviour"]
-        },
-        {
-          id: "peer-pressure",
-          title: "Peer pressure",
-          intro: "Peer pressure is when people your age push you to act like them — in good ways or risky ways.",
-          key: "Notice the push: 'Everyone does it', 'Don't be a coward', 'Just this once'. You can say no, suggest something else, leave, or find friends who respect your choices.",
-          example: "Boys dared Lemayian to throw stones at passing cars. He laughed it off — 'Not my game' — and went to join the football match instead.",
-          reflection: "Have you ever done something just because others were doing it? How did it feel after?",
-          activity: "Prepare two exit lines, like 'Not for me' and 'I have somewhere to be', and practice them.",
-          quiz: { q: "Which is a peer pressure phrase?", options: ["'Take your time to decide.'", "'Everyone is doing it, don't be slow!'", "'It is okay to say no.'"], answer: 1 },
-          takeaway: "Standing alone for a moment is better than falling with the crowd.",
-          related: ["resisting-pressure", "saying-no"]
-        },
-        {
-          id: "conflict",
-          title: "Conflict",
-          intro: "Conflict is a serious disagreement. Handled well, it can even make relationships stronger.",
-          key: "Cool down first. Talk in private, not in front of a crowd. Use 'I' statements, listen to their side, and look for a solution both can accept. If it stays stuck, ask a fair adult to help.",
-          example: "Two friends stopped speaking over a rumour. Finally one said, 'Can we talk? I want to understand what happened.' The rumour turned out to be false.",
-          reflection: "Is there a conflict in your life that needs a calm conversation?",
-          activity: "Think of a current conflict. Write the other person's side of the story as fairly as you can.",
-          quiz: { q: "A good first step in conflict is to...", options: ["Gather friends to your side", "Cool down, then talk in private", "Post about it online"], answer: 1 },
-          takeaway: "The goal of conflict is understanding, not winning.",
-          related: ["handling-disagreements", "bullying"]
-        },
-        {
-          id: "bullying",
-          title: "Bullying",
-          intro: "Bullying is when someone repeatedly hurts, frightens, or leaves out another person on purpose. It is never okay.",
-          key: "If you are bullied: it is NOT your fault. Do not face it alone — tell a trusted adult and keep telling until it stops. If you see bullying, do not join or laugh; support the person and report it.",
-          example: "Students kept hiding Mueni's bag and mocking her. She told her class teacher, who acted quickly. Two classmates started walking with her. The bullying stopped.",
-          reflection: "Why do you think some people bully others?",
-          activity: "Write what you would say to support a classmate who is being bullied.",
-          quiz: { q: "If you are being bullied, you should...", options: ["Keep it secret", "Tell a trusted adult and keep telling until it stops", "Believe it is your fault"], answer: 1 },
-          takeaway: "Nobody deserves bullying. Speaking up protects you and others.",
-          related: ["reporting-harm", "supporting-others", "trusted-adults"]
-        },
-        {
-          id: "supporting-others",
-          title: "Supporting others",
-          intro: "A kind word at the right time can change someone's whole day — or life.",
-          key: "Support looks like: listening without judging, sitting with someone who is alone, encouraging someone who failed, and telling an adult when a friend is in danger — even if the friend asked you not to.",
-          example: "When Taji failed his exam and hid at break, Dari sat next to him and said, 'One exam doesn't decide your future. Let's revise together next time.'",
-          reflection: "Who around you might need support right now?",
-          activity: "Notice one person today who seems down. Offer a kind word or invite them to join you.",
-          quiz: { q: "If a friend tells you they are in danger but says 'don't tell anyone', you should...", options: ["Keep the secret no matter what", "Tell a trusted adult — safety comes first", "Ignore it"], answer: 1 },
-          takeaway: "Being there for others is a quiet superpower.",
-          related: ["listening-well", "friendship"]
-        },
-        {
-          id: "unhealthy-behaviour",
-          title: "Recognizing unhealthy behaviour",
-          intro: "Some relationships hurt instead of help. Learning the warning signs protects you and your friends.",
-          key: "Warning signs: constant insults or put-downs, controlling who you talk to, threats, forcing secrets, taking your things, making you afraid. A relationship that makes you feel small or scared is not healthy.",
-          example: "An older friend kept telling Nekesa she was 'nothing without him' and demanded to know where she was at all times. Her aunt helped her see this was controlling behaviour — and helped her step away.",
-          reflection: "How does a healthy friendship make you feel? How should you never feel?",
-          activity: "Write two lists: 'A healthy friend makes me feel...' and 'Warning signs I will watch for...'",
-          quiz: { q: "Which is a warning sign of an unhealthy relationship?", options: ["They encourage your dreams", "They control and frighten you", "They respect your no"], answer: 1 },
-          takeaway: "You deserve relationships that make you feel safe and valued.",
-          related: ["rel-boundaries", "reporting-harm", "trusted-adults"]
-        }
-      ]
-    },
-
-    /* ================= 7. CONFIDENCE AND RESILIENCE ================= */
-    {
-      id: "resilience",
-      title: "Confidence & Resilience",
-      emoji: "💪",
-      color: "orange",
-      blurb: "Bounce back from setbacks and believe in your own strength.",
-      lessons: [
-        {
-          id: "trying-again",
-          title: "Trying again",
-          intro: "Falling down is part of learning. Getting up again is what makes the difference.",
-          key: "Resilience means trying again after failing — maybe in a new way. Every expert was once a beginner who refused to quit.",
-          example: "Jela failed her cycling test twice. She practiced turns every evening for two weeks. The third time, she passed with a smile.",
-          reflection: "What is something you gave up on that might deserve another try?",
-          activity: "Choose one thing you failed at before. Plan one small new attempt this week.",
-          quiz: { q: "True or false: Failing once means you should stop trying.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Fall seven times, stand up eight.",
-          related: ["learning-mistakes-cr", "facing-challenges"]
-        },
-        {
-          id: "learning-mistakes-cr",
-          title: "Learning from mistakes",
-          intro: "Mistakes feel bad, but hidden inside every mistake is a lesson waiting to be found.",
-          key: "Instead of 'I am useless', ask 'What can this teach me?' Champions study their losses more than their wins.",
-          example: "Dala's team lost the debate. Instead of sulking, they rewatched their arguments, fixed the weak points, and won the next round.",
-          reflection: "What is the most useful mistake you have ever made?",
-          activity: "After your next mistake, write one sentence: 'Next time, I will ____.'",
-          quiz: { q: "The smartest response to a mistake is to...", options: ["Hide it and hope", "Find the lesson inside it", "Blame someone else"], answer: 1 },
-          takeaway: "Mistakes are proof that you are trying.",
-          related: ["learning-mistakes-dm", "trying-again"]
-        },
-        {
-          id: "handling-criticism",
-          title: "Handling criticism",
-          intro: "Criticism is when someone points out what you did wrong. It stings — but sometimes it helps you grow.",
-          key: "Ask: is this criticism trying to help me or hurt me? Helpful criticism, take the lesson and say thanks. Hurtful mockery, let it pass — it says more about them than about you.",
-          example: "The coach said Sudi's passing was weak. It hurt, but Sudi practiced passing drills. A month later he set up the winning goal.",
-          reflection: "Think of criticism you received. Was it meant to help or to hurt?",
-          activity: "Next time you are corrected, breathe, say 'thank you', and look for one useful point.",
-          quiz: { q: "Helpful criticism...", options: ["Should always be ignored", "Can show you how to improve", "Means you are a bad person"], answer: 1 },
-          takeaway: "Take the lesson, leave the sting.",
-          related: ["positive-self-talk", "learning-mistakes-cr"]
-        },
-        {
-          id: "coping-change",
-          title: "Coping with change",
-          intro: "New school, new home, new baby in the family — change can feel exciting and scary at the same time.",
-          key: "Change is easier when you: accept your mixed feelings, keep small routines the same, ask questions about what is coming, and give yourself time to adjust.",
-          example: "When Panya's family moved towns, she kept her habit of morning runs. That one familiar routine helped everything else feel less strange.",
-          reflection: "What change are you facing now or soon?",
-          activity: "For a change you face, write one thing that will stay the same and one good thing the change might bring.",
-          quiz: { q: "During big changes, it helps to...", options: ["Panic about everything", "Keep some familiar routines", "Refuse to accept anything new"], answer: 1 },
-          takeaway: "You have survived every change so far. You can handle this one too.",
-          related: ["coping-stress", "facing-challenges"]
-        },
-        {
-          id: "facing-challenges",
-          title: "Facing challenges",
-          intro: "A challenge is anything hard: a tough subject, a big competition, a difficult situation at home.",
-          key: "Break the mountain into steps. Start with the smallest one. Ask for support. Celebrate each bit of progress. Hard does not mean impossible.",
-          example: "Maths felt like a mountain to Tabu. She started with ten minutes a day on one topic. In a term, her grade rose two levels.",
-          reflection: "What challenge would you attempt if you knew you could not fail?",
-          activity: "Name a current challenge. Write the smallest possible first step. Do it within 24 hours.",
-          quiz: { q: "When facing something hard, it helps to...", options: ["Wait for it to disappear", "Break it into small steps and start", "Decide you were born unable"], answer: 1 },
-          takeaway: "Big things are done in small steps.",
-          related: ["goals-lesson", "trying-again"]
-        },
-        {
-          id: "positive-self-talk",
-          title: "Positive self-talk",
-          intro: "Self-talk is the voice in your head. It can be your harshest critic or your best coach.",
-          key: "Catch unkind thoughts like 'I always fail' and replace them with true, kind ones: 'I am still learning' or 'I have solved hard things before.' Speak to yourself like you would to a good friend.",
-          example: "Before exams, Isika's mind said 'You will fail like last time.' She answered it: 'I prepared better this time. I will do my best.' Her calm improved her focus.",
-          reflection: "What does your inner voice usually say when things go wrong?",
-          activity: "Write three kind-but-true sentences about yourself. Read them each morning.",
-          quiz: { q: "Positive self-talk means...", options: ["Lying to yourself", "Speaking to yourself with kindness and truth", "Never admitting mistakes"], answer: 1 },
-          takeaway: "Be your own coach, not your own bully.",
-          related: ["self-confidence", "handling-criticism"]
-        },
-        {
-          id: "building-courage",
-          title: "Building courage",
-          intro: "Courage is doing the right or needed thing even when you feel afraid.",
-          key: "Courage grows with practice, like a muscle. Start small: raise your hand, greet someone new, admit a mistake. Each brave act makes the next one easier.",
-          example: "Naserian was terrified of the school talent show. She first performed for her family, then her class, then the whole school. Step by step, courage grew.",
-          reflection: "What would 'one size braver' look like for you?",
-          activity: "Do one small brave act today and write down how you felt after.",
-          quiz: { q: "Courage means...", options: ["Never feeling fear", "Acting well even when afraid", "Doing dangerous dares"], answer: 1 },
-          takeaway: "Bravery is built one small brave step at a time.",
-          related: ["managing-fear", "self-confidence"]
-        },
-        {
-          id: "celebrating-progress",
-          title: "Celebrating progress",
-          intro: "Progress is moving forward, even a little. Noticing it keeps you motivated.",
-          key: "Do not wait for the finish line to feel proud. Compare yourself to your past self, not to others. Small wins deserve small celebrations.",
-          example: "Last term Odhis could barely swim a width. Now he swims two. He is not the fastest in class — but he is far ahead of his old self.",
-          reflection: "What can you do now that you could not do a year ago?",
-          activity: "Write down three things you have improved at this year, however small.",
-          quiz: { q: "The best person to compare yourself with is...", options: ["The top student", "Your past self", "Famous people online"], answer: 1 },
-          takeaway: "Small steps forward are still steps forward. Celebrate them.",
-          related: ["emotional-wellbeing", "goals-lesson"]
-        }
-      ]
-    },
-
-    /* ================= 8. SCHOOL AND LEARNING ================= */
-    {
-      id: "school",
-      title: "School & Learning",
-      emoji: "📚",
-      color: "blue",
-      blurb: "Study smarter, manage your time, and enjoy learning.",
-      lessons: [
-        {
-          id: "study-habits",
-          title: "Study habits",
-          intro: "How you study matters as much as how long you study. Good habits make learning stick.",
-          key: "Strong habits: study at the same time daily, remove distractions, take short breaks, test yourself instead of just re-reading, and teach what you learned to someone else.",
-          example: "Instead of reading notes five times, Wairimu covered them and tried to explain the topic aloud. Her marks improved because her brain worked harder.",
-          reflection: "Which of your study habits helps you most? Which hurts you?",
-          activity: "Tonight, study one topic, close the book, and write everything you remember. Then check what you missed.",
-          quiz: { q: "Which study method makes learning stick best?", options: ["Reading notes many times", "Testing yourself and explaining aloud", "Studying only the night before"], answer: 1 },
-          takeaway: "Small daily study beats big last-minute panic.",
-          related: ["time-management", "exam-prep"]
+          id: "goal-setting",
+          title: "Setting goals",
+          intro: "Goals are things we want to achieve. They give us direction, help us stay focused, and motivate us to keep working even when we meet challenges.",
+          key: "Be clear about your goal, know why it matters to you, plan the steps, expect obstacles, and set a deadline. \"I want to improve my mathematics grade from a C to a B by the end of this term\" beats \"I want to do better in school.\"",
+          example: "Chebet wants to become a nurse. Her short-term goal: pass this term's science exams. Her plan: study in the library every afternoon and ask her teacher when she is stuck.",
+          reflection: "What is one goal for the next six months — and one for the next five years? Why do they matter to you?",
+          activity: "Write one clear goal using this pattern: \"I want to [what] by [when], because [why]. My first step is [step].\"",
+          quiz: {
+            q: "Which goal is the clearest?",
+            options: [
+              "\"I want to perform better in school.\"",
+              "\"I want to be successful someday.\"",
+              "\"I want to improve my maths grade from a C to a B by the end of term.\"",
+              "\"I will try harder.\""
+            ],
+            answer: 2
+          },
+          takeaway: "A goal with a plan and a deadline becomes a journey you can start today.",
+          related: ["time-management", "motivation"]
         },
         {
           id: "time-management",
           title: "Time management",
-          intro: "Everyone gets the same 24 hours. Managing time means using yours on purpose.",
-          key: "Plan your day the night before. Do the hardest task when your mind is freshest. Use small pieces of time — 15 minutes counts. Leave time for rest and play too.",
-          example: "Mutua wrote a simple evening plan: chores, 40 minutes study, 20 minutes football talk with friends, sleep by 9:30. Less stress, better marks, still fun.",
-          reflection: "Where does most of your free time actually go?",
-          activity: "Tonight, write tomorrow's plan with just three main things. Tick them off as you go.",
-          quiz: { q: "A good time plan includes...", options: ["Only studying, no rest", "Study, chores, rest, and play", "No plan — just react"], answer: 1 },
-          takeaway: "Control your time, or it will control you.",
-          related: ["setting-priorities", "study-habits"]
+          intro: "Time management means planning how you use your time so you can get important things done and achieve your goals. Time is a limited resource — own it!",
+          key: "Plan your day, do the most important tasks first, break big tasks into small steps, focus on one thing at a time, avoid distractions, use reminders, take short breaks, and sleep enough.",
+          example: "Peter has homework for tomorrow but keeps watching videos on the phone. He puts the phone in another room, finishes his homework in an hour, and still has time to relax — without the guilt.",
+          reflection: "What are your biggest \"time robbers\" — texting, endless chatting, social media, TV? What could you do differently this week?",
+          activity: "Tonight, write tomorrow's to-do list with the three most important tasks first. Tick them off as you go.",
+          quiz: {
+            q: "What is the best first move when a task feels too big?",
+            options: [
+              "Wait until you feel ready",
+              "Break it into small steps and start with one",
+              "Do several other things at the same time",
+              "Ask someone else to do it"
+            ],
+            answer: 1
+          },
+          takeaway: "You cannot make more time — but you can decide what your time is for.",
+          related: ["goal-setting", "beat-procrastination"]
         },
         {
-          id: "asking-questions-school",
-          title: "Asking questions",
-          intro: "In class, the question you are afraid to ask is often the one many others need answered too.",
-          key: "If you do not understand, ask — in class, after class, or through a note. Teachers respect students who want to understand. Confusion left alone grows; confusion asked about shrinks.",
-          example: "Rispa never understood fractions but stayed silent for a term. When she finally asked after class, her teacher explained it in five minutes. 'Why did I wait so long?' she wondered.",
-          reflection: "What topic are you silently confused about right now?",
-          activity: "Write down one question about school work and ask it tomorrow.",
-          quiz: { q: "If you do not understand a lesson, the best move is to...", options: ["Stay quiet and hope", "Ask the teacher, even after class", "Copy homework from a friend"], answer: 1 },
-          takeaway: "Every question you ask buys back your understanding.",
-          related: ["asking-questions-comm", "study-habits"]
+          id: "beat-procrastination",
+          title: "Overcoming procrastination",
+          intro: "Procrastination is postponing tasks, decisions, or activities. It is a learned habit — the more you do it, the worse it becomes.",
+          key: "People procrastinate out of fear of failure, perfectionism, distraction, or feeling overwhelmed. Beat it by setting daily goals, breaking tasks into small steps, starting with the most urgent task, and removing distractions.",
+          example: "\"I'll do it tomorrow,\" Sifa kept saying about her essay. The night before the deadline she panicked. Next time, she wrote just the introduction on day one — and starting made the rest easier.",
+          reflection: "What is one task you have been postponing? What would be the benefit of finishing it?",
+          activity: "Pick one postponed task. Write the three smallest steps to complete it — and do the first step today.",
+          quiz: {
+            q: "Which of these is a sign of procrastination?",
+            options: [
+              "\"I will start with the hardest part now.\"",
+              "\"This is not the right time — I'll do it tomorrow.\"",
+              "\"Let me remove distractions first.\"",
+              "\"I'll break this into small steps.\""
+            ],
+            answer: 1
+          },
+          takeaway: "Starting is the hardest step — make it small enough to take today.",
+          related: ["time-management", "motivation"]
         },
         {
-          id: "group-work",
-          title: "Working in groups",
-          intro: "Group work teaches skills you will use your whole life: sharing, leading, listening, and delivering your part.",
-          key: "Good group members: do their share, meet deadlines, listen to quiet voices, and disagree politely. If someone struggles, help them instead of mocking them.",
-          example: "In a science project, each member took one section — research, drawing, writing, presenting. They rehearsed together and got the best mark in class.",
-          reflection: "In groups, are you usually a leader, helper, ideas person, or quiet worker? All are valuable.",
-          activity: "Next group task, invite the quietest member to share their idea first.",
-          quiz: { q: "A strong group member...", options: ["Does nothing but takes credit", "Does their share and listens to others", "Argues about everything"], answer: 1 },
-          takeaway: "Teamwork divides the work and multiplies the result.",
-          related: ["working-with-others", "listening-well"]
-        },
-        {
-          id: "exam-prep",
-          title: "Preparing for exams",
-          intro: "Exams test what you know — and preparation is what puts knowledge there.",
-          key: "Start early, make a revision timetable, practice past questions, sleep well the night before, and eat before the exam. In the room: read instructions twice, do easy questions first, watch the time.",
-          example: "Three weeks before exams, Kirui revised one subject a day and did past papers on weekends. He walked into the exam room calm instead of panicked.",
-          reflection: "How early do you usually start preparing? How early would be ideal?",
-          activity: "Draw a two-week revision timetable for your next exams. One subject per day.",
-          quiz: { q: "The night before an exam it is best to...", options: ["Stay up all night cramming", "Review lightly and sleep well", "Not think about it at all"], answer: 1 },
-          takeaway: "Exams are won in the weeks before, not the night before.",
-          related: ["study-habits", "school-stress"]
-        },
-        {
-          id: "school-stress",
-          title: "Managing school stress",
-          intro: "School can pile pressure: exams, homework, expectations. You can handle pressure without breaking.",
-          key: "Watch for signs: headaches, bad sleep, worry that won't stop. Ease it by planning your work, moving your body, talking about it, breathing exercises, and remembering: your worth is more than your marks.",
-          example: "Exam pressure gave Dama stomach aches. Her facilitator taught her belly breathing and helped her make a study plan. The aches faded as her control grew.",
-          reflection: "What does school stress feel like in your body?",
-          activity: "Before homework today, do one minute of slow breathing. Notice if focusing becomes easier.",
-          quiz: { q: "True or false: Your exam marks decide your full worth as a person.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Work hard, breathe deep, and remember you are more than a grade.",
-          related: ["coping-stress", "calming-exercises", "exam-prep"]
-        },
-        {
-          id: "learning-goals",
-          title: "Setting learning goals",
-          intro: "A learning goal turns 'I wish I were better at maths' into a plan you can actually follow.",
-          key: "Make goals SMART: Specific, Measurable, Achievable, Relevant, Time-bound. 'Improve maths' becomes 'Practice 5 algebra questions every school day this month.'",
-          example: "Goal: 'Raise my English grade one level this term by reading 20 minutes daily and writing one composition weekly.' Sila hit it — because he could measure it.",
-          reflection: "What is one school subject where a clear goal could help you?",
-          activity: "Write one SMART learning goal: what, how much, by when.",
-          quiz: { q: "Which is a SMART goal?", options: ["'Be smarter'", "'Read 20 minutes daily this month'", "'Maybe study sometime'"], answer: 1 },
-          takeaway: "A goal with a plan and a date becomes real.",
-          related: ["goals-lesson", "action-plan"]
+          id: "motivation",
+          title: "Motivation & perseverance",
+          intro: "Motivation gets you started; perseverance keeps you going. Every goal worth reaching has moments when you want to give up.",
+          key: "Keep track of your progress, be flexible when the path gets bumpy, seek help when what you're doing isn't working, and stay positive. Don't give up if it takes longer than expected.",
+          example: "Kiprop failed his first driving-school test. Instead of quitting, he asked what went wrong, practised the weak parts, and passed the second time. The setback became a lesson.",
+          reflection: "Think of something hard you did not give up on. What kept you going?",
+          activity: "Write your goal on a card. Under it, write: \"When it gets hard, I will remember...\" and finish the sentence.",
+          quiz: {
+            q: "Your plan is not working. What does perseverance look like?",
+            options: [
+              "Giving up — it was not meant to be",
+              "Doing exactly the same thing and hoping",
+              "Adjusting the plan, seeking help, and continuing",
+              "Blaming other people"
+            ],
+            answer: 2
+          },
+          takeaway: "Where you start does not decide where you finish.",
+          related: ["goal-setting", "resilience"]
         }
       ]
     },
 
-    /* ================= 9. DREAMS AND FUTURE PLANNING ================= */
+    /* ================= PILLAR 4 — I CHOOSE WISELY ================= */
     {
-      id: "future",
-      title: "Dreams & Future Planning",
-      emoji: "🚀",
-      color: "indigo",
-      blurb: "Dream big, set goals, and build your path step by step.",
+      id: "choose-wisely", emoji: "🧭", color: "blue",
+      title: "I Choose Wisely",
+      blurb: "Making informed decisions and solving problems with confidence.",
+      outcome: "I make informed decisions that support my wellbeing and future.",
       lessons: [
         {
-          id: "my-dreams",
-          title: "My dreams",
-          intro: "A dream is a picture of the future you hope for. Dreams give direction and energy to your life.",
-          key: "Your dreams are allowed to be big. Where you start does not decide where you can finish. Write dreams down — a written dream is the first step to a plan.",
-          example: "A girl from a small village dreamed of becoming a pilot. She wrote it down, worked hard in maths and physics, found sponsors — today she flies.",
-          reflection: "If nothing could stop you, what would you become?",
-          activity: "Write or draw your biggest dream. Keep it somewhere you see daily.",
-          quiz: { q: "True or false: Only children from rich families are allowed big dreams.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Every big achievement started as someone's dream.",
-          related: ["goals-lesson", "role-models"]
+          id: "decision-making",
+          title: "Decision-making",
+          intro: "Decision-making is the process of choosing the best option among several alternatives. With more freedom comes greater responsibility.",
+          key: "Good decision-making means thinking about the consequences, considering your values, and taking responsibility for your actions — instead of reacting impulsively.",
+          example: "At a party, Musa's ride home has been drinking. Musa remembers his rule — never ride with a drunk driver — and calls his older sister instead, even though it's embarrassing.",
+          reflection: "What decisions are you facing right now? Which one matters most for your future?",
+          activity: "For one real decision you face, list your options and write one positive and one negative consequence for each.",
+          quiz: {
+            q: "What does good decision-making include?",
+            options: [
+              "Choosing whatever your friends choose",
+              "Deciding as fast as possible",
+              "Thinking about consequences and your values",
+              "Avoiding all decisions"
+            ],
+            answer: 2
+          },
+          takeaway: "Your choices have power — use them on purpose.",
+          related: ["consequences", "critical-thinking"]
         },
         {
-          id: "goals-lesson",
-          title: "My goals",
-          intro: "A goal is a dream with a deadline. Goals turn hopes into plans.",
-          key: "Break big goals into small steps you can start now. Write them down, track progress, and adjust when needed. Reaching small goals builds power for big ones.",
-          example: "Dream: become a nurse. Goals: pass science this term → join health club → finish secondary school → apply for training. Each step is climbable.",
-          reflection: "What is one goal you could reach within one month?",
-          activity: "Take one dream and write three stepping-stone goals under it.",
-          quiz: { q: "A goal is different from a dream because a goal has...", options: ["No purpose", "Steps and a deadline", "To be secret"], answer: 1 },
-          takeaway: "Dream big, plan small, start today.",
-          related: ["my-dreams", "action-plan", "learning-goals"]
+          id: "critical-thinking",
+          title: "Critical thinking",
+          intro: "Critical thinking means examining information carefully before believing or acting on it — asking: Is this true? Who says so? What is missing?",
+          key: "Friends, emotions, social media, and money pressures all influence our decisions. Critical thinking helps you notice those influences and think for yourself.",
+          example: "A post claims a famous person said something shocking. Before sharing, Nyokabi checks other sources — the quote was invented. She saves herself from spreading a lie.",
+          reflection: "Think of the last thing you believed because \"everyone\" said it. Did you check it yourself?",
+          activity: "Take one message or post you saw today and ask three questions: Who created this? Why? What evidence supports it?",
+          quiz: {
+            q: "What is the critical-thinking response to a shocking online claim?",
+            options: [
+              "Share it quickly before others do",
+              "Believe it if many people liked it",
+              "Check the source and look for evidence first",
+              "Ignore all information forever"
+            ],
+            answer: 2
+          },
+          takeaway: "Don't just swallow information — chew it first.",
+          related: ["decision-making", "peer-pressure"]
         },
         {
-          id: "career-explore",
-          title: "Career exploration",
-          intro: "There are hundreds of careers — many you have never heard of. Exploring helps you find your fit.",
-          key: "Explore by asking workers about their jobs, noticing what you enjoy and do well, trying clubs and activities, and learning what education each career needs. Your interests are clues.",
-          example: "Sayo loved drawing and buildings. A visiting engineer told her about architecture — a career she had never heard of. Now it is her goal.",
-          reflection: "What jobs do people in your community do? Which ones interest you?",
-          activity: "Interview one adult about their work: What do you do? How did you get here? What do you enjoy?",
-          quiz: { q: "A good way to explore careers is to...", options: ["Wait for a career to find you", "Ask workers about their jobs and try activities", "Pick only what friends pick"], answer: 1 },
-          takeaway: "The more you explore, the more doors you discover.",
-          related: ["my-interests", "education-pathways"]
+          id: "problem-solving",
+          title: "Problem-solving step by step",
+          intro: "Problems are a normal part of life. Problem-solving is the ability to recognise a challenge, think about possible solutions, and choose the best way to respond.",
+          key: "Use the 7 steps: identify the problem, consider all options, weigh the consequences of each, choose the best option, act, monitor the results, and reflect on what you learned.",
+          example: "Wafula keeps failing maths quizzes. Instead of deciding \"I'm just bad at maths,\" he identifies the real problem (he never practises), tries a solution (three practice questions daily), and his marks slowly rise.",
+          reflection: "Think of a problem you solved well. Which of the 7 steps did you use without realising?",
+          activity: "Take one current problem and walk it through the first four steps on paper: problem, options, consequences, choice.",
+          quiz: {
+            q: "What is the FIRST step of good problem-solving?",
+            options: [
+              "Act immediately",
+              "Identify the real problem",
+              "Blame someone",
+              "Choose the easiest option"
+            ],
+            answer: 1
+          },
+          takeaway: "Step back, assess, weigh your options — then act. That is control.",
+          related: ["decision-making", "consequences"]
         },
         {
-          id: "education-pathways",
-          title: "Education pathways",
-          intro: "There are many roads to a good future: universities, colleges, technical training, apprenticeships, and more.",
-          key: "University is one path, not the only one. Technical and vocational training (learning hands-on job skills) leads to strong careers too — electricians, chefs, designers, mechanics. Choose the path that fits your strengths and dream.",
-          example: "Two friends finished school. One went to university for teaching; the other trained as a solar technician. Five years later, both had good work they loved.",
-          reflection: "Which pathways have people around you taken? What can you learn from them?",
-          activity: "List three different education pathways that could lead toward your dream.",
-          quiz: { q: "True or false: University is the only path to a successful life.", tf: true, answer: 1, options: ["True", "False"] },
-          takeaway: "Many roads lead to a bright future. Find yours.",
-          related: ["career-explore", "skills-to-build"]
-        },
-        {
-          id: "skills-to-build",
-          title: "Skills I want to build",
-          intro: "Skills are abilities you grow through practice: speaking, computing, cooking, coding, leading, farming.",
-          key: "The best time to build skills is now. Pick skills that match your dream and start small: practice, ask people to teach you, use school clubs, borrow books. Skills stack up like savings.",
-          example: "Kilonzo wanted business skills. He started by helping at his aunt's shop on weekends — counting stock, serving customers, keeping records. Real skills, built early.",
-          reflection: "What skill would move you closer to your dream?",
-          activity: "Choose one skill. Write how you will practice it 15 minutes each week.",
-          quiz: { q: "Skills grow mainly through...", options: ["Wishing", "Practice over time", "Luck"], answer: 1 },
-          takeaway: "Every hour of practice is a brick in your future.",
-          related: ["goals-lesson", "career-explore"]
-        },
-        {
-          id: "action-plan",
-          title: "Creating a personal action plan",
-          intro: "An action plan is your personal map: where you are, where you are going, and the steps between.",
-          key: "A simple plan answers five questions: What is my goal? What steps will I take? What do I need? Who can help me? When will I check my progress?",
-          example: "Goal: join the debate team. Steps: practice speaking aloud daily, attend club meetings, ask the patron for tips, try out next term. Helper: sister. Check: end of month.",
-          reflection: "What would the first line of your action plan say?",
-          activity: "Use the Goal Ladder activity in this app to build your own action plan.",
-          quiz: { q: "A personal action plan should include...", options: ["Only the dream", "Goal, steps, needs, helpers, and check dates", "Other people's goals"], answer: 1 },
-          takeaway: "A plan turns 'someday' into 'starting now'.",
-          related: ["goals-lesson", "learning-goals"]
-        },
-        {
-          id: "role-models",
-          title: "Finding positive role models",
-          intro: "A role model is someone whose good example shows you what is possible.",
-          key: "Choose role models for their character and effort, not just fame or money. They can be near — a teacher, nurse, or businesswoman in your community. Learn their habits, not just their success.",
-          example: "Mbeki admired a local carpenter known for honest work and training youth for free. He learned from him every Saturday — skills and character together.",
-          reflection: "Who do you look up to, and what exactly do you admire about them?",
-          activity: "Name one role model. Write two of their habits you want to copy.",
-          quiz: { q: "The best role models are people with...", options: ["The most money", "Good character and real effort", "The most followers"], answer: 1 },
-          takeaway: "Show me your role models, and I will show you your future.",
-          related: ["my-dreams", "my-values"]
+          id: "consequences",
+          title: "Evaluating consequences",
+          intro: "Every choice carries consequences — for you, your family, and your community. Some appear immediately; others show up much later.",
+          key: "Before deciding, write down the positive and negative consequences of each option. A choice that feels good today can cost you tomorrow — and a hard choice today can protect your future.",
+          example: "A man offers Dennis 3,000 shillings to deliver a mysterious package. Quick money now — but Dennis weighs the risk: trouble with the police, danger, his family's trust. He refuses.",
+          reflection: "Think of a choice you regret. Which consequences did you not consider at the time?",
+          activity: "Draw a table with two columns — Positive and Negative — and fill it in for a decision you are facing this week.",
+          quiz: {
+            q: "Why weigh consequences before deciding?",
+            options: [
+              "To make deciding slower for no reason",
+              "Because choices that feel good now can cost you later",
+              "So you can blame others if it fails",
+              "Because all options are always equal"
+            ],
+            answer: 1
+          },
+          takeaway: "Think past today — your future self is counting on you.",
+          related: ["problem-solving", "substance-abuse"]
         }
       ]
     },
 
-    /* ================= 10. SAFETY AND SUPPORT ================= */
+    /* ================= PILLAR 5 — I BUILD BRIDGES ================= */
     {
-      id: "safety",
-      title: "Safety & Support",
-      emoji: "🛡️",
-      color: "red",
-      blurb: "Know how to stay safe and where to find help when you need it.",
+      id: "build-bridges", emoji: "🤝", color: "purple",
+      title: "I Build Bridges",
+      blurb: "Managing disagreements constructively and strengthening relationships.",
+      outcome: "I navigate conflict with respect and understanding.",
       lessons: [
         {
-          id: "personal-safety",
-          title: "Personal safety",
-          intro: "Your body and your safety belong to you. Learning safety rules helps you protect yourself.",
-          key: "Trust your feelings — if a place, person, or situation feels wrong, leave and tell a trusted adult. Move in groups when possible, let family know where you are, and avoid isolated places, especially after dark.",
-          example: "A stranger offered Mokeira a lift 'as a favour'. It felt wrong. She refused, walked to a nearby shop, and told the shopkeeper and later her mother.",
-          reflection: "What safety rules do you already follow every day?",
-          activity: "Agree on a family plan: what you will do and who you will call if you ever feel unsafe.",
-          quiz: { q: "If a situation feels wrong, you should...", options: ["Stay to be polite", "Leave and tell a trusted adult", "Keep it to yourself"], answer: 1 },
-          takeaway: "Your safety comes before politeness. Always.",
-          related: ["trusted-adults", "safe-decisions"]
+          id: "understanding-conflict",
+          title: "Understanding conflict",
+          intro: "Conflict is a disagreement between people caused by incompatible goals, needs, values, or opinions. It is a natural part of life.",
+          key: "Conflict is like fire: it can cook and bring warmth, but it can harm if it gets out of control. Handled well, conflict helps us understand each other and can even strengthen relationships.",
+          example: "Two teammates argue about who plays striker. Handled badly, the team splits into sides. Handled well — they talk, take turns, and the team grows stronger.",
+          reflection: "What words come to mind when you hear \"conflict\"? Can you think of a conflict that ended with a stronger friendship?",
+          activity: "Recall one small conflict from this week. Write down what each side actually needed (not what they said — what they needed).",
+          quiz: {
+            q: "Which statement about conflict is true?",
+            options: [
+              "Conflict always means a relationship is broken",
+              "Conflict is natural — what matters is how you handle it",
+              "The best response is always to fight back",
+              "Only bad people have conflicts"
+            ],
+            answer: 1
+          },
+          takeaway: "Conflict handled early and with respect becomes understanding.",
+          related: ["negotiation", "teamwork"]
         },
         {
-          id: "trusted-adults",
-          title: "Trusted adults",
-          intro: "A trusted adult is a grown-up who listens to you, respects you, and acts to keep you safe.",
-          key: "Trusted adults can be parents, guardians, teachers, facilitators, faith leaders, or relatives. Choose at least three, so you always have someone to turn to. A trusted adult never asks you to keep unsafe secrets.",
-          example: "Kanini listed her three: her mother, her class teacher, and her I Matter facilitator. When trouble came, she knew exactly who to go to.",
-          reflection: "Who are YOUR three trusted adults?",
-          activity: "Use the Trusted Adults Map activity in this app to record your support circle.",
-          quiz: { q: "A trusted adult is someone who...", options: ["Gives you gifts to keep secrets", "Listens, respects, and keeps you safe", "Is simply the oldest person around"], answer: 1 },
-          takeaway: "Know your three trusted adults before you need them.",
-          related: ["asking-help", "reporting-harm"]
+          id: "negotiation",
+          title: "Negotiation skills",
+          intro: "Negotiating a conflict doesn't mean fighting or giving up — it means building bridges towards a peaceful resolution.",
+          key: "Use \"I\" statements (\"I feel frustrated when...\"), listen actively, ask for clarification, take turns, focus on the problem (not the person), and aim for win-win — where both sides get what they truly need.",
+          example: "Brian is angry that Kevin missed their study session. Instead of \"You are so selfish!\", he tries: \"I felt let down when you didn't come, because I was counting on you.\" Kevin apologises — and explains what happened.",
+          reflection: "Think about your last argument. What would it sound like if you replaced \"You always...\" with \"I feel... when... because...\"?",
+          activity: "Rewrite these as \"I\" statements: \"You never listen!\" and \"You always leave me out!\"",
+          quiz: {
+            q: "Which is an \"I\" statement?",
+            options: [
+              "\"You never listen to me!\"",
+              "\"You are the problem here.\"",
+              "\"I feel ignored when I'm interrupted, because my ideas matter too.\"",
+              "\"Everyone knows you are wrong.\""
+            ],
+            answer: 2
+          },
+          takeaway: "Attack the problem, never the person.",
+          related: ["understanding-conflict", "communication-basics"]
         },
         {
-          id: "reporting-harm",
-          title: "Reporting harm",
-          intro: "If someone hurts you or another child — in body, words, or in ways that feel wrong — reporting it is the right thing to do.",
-          key: "Harm is never the child's fault. Tell a trusted adult clearly what happened. If the first person does not help, tell another, and keep telling until someone acts. Reporting protects you and other children too.",
-          example: "An older youth kept threatening younger boys for money. One boy told his teacher. The school acted, and the threats stopped — for everyone.",
-          reflection: "Why do you think some people stay silent about harm? What could help them speak?",
-          activity: "Memorize this: 'Tell. And if they don't act, tell someone else. Never stop telling.'",
-          quiz: { q: "If you report harm and the adult does not act, you should...", options: ["Give up", "Tell another trusted adult and keep telling", "Decide it was your fault"], answer: 1 },
-          takeaway: "Speaking up about harm is brave, right, and never your fault.",
-          related: ["bullying", "trusted-adults", "secrets"]
+          id: "perspective-taking",
+          title: "Seeing the other side",
+          intro: "Perspective-taking means stepping into the other person's shoes — trying to see the situation as they see it.",
+          key: "Most conflicts grow because each side is sure they are completely right. Pausing to ask \"How does this look from their side?\" cools the conflict and often reveals a solution.",
+          example: "The Owino family planted a mango tree; its branches now hang over the Ontingana family's garden — both claim the mangoes. A mediator asks each family to state the other's view. Suddenly, sharing the fruit doesn't sound so impossible.",
+          reflection: "In your current or most recent disagreement — can you honestly describe the other person's point of view?",
+          activity: "With a friend, each of you argues the OTHER person's side of a small disagreement for one minute. What did you learn?",
+          quiz: {
+            q: "What is perspective-taking?",
+            options: [
+              "Agreeing with whoever is loudest",
+              "Trying to see the situation through the other person's eyes",
+              "Giving up your own opinion",
+              "Waiting for the other person to apologise first"
+            ],
+            answer: 1
+          },
+          takeaway: "Understanding the other side doesn't weaken you — it makes you wiser.",
+          related: ["empathy", "negotiation"]
         },
         {
-          id: "online-safety",
-          title: "Online safety",
-          intro: "The internet is useful and fun, but it needs the same care as a busy street.",
-          key: "Keep private things private: full name, school, address, photos, passwords. People online are not always who they claim. Never agree to meet an online stranger. If anything online scares or confuses you, show a trusted adult.",
-          example: "Someone online asked Mumo for photos and said 'keep it our secret'. Mumo blocked them and told his older sister — exactly the right move.",
-          reflection: "What personal information should never be shared online?",
-          activity: "Check with an adult: review privacy settings on any accounts or apps you use.",
-          quiz: { q: "If a stranger online asks to meet you or keep secrets, you should...", options: ["Agree if they seem nice", "Block them and tell a trusted adult", "Send them a photo first"], answer: 1 },
-          takeaway: "Online strangers are still strangers. Guard your private world.",
-          related: ["online-communication", "secrets"]
+          id: "cooperation",
+          title: "Managing anger & cooperating",
+          intro: "Anger is a normal feeling — it tells you something feels unfair or wrong. But words said in anger leave scars, like nail holes in a fence.",
+          key: "Recognise anger early (fast heartbeat, clenched fists, heat). Acknowledge it: \"This is making me really angry.\" Take a time-out, cool down, then talk. Avoid reacting while angry — and avoid arguing with someone who is angry.",
+          example: "A boy hammered a nail into the fence each time he lost his temper. As he learned self-control, the nails stopped — but his father showed him the holes that remained: \"The fence will never be the same.\"",
+          reflection: "Have you ever said or done something in anger that you regretted later? What could you do differently next time?",
+          activity: "Make your personal \"cool-down plan\": three things you will do before responding when you feel very angry.",
+          quiz: {
+            q: "You feel rage rising during an argument. What is the wisest next step?",
+            options: [
+              "Say everything you feel immediately",
+              "Take a time-out and talk after cooling down",
+              "Get louder so you win",
+              "Bring up the person's past mistakes"
+            ],
+            answer: 1
+          },
+          takeaway: "You can feel angry and still choose your actions wisely.",
+          related: ["understanding-conflict", "resilience"]
+        }
+      ]
+    },
+
+    /* ================= PILLAR 6 — I PROTECT MY FUTURE ================= */
+    {
+      id: "protect-future", emoji: "🛡️", color: "coral",
+      title: "I Protect My Future",
+      blurb: "Making healthy choices that support my wellbeing and future aspirations.",
+      outcome: "I make healthy choices that protect my wellbeing and my future.",
+      lessons: [
+        {
+          id: "peer-pressure",
+          title: "Peer pressure & refusal skills",
+          intro: "Peer pressure is influence from friends and age-mates. It can be positive (encouraging you to study) or negative (pushing you to drink, smoke, or skip school).",
+          key: "You can refuse without losing yourself: say NO firmly and repeat it, use strong body language, give a reason, suggest an alternative, or walk away. Real friends respect your choices.",
+          example: "\"Just try it once, don't be a child,\" the boys tell Simiyu, offering a cigarette. He looks them in the eye: \"No thanks — I've seen what smoking did to my uncle. Let's go play football instead.\"",
+          reflection: "Where in your life do you feel pressure to do things that don't match your values? What could you say next time?",
+          activity: "Practise saying \"No\" three ways to one risky invitation: (1) No + reason, (2) No + alternative, (3) No + walk away.",
+          quiz: {
+            q: "Which is an effective refusal skill?",
+            options: [
+              "Saying \"maybe later\" so they stop asking",
+              "Saying no firmly, giving a reason, and suggesting an alternative",
+              "Going along with it once to keep the peace",
+              "Laughing and hoping they forget"
+            ],
+            answer: 1
+          },
+          takeaway: "Saying no to the wrong thing is saying yes to your future.",
+          related: ["substance-abuse", "communication-basics"]
         },
         {
-          id: "secrets",
-          title: "Safe and unsafe secrets",
-          intro: "Some secrets are fun — like a surprise gift. Others are heavy and hurtful. Learn to tell the difference.",
-          key: "A safe secret is happy and will soon be told (a surprise party). An unsafe secret makes you feel scared, confused, or asks you to hide harm. Unsafe secrets should ALWAYS be told to a trusted adult — even if you promised.",
-          example: "'Don't tell anyone or you'll be in trouble' — that sentence itself is a warning sign. When Atieno heard it, she knew this was an unsafe secret, and she told her mother.",
-          reflection: "How does your body feel with a fun secret? How about a heavy one?",
-          activity: "Practice this rule aloud: 'Secrets that scare me or hide harm — I always tell.'",
-          quiz: { q: "Which secret should you always tell a trusted adult?", options: ["A surprise birthday party", "A secret that scares you or hides harm", "A friend's favourite colour"], answer: 1 },
-          takeaway: "No secret is more important than your safety.",
-          related: ["reporting-harm", "trusted-adults"]
+          id: "substance-abuse",
+          title: "Drugs & addiction: the facts",
+          intro: "Drugs are substances that change how your body and mind work. They are unpredictable and especially dangerous for teenagers, whose brains are still developing.",
+          key: "Addiction is when your body and brain get so used to a drug that you feel you can't live without it — and young people can get addicted very quickly. \"Natural,\" \"legal,\" or \"everyone does it\" does not mean safe. Recovery is possible with support, but prevention is far better.",
+          example: "David started sniffing glue with older boys to forget his problems. Within months he lost interest in school and stole from his parents. With counselling and family support he recovered — but he says: \"I wish I had never started.\"",
+          reflection: "Why do you think some young people start using drugs — and what protects those who don't?",
+          activity: "Myth or fact? Discuss: \"Weed is natural, so it's safe.\" \"Alcohol helps you forget problems.\" \"Only weak people get addicted.\" (All myths.)",
+          quiz: {
+            q: "Which statement is TRUE?",
+            options: [
+              "Drugs that are legal or natural are safe",
+              "Addiction only happens to weak people",
+              "Teenagers can become addicted very quickly because their brains are still developing",
+              "You can always control how much you use"
+            ],
+            answer: 2
+          },
+          takeaway: "Your developing brain is your greatest asset — protect it.",
+          related: ["peer-pressure", "consequences"]
         },
         {
-          id: "asking-help",
-          title: "Asking for help",
-          intro: "Knowing how and when to ask for help is one of the most important life skills of all.",
-          key: "Ask for help when you feel unsafe, overwhelmed, or stuck. Be direct: 'Something happened and I need your help.' If you cannot say it, write it in a note. Help-seekers are problem-solvers.",
-          example: "Ngala could not say the words out loud, so he wrote his problem in a note and gave it to his teacher after class. The teacher understood and helped.",
-          reflection: "If speaking felt too hard, what other ways could you ask for help?",
-          activity: "Write a short 'help sentence' you could use or adapt anytime: 'I need to talk to you about something important.'",
-          quiz: { q: "If it feels too hard to say a problem out loud, you can...", options: ["Give up on getting help", "Write it in a note to a trusted adult", "Wait years until it fixes itself"], answer: 1 },
-          takeaway: "Help is always closer than it feels. Reach for it.",
-          related: ["asking-support", "trusted-adults"]
+          id: "resilience",
+          title: "Resilience",
+          intro: "Resilience is the ability to recover from setbacks, adapt to change, and keep going when life gets hard.",
+          key: "Resilience is built, not born: supportive relationships, hobbies and goals, self-care, asking for help, and remembering that failure is a teacher — not the end of the story.",
+          example: "When Akinyi's family had to move towns mid-year, she lost her friends and her marks dropped. She joined the drama club, found new friends, asked teachers for help — and finished the year stronger than she started.",
+          reflection: "You have survived 100% of your hardest days so far. What helped you get through the hardest one?",
+          activity: "Draw your \"resilience shield\": four things that keep you strong — a person, an activity, a strength, and a hope.",
+          quiz: {
+            q: "What is resilience?",
+            options: [
+              "Never having any problems",
+              "Hiding your feelings so no one knows",
+              "Recovering from setbacks and continuing towards your goals",
+              "Refusing to ever ask for help"
+            ],
+            answer: 2
+          },
+          takeaway: "Falling is human. Rising again is resilience.",
+          related: ["motivation", "healthy-lifestyle"]
         },
         {
-          id: "emergency-info",
-          title: "Emergency support information",
-          intro: "In an emergency, knowing who to contact — fast — can protect you and others.",
-          key: "Know your emergency contacts: a parent or guardian's number, your school's contact, and the support numbers in this app's Help section. Ask your teacher or facilitator to confirm the right local numbers.",
-          example: "When a neighbour was badly injured, Sokorte stayed calm, called her mother, and alerted a nearby adult. Knowing exactly who to call saved precious minutes.",
-          reflection: "Do you know the numbers you would need in an emergency? Who can help you confirm them?",
-          activity: "Open the Help section of this app with a teacher or parent and fill in your local support contacts together.",
-          quiz: { q: "The best time to learn emergency contacts is...", options: ["During the emergency", "Before any emergency happens", "Never"], answer: 1 },
-          takeaway: "Prepared today, protected tomorrow.",
-          related: ["personal-safety", "trusted-adults"]
-        },
-        {
-          id: "child-protection",
-          title: "Child protection basics",
-          intro: "Children and young people have the right to be safe, cared for, and heard. This is protected by law.",
-          key: "You have the right to: safety from harm, food, shelter, education, medical care, and to be heard. No one — not even family — has the right to abuse you. Schools and communities have people whose job is to protect children.",
-          example: "During an I Matter session, students learned that their school has a child protection teacher. Knowing this, Sialo helped a friend get support she badly needed.",
-          reflection: "Who in your school or community is responsible for protecting children?",
-          activity: "Find out the name of your school's child protection or guidance teacher this week.",
-          quiz: { q: "Which of these is a child's right?", options: ["Safety, education, and being heard", "Only what adults decide to give", "Nothing until age 18"], answer: 0 },
-          takeaway: "Your safety and your voice are your rights — know them, use them.",
-          related: ["reporting-harm", "trusted-adults", "emergency-info"]
+          id: "healthy-lifestyle",
+          title: "Healthy lifestyles",
+          intro: "Your body and mind are the vehicle for every dream you have. Healthy habits — sleep, food, movement, and rest — power everything else.",
+          key: "Protecting your future includes daily choices: sleep enough, eat what strengthens you, move your body, limit screen time, and take care of your mental health. Small habits, repeated daily, shape who you become.",
+          example: "Tumaini kept falling asleep in class after late nights on the phone. She set a rule — phone off by 9 pm — and within two weeks her energy, mood, and marks all improved.",
+          reflection: "Which daily habit is building your future — and which one is quietly working against you?",
+          activity: "Choose one small healthy habit for this week (sleep by 10 pm, a daily walk, one hour less scrolling). Track it for seven days.",
+          quiz: {
+            q: "Which choice best supports both body and mind?",
+            options: [
+              "Skipping sleep to do more",
+              "Regular sleep, healthy food, and movement",
+              "Energy drinks instead of rest",
+              "Keeping worries secret"
+            ],
+            answer: 1
+          },
+          takeaway: "Take care of your body — you live your whole future in it.",
+          related: ["resilience", "time-management"]
         }
       ]
     }
-  ]
+  ] },
+
+  /* ==================================================================== */
+  /* KISWAHILI                                                            */
+  /* ==================================================================== */
+  sw: { categories: [
+
+    /* ================= NGUZO 1 — NINAJIJUA ================= */
+    {
+      id: "know-myself", emoji: "🌟", color: "yellow",
+      title: "Ninajijua",
+      blurb: "Kuelewa mimi ni nani na kutambua uwezo wangu, maadili yangu, na vipaji vyangu.",
+      outcome: "Ninajua mimi ni nani na ninajithamini.",
+      lessons: [
+        {
+          id: "self-awareness",
+          title: "Kujitambua",
+          intro: "Kujitambua ni uwezo wa kujielewa — tabia zetu, mawazo yetu, hisia zetu, mienendo yetu, uwezo wetu, na udhaifu wetu.",
+          key: "Kujijua ni hatua ya kwanza ya safari. Unapoelewa unachohisi, unachothamini, na unachokiweza, unaweza kufanya maamuzi yanayokufaa kweli.",
+          example: "Amina anagundua kwamba anasoma vizuri zaidi asubuhi na hukasirika anapoharakishwa. Anaanza kufanya kazi ngumu za nyumbani kabla ya shule — na alama zake zinapanda.",
+          reflection: "Ni mambo gani matatu unayojijua — kitu unachofurahia, kitu unachokiweza vizuri, na kitu kinachokuwia kigumu?",
+          activity: "Chora duara na uligawe sehemu tano: uwezo wangu, udhaifu wangu, malengo yangu, maadili yangu, na neno moja linalonielezea. Jaza sehemu zote.",
+          quiz: {
+            q: "Kujitambua ni nini?",
+            options: [
+              "Kujua kila kitu kuhusu watu wengine",
+              "Kuelewa mawazo yako, hisia zako, uwezo wako, na udhaifu wako",
+              "Kufurahia kila kitu kukuhusu kila wakati",
+              "Kutokosea kamwe"
+            ],
+            answer: 1
+          },
+          takeaway: "Kadiri unavyojijua zaidi, ndivyo unavyoweza kujiongoza vizuri zaidi.",
+          related: ["self-esteem", "my-strengths"]
+        },
+        {
+          id: "self-esteem",
+          title: "Kujithamini na kujiamini",
+          intro: "Kujiamini ni imani katika uwezo wetu na thamani yetu — kuamini nafsi yako. Kujithamini ni kiasi unachojiona una thamani.",
+          key: "Kujiamini hukua kupitia mazoezi na maneno mazuri kwa nafsi yako — kujisemesha kwa wema, huruma, na upendo. Huhitaji kuwa mkamilifu ili uwe na thamani.",
+          example: "Kabla ya kuwasilisha darasani, Baraka anajiambia: \"Nimejiandaa vizuri. Hata nikikosea, bado najifunza.\" Mikono yake bado inatetemeka kidogo — lakini anaongea, na inaenda vizuri.",
+          reflection: "Ungemwambia nini rafiki anayehisi hafai? Sasa — unaweza kujisemea maneno hayo hayo mazuri?",
+          activity: "Andika kauli tatu chanya kuhusu nafsi yako, kama \"Mimi ni mwema\" au \"Ninawatunza vizuri wadogo zangu.\" Zisome kwa sauti.",
+          quiz: {
+            q: "Kipi kati ya hivi husaidia kujiamini kukua?",
+            options: [
+              "Kusubiri hadi usiwe na hofu kabisa",
+              "Kujilinganisha na wengine",
+              "Mazoezi na maneno mazuri kwa nafsi yako",
+              "Kuepuka kila changamoto"
+            ],
+            answer: 2
+          },
+          takeaway: "Jisemeshe kama mtu unayempenda.",
+          related: ["self-awareness", "resilience"]
+        },
+        {
+          id: "my-strengths",
+          title: "Uwezo wangu",
+          intro: "Kila mtu ana uwezo — mambo tunayoyafanya vizuri, sifa zinazotusaidia sisi na wengine. Baadhi huonekana kwa urahisi; mengine yamejificha.",
+          key: "Uwezo unaweza kujificha: mambo ambayo watu hukushukuru kwayo ni dalili. Kujua uwezo wako hujenga kujiamini na huongoza malengo yako.",
+          example: "Neema alidhani hana kipaji kwa sababu hakuwa wa kwanza darasani. Kisha akagundua wanafunzi wenzake huja kwake kila mara na matatizo yao — kuwa msikilizaji mzuri ni uwezo wa kweli.",
+          reflection: "Rafiki, mwalimu, au mtu wa familia amekushukuru kwa nini hivi karibuni? Hilo linasema nini kuhusu uwezo wako?",
+          activity: "Waulize watu wawili wanaokujua vizuri: \"Unadhani mimi ni hodari wa nini?\" Andika wanachosema.",
+          quiz: {
+            q: "Kipi kati ya hivi ni dalili ya uwezo uliojificha?",
+            options: [
+              "Mambo ambayo watu hukushukuru kwayo mara kwa mara",
+              "Alama za shule pekee",
+              "Yale wengine wanasema huwezi",
+              "Kuwa bora katika kila kitu"
+            ],
+            answer: 0
+          },
+          takeaway: "Una uwezo — mwingine bado hujaugundua.",
+          related: ["self-awareness", "goal-setting"]
+        },
+        {
+          id: "my-values",
+          title: "Maadili yangu",
+          intro: "Maadili ni imani zinazotujali zaidi — kama uaminifu, heshima, familia, imani, au haki. Huunda maamuzi yetu kila siku.",
+          key: "Matendo yako yanapolingana na maadili yako, unahisi amani na nafsi yako. Yasipolingana, unahisi wasiwasi — hisia hiyo ni ishara inayostahili kusikilizwa.",
+          example: "Juma anathamini uaminifu. Rafiki anapomwomba amdanganyie mwalimu, anahisi fundo tumboni. Anasema: \"Siwezi kufanya hivyo — lakini naweza kukusaidia kueleza kilichotokea.\"",
+          reflection: "Fikiria wakati ulijivunia nafsi yako. Ulikuwa unaishi maadili yapi wakati huo?",
+          activity: "Kutoka kwenye orodha hii — uaminifu, heshima, familia, urafiki, kujifunza, imani, ujasiri, wema — chagua maadili yako matatu makuu na ueleze kwa nini.",
+          quiz: {
+            q: "Maadili ni nini?",
+            options: [
+              "Vitu vinavyogharimu pesa nyingi",
+              "Imani zinazotujali zaidi na zinazoongoza maamuzi yetu",
+              "Sheria zilizotungwa na watu wengine",
+              "Hisia zinazobadilika kila siku"
+            ],
+            answer: 1
+          },
+          takeaway: "Jua unachosimamia — hufanya maamuzi magumu kuwa rahisi.",
+          related: ["decision-making", "self-awareness"]
+        }
+      ]
+    },
+
+    /* ================= NGUZO 2 — NINA MAHALI PANGU ================= */
+    {
+      id: "belong", emoji: "💬", color: "teal",
+      title: "Nina Mahali Pangu",
+      blurb: "Kujenga mahusiano yenye afya kupitia mawasiliano bora, huruma, na heshima kwa wote.",
+      outcome: "Najenga mahusiano chanya na wengine.",
+      lessons: [
+        {
+          id: "communication-basics",
+          title: "Jinsi tunavyowasiliana",
+          intro: "Tunawasiliana kwa maneno (mazungumzo) na bila maneno — sura ya uso, lugha ya mwili, kutazamana machoni, na sauti.",
+          key: "Mawasiliano thabiti ni kueleza mawazo yako, hisia zako, na mahitaji yako kwa uwazi na kujiamini, huku ukiheshimu wengine. Ni tofauti na kunyamaza (unyonge) au kuumiza wengine (ukali).",
+          example: "Mtu anaendelea kuchukua kiti cha Zawadi. Badala ya kunyamaza (unyonge) au kupiga kelele (ukali), anasema kwa utulivu: \"Napendelea kukaa hapa. Tafadhali unaweza kuhama?\"",
+          reflection: "Kitu kinapokusumbua, huwa unanyamaza, unakasirika, au unaongea kwa utulivu? Ungependa kubadilisha nini?",
+          activity: "Fanyia mazoezi sentensi moja thabiti kwa hali hii: rafiki anaendelea kukukatiza. Anza na \"Mimi\" — kwa mfano, \"Sipendi kukatizwa. Tafadhali niache nimalize.\"",
+          quiz: {
+            q: "Jibu lipi ni thabiti?",
+            options: [
+              "Kunyamaza na kuumia ndani",
+              "\"Hapana asante, nataka kubaki darasani. Tunaweza kukutana baada ya shule.\"",
+              "\"Niache! Wewe huleta matatizo kila wakati!\"",
+              "Kukubali kila kitu ili kuepuka mgogoro"
+            ],
+            answer: 1
+          },
+          takeaway: "Kuwa wazi lakini mwenye heshima — sauti yako inastahili kusikika.",
+          related: ["active-listening", "peer-pressure"]
+        },
+        {
+          id: "active-listening",
+          title: "Usikilizaji makini",
+          intro: "Kusikia ni jambo la kawaida — hutokea lenyewe. Kusikiliza ni tendo — linahitaji umakini, utulivu, na kujali.",
+          key: "Usikilizaji makini ni kubaki umezingatia kikamilifu mtu anapoongea: zingatia, mtazame machoni, usimkatize, uliza maswali, na onyesha huruma. Watu huhisi hasira kidogo na thamani zaidi wanaposikilizwa.",
+          example: "Mary anamweleza Wanjiru tatizo la nyumbani. Wanjiru anaweka simu mbali, anamtazama, na kuuliza: \"Hilo lilikufanya uhisije?\" Baadaye Mary anasema mazungumzo hayo yalimsaidia kuliko ushauri wowote.",
+          reflection: "Unapoongea, unajuaje kama mtu anakusikiliza kweli? Unahisije asipokusikiliza?",
+          activity: "Leo, katika mazungumzo mamoja, fanyia mazoezi kusikiliza bila kukatiza hata mara moja. Kisha uliza swali moja la kujali.",
+          quiz: {
+            q: "Kipi kati ya hivi ni sehemu ya usikilizaji makini?",
+            options: [
+              "Kupanga jibu lako wakati mwingine anaongea",
+              "Kuangalia simu yako",
+              "Kuzingatia kikamilifu na kuuliza maswali",
+              "Kumalizia sentensi za mwingine"
+            ],
+            answer: 2
+          },
+          takeaway: "Kusikiliza vizuri ni mojawapo ya matendo ya wema zaidi unayoweza kufanya.",
+          related: ["communication-basics", "empathy"]
+        },
+        {
+          id: "empathy",
+          title: "Huruma",
+          intro: "Huruma ni uwezo wa kuelewa na kushiriki hisia za mtu mwingine — kuona hali kupitia macho yake.",
+          key: "Huruma haimaanishi kukubaliana na kila kitu. Inamaanisha kujaribu kuelewa kabla ya kuhukumu. Hujenga uaminifu na kuimarisha mahusiano.",
+          example: "Mwanafunzi mwenzake anamfokea Otieno bila sababu wazi. Badala ya kufoka naye, Otieno anakumbuka mama wa kijana huyo ni mgonjwa. Baadaye anauliza kwa upole: \"Uko sawa?\" — na kijana anaomba msamaha.",
+          reflection: "Fikiria mtu aliyekuudhi hivi karibuni. Huenda kulikuwa na nini katika maisha yake ambacho hukukiona?",
+          activity: "Watazame watu wanaokuzunguka leo. Jaribu kutaja wanachoweza kuwa wanahisi kutokana na sura na lugha ya mwili — bila kuhukumu.",
+          quiz: {
+            q: "Huruma ni nini?",
+            options: [
+              "Kumwonea mtu huruma kwa mbali",
+              "Kujaribu kuelewa mtu mwingine anahisi nini, kwa mtazamo wake",
+              "Kukubaliana na kila kitu wengine wanasema",
+              "Kuwaambia watu wanapaswa kuhisi nini"
+            ],
+            answer: 1
+          },
+          takeaway: "Kabla ya kuhukumu, jiulize: huenda anapitia nini?",
+          related: ["active-listening", "perspective-taking"]
+        },
+        {
+          id: "teamwork",
+          title: "Mahusiano yenye afya na kazi ya pamoja",
+          intro: "Katika mahusiano yenye afya watu huhisi kuthaminiwa, kuheshimiwa, na kuungwa mkono. Timu zenye afya hufanya kazi vivyo hivyo — kila mtu ni muhimu.",
+          key: "Mahusiano yenye afya hujengwa juu ya uaminifu, heshima kwa wote, mawasiliano wazi, na msaada. Yasiyo na afya huonyesha dharau, udhibiti, migogoro isiyoisha, au hofu. Mipaka — vikomo tunavyoweka ili tuhisi salama na kuheshimiwa — hulinda kila uhusiano.",
+          example: "Rafiki wa Achieng anasoma shajara yake bila ruhusa. Achieng anasema: \"Tafadhali usipekue vitu vyangu — huo ni mpaka wangu.\" Rafiki wa kweli husikiliza na kuomba msamaha.",
+          reflection: "Fikiria urafiki wako wa karibu. Unahisi kuthaminiwa, kuheshimiwa, na kuungwa mkono? Marafiki zako wanahisi vivyo hivyo nawe?",
+          activity: "Andika mpaka mmoja unaokujali (kwa mfano: \"Nahitaji muda wa kusoma jioni\") na ufanyie mazoezi kuusema kwa upole na uwazi.",
+          quiz: {
+            q: "Ipi ni ishara ya uhusiano wenye afya?",
+            options: [
+              "Mtu mmoja anadhibiti maamuzi ya mwingine",
+              "Dhihaka na majina mabaya kama \"utani\"",
+              "Uaminifu, heshima, na msaada kwa pande zote",
+              "Kuogopa kusema hapana"
+            ],
+            answer: 2
+          },
+          takeaway: "Unastahili mahusiano ambapo unahisi salama, unathaminiwa, na uko huru kuwa wewe.",
+          related: ["empathy", "understanding-conflict"]
+        }
+      ]
+    },
+
+    /* ================= NGUZO 3 — NINACHUKUA HATUA ================= */
+    {
+      id: "take-action", emoji: "🎯", color: "green",
+      title: "Ninachukua Hatua",
+      blurb: "Kugeuza ndoto kuwa vitendo kupitia mipango, uvumilivu, na uwajibikaji binafsi.",
+      outcome: "Nachukua hatua kufikia malengo yangu.",
+      lessons: [
+        {
+          id: "goal-setting",
+          title: "Kuweka malengo",
+          intro: "Malengo ni mambo tunayotaka kufikia. Hutupa mwelekeo, hutusaidia kuzingatia, na hutupa motisha ya kuendelea hata tunapokutana na changamoto.",
+          key: "Kuwa wazi kuhusu lengo lako, jua kwa nini linakujali, panga hatua, tarajia vikwazo, na weka tarehe ya mwisho. \"Nataka kupandisha alama yangu ya hisabati kutoka C hadi B kufikia mwisho wa muhula\" ni bora kuliko \"Nataka kufanya vizuri shuleni.\"",
+          example: "Chebet anataka kuwa muuguzi. Lengo lake la muda mfupi: kufaulu mitihani ya sayansi muhula huu. Mpango wake: kusoma maktabani kila alasiri na kumuuliza mwalimu anapokwama.",
+          reflection: "Lengo lako moja la miezi sita ijayo ni lipi — na moja la miaka mitano ijayo? Kwa nini yanakujali?",
+          activity: "Andika lengo moja wazi kwa mtindo huu: \"Nataka [nini] kufikia [lini], kwa sababu [kwa nini]. Hatua yangu ya kwanza ni [hatua].\"",
+          quiz: {
+            q: "Lengo lipi liko wazi zaidi?",
+            options: [
+              "\"Nataka kufanya vizuri shuleni.\"",
+              "\"Nataka kufanikiwa siku moja.\"",
+              "\"Nataka kupandisha alama yangu ya hisabati kutoka C hadi B kufikia mwisho wa muhula.\"",
+              "\"Nitajitahidi zaidi.\""
+            ],
+            answer: 2
+          },
+          takeaway: "Lengo lenye mpango na tarehe ya mwisho huwa safari unayoweza kuanza leo.",
+          related: ["time-management", "motivation"]
+        },
+        {
+          id: "time-management",
+          title: "Usimamizi wa muda",
+          intro: "Usimamizi wa muda ni kupanga jinsi unavyotumia muda wako ili ukamilishe mambo muhimu na kufikia malengo yako. Muda ni rasilimali yenye kikomo — umiliki!",
+          key: "Panga siku yako, fanya kazi muhimu zaidi kwanza, gawa kazi kubwa katika hatua ndogo, zingatia jambo moja kwa wakati, epuka vishawishi, tumia vikumbusho, pumzika mara kwa mara, na lala vya kutosha.",
+          example: "Peter ana kazi ya nyumbani ya kesho lakini anaendelea kutazama video kwenye simu. Anaweka simu chumba kingine, anamaliza kazi yake kwa saa moja, na bado ana muda wa kupumzika — bila hatia.",
+          reflection: "\"Wezi wa muda\" wako wakubwa ni wapi — kutuma meseji, soga zisizoisha, mitandao ya kijamii, TV? Ungefanya nini tofauti wiki hii?",
+          activity: "Usiku wa leo, andika orodha ya kazi za kesho ukianza na kazi tatu muhimu zaidi. Weka alama unapozimaliza.",
+          quiz: {
+            q: "Hatua ipi bora ya kwanza kazi inapoonekana kubwa mno?",
+            options: [
+              "Kusubiri hadi ujisikie tayari",
+              "Kuigawa katika hatua ndogo na kuanza na moja",
+              "Kufanya mambo mengine mengi kwa wakati mmoja",
+              "Kumwomba mtu mwingine aifanye"
+            ],
+            answer: 1
+          },
+          takeaway: "Huwezi kutengeneza muda zaidi — lakini unaweza kuamua muda wako ni wa nini.",
+          related: ["goal-setting", "beat-procrastination"]
+        },
+        {
+          id: "beat-procrastination",
+          title: "Kushinda uchelewaji",
+          intro: "Uchelewaji (kuahirisha) ni kusogeza mbele kazi, maamuzi, au shughuli. Ni tabia inayojifunzwa — kadiri unavyoifanya, ndivyo inavyozidi kuwa mbaya.",
+          key: "Watu huahirisha kwa hofu ya kushindwa, kutaka ukamilifu, vishawishi, au kuhisi kulemewa. Ishinde kwa kuweka malengo ya kila siku, kugawa kazi katika hatua ndogo, kuanza na kazi ya haraka zaidi, na kuondoa vishawishi.",
+          example: "\"Nitafanya kesho,\" Sifa aliendelea kusema kuhusu insha yake. Usiku wa kabla ya mwisho alipatwa na wasiwasi mkubwa. Safari iliyofuata, aliandika utangulizi tu siku ya kwanza — na kuanza kulifanya lililobaki kuwa rahisi.",
+          reflection: "Ni kazi gani moja umekuwa ukiahirisha? Faida ya kuimaliza ingekuwa nini?",
+          activity: "Chagua kazi moja uliyoahirisha. Andika hatua tatu ndogo zaidi za kuikamilisha — na fanya hatua ya kwanza leo.",
+          quiz: {
+            q: "Kipi kati ya hivi ni dalili ya uchelewaji?",
+            options: [
+              "\"Nitaanza na sehemu ngumu zaidi sasa.\"",
+              "\"Huu si wakati mzuri — nitafanya kesho.\"",
+              "\"Ngoja niondoe vishawishi kwanza.\"",
+              "\"Nitaigawa hii katika hatua ndogo.\""
+            ],
+            answer: 1
+          },
+          takeaway: "Kuanza ni hatua ngumu zaidi — ifanye ndogo kiasi cha kuichukua leo.",
+          related: ["time-management", "motivation"]
+        },
+        {
+          id: "motivation",
+          title: "Motisha na uvumilivu",
+          intro: "Motisha hukuanzisha; uvumilivu hukuendeleza. Kila lengo linalofaa kufikiwa lina nyakati unazotaka kukata tamaa.",
+          key: "Fuatilia maendeleo yako, kuwa tayari kubadilika njia inapokuwa na mashimo, tafuta msaada pale unachofanya hakifanyi kazi, na baki na matumaini. Usikate tamaa ikichukua muda mrefu kuliko ulivyotarajia.",
+          example: "Kiprop alifeli mtihani wake wa kwanza wa udereva. Badala ya kuacha, aliuliza nini kilienda vibaya, akafanyia mazoezi sehemu dhaifu, na akafaulu mara ya pili. Kikwazo kikawa somo.",
+          reflection: "Fikiria jambo gumu ambalo hukukata tamaa nalo. Nini kilikuendeleza?",
+          activity: "Andika lengo lako kwenye kadi. Chini yake, andika: \"Litakapokuwa gumu, nitakumbuka...\" na umalize sentensi.",
+          quiz: {
+            q: "Mpango wako haufanyi kazi. Uvumilivu unaonekanaje?",
+            options: [
+              "Kukata tamaa — haikukusudiwa kuwa",
+              "Kufanya kitu kile kile na kutumaini",
+              "Kurekebisha mpango, kutafuta msaada, na kuendelea",
+              "Kuwalaumu watu wengine"
+            ],
+            answer: 2
+          },
+          takeaway: "Unapoanzia hakuamui unapomalizia.",
+          related: ["goal-setting", "resilience"]
+        }
+      ]
+    },
+
+    /* ================= NGUZO 4 — NINACHAGUA KWA BUSARA ================= */
+    {
+      id: "choose-wisely", emoji: "🧭", color: "blue",
+      title: "Ninachagua kwa Busara",
+      blurb: "Kufanya maamuzi sahihi na kutatua matatizo kwa kujiamini.",
+      outcome: "Nafanya maamuzi sahihi yanayolinda ustawi wangu na maisha yangu ya baadaye.",
+      lessons: [
+        {
+          id: "decision-making",
+          title: "Kufanya maamuzi",
+          intro: "Kufanya maamuzi ni mchakato wa kuchagua chaguo bora kati ya njia kadhaa. Uhuru zaidi huja na uwajibikaji mkubwa zaidi.",
+          key: "Kufanya maamuzi mazuri ni kufikiria madhara, kuzingatia maadili yako, na kuwajibika kwa matendo yako — badala ya kutenda kwa msukumo wa haraka.",
+          example: "Kwenye sherehe, dereva wa Musa amekunywa pombe. Musa anakumbuka kanuni yake — kamwe asipande gari la dereva mlevi — na anampigia dada yake mkubwa badala yake, ingawa inamwaibisha.",
+          reflection: "Unakabiliwa na maamuzi gani sasa hivi? Lipi ni muhimu zaidi kwa maisha yako ya baadaye?",
+          activity: "Kwa uamuzi mmoja halisi unaoukabili, orodhesha njia zako na uandike faida moja na hasara moja kwa kila njia.",
+          quiz: {
+            q: "Kufanya maamuzi mazuri kunajumuisha nini?",
+            options: [
+              "Kuchagua kile marafiki zako wanachagua",
+              "Kuamua haraka iwezekanavyo",
+              "Kufikiria madhara na maadili yako",
+              "Kuepuka maamuzi yote"
+            ],
+            answer: 2
+          },
+          takeaway: "Maamuzi yako yana nguvu — yatumie kwa makusudi.",
+          related: ["consequences", "critical-thinking"]
+        },
+        {
+          id: "critical-thinking",
+          title: "Fikra makini",
+          intro: "Fikra makini ni kuchunguza taarifa kwa umakini kabla ya kuamini au kutenda — kuuliza: Je, hii ni kweli? Nani anasema? Nini kinakosekana?",
+          key: "Marafiki, hisia, mitandao ya kijamii, na shinikizo la pesa vyote huathiri maamuzi yetu. Fikra makini hukusaidia kutambua ushawishi huo na kufikiri mwenyewe.",
+          example: "Chapisho linadai mtu maarufu alisema jambo la kushtua. Kabla ya kushiriki, Nyokabi anaangalia vyanzo vingine — nukuu ilikuwa ya kubuni. Anajiepusha kueneza uongo.",
+          reflection: "Fikiria kitu cha mwisho ulichoamini kwa sababu \"kila mtu\" alisema. Ulikichunguza mwenyewe?",
+          activity: "Chukua ujumbe au chapisho moja ulioona leo na uulize maswali matatu: Nani aliitengeneza? Kwa nini? Ushahidi gani unaiunga mkono?",
+          quiz: {
+            q: "Jibu la fikra makini kwa dai la kushtua mtandaoni ni lipi?",
+            options: [
+              "Kulishiriki haraka kabla ya wengine",
+              "Kuliamini kama watu wengi wamelipenda",
+              "Kuangalia chanzo na kutafuta ushahidi kwanza",
+              "Kupuuza taarifa zote milele"
+            ],
+            answer: 2
+          },
+          takeaway: "Usimeze taarifa tu — itafune kwanza.",
+          related: ["decision-making", "peer-pressure"]
+        },
+        {
+          id: "problem-solving",
+          title: "Kutatua matatizo hatua kwa hatua",
+          intro: "Matatizo ni sehemu ya kawaida ya maisha. Utatuzi wa matatizo ni uwezo wa kutambua changamoto, kufikiria suluhisho, na kuchagua njia bora ya kujibu.",
+          key: "Tumia hatua 7: tambua tatizo, fikiria njia zote, pima madhara ya kila njia, chagua njia bora, tenda, fuatilia matokeo, na tafakari ulichojifunza.",
+          example: "Wafula anaendelea kufeli majaribio ya hisabati. Badala ya kuamua \"mimi ni mbaya tu kwa hisabati,\" anatambua tatizo halisi (hafanyi mazoezi), anajaribu suluhisho (maswali matatu ya mazoezi kila siku), na alama zake zinapanda taratibu.",
+          reflection: "Fikiria tatizo ulilolitatua vizuri. Ulitumia hatua zipi kati ya 7 bila kujua?",
+          activity: "Chukua tatizo moja la sasa na ulipitishe kwenye hatua nne za kwanza kwenye karatasi: tatizo, njia, madhara, chaguo.",
+          quiz: {
+            q: "Hatua ya KWANZA ya utatuzi mzuri wa matatizo ni ipi?",
+            options: [
+              "Kutenda mara moja",
+              "Kutambua tatizo halisi",
+              "Kumlaumu mtu",
+              "Kuchagua njia rahisi zaidi"
+            ],
+            answer: 1
+          },
+          takeaway: "Rudi nyuma, tathmini, pima njia zako — kisha tenda. Huo ndio udhibiti.",
+          related: ["decision-making", "consequences"]
+        },
+        {
+          id: "consequences",
+          title: "Kupima madhara",
+          intro: "Kila chaguo lina madhara — kwako, kwa familia yako, na kwa jamii yako. Mengine huonekana mara moja; mengine hujitokeza baadaye sana.",
+          key: "Kabla ya kuamua, andika faida na hasara za kila njia. Chaguo linalopendeza leo linaweza kukugharimu kesho — na chaguo gumu leo linaweza kulinda maisha yako ya baadaye.",
+          example: "Mtu anampa Dennis shilingi 3,000 apeleke kifurushi cha kutatanisha. Pesa ya haraka sasa — lakini Dennis anapima hatari: matatizo na polisi, hatari, uaminifu wa familia yake. Anakataa.",
+          reflection: "Fikiria chaguo unalojutia. Madhara yapi hukuyazingatia wakati huo?",
+          activity: "Chora jedwali la safu mbili — Faida na Hasara — na ulijaze kwa uamuzi unaoukabili wiki hii.",
+          quiz: {
+            q: "Kwa nini tupime madhara kabla ya kuamua?",
+            options: [
+              "Ili kufanya maamuzi kuwa ya polepole bila sababu",
+              "Kwa sababu machaguo yanayopendeza sasa yanaweza kukugharimu baadaye",
+              "Ili uweze kuwalaumu wengine ikishindikana",
+              "Kwa sababu njia zote huwa sawa kila wakati"
+            ],
+            answer: 1
+          },
+          takeaway: "Fikiria zaidi ya leo — nafsi yako ya kesho inakutegemea.",
+          related: ["problem-solving", "substance-abuse"]
+        }
+      ]
+    },
+
+    /* ================= NGUZO 5 — NINAJENGA MADARAJA ================= */
+    {
+      id: "build-bridges", emoji: "🤝", color: "purple",
+      title: "Ninajenga Madaraja",
+      blurb: "Kushughulikia kutokubaliana kwa njia ya kujenga na kuimarisha mahusiano.",
+      outcome: "Napitia migogoro kwa heshima na uelewa.",
+      lessons: [
+        {
+          id: "understanding-conflict",
+          title: "Kuelewa migogoro",
+          intro: "Mgogoro ni kutokubaliana kati ya watu kunakosababishwa na malengo, mahitaji, maadili, au maoni yasiyolingana. Ni sehemu ya kawaida ya maisha.",
+          key: "Mgogoro ni kama moto: unaweza kupika na kuleta joto, lakini unaweza kudhuru ukitoka nje ya udhibiti. Ukishughulikiwa vizuri, mgogoro hutusaidia kuelewana na unaweza hata kuimarisha mahusiano.",
+          example: "Wachezaji wenzawili wanabishana nani acheze mshambuliaji. Ukishughulikiwa vibaya, timu inagawanyika pande mbili. Ukishughulikiwa vizuri — wanazungumza, wanapokezana, na timu inakuwa imara zaidi.",
+          reflection: "Maneno gani yanakujia unaposikia neno \"mgogoro\"? Unaweza kufikiria mgogoro uliomalizika na urafiki imara zaidi?",
+          activity: "Kumbuka mgogoro mmoja mdogo wa wiki hii. Andika kila upande ulihitaji nini hasa (si walichosema — walichohitaji).",
+          quiz: {
+            q: "Kauli ipi kuhusu migogoro ni kweli?",
+            options: [
+              "Mgogoro daima humaanisha uhusiano umevunjika",
+              "Mgogoro ni wa kawaida — muhimu ni jinsi unavyoushughulikia",
+              "Jibu bora daima ni kupigana",
+              "Watu wabaya tu ndio huwa na migogoro"
+            ],
+            answer: 1
+          },
+          takeaway: "Mgogoro unaoshughulikiwa mapema na kwa heshima huwa uelewa.",
+          related: ["negotiation", "teamwork"]
+        },
+        {
+          id: "negotiation",
+          title: "Stadi za majadiliano",
+          intro: "Kujadili mgogoro hakumaanishi kupigana wala kukata tamaa — kunamaanisha kujenga madaraja kuelekea suluhisho la amani.",
+          key: "Tumia kauli za \"Mimi\" (\"Nahisi kuvunjika moyo unapo...\"), sikiliza kwa makini, omba ufafanuzi, pokezaneni zamu, zingatia tatizo (si mtu), na lenga ushindi kwa wote — ambapo pande zote zinapata zinachohitaji hasa.",
+          example: "Brian amekasirika kwamba Kevin hakuja kwenye kipindi chao cha kusoma. Badala ya \"Wewe ni mbinafsi sana!\", anajaribu: \"Nilihisi kuachwa uliponikosa, kwa sababu nilikuwa nakutegemea.\" Kevin anaomba msamaha — na kueleza kilichotokea.",
+          reflection: "Fikiria ubishi wako wa mwisho. Ungesikikaje kama ungebadilisha \"Wewe daima...\" kuwa \"Nahisi... unapo... kwa sababu...\"?",
+          activity: "Andika upya hizi kama kauli za \"Mimi\": \"Hunisikilizi kamwe!\" na \"Unaniacha nje kila wakati!\"",
+          quiz: {
+            q: "Ipi ni kauli ya \"Mimi\"?",
+            options: [
+              "\"Hunisikilizi kamwe!\"",
+              "\"Wewe ndiye tatizo hapa.\"",
+              "\"Nahisi kupuuzwa ninapokatizwa, kwa sababu mawazo yangu pia ni muhimu.\"",
+              "\"Kila mtu anajua umekosea.\""
+            ],
+            answer: 2
+          },
+          takeaway: "Shambulia tatizo, kamwe si mtu.",
+          related: ["understanding-conflict", "communication-basics"]
+        },
+        {
+          id: "perspective-taking",
+          title: "Kuona upande wa pili",
+          intro: "Kuona mtazamo wa mwingine ni kuingia katika viatu vya mtu mwingine — kujaribu kuona hali kama anavyoiona yeye.",
+          key: "Migogoro mingi hukua kwa sababu kila upande una uhakika uko sahihi kabisa. Kusimama na kuuliza \"Hii inaonekanaje kwa upande wake?\" hupoza mgogoro na mara nyingi hufunua suluhisho.",
+          example: "Familia ya Owino ilipanda mwembe; matawi yake sasa yanaingia kwenye shamba la familia ya Ontingana — wote wanadai maembe. Msuluhishi anaomba kila familia ieleze mtazamo wa nyingine. Ghafla, kugawana matunda hakusikiki tena kuwa jambo lisilowezekana.",
+          reflection: "Katika kutokubaliana kwako kwa sasa au kwa karibuni — unaweza kueleza kwa uaminifu mtazamo wa mtu mwingine?",
+          activity: "Na rafiki, kila mmoja wenu atetee upande wa MWENZAKE katika kutokubaliana kudogo kwa dakika moja. Mlijifunza nini?",
+          quiz: {
+            q: "Kuona mtazamo wa mwingine ni nini?",
+            options: [
+              "Kukubaliana na mwenye sauti kubwa zaidi",
+              "Kujaribu kuona hali kupitia macho ya mtu mwingine",
+              "Kuachana na maoni yako",
+              "Kusubiri mwingine aombe msamaha kwanza"
+            ],
+            answer: 1
+          },
+          takeaway: "Kuelewa upande wa pili hakukudhoofishi — kunakufanya mwenye busara zaidi.",
+          related: ["empathy", "negotiation"]
+        },
+        {
+          id: "cooperation",
+          title: "Kudhibiti hasira na kushirikiana",
+          intro: "Hasira ni hisia ya kawaida — inakwambia kitu kinaonekana si haki au si sawa. Lakini maneno yaliyosemwa kwa hasira huacha makovu, kama mashimo ya misumari kwenye ua.",
+          key: "Tambua hasira mapema (moyo kwenda kasi, ngumi kukazwa, joto). Ikubali: \"Hii inanikasirisha sana.\" Chukua muda wa kupumzika, tulia, kisha zungumza. Epuka kutenda ukiwa na hasira — na epuka kubishana na mtu mwenye hasira.",
+          example: "Mvulana aligonga msumari kwenye ua kila alipokasirika. Alipojifunza kujizuia, misumari ilikoma — lakini baba yake alimwonyesha mashimo yaliyobaki: \"Ua hautakuwa kama zamani.\"",
+          reflection: "Umewahi kusema au kufanya jambo kwa hasira ambalo ulijutia baadaye? Ungefanya nini tofauti wakati ujao?",
+          activity: "Tengeneza \"mpango wako wa kutulia\": mambo matatu utakayofanya kabla ya kujibu unapohisi hasira kali.",
+          quiz: {
+            q: "Unahisi hasira kali ikipanda wakati wa ubishi. Hatua ipi ya busara zaidi?",
+            options: [
+              "Kusema kila unachohisi mara moja",
+              "Kuchukua muda wa kupumzika na kuzungumza baada ya kutulia",
+              "Kupaza sauti zaidi ili ushinde",
+              "Kutaja makosa ya zamani ya mtu"
+            ],
+            answer: 1
+          },
+          takeaway: "Unaweza kuhisi hasira na bado ukachagua matendo yako kwa busara.",
+          related: ["understanding-conflict", "resilience"]
+        }
+      ]
+    },
+
+    /* ================= NGUZO 6 — NINALINDA KESHO YANGU ================= */
+    {
+      id: "protect-future", emoji: "🛡️", color: "coral",
+      title: "Ninalinda Kesho Yangu",
+      blurb: "Kufanya maamuzi yenye afya yanayolinda ustawi wangu na ndoto zangu za baadaye.",
+      outcome: "Nafanya maamuzi yenye afya yanayolinda ustawi wangu na kesho yangu.",
+      lessons: [
+        {
+          id: "peer-pressure",
+          title: "Shinikizo la marafiki na stadi za kukataa",
+          intro: "Shinikizo la marafiki ni ushawishi kutoka kwa marafiki na rika. Linaweza kuwa chanya (kukuhimiza kusoma) au hasi (kukusukuma kunywa, kuvuta, au kuruka masomo).",
+          key: "Unaweza kukataa bila kujipoteza: sema HAPANA kwa msisitizo na urudie, tumia lugha ya mwili imara, toa sababu, pendekeza mbadala, au ondoka. Marafiki wa kweli huheshimu maamuzi yako.",
+          example: "\"Jaribu mara moja tu, usiwe mtoto,\" wavulana wanamwambia Simiyu, wakimpa sigara. Anawatazama machoni: \"Hapana asante — nimeona uvutaji ulivyomfanya mjomba wangu. Twende tukacheze mpira badala yake.\"",
+          reflection: "Ni wapi katika maisha yako unahisi shinikizo la kufanya mambo yasiyolingana na maadili yako? Ungeweza kusema nini wakati ujao?",
+          activity: "Fanyia mazoezi kusema \"Hapana\" kwa njia tatu kwa mwaliko mmoja wa hatari: (1) Hapana + sababu, (2) Hapana + mbadala, (3) Hapana + kuondoka.",
+          quiz: {
+            q: "Ipi ni stadi bora ya kukataa?",
+            options: [
+              "Kusema \"labda baadaye\" ili waache kuuliza",
+              "Kusema hapana kwa msisitizo, kutoa sababu, na kupendekeza mbadala",
+              "Kukubali mara moja ili kudumisha amani",
+              "Kucheka na kutumaini watasahau"
+            ],
+            answer: 1
+          },
+          takeaway: "Kusema hapana kwa jambo baya ni kusema ndiyo kwa maisha yako ya baadaye.",
+          related: ["substance-abuse", "communication-basics"]
+        },
+        {
+          id: "substance-abuse",
+          title: "Dawa za kulevya na uraibu: ukweli",
+          intro: "Dawa za kulevya ni vitu vinavyobadilisha jinsi mwili na akili yako vinavyofanya kazi. Hazitabiriki na ni hatari hasa kwa vijana, ambao ubongo wao bado unakua.",
+          key: "Uraibu ni pale mwili na ubongo wako vinapozoea dawa kiasi cha kuhisi huwezi kuishi bila hiyo — na vijana wanaweza kupata uraibu haraka sana. \"Asili,\" \"halali,\" au \"kila mtu anafanya\" haimaanishi salama. Kupona kunawezekana kwa msaada, lakini kinga ni bora zaidi.",
+          example: "David alianza kunusa gundi na wavulana wakubwa ili kusahau matatizo yake. Ndani ya miezi michache alipoteza hamu ya shule na kuiba kwa wazazi wake. Kwa ushauri nasaha na msaada wa familia alipona — lakini anasema: \"Laiti nisingeanza kamwe.\"",
+          reflection: "Unadhani kwa nini baadhi ya vijana huanza kutumia dawa za kulevya — na nini kinawalinda wasioanza?",
+          activity: "Uongo au ukweli? Jadilini: \"Bangi ni ya asili, kwa hiyo ni salama.\" \"Pombe hukusaidia kusahau matatizo.\" \"Watu dhaifu tu ndio hupata uraibu.\" (Zote ni uongo.)",
+          quiz: {
+            q: "Kauli ipi ni ya KWELI?",
+            options: [
+              "Dawa halali au za asili ni salama",
+              "Uraibu huwapata watu dhaifu tu",
+              "Vijana wanaweza kupata uraibu haraka sana kwa sababu ubongo wao bado unakua",
+              "Unaweza kudhibiti kiasi unachotumia kila wakati"
+            ],
+            answer: 2
+          },
+          takeaway: "Ubongo wako unaokua ndio mali yako kubwa zaidi — ulinde.",
+          related: ["peer-pressure", "consequences"]
+        },
+        {
+          id: "resilience",
+          title: "Ustahimilivu",
+          intro: "Ustahimilivu ni uwezo wa kuinuka baada ya vikwazo, kuzoea mabadiliko, na kuendelea maisha yanapokuwa magumu.",
+          key: "Ustahimilivu hujengwa, hauzaliwi nao: mahusiano yenye msaada, michezo na malengo, kujitunza, kuomba msaada, na kukumbuka kwamba kushindwa ni mwalimu — si mwisho wa hadithi.",
+          example: "Familia ya Akinyi ilipohamia mji mwingine katikati ya mwaka, alipoteza marafiki zake na alama zake zikashuka. Alijiunga na klabu ya maigizo, akapata marafiki wapya, akaomba msaada kwa walimu — na akamaliza mwaka akiwa imara kuliko alivyoanza.",
+          reflection: "Umenusurika asilimia 100 ya siku zako ngumu zaidi hadi sasa. Nini kilikusaidia kupita ile ngumu zaidi?",
+          activity: "Chora \"ngao yako ya ustahimilivu\": mambo manne yanayokufanya imara — mtu, shughuli, uwezo, na tumaini.",
+          quiz: {
+            q: "Ustahimilivu ni nini?",
+            options: [
+              "Kutokuwa na matatizo kamwe",
+              "Kuficha hisia zako ili mtu asijue",
+              "Kuinuka baada ya vikwazo na kuendelea kuelekea malengo yako",
+              "Kukataa kabisa kuomba msaada"
+            ],
+            answer: 2
+          },
+          takeaway: "Kuanguka ni ubinadamu. Kuinuka tena ni ustahimilivu.",
+          related: ["motivation", "healthy-lifestyle"]
+        },
+        {
+          id: "healthy-lifestyle",
+          title: "Maisha yenye afya",
+          intro: "Mwili na akili yako ni gari la kila ndoto uliyo nayo. Mazoea yenye afya — usingizi, chakula, mazoezi, na mapumziko — huendesha kila kitu kingine.",
+          key: "Kulinda maisha yako ya baadaye kunajumuisha maamuzi ya kila siku: lala vya kutosha, kula kinachokuimarisha, fanya mazoezi, punguza muda wa skrini, na tunza afya yako ya akili. Mazoea madogo, yakirudiwa kila siku, huunda unavyokuwa.",
+          example: "Tumaini alikuwa akisinzia darasani baada ya usiku wa manane kwenye simu. Aliweka kanuni — simu izimwe saa tatu usiku — na ndani ya wiki mbili nguvu zake, hisia zake, na alama zake zote ziliboreka.",
+          reflection: "Zoea lipi la kila siku linajenga maisha yako ya baadaye — na lipi linafanya kazi kimyakimya dhidi yako?",
+          activity: "Chagua zoea moja dogo lenye afya kwa wiki hii (kulala kufikia saa nne usiku, matembezi ya kila siku, saa moja pungufu ya kuskrolu). Lifuatilie kwa siku saba.",
+          quiz: {
+            q: "Chaguo lipi linasaidia zaidi mwili na akili?",
+            options: [
+              "Kuruka usingizi ili ufanye zaidi",
+              "Usingizi wa kawaida, chakula chenye afya, na mazoezi",
+              "Vinywaji vya kuongeza nguvu badala ya kupumzika",
+              "Kuficha wasiwasi wako"
+            ],
+            answer: 1
+          },
+          takeaway: "Tunza mwili wako — unaishi maisha yako yote ya baadaye ndani yake.",
+          related: ["resilience", "time-management"]
+        }
+      ]
+    }
+  ] }
 };

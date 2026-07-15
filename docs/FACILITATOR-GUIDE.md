@@ -1,63 +1,66 @@
 # Facilitator Guide
 
 Welcome! This guide is for I Matter facilitators, teachers, and youth
-mentors using the app in monthly sessions at partner schools.
+workers using the app to guide adolescents through the **I Matter Positive
+Youth Development Framework** and its six pillars.
 
 ## What the app is (and is not)
 
-- It is an **offline resource centre** for the young people in your program:
-  session plans, lessons, stories, and private reflection tools.
+- It is a **toolkit** for the young people in your program: ready-to-run
+  session plans, pillar lessons, stories, the framework itself, and private
+  reflection tools.
 - It is **not** a data collection tool. It stores nothing about individual
   students, requires no accounts, and uploads nothing. Anything a student
   writes stays on the device they used and can be deleted by them at any
   time.
+- It only needs an internet connection the first time it is installed or
+  opened. After that it works **fully offline**.
+
+## The six pillars
+
+*I Know Myself • I Belong • I Take Action • I Choose Wisely • I Build Bridges
+• I Protect My Future.* Each pillar has a Learn category (four short
+lessons), a story, and a full session plan. The pillars reinforce one
+another — feel free to revisit earlier ones as the group grows.
+
+> **You matter. Your life has value. Your choices have power. Your future is
+> worth investing in.**
 
 ## Getting started
 
 1. Install the app on the device(s) you will use (see README — Add to Home
-   Screen). After the first load it works fully offline.
-2. Open **More → Facilitator** and enter the PIN.
-   - The default PIN is set in `data/config.js` (shipped as `2014`).
-   - **Change it** on each device: Facilitator → ⚙️ → *Change facilitator
-     PIN*. The PIN only protects facilitator tools on that device.
-3. Add your school or group name (stored locally only).
+   Screen). The first load needs a connection; after that it works offline.
+2. Choose your language any time with the header language button (English /
+   Kiswahili). The whole app — interface and content — switches instantly.
+3. Explore **Resources → The Framework** to ground yourself in the approach
+   before leading a session.
 
-## Facilitator Mode tools
+## The six session plans
 
-| Tool | What it does |
-| --- | --- |
-| Monthly session plans | Full plans for Sessions 1–8 (see below) |
-| Discussion questions | Shown inside each session plan — tap to display |
-| Projector mode | Enlarges all text and hides navigation for group display |
-| Print | Print any session plan or worksheet (or save as PDF) |
-| Local completion totals | Anonymous counts of lessons/quizzes done **on that device** |
-| Session notes | Your private notes, stored on the device |
-| Reset local activity results | Clears counters (does NOT touch students' My Space) |
+Under **Session Plans** (bottom navigation), one per pillar:
 
-## The eight monthly sessions
+1. 🌟 **Self-Awareness & Building Confidence** — *I Know Myself* (90 min)
+2. 💬 **Effective Communication & Healthy Relationships** — *I Belong* (70 min)
+3. 🎯 **Goal Setting, Time Management & Overcoming Procrastination** — *I Take Action* (90 min)
+4. 🧭 **Decision-Making & Problem-Solving** — *I Choose Wisely* (75 min)
+5. 🤝 **Conflict Resolution & Negotiation Skills** — *I Build Bridges* (70 min)
+6. 🛡️ **Substance Abuse & Peer Pressure** — *I Protect My Future* (70 min)
 
-1. **I Matter and My Strengths** — self-worth, identifying strengths
-2. **Understanding My Feelings** — naming feelings, calming tools
-3. **Communication and Listening** — active listening, "I" statements
-4. **Making Good Decisions** — consequences, the Safe–Fair–Approved test
-5. **Solving Problems** — the problem-solving path
-6. **Healthy Friendships** — respect, boundaries, warning signs, bullying
-7. **Confidence and Resilience** — failure as learning, self-talk
-8. **My Goals and Future** — dreams, SMART goals, pathways
+Each plan opens with its pillar and outcome, an "In this session" jump menu,
+and numbered section cards with time badges, activity boxes, scenarios,
+dialogues, tables, key-point notes, and (where relevant) a pledge. Tap
+**Print** to print or save any plan as a PDF.
 
-Each session plan includes: learning objective, opening activity, main
-lesson points, group discussion questions, a linked game, a reflection, and
-a take-home challenge, plus a linked printable activity.
+## Running a session
 
-### Suggested 60–75 minute session flow
-
-1. Opening activity (10 min) — energizer from the plan
-2. Main lesson (15 min) — use projector mode; keep it interactive
-3. Group discussion (15 min) — small groups work well
-4. Game (10 min) — play together on a projected screen, or in small groups
-   on shared devices
-5. Reflection (5–10 min) — quiet, individual; My Space if devices allow
-6. Take-home challenge (5 min) — explain and encourage
+- **Prepare** by reading the whole plan first and gathering any materials
+  (manila paper, pens, scenario cards).
+- **Adapt** activities, discussions, and examples to the age and context of
+  your group — a 13-year-old and an 18-year-old need different framing.
+- **Keep it participatory.** The plans are built around discussion,
+  role-play, and small-group work rather than lecturing.
+- **Reinforce the message** at the heart of every session: every young
+  person matters and has the potential to grow, contribute, and thrive.
 
 ## Facilitation principles
 
@@ -65,23 +68,29 @@ a take-home challenge, plus a linked printable activity.
   pass.
 - **Never shame wrong answers** — the app doesn't, and neither should we.
 - **Privacy is real.** Never ask students to show their My Space or journal
-  entries. If a device is shared, show students how to delete their
-  data afterwards (My Space → Delete all my data).
-- **Be alert.** Sessions on feelings, safety, and secrets can surface
-  disclosures. Know your school's child protection procedure and the
+  entries. If a device is shared, show students how to delete their data
+  afterwards (My Space → Delete all my data).
+- **Be alert.** Sessions on feelings, safety, drugs, and relationships can
+  surface disclosures. Know your school's child protection procedure and the
   safeguarding note in `docs/SAFEGUARDING.md`.
-- **Local contacts.** Before rollout, make sure the Help section contacts
-  in `data/config.js` are real, verified, and current.
+- **Verify the contacts.** Before rollout, confirm the Help section contacts
+  in `data/config.js` are correct for your school and area.
+
+## Using Learn, Stories & My Space with students
+
+- **Learn** — the pillar lessons work as short teach-alongs: introduction,
+  key lesson, real-life example, a reflection to reveal, a small activity, a
+  quick quiz, and a takeaway.
+- **Stories** — read a pillar's story aloud, then use the discussion prompt
+  and "What would you do?" to open conversation. There are no wrong answers.
+- **My Space** — a fully private, device-only space for a young person's own
+  strengths, goals, gratitude, journal, and plans. Optional PIN protection,
+  and a one-tap delete-all.
 
 ## Shared device tips
 
-- Use Facilitator Mode's totals to gauge engagement — they are anonymous.
+- The app is small and works on low-cost Android phones; install it once from
+  a hotspot session and use it offline afterwards.
 - Encourage students to use "Delete all my data" after using a borrowed
-  device, or avoid personal entries on shared devices.
-- The app is small and works on low-cost Android phones; it can be
-  installed from one hotspot session and used offline afterwards.
-
-## Printing worksheets
-
-Open any Activity → **Print / Save as PDF**. The print layout adds writing
-lines for list questions, so worksheets work on paper too.
+  device, or to avoid personal entries on shared devices.
+- Everything prints or saves as PDF for groups without enough devices.
